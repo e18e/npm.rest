@@ -1,0 +1,25 @@
+{
+	"name": "@npm.rest/validate",
+	"type": "module",
+	"private": true,
+	"exports": {
+		"./packument": "./src/packument.ts",
+		"./package": "./src/package.ts"
+	},
+	"dependencies": {
+		"npm-package-arg": "^13.0.2",
+		"semver": "^7.7.3",
+		"valibot": "catalog:",
+		"validate-npm-package-name": "^7.0.2"
+	},
+	"devDependencies": {
+		"@types/npm-package-arg": "^6.1.4",
+		"@types/semver": "^7.7.1",
+		"@types/validate-npm-package-name": "^4.0.2"
+	},
+	"packageManager": "pnpm@10.28.1",
+	"volta": {
+		"node": "24.13.0",
+		"pnpm": "10.28.1"
+	}
+}

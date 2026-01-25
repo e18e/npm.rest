@@ -1,0 +1,12 @@
+onlyBuiltDependencies:
+    - esbuild
+
+packages:
+    - packages/validate
+    - packages/replication
+
+catalog:
+    '@types/node': ^24.10.9
+    prettier: ^3.8.0
+    typescript: ^5.9.3
+    valibot: ^1.2.0

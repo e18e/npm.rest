@@ -1,0 +1,21 @@
+services:
+    db:
+        container_name: npm-alt-db
+        restart: unless-stopped
+        image: postgres:18-alpine
+        environment:
+            - 'POSTGRES_PASSWORD=postgres'
+            - 'POSTGRES_USER=postgres'
+            - 'POSTGRES_DB=postgres'
+        ports:
+            - '127.0.0.1:5432:5432'
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U postgres']
+            interval: 30s
+            timeout: 8s
+            retries: 6
+        volumes:
+            - data:/var/lib/postgresql
+
+volumes:
+    data:
