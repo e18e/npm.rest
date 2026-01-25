@@ -1,7 +1,7 @@
 import { packumentTable } from './schema';
 import { fetchPackument } from './fetch';
 import { createState, db } from './db';
-import { ofetch } from 'ofetch';
+import { FetchError, ofetch } from 'ofetch';
 import { eq } from 'drizzle-orm';
 
 interface Row {
@@ -26,6 +26,39 @@ interface MetaResponse {
 const dbSeedPickup = createState<MetaResponse>('seed-pickup');
 const dbStartKey = createState<string>('seed-last-key');
 
+//             | a technical term
+async function getSomething(id: string) {
+	try {
+		const data = await ofetch(`/${id}`, {
+			baseURL: 'https://registry.npmjs.org',
+			headers: {
+				'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+			},
+			retry: 3,
+			retryDelay: 500,
+			responseType: 'text',
+		});
+
+		return {
+			__type: 'packument',
+			looksLikeJSON: data.startsWith('{'),
+			data: data.replace(
+				/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]+/g,
+				'',
+			),
+		};
+	} catch (e) {
+		const error = e as FetchError;
+
+		return {
+			__type: 'error',
+			error: error.message,
+			note: 'failed to fetch packument',
+			status: error.status || '??',
+		};
+	}
+}
+
 async function handleRow(row: Row) {
 	if (row.id !== row.key) {
 		console.info('found case where row.id !== row.key', row);
@@ -37,28 +70,18 @@ async function handleRow(row: Row) {
 		.where(eq(packumentTable.id, row.id))
 		.catch(() => null);
 
-	if (exists?.length) {
+	if (exists?.at(0)?.id) {
 		return;
 	}
 
-	const res = await fetchPackument(row.id);
-
-	if (res.type === 'error' && res.code !== 'not-found') {
-		throw new Error(
-			`failed to fetch packument for ${row.id}: ${res.error.message}`,
-			{ cause: res.error },
-		);
-	}
-
-	const packument =
-		res.type === 'error' ? { __type: 'error', row } : res.packument;
+	const data = await getSomething(row.id);
 
 	await db
 		.insert(packumentTable)
-		.values({ id: row.id, data: packument })
+		.values({ id: row.id, data })
 		.onConflictDoUpdate({
 			target: packumentTable.id,
-			set: { data: packument },
+			set: { data },
 		})
 		.catch((error) => {
 			throw new Error(`db issue for ${row.id}: ${error}`, {
