@@ -1,12 +1,14 @@
-onlyBuiltDependencies:
-    - esbuild
-
 packages:
     - packages/validate
     - packages/replication
+    - packages/db
 
 catalog:
     '@types/node': ^24.10.9
+    drizzle-orm: ^0.45.1
     prettier: ^3.8.0
     typescript: ^5.9.3
     valibot: ^1.2.0
+
+onlyBuiltDependencies:
+    - esbuild

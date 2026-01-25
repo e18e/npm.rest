@@ -6,17 +6,12 @@
 		"seed": "tsx src/seed.ts"
 	},
 	"dependencies": {
+		"@npm.rest/db": "workspace:^",
 		"@npm.rest/validate": "workspace:^",
-		"dotenv": "^17.2.3",
-		"drizzle-orm": "^0.45.1",
+		"drizzle-orm": "catalog:",
 		"ofetch": "^1.5.1",
-		"postgres": "^3.4.8",
 		"tsx": "^4.21.0",
 		"valibot": "catalog:"
-	},
-	"devDependencies": {
-		"@types/node": "catalog:",
-		"drizzle-kit": "^0.31.8"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

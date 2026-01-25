@@ -1,6 +1,4 @@
-import { packumentTable } from './schema';
-import { fetchPackument } from './fetch';
-import { createState, db } from './db';
+import { createState, db, packumentTable } from '@npm.rest/db';
 import { FetchError, ofetch } from 'ofetch';
 import { eq } from 'drizzle-orm';
 

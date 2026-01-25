@@ -6,20 +6,6 @@ import { eq } from 'drizzle-orm';
 
 export const db = drizzle(env.DATABASE_URL!);
 
-export async function getState<T>(key: string): Promise<T | null> {
-	const [record] = await db
-		.select({ value: stateTable.value })
-		.from(stateTable)
-		.where(eq(stateTable.value, key))
-		.limit(1);
-
-	if (!record) {
-		return null;
-	}
-
-	return JSON.parse(record.value);
-}
-
 export function createState<T>(key: string) {
 	return {
 		async get(): Promise<T | null> {
