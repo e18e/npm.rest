@@ -1,8 +1,8 @@
 import { db, packumentTable, queueTable } from '@npm.rest/db';
 import { setTimeout } from 'node:timers/promises';
+import { logger, seq } from './shared';
 import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';
-import { seq } from './shared';
 
 interface ChangeResult {
 	id: string;
@@ -19,6 +19,8 @@ interface ChangesResponse {
 export async function watchChanges() {
 	let { last_seq } = (await seq.get())!;
 
+	logger.info('watching changes', { last_seq });
+
 	while (true) {
 		const changes = await ofetch<ChangesResponse>('/registry/_changes', {
 			baseURL: 'https://replicate.npmjs.com',
@@ -30,8 +32,6 @@ export async function watchChanges() {
 				limit: 1000,
 			},
 		});
-
-		console.log(`batch of ${changes.results.length} changes`);
 
 		const queueItems: (typeof queueTable.$inferInsert)[] = [];
 
@@ -60,10 +60,21 @@ export async function watchChanges() {
 				});
 		}
 
+		logger.debug(`changes ${changes.results.length}`, {
+			results_len: changes.results.length,
+			last_seq: changes.last_seq,
+			change_count: queueItems.length,
+			deletion_count: changes.results.length - queueItems.length,
+		});
+
 		await seq.set({ last_seq: changes.last_seq });
 		last_seq = changes.last_seq;
 
 		if (changes.results.length < 1000) {
+			logger.info(`sleeping for 180 seconds`, {
+				until_approx: new Date(Date.now() + 180_000).toISOString(),
+			});
+
 			await setTimeout(180_000);
 		}
 	}

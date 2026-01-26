@@ -11,6 +11,8 @@
 		".": "./src/index.ts"
 	},
 	"dependencies": {
+		"@logtape/drizzle-orm": "^2.0.2",
+		"@logtape/logtape": "catalog:",
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"postgres": "^3.4.8"

@@ -1,7 +1,7 @@
 import { db, queueTable } from '@npm.rest/db';
+import { logger, seq } from './shared';
 import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';
-import { seq } from './shared';
 
 interface Row {
 	id: string;
@@ -23,6 +23,8 @@ interface MetaResponse {
 }
 
 export async function seed() {
+	logger.info`starting seed`;
+
 	const meta = await ofetch<MetaResponse>('/', {
 		baseURL: 'https://replicate.npmjs.com',
 		headers: {
@@ -30,7 +32,7 @@ export async function seed() {
 		},
 	});
 
-	console.log(meta);
+	logger.debug('fetched replicate meta', { meta });
 
 	let startKey: string | null = null;
 	let count = 0;
@@ -48,13 +50,23 @@ export async function seed() {
 		});
 
 		if (docs.rows.length === 1) {
-			console.log('seeding finished!');
+			logger.info('seeding finished', {
+				last_seq: meta.update_seq,
+				count,
+			});
 			await seq.set({ last_seq: meta.update_seq });
 			break;
 		}
 
-		console.log(
-			`Processing: ${count}/${docs.total_rows - docs.offset} (${Math.round((count / (docs.total_rows - docs.offset)) * 100)}%)`,
+		logger.debug(
+			`seed ${count}/${docs.total_rows} (${Math.round((count / docs.total_rows) * 100)}%)`,
+			{
+				startKey,
+				count,
+				total_rows: docs.total_rows,
+				batch_len: docs.rows.length,
+				offset: docs.offset,
+			},
 		);
 
 		count += docs.rows.length;

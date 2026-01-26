@@ -1,8 +1,13 @@
 import { watchChanges } from './changes';
-import { seq } from './shared';
+import { logger, seq } from './shared';
 import { seed } from './seed';
 
-if (!(await seq.get())) {
+logger.info`starting replication service`;
+
+const currentSeq = await seq.get();
+logger.info(`current sequence: ${currentSeq?.last_seq}`, { currentSeq });
+
+if (!currentSeq) {
 	await seed();
 }
 

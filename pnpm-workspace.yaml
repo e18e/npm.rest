@@ -4,6 +4,7 @@ packages:
     - packages/db
 
 catalog:
+    '@logtape/logtape': ^2.0.2
     '@types/node': ^24.10.9
     drizzle-orm: ^0.45.1
     prettier: ^3.8.0
