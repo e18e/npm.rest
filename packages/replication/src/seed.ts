@@ -49,13 +49,10 @@ export async function seed() {
 			},
 		});
 
-		if (docs.rows.length === 1) {
-			logger.info('seeding finished', {
-				last_seq: meta.update_seq,
-				count,
-			});
-			await seq.set({ last_seq: meta.update_seq });
-			break;
+		// When you request with the start key, it's inclusive
+		// so we need to remove it from the docs
+		if (startKey && docs.rows.at(0)?.key === startKey) {
+			docs.rows.shift();
 		}
 
 		logger.debug(
@@ -68,9 +65,6 @@ export async function seed() {
 				offset: docs.offset,
 			},
 		);
-
-		count += docs.rows.length;
-		startKey = docs.rows.at(-1)?.id || null;
 
 		await db
 			.insert(queueTable)
@@ -86,5 +80,17 @@ export async function seed() {
 				set: { updatedAt: new Date() },
 				setWhere: eq(queueTable.state, 'pending'),
 			});
+
+		count += docs.rows.length;
+		startKey = docs.rows.at(-1)?.id || null;
+
+		if (docs.rows.length === 0) {
+			logger.info('seeding finished', {
+				last_seq: meta.update_seq,
+				count,
+			});
+			await seq.set({ last_seq: meta.update_seq });
+			break;
+		}
 	}
 }
