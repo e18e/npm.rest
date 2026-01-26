@@ -81,9 +81,6 @@ importers:
       '@npm.rest/db':
         specifier: workspace:^
         version: link:../db
-      '@npm.rest/validate':
-        specifier: workspace:^
-        version: link:../validate
       '@sentry/node':
         specifier: ^10.36.0
         version: 10.36.0

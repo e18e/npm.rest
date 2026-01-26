@@ -1,5 +1,5 @@
 {
-	"name": "@npm.rest/replication",
+	"name": "@npm.rest/consumer",
 	"type": "module",
 	"private": true,
 	"scripts": {
