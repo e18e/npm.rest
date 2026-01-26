@@ -1,4 +1,4 @@
-import { db, queueTable } from '@npm.rest/db';
+import { db, changeTable } from '@npm.rest/db';
 import { logger, seq } from './shared';
 import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';
@@ -67,18 +67,18 @@ export async function seed() {
 		);
 
 		await db
-			.insert(queueTable)
+			.insert(changeTable)
 			.values(
-				docs.rows.map((row): typeof queueTable.$inferInsert => ({
-					key: row.id,
+				docs.rows.map((row): typeof changeTable.$inferInsert => ({
+					name: row.id,
 					revId: row.value.rev,
 					state: 'pending',
 				})),
 			)
 			.onConflictDoUpdate({
-				target: [queueTable.key, queueTable.state],
+				target: [changeTable.name, changeTable.revId],
 				set: { updatedAt: new Date() },
-				setWhere: eq(queueTable.state, 'pending'),
+				setWhere: eq(changeTable.state, 'pending'),
 			});
 
 		count += docs.rows.length;

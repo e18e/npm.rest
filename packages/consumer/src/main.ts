@@ -1,13 +1,6 @@
 import { configure, getConsoleSink, getLogger } from '@logtape/logtape';
-import {
-	and,
-	DrizzleQueryError,
-	eq,
-	inArray,
-	notExists,
-	sql,
-} from 'drizzle-orm';
-import { db, packumentTable, queueTable } from '@npm.rest/db';
+import { db, packumentTable, changeTable } from '@npm.rest/db';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import { setTimeout } from 'node:timers/promises';
 import { getSentrySink } from '@logtape/sentry';
 import { FetchError, ofetch } from 'ofetch';
@@ -29,12 +22,12 @@ await configure({
 	],
 });
 
-// function revGreater(a: string, b: string) {
-// 	if (a === b) return false;
-// 	const aNum = parseInt(a.split('-')[1]);
-// 	const bNum = parseInt(b.split('-')[1]);
-// 	return aNum > bNum;
-// }
+function revGreater(a: string, b: string) {
+	if (a === b) return false;
+	const aNum = parseInt(a.split('-')[1]);
+	const bNum = parseInt(b.split('-')[1]);
+	return aNum > bNum;
+}
 
 async function storePackument(name: string, rev: string) {
 	const [exists] = await db
@@ -96,35 +89,35 @@ async function storePackument(name: string, rev: string) {
 async function dequeue() {
 	// Get up to 10 items from the queue that are pending,
 	// and aren't currently being processed - the queue table has
-	// a unique index on (key, state) so there can always be two entries
-	// with the same key (package name), but not two being processed at
+	// a unique index on (name, revId) so there can always be many entries
+	// with the same name and different revIds, but not two being processed at
 	// the same time. This effectively is the logic to make sure that we
 	// aren't racing against ourselves and potentially doing the lost
 	// update problem.
 	return await db.transaction(async (tx) => {
 		const where = tx
-			.select({ id: queueTable.id })
-			.from(queueTable)
+			.select({ name: changeTable.name })
+			.from(changeTable)
 			.where(
 				and(
-					eq(queueTable.state, 'pending'),
+					eq(changeTable.state, 'pending'),
 					sql`
                         NOT EXISTS (
-                            SELECT 1 FROM ${queueTable} q2
-                            WHERE q2.key = ${queueTable}.key
+                            SELECT 1 FROM ${changeTable} q2
+                            WHERE q2.name = ${changeTable}.name
                                 AND q2.state = 'processing'
                         )
                     `,
 				),
 			)
-			.orderBy(queueTable.createdAt)
+			.orderBy(changeTable.createdAt)
 			.limit(10)
 			.for('update', { skipLocked: true });
 
 		return await tx
-			.update(queueTable)
+			.update(changeTable)
 			.set({ state: 'processing', updatedAt: new Date() })
-			.where(inArray(queueTable.id, where))
+			.where(inArray(changeTable.name, where))
 			.returning();
 	});
 }
@@ -135,61 +128,35 @@ while (true) {
 	const items = await dequeue();
 
 	logger.debug(`dequeued ${items.length} items`, {
-		keys: items.map((item) => item.key),
+		names: items.map((item) => item.name),
 	});
 
 	const changes = await Promise.all(
 		items.map(async (item) => ({
-			queueId: item.id,
-			queueKey: item.key,
-			queueRevId: item.revId,
-			queueAttempts: item.attempts,
-			result: await storePackument(item.key, item.revId),
+			name: item.name,
+			revId: item.revId,
+			result: await storePackument(item.name, item.revId),
 		})),
 	);
 
 	for (const change of changes) {
-		if (change.result.isOk()) {
-			logger.debug('packument stored successfully', { ...change });
+		logger.error(
+			`packument store ${change.result.isOk() ? 'succeeded' : 'failed'}`,
+			{ ...change },
+		);
 
-			await db
-				.delete(queueTable)
-				.where(eq(queueTable.id, change.queueId));
-		} else {
-			logger.error('packument store failed', { ...change });
-			const newState = change.queueAttempts === 2 ? 'failed' : 'pending';
-
-			const result = await Result.tryPromise({
-				try: async () => {
-					await db
-						.update(queueTable)
-						.set({
-							attempts: change.queueAttempts + 1,
-							updatedAt: new Date(),
-							state: newState,
-						})
-						.where(eq(queueTable.id, change.queueId));
-				},
-				catch: (error) => error as DrizzleQueryError,
-			});
-
-			if (result.isErr()) {
-				if (
-					result.error.cause &&
-					'code' in result.error.cause &&
-					result.error.cause.code == '23505'
-				) {
-					// If the error is a duplicate unique key violation, then
-					// we can delete the item from the queue since it's already
-					// there.
-					await db
-						.delete(queueTable)
-						.where(eq(queueTable.id, change.queueId));
-				} else {
-					throw result.error;
-				}
-			}
-		}
+		await db
+			.update(changeTable)
+			.set({
+				updatedAt: new Date(),
+				state: change.result.isOk() ? 'completed' : 'failed',
+			})
+			.where(
+				and(
+					eq(changeTable.name, change.name),
+					eq(changeTable.revId, change.revId),
+				),
+			);
 	}
 
 	if (items.length < 10) {

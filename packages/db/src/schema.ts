@@ -7,6 +7,7 @@ import {
 	jsonb,
 	text,
 	uuid,
+	index,
 } from 'drizzle-orm/pg-core';
 
 export const stateTable = pgTable('state', {
@@ -19,22 +20,21 @@ export const packumentTable = pgTable('packument', {
 	data: jsonb().notNull(),
 });
 
-export const queueState = pgEnum('queue_state', [
+export const changeState = pgEnum('change_state', [
 	'pending',
 	'processing',
 	'failed',
+	'completed',
 ]);
 
-export const queueTable = pgTable(
-	'queue',
+export const changeTable = pgTable(
+	'change',
 	{
-		id: uuid().defaultRandom().primaryKey().notNull(),
-		key: text().notNull(),
-		state: queueState().notNull(),
-		revId: text().notNull(),
-		attempts: integer().notNull().default(0),
+		name: text().primaryKey(),
+		revId: text().primaryKey(),
+		state: changeState().notNull(),
 		createdAt: timestamp().defaultNow().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
 	},
-	(table) => [uniqueIndex('queue_key_state_idx').on(table.key, table.state)],
+	(table) => [index('change_state_idx').on(table.state)],
 );
