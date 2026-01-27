@@ -28,28 +28,24 @@ await configure({
 
 function revGreater(a: string, b: string) {
 	if (a === b) return false;
-	const aNum = parseInt(a.split('-')[1]);
-	const bNum = parseInt(b.split('-')[1]);
+	const aNum = Number.parseInt(a.split('-')[1]);
+	const bNum = Number.parseInt(b.split('-')[1]);
 	return aNum > bNum;
 }
 
 async function storePackument(name: string, rev: string) {
 	const [exists] = await db
-		.select({ id: packumentTable.id })
+		.select({ id: packumentTable.id, revId: packumentTable.revId })
 		.from(packumentTable)
 		.where(eq(packumentTable.id, name));
 
-	// if (exists && revGreater(exists.revId, rev)) {
-	// 	logger.debug(`skipped ${name} since existing rev is greater`, {
-	// 		pkg: name,
-	// 		currentRev: exists.revId,
-	// 		newRev: rev,
-	// 	});
+	if (exists?.revId && revGreater(exists.revId, rev)) {
+		logger.debug(`skipped ${name} since existing rev is greater`, {
+			pkg: name,
+			currentRev: exists.revId,
+			newRev: rev,
+		});
 
-	// 	return Result.ok();
-	// }
-
-	if (exists) {
 		return Result.ok();
 	}
 

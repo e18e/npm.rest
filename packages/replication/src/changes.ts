@@ -1,4 +1,4 @@
-import { packumentTable, queueTable } from '@npm.rest/db/schema';
+import { packumentTable, changeTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
 import { db } from '@npm.rest/db/server';
 import { logger, seq } from './shared';
@@ -23,7 +23,7 @@ export async function watchChanges() {
 	logger.info('watching changes', { last_seq });
 
 	while (true) {
-		const changes = await ofetch<ChangesResponse>('/registry/_changes', {
+		const response = await ofetch<ChangesResponse>('/registry/_changes', {
 			baseURL: 'https://replicate.npmjs.com',
 			headers: {
 				'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
@@ -34,44 +34,44 @@ export async function watchChanges() {
 			},
 		});
 
-		const queueItems: (typeof queueTable.$inferInsert)[] = [];
+		const changes: (typeof changeTable.$inferInsert)[] = [];
 
-		for (const change of changes.results) {
+		for (const change of response.results) {
 			if (change.deleted) {
 				await db
 					.delete(packumentTable)
 					.where(eq(packumentTable.id, change.id));
 			} else {
-				queueItems.push({
-					key: change.id,
+				changes.push({
+					name: change.id,
 					revId: change.changes[0].rev,
 					state: 'pending',
 				});
 			}
 		}
 
-		if (queueItems.length) {
+		if (changes.length) {
 			await db
-				.insert(queueTable)
-				.values(queueItems)
+				.insert(changeTable)
+				.values(changes)
 				.onConflictDoUpdate({
-					target: [queueTable.key, queueTable.state],
+					target: [changeTable.name, changeTable.state],
 					set: { updatedAt: new Date() },
-					setWhere: eq(queueTable.state, 'pending'),
+					setWhere: eq(changeTable.state, 'pending'),
 				});
 		}
 
-		logger.debug(`changes ${changes.results.length}`, {
-			results_len: changes.results.length,
-			last_seq: changes.last_seq,
-			change_count: queueItems.length,
-			deletion_count: changes.results.length - queueItems.length,
+		logger.debug(`changes ${response.results.length}`, {
+			results_len: response.results.length,
+			last_seq: response.last_seq,
+			change_count: changes.length,
+			deletion_count: response.results.length - changes.length,
 		});
 
-		await seq.set({ last_seq: changes.last_seq });
-		last_seq = changes.last_seq;
+		await seq.set({ last_seq: response.last_seq });
+		last_seq = response.last_seq;
 
-		if (changes.results.length < 1000) {
+		if (response.results.length < 1000) {
 			logger.info(`sleeping for 180 seconds`, {
 				until_approx: new Date(Date.now() + 180_000).toISOString(),
 			});
