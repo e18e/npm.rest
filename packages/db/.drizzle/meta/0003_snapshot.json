@@ -1,5 +1,5 @@
 {
-  "id": "3595cd15-b625-4207-b81a-f822880d1549",
+  "id": "9788818b-9981-4860-b929-d381ab648f21",
   "prevId": "4acce803-1165-4e38-9abd-c2e616ad4b78",
   "version": "7",
   "dialect": "postgresql",
@@ -11,13 +11,13 @@
         "name": {
           "name": "name",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true
         },
         "revId": {
           "name": "revId",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true
         },
         "state": {
@@ -60,7 +60,15 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "change_name_revId_pk": {
+          "name": "change_name_revId_pk",
+          "columns": [
+            "name",
+            "revId"
+          ]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},

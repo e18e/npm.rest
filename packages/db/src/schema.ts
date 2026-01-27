@@ -1,4 +1,5 @@
 import {
+	primaryKey,
 	timestamp,
 	pgTable,
 	pgEnum,
@@ -27,11 +28,14 @@ export const changeState = pgEnum('change_state', [
 export const changeTable = pgTable(
 	'change',
 	{
-		name: text().primaryKey(),
-		revId: text().primaryKey(),
+		name: text().notNull(),
+		revId: text().notNull(),
 		state: changeState().notNull(),
 		createdAt: timestamp().defaultNow().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
 	},
-	(table) => [index('change_state_idx').on(table.state)],
+	(table) => [
+		index('change_state_idx').on(table.state),
+		primaryKey({ columns: [table.name, table.revId] }),
+	],
 );
