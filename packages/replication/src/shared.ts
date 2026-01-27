@@ -4,7 +4,10 @@ import { getSentrySink } from '@logtape/sentry';
 import { db } from '@npm.rest/db/server';
 import * as Sentry from '@sentry/node';
 import { env } from 'node:process';
-import 'dotenv/config';
+import { join } from 'node:path';
+import { config } from 'dotenv';
+
+config({ path: join(import.meta.dirname, '../../../.env') });
 
 Sentry.init({ dsn: env.SENTRY_DSN, enableLogs: true });
 
