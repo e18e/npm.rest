@@ -53,9 +53,21 @@ importers:
       '@cloudflare/vite-plugin':
         specifier: ^1.21.2
         version: 1.21.2(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(tsx@4.21.0))(workerd@1.20260120.0)(wrangler@4.60.0)
+      '@npm.rest/db':
+        specifier: workspace:^
+        version: link:../db
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.1(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(postgres@3.4.8)
       nitro:
         specifier: ^3.0.1-alpha.2
         version: 3.0.1-alpha.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(postgres@3.4.8))(lru-cache@11.2.4)(rolldown@1.0.0-rc.1)(rollup@4.57.0)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(tsx@4.21.0))
+      postgres:
+        specifier: 'catalog:'
+        version: 3.4.8
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@24.10.9)(jiti@2.6.1)(tsx@4.21.0)

@@ -2,6 +2,7 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "npm-rest",
 	"compatibility_date": "2026-01-27",
+	"compatibility_flags": ["nodejs_compat"],
 	"workers_dev": true,
 	"preview_urls": true,
 	"observability": {
@@ -9,4 +10,10 @@
 		"traces": { "enabled": true, "head_sampling_rate": 0.1 },
 		"logs": { "enabled": true },
 	},
+	"hyperdrive": [
+		{
+			"binding": "PG_HYPERDRIVE",
+			"id": "858281c7640747608e7863966a6e955a",
+		},
+	],
 }

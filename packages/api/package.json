@@ -10,7 +10,11 @@
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.21.2",
+		"@npm.rest/db": "workspace:^",
+		"dotenv": "^17.2.3",
+		"drizzle-orm": "catalog:",
 		"nitro": "^3.0.1-alpha.2",
+		"postgres": "catalog:",
 		"vite": "^7.3.1",
 		"wrangler": "^4.60.0"
 	}
