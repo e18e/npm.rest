@@ -2,10 +2,11 @@ import {
 	primaryKey,
 	timestamp,
 	pgTable,
+	integer,
 	pgEnum,
+	index,
 	jsonb,
 	text,
-	index,
 } from 'drizzle-orm/pg-core';
 
 export const stateTable = pgTable('state', {
@@ -44,3 +45,36 @@ export const changeTable = pgTable(
 		primaryKey({ columns: [table.name, table.revId] }),
 	],
 );
+
+export const packageTable = pgTable('package', {
+	name: text().primaryKey(),
+	distTags: jsonb().$type<Record<string, string>>().default({}).notNull(),
+	createdAt: timestamp().notNull(),
+	npmUpdatedAt: timestamp().notNull(),
+	updatedAt: timestamp().defaultNow().notNull(),
+});
+
+export const versionTable = pgTable(
+	'version',
+	{
+		name: text().notNull(),
+		version: text().notNull(),
+		description: text(),
+		repoURL: text(),
+		repoDir: text(),
+		homepage: text(),
+		deprecated: text(),
+		license: text(),
+		unpackedSize: integer().notNull(),
+		packedSize: integer().notNull(),
+		publint: jsonb(),
+		// types:
+		// funding:
+		publishedAt: timestamp().notNull(),
+		updatedAt: timestamp().defaultNow().notNull(),
+	},
+	(table) => [primaryKey({ columns: [table.name, table.version] })],
+);
+
+// export const dependencyTable
+// export const repositoryTable

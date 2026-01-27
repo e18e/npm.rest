@@ -7,6 +7,7 @@ import { FetchError, ofetch } from 'ofetch';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import * as Sentry from '@sentry/node';
+import { process } from './process';
 import { env } from 'node:process';
 import { join } from 'node:path';
 import { config } from 'dotenv';
@@ -25,66 +26,6 @@ await configure({
 		{ category: 'consumer', sinks: ['sentry', 'console'] },
 	],
 });
-
-function revGreater(a: string, b: string) {
-	if (a === b) return false;
-	const aNum = Number.parseInt(a.split('-')[1]);
-	const bNum = Number.parseInt(b.split('-')[1]);
-	return aNum > bNum;
-}
-
-async function storePackument(name: string, rev: string) {
-	const [exists] = await db
-		.select({ id: packumentTable.id, revId: packumentTable.revId })
-		.from(packumentTable)
-		.where(eq(packumentTable.id, name));
-
-	if (exists?.revId && revGreater(exists.revId, rev)) {
-		logger.debug(`skipped ${name} since existing rev is greater`, {
-			pkg: name,
-			currentRev: exists.revId,
-			newRev: rev,
-		});
-
-		return Result.ok();
-	}
-
-	const packument = await Result.tryPromise({
-		try: async () => {
-			const raw = await ofetch(`/${name}`, {
-				baseURL: 'https://registry.npmjs.org',
-				headers: {
-					'User-Agent': `npm.rest (+https://github.com/ghostdevv/npm.rest)`,
-				},
-				retry: 3,
-				retryDelay: 500,
-				responseType: 'text',
-			});
-
-			return raw.replace(
-				/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]+/g,
-				'',
-			);
-		},
-		catch: (error) => {
-			return error as FetchError<string>;
-		},
-	});
-
-	if (packument.isErr()) {
-		return packument;
-	}
-
-	await db
-		.insert(packumentTable)
-		.values({ id: name, data: packument.value })
-		.onConflictDoUpdate({
-			target: packumentTable.id,
-			set: { data: packument.value },
-		});
-
-	return Result.ok();
-}
 
 async function dequeue() {
 	// Get up to 10 items from the queue that are pending,
@@ -135,7 +76,7 @@ while (true) {
 		items.map(async (item) => ({
 			name: item.name,
 			revId: item.revId,
-			result: await storePackument(item.name, item.revId),
+			result: await process(item.name, item.revId),
 		})),
 	);
 
