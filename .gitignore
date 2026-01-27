@@ -1,5 +1,5 @@
 node_modules
-/database/certs
+/database/.lego
 
 # Env
 .env

@@ -16,6 +16,8 @@ services:
             retries: 6
         volumes:
             - data:/var/lib/postgresql
+            - ./database/.lego/certificates/${POSTGRES_HOST}.crt:/etc/postgresql/tls/server.crt:ro
+            - ./database/.lego/certificates/${POSTGRES_HOST}.key:/etc/postgresql/tls/server.key:ro
 
 volumes:
     data:

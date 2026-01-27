@@ -7,5 +7,5 @@ CLOUDFLARE_DNS_API_TOKEN="..." lego \
     --dns cloudflare \
     --domains ... \
     --accept-tos \
-    --path certs
+    run
 ```
