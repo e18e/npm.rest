@@ -1,12 +1,9 @@
 import {
-	uniqueIndex,
 	timestamp,
 	pgTable,
-	integer,
 	pgEnum,
 	jsonb,
 	text,
-	uuid,
 	index,
 } from 'drizzle-orm/pg-core';
 

@@ -1,18 +1,8 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { getLogger } from '@logtape/drizzle-orm';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { stateTable } from './schema';
-import { env } from 'node:process';
-import { join } from 'node:path';
 import { eq } from 'drizzle-orm';
-import { config } from 'dotenv';
 
-config({ path: join(import.meta.dirname, '../.env') });
-
-export const db = drizzle(env.DATABASE_URL!, {
-	logger: getLogger({ category: 'db' }),
-});
-
-export function createState<T>(key: string) {
+export function createState<T>(db: PostgresJsDatabase, key: string) {
 	return {
 		async get(): Promise<T | null> {
 			const [record] = await db

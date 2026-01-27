@@ -1,9 +1,10 @@
 import { configure, getConsoleSink, getLogger } from '@logtape/logtape';
-import { db, packumentTable, changeTable } from '@npm.rest/db';
+import { changeTable, packumentTable } from '@npm.rest/db/schema';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { setTimeout } from 'node:timers/promises';
 import { getSentrySink } from '@logtape/sentry';
 import { FetchError, ofetch } from 'ofetch';
+import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import * as Sentry from '@sentry/node';
 import { env } from 'node:process';

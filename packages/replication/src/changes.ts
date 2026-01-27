@@ -1,5 +1,6 @@
-import { db, packumentTable, queueTable } from '@npm.rest/db';
+import { packumentTable, queueTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
+import { db } from '@npm.rest/db/server';
 import { logger, seq } from './shared';
 import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';

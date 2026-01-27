@@ -1,4 +1,5 @@
-import { db, changeTable } from '@npm.rest/db';
+import { changeTable } from '@npm.rest/db/schema';
+import { db } from '@npm.rest/db/server';
 import { logger, seq } from './shared';
 import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';

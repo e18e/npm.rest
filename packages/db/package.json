@@ -8,14 +8,16 @@
 		"studio": "drizzle-kit studio"
 	},
 	"exports": {
-		".": "./src/index.ts"
+		"./server": "./src/server.ts",
+		"./schema": "./src/schema.ts",
+		"./utils": "./src/utils.ts"
 	},
 	"dependencies": {
 		"@logtape/drizzle-orm": "^2.0.2",
 		"@logtape/logtape": "catalog:",
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
-		"postgres": "^3.4.8"
+		"postgres": "catalog:"
 	},
 	"devDependencies": {
 		"@types/node": "catalog:",
