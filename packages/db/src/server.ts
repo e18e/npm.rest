@@ -17,4 +17,5 @@ const pg = postgres({
 
 export const db = drizzle(pg, {
 	logger: getLogger({ category: 'db' }),
+	casing: 'snake_case',
 });

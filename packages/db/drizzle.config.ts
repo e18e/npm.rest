@@ -9,6 +9,7 @@ export default defineConfig({
 	out: './.drizzle',
 	schema: './src/schema.ts',
 	dialect: 'postgresql',
+	casing: 'snake_case',
 	dbCredentials: {
 		user: env.POSTGRES_USER!,
 		password: env.POSTGRES_PASSWORD!,
