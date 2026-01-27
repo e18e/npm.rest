@@ -1,9 +1,9 @@
 import { defineConfig } from 'drizzle-kit';
+import { resolve } from 'node:path';
 import { env } from 'node:process';
-import { join } from 'node:path';
 import { config } from 'dotenv';
 
-config({ path: join(import.meta.dirname, '../../.env') });
+config({ path: resolve('../../.env') });
 
 export default defineConfig({
 	out: './.drizzle',

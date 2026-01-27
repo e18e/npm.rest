@@ -29,6 +29,13 @@
       "when": 1769519926379,
       "tag": "0003_classy_swordsman",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1769520154438,
+      "tag": "0004_mature_warbound",
+      "breakpoints": true
     }
   ]
 }

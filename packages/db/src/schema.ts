@@ -9,14 +9,19 @@ import {
 } from 'drizzle-orm/pg-core';
 
 export const stateTable = pgTable('state', {
-	key: text().primaryKey().notNull(),
+	key: text().primaryKey(),
 	value: text().notNull(),
 });
 
-export const packumentTable = pgTable('packument', {
-	id: text().primaryKey().notNull(),
-	data: jsonb().notNull(),
-});
+export const packumentTable = pgTable(
+	'packument',
+	{
+		id: text().primaryKey(),
+		revId: text(),
+		data: jsonb().notNull(),
+	},
+	(table) => [index('packument_data_gin_idx').using('gin', table.data)],
+);
 
 export const changeState = pgEnum('change_state', [
 	'pending',
