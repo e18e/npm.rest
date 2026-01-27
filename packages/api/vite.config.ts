@@ -10,6 +10,18 @@ export default defineConfig({
 			preset: 'cloudflare-module',
 			cloudflare: { deployConfig: true },
 			errorHandler: './src/error.ts',
+			experimental: {
+				vite: {},
+				openAPI: true,
+			},
+			openAPI: {
+				production: 'runtime',
+				route: '/_openapi.json',
+				ui: { scalar: false, swagger: false },
+				meta: {
+					title: 'npm.rest',
+				},
+			},
 		}),
 		cloudflare(),
 	],
