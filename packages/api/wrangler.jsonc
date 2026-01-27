@@ -1,0 +1,12 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "npm-rest",
+	"compatibility_date": "2026-01-27",
+	"workers_dev": true,
+	"preview_urls": true,
+	"observability": {
+		"enabled": true,
+		"traces": { "enabled": true, "head_sampling_rate": 0.1 },
+		"logs": { "enabled": true },
+	},
+}

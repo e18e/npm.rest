@@ -1,0 +1,17 @@
+{
+	"name": "@npm.rest/api",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"types": "wrangler types",
+		"prepare": "pnpm types"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.21.2",
+		"nitro": "^3.0.1-alpha.2",
+		"vite": "^7.3.1",
+		"wrangler": "^4.60.0"
+	}
+}

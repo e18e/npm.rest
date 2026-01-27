@@ -2,6 +2,7 @@ packages:
     - packages/validate
     - packages/replication
     - packages/db
+    - packages/api
 
 catalog:
     '@logtape/logtape': ^2.0.2
@@ -13,3 +14,5 @@ catalog:
 
 onlyBuiltDependencies:
     - esbuild
+    - workerd
+    - sharp
