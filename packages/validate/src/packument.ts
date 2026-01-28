@@ -107,13 +107,13 @@ export const PackumentSchema = v.looseObject({
 	description: FussyString,
 	'dist-tags': v.optional(
 		v.intersect([
-			v.strictObject({ latest: v.string() }),
+			v.object({ latest: v.string() }),
 			v.record(v.string(), v.string()),
 		]),
 	),
 	versions: v.optional(v.record(v.string(), PackumentVersionSchema)),
 	time: v.intersect([
-		v.strictObject({ created: Date, modified: Date }),
+		v.object({ created: Date, modified: Date }),
 		v.record(v.string(), Date),
 	]),
 	// maintainers: v.array(Maintainer),

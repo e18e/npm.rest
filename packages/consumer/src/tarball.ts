@@ -1,20 +1,19 @@
-import type { PackumentVersion } from '@npm.rest/validate/packument';
 import { Result } from 'better-result';
 import { unpack } from '@publint/pack';
 
-export async function downloadTarball(dist: PackumentVersion['dist']) {
+export async function downloadTarball(url: string, integrity?: string) {
 	const result = await Result.tryPromise(async () => {
-		const response = await fetch(dist.tarball, {
+		const response = await fetch(url, {
 			headers: {
 				'User-Agent':
 					'npm.rest (+https://github.com/ghostdevv/npm.rest)',
 			},
-			integrity: dist.integrity,
+			integrity,
 		});
 
 		if (!response.ok || !response.body) {
 			throw new Error(
-				`failed to download tarball "${dist.tarball}" with ${response.status}`,
+				`failed to download tarball "${url}" with ${response.status}`,
 			);
 		}
 

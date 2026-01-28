@@ -31,13 +31,14 @@ export async function process(name: string, rev: string) {
 	}
 
 	return await Result.gen(async function* () {
-		const packu = yield* Result.await(processPackument(name));
+		const packument = yield* Result.await(processPackument(name));
 
-		yield* Result.await(processPackage(packu));
+		yield* Result.await(processPackage(packument));
 
-		if (packu.versions) {
-			for (const ver of Object.values(packu.versions)) {
-				yield* Result.await(processVersion(packu, ver));
+		if (packument.versions) {
+			for (const pkv of Object.values(packument.versions)) {
+				yield* Result.await(processVersion(packument, pkv));
+				break;
 			}
 		}
 

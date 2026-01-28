@@ -5,7 +5,7 @@ import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { and, eq } from 'drizzle-orm';
 import { publint } from 'publint';
-import { join } from 'node:path';
+import { attw } from './attw';
 import {
 	type PackumentVersion,
 	type Packument,
@@ -40,13 +40,13 @@ export async function processVersion(pkg: Packument, pkv: PackumentVersion) {
 		return Result.ok();
 	}
 
-	const files = await downloadTarball(pkv.dist);
-	if (files.isErr()) return files;
+	const tarball = await downloadTarball(pkv.dist.tarball, pkv.dist.integrity);
+	if (tarball.isErr()) return tarball;
 
 	const publintResult = await Result.tryPromise(async () => {
 		return await publint({
-			pkgDir: files.value.rootDir,
-			pack: { files: files.value.files },
+			pkgDir: tarball.value.rootDir,
+			pack: { files: tarball.value.files },
 		});
 	});
 
@@ -54,28 +54,8 @@ export async function processVersion(pkg: Packument, pkv: PackumentVersion) {
 		return publintResult;
 	}
 
-	const attw = await Result.tryPromise(async () => {
-		const mappedFiles = Object.fromEntries(
-			files.value.files.map((file) => [
-				join(
-					'/node_modules',
-					'create-ghost',
-					file.name.startsWith(files.value.rootDir)
-						? file.name.slice(files.value.rootDir.length)
-						: file.name,
-				),
-				file.data,
-			]),
-		);
-
-		return await checkPackage(
-			new Package(mappedFiles, pkg.name, pkv.version),
-		);
-	});
-
-	if (attw.isErr()) {
-		return attw;
-	}
+	const attwResult = await attw(pkg.name, pkv.version, tarball.value);
+	if (attwResult.isErr()) return attwResult;
 
 	await db.insert(versionTable).values({
 		name: pkg.name,
@@ -86,8 +66,8 @@ export async function processVersion(pkg: Packument, pkv: PackumentVersion) {
 		homepage: pkv.homepage,
 		deprecated: pkv.deprecated,
 		license: pkv.license,
-		packedSize: files.value.packedSize,
-		unpackedSize: files.value.unpackedSize,
+		packedSize: tarball.value.packedSize,
+		unpackedSize: tarball.value.unpackedSize,
 		publishedAt: pkg.time[pkv.version],
 		publint: publintResult.value.messages.length
 			? publintResult.value.messages
