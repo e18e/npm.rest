@@ -18,8 +18,11 @@
 		"ofetch": "^1.5.1",
 		"publint": "catalog:",
 		"tsx": "^4.21.0",
-		"typescript": "catalog:",
 		"valibot": "catalog:"
+	},
+	"devDependencies": {
+		"pkg-types": "^2.3.0",
+		"typescript": "catalog:"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

@@ -97,6 +97,15 @@ export const typesState = pgEnum('types_state', [
 	'none',
 ]);
 
+export const moduleType = pgEnum('module_type', [
+	'cjs',
+	'esm',
+	'dual',
+	'faux',
+	'dts',
+	'unknown',
+]);
+
 export const versionTable = pgTable(
 	'version',
 	{
@@ -114,6 +123,7 @@ export const versionTable = pgTable(
 		unpackedSize: integer().notNull(),
 		packedSize: integer().notNull(),
 		types: typesState().notNull(),
+		moduleType: moduleType().notNull(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),

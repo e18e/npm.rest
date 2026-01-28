@@ -1,5 +1,6 @@
 import { publintTable, versionTable } from '@npm.rest/db/schema';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
+import { analyzePackageModuleType } from './module-type';
 import type { UnpackResult } from '@publint/pack';
 import { processPackument } from './packument';
 import { downloadTarball } from './tarball';
@@ -110,6 +111,7 @@ export async function processVersion(
 			unpackedSize: tarball.value.unpackedSize,
 			publishedAt: pkg.time[pkv.version],
 			types: types.value,
+			moduleType: analyzePackageModuleType(publintResult.value.pkg),
 		})
 		.returning({ id: versionTable.id });
 
