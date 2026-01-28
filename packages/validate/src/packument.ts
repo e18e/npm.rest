@@ -52,7 +52,7 @@ const PackumentVersionSchema = v.looseObject({
 	name: v.string(),
 	description: FussyString,
 	version: v.string(),
-	// keywords: v.optional(v.array(v.string())),
+	keywords: v.optional(v.array(v.string())),
 	// author: v.optional(v.union([Author, Str])),
 	license: v.optional(v.string()),
 	// maintainers: v.optional(v.array(Maintainer)),

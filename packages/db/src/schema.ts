@@ -124,6 +124,7 @@ export const versionTable = pgTable(
 		packedSize: integer().notNull(),
 		types: typesState().notNull(),
 		moduleType: moduleType().notNull(),
+		keywords: text().array(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),

@@ -112,6 +112,7 @@ export async function processVersion(
 			publishedAt: pkg.time[pkv.version],
 			types: types.value,
 			moduleType: analyzePackageModuleType(publintResult.value.pkg),
+			keywords: pkv.keywords,
 		})
 		.returning({ id: versionTable.id });
 
