@@ -1,4 +1,4 @@
-import { packumentTable } from '@npm.rest/db/schema';
+import { packageTable } from '@npm.rest/db/schema';
 import { processPackument } from './packument';
 import { processVersion } from './version';
 import { processPackage } from './package';
@@ -16,10 +16,11 @@ function revGreater(a: string, b: string) {
 
 export async function process(name: string, rev: string) {
 	const [exists] = await db
-		.select({ id: packumentTable.id, revId: packumentTable.revId })
-		.from(packumentTable)
-		.where(eq(packumentTable.id, name));
+		.select({ id: packageTable.id, revId: packageTable.revId })
+		.from(packageTable)
+		.where(eq(packageTable.name, name));
 
+	// todo this assumption may fall apart if a queue item fails
 	if (exists?.revId && revGreater(exists.revId, rev)) {
 		logger.debug(`skipped ${name} since existing rev is greater`, {
 			pkg: name,
@@ -31,8 +32,11 @@ export async function process(name: string, rev: string) {
 	}
 
 	return await Result.gen(async function* () {
-		const packument = yield* Result.await(processPackument(name));
-		const packageId = yield* Result.await(processPackage(packument, rev));
+		const packument = yield* Result.await(processPackument(name, rev));
+
+		const packageId = yield* Result.await(
+			processPackage(packument, rev, exists),
+		);
 
 		if (packument.versions) {
 			for (const pkv of Object.values(packument.versions)) {
