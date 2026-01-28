@@ -9,9 +9,21 @@ catalogs:
     '@logtape/logtape':
       specifier: ^2.0.2
       version: 2.0.2
+    '@types/node':
+      specifier: ^24.10.9
+      version: 24.10.9
     drizzle-orm:
       specifier: ^0.45.1
       version: 0.45.1
+    postgres:
+      specifier: ^3.4.8
+      version: 3.4.8
+    prettier:
+      specifier: ^3.8.0
+      version: 3.8.1
+    publint:
+      specifier: ^0.3.17
+      version: 0.3.17
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
@@ -138,6 +150,9 @@ importers:
       drizzle-kit:
         specifier: ^0.31.8
         version: 0.31.8
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.17
 
   packages/replication:
     dependencies:

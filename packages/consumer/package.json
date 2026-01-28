@@ -17,7 +17,7 @@
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"ofetch": "^1.5.1",
-		"publint": "^0.3.17",
+		"publint": "catalog:",
 		"tsx": "^4.21.0",
 		"typescript": "catalog:",
 		"valibot": "catalog:"

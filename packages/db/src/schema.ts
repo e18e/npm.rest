@@ -48,11 +48,25 @@ export const changeTable = pgTable(
 
 export const packageTable = pgTable('package', {
 	name: text().primaryKey(),
+	revId: text().notNull(),
 	distTags: jsonb().$type<Record<string, string>>().default({}).notNull(),
 	createdAt: timestamp().notNull(),
 	npmUpdatedAt: timestamp().notNull(),
 	updatedAt: timestamp().defaultNow().notNull(),
 });
+
+export const typesState = pgEnum('types_state', [
+	'definitely-typed',
+	'built-in',
+	'none',
+]);
+
+// export const publintTable = pgTable('publint', {
+// 	name: text().notNull(),
+// 	version: text().notNull(),
+// 	publintVersion: text().notNull(),
+// 	messages: jsonb().$type<Message[]>(),
+// });
 
 export const versionTable = pgTable(
 	'version',
@@ -67,8 +81,8 @@ export const versionTable = pgTable(
 		license: text(),
 		unpackedSize: integer().notNull(),
 		packedSize: integer().notNull(),
-		publint: jsonb(),
-		// types:
+		types: typesState().notNull(),
+		// publint: jsonb().$type<{ version: }>().notNull(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
