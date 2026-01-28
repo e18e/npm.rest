@@ -1,11 +1,13 @@
 import { publintTable, versionTable } from '@npm.rest/db/schema';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
+import type { UnpackResult } from '@publint/pack';
+import { processPackument } from './packument';
 import { downloadTarball } from './tarball';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { and, eq } from 'drizzle-orm';
+import { extname } from 'node:path';
 import { publint } from 'publint';
-import { attw } from './attw';
 import {
 	type PackumentVersion,
 	type Packument,
@@ -13,6 +15,38 @@ import {
 
 const { version: publintVersion } =
 	await import('../node_modules/publint/package.json');
+
+const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
+
+async function hasTypes(name: string, tarball: UnpackResult) {
+	if (name.startsWith('@types/')) {
+		return Result.ok('built-in' as const);
+	}
+
+	const containsTypes = tarball.files.some((file) =>
+		TS_FILE_EXTENSIONS.includes(extname(file.name)),
+	);
+
+	if (containsTypes) {
+		return Result.ok('built-in' as const);
+	}
+
+	const pkg = await processPackument(
+		name.startsWith('@')
+			? name.replace('/', '__').replace('@', '@types/')
+			: `@types/${name}`,
+	);
+
+	if (pkg.isErr()) {
+		if ('status' in pkg.error && pkg.error.status === 404) {
+			return Result.ok('none' as const);
+		}
+
+		return pkg;
+	}
+
+	return Result.ok('definitely-typed' as const);
+}
 
 export async function processVersion(
 	packageId: ResourceId<'pkg'>,
@@ -57,8 +91,8 @@ export async function processVersion(
 		return publintResult;
 	}
 
-	const attwResult = await attw(pkg.name, pkv.version, tarball.value);
-	if (attwResult.isErr()) return attwResult;
+	const types = await hasTypes(pkg.name, tarball.value);
+	if (types.isErr()) return types;
 
 	const [record] = await db
 		.insert(versionTable)
@@ -75,11 +109,7 @@ export async function processVersion(
 			packedSize: tarball.value.packedSize,
 			unpackedSize: tarball.value.unpackedSize,
 			publishedAt: pkg.time[pkv.version],
-			types: attwResult.value.types
-				? attwResult.value.types.kind === '@types'
-					? 'definitely-typed'
-					: 'built-in'
-				: 'none',
+			types: types.value,
 		})
 		.returning({ id: versionTable.id });
 

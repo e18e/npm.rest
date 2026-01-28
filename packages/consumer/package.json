@@ -6,7 +6,6 @@
 		"start": "tsx src/main.ts"
 	},
 	"dependencies": {
-		"@arethetypeswrong/core": "^0.18.2",
 		"@logtape/logtape": "catalog:",
 		"@logtape/sentry": "^2.0.2",
 		"@npm.rest/db": "workspace:^",

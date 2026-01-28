@@ -14,7 +14,7 @@ type PackumentResult = Result<
 
 export async function processPackument(
 	name: string,
-	rev: string,
+	rev?: string,
 ): Promise<PackumentResult> {
 	const [exists] = await db
 		.select()
