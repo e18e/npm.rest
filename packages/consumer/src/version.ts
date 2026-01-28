@@ -1,5 +1,5 @@
-import { checkPackage, Package } from '@arethetypeswrong/core';
-import { versionTable } from '@npm.rest/db/schema';
+import { publintTable, versionTable } from '@npm.rest/db/schema';
+import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { downloadTarball } from './tarball';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
@@ -11,31 +11,34 @@ import {
 	type Packument,
 } from '@npm.rest/validate/packument';
 
-export async function processVersion(pkg: Packument, pkv: PackumentVersion) {
-	const exists = await db
-		.select({ version: versionTable.version })
+const { version: publintVersion } =
+	await import('../node_modules/publint/package.json');
+
+export async function processVersion(
+	packageId: ResourceId<'pkg'>,
+	pkg: Packument,
+	pkv: PackumentVersion,
+) {
+	const [exists] = await db
+		.select({ id: versionTable.id })
 		.from(versionTable)
 		.where(
 			and(
-				eq(versionTable.name, pkg.name),
+				eq(versionTable.packageId, packageId),
 				eq(versionTable.version, pkv.version),
 			),
 		);
 
-	if (exists.length > 0) {
+	if (exists) {
 		// todo confirm what is actually immutable
+		// todo check if publint exists else process
 		await db
 			.update(versionTable)
 			.set({
 				deprecated: pkv.deprecated,
 				updatedAt: new Date(),
 			})
-			.where(
-				and(
-					eq(versionTable.name, pkg.name),
-					eq(versionTable.version, pkv.version),
-				),
-			);
+			.where(eq(versionTable.id, exists.id));
 
 		return Result.ok();
 	}
@@ -57,21 +60,34 @@ export async function processVersion(pkg: Packument, pkv: PackumentVersion) {
 	const attwResult = await attw(pkg.name, pkv.version, tarball.value);
 	if (attwResult.isErr()) return attwResult;
 
-	await db.insert(versionTable).values({
-		name: pkg.name,
-		version: pkv.version,
-		description: pkv.description,
-		repoURL: pkv.repository?.url,
-		repoDir: pkv.repository?.directory,
-		homepage: pkv.homepage,
-		deprecated: pkv.deprecated,
-		license: pkv.license,
-		packedSize: tarball.value.packedSize,
-		unpackedSize: tarball.value.unpackedSize,
-		publishedAt: pkg.time[pkv.version],
-		publint: publintResult.value.messages.length
-			? publintResult.value.messages
-			: null,
+	const [record] = await db
+		.insert(versionTable)
+		.values({
+			id: generateId('pkv'),
+			packageId,
+			version: pkv.version,
+			description: pkv.description,
+			repoURL: pkv.repository?.url,
+			repoDir: pkv.repository?.directory,
+			homepage: pkv.homepage,
+			deprecated: pkv.deprecated,
+			license: pkv.license,
+			packedSize: tarball.value.packedSize,
+			unpackedSize: tarball.value.unpackedSize,
+			publishedAt: pkg.time[pkv.version],
+			types: attwResult.value.types
+				? attwResult.value.types.kind === '@types'
+					? 'definitely-typed'
+					: 'built-in'
+				: 'none',
+		})
+		.returning({ id: versionTable.id });
+
+	await db.insert(publintTable).values({
+		id: generateId('publ'),
+		versionId: record.id,
+		messages: publintResult.value.messages,
+		publintVersion,
 	});
 
 	return Result.ok();

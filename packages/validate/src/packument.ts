@@ -103,6 +103,7 @@ const PackumentVersionSchema = v.looseObject({
 export type PackumentVersion = v.InferOutput<typeof PackumentVersionSchema>;
 
 export const PackumentSchema = v.looseObject({
+	_rev: v.optional(v.string()),
 	name: v.string(),
 	description: FussyString,
 	'dist-tags': v.optional(

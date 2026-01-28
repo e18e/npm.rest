@@ -1,5 +1,11 @@
+import { isIdPrefix, type IdPrefix, type ResourceId } from './id';
+import type { Message as PublintMessage } from 'publint';
+import { sql } from 'drizzle-orm';
 import {
+	type ExtraConfigColumn,
+	uniqueIndex,
 	primaryKey,
+	customType,
 	timestamp,
 	pgTable,
 	integer,
@@ -7,7 +13,29 @@ import {
 	index,
 	jsonb,
 	text,
+	check,
 } from 'drizzle-orm/pg-core';
+
+/** Create a resource id column with the given prefix. */
+function resourceId<T extends IdPrefix>(prefix: T) {
+	return customType<{ data: ResourceId<T>; config: { prefix: T } }>({
+		dataType() {
+			return 'text';
+		},
+	})({ prefix }).notNull();
+}
+
+/** Create the check constraint for resource id column */
+function resourceIdCheck(name: string, column: ExtraConfigColumn) {
+	// @ts-expect-error shhh
+	const prefix = column.config?.fieldConfig?.prefix;
+
+	if (!isIdPrefix(prefix)) {
+		throw new Error(`Invalid prefix for ${name}: ${prefix}`);
+	}
+
+	return check(name, sql`${column} LIKE '${sql.raw(prefix)}_%'`);
+}
 
 export const stateTable = pgTable('state', {
 	key: text().primaryKey(),
@@ -46,14 +74,22 @@ export const changeTable = pgTable(
 	],
 );
 
-export const packageTable = pgTable('package', {
-	name: text().primaryKey(),
-	revId: text().notNull(),
-	distTags: jsonb().$type<Record<string, string>>().default({}).notNull(),
-	createdAt: timestamp().notNull(),
-	npmUpdatedAt: timestamp().notNull(),
-	updatedAt: timestamp().defaultNow().notNull(),
-});
+export const packageTable = pgTable(
+	'package',
+	{
+		id: resourceId('pkg').primaryKey(),
+		name: text().notNull(),
+		revId: text().notNull(),
+		distTags: jsonb().$type<Record<string, string>>().default({}).notNull(),
+		createdAt: timestamp().notNull(),
+		npmUpdatedAt: timestamp().notNull(),
+		updatedAt: timestamp().defaultNow().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('package_resource_id', table.id),
+		uniqueIndex('package_name_unique_idx').on(table.name),
+	],
+);
 
 export const typesState = pgEnum('types_state', [
 	'definitely-typed',
@@ -61,17 +97,13 @@ export const typesState = pgEnum('types_state', [
 	'none',
 ]);
 
-// export const publintTable = pgTable('publint', {
-// 	name: text().notNull(),
-// 	version: text().notNull(),
-// 	publintVersion: text().notNull(),
-// 	messages: jsonb().$type<Message[]>(),
-// });
-
 export const versionTable = pgTable(
 	'version',
 	{
-		name: text().notNull(),
+		id: resourceId('pkv').primaryKey(),
+		packageId: resourceId('pkg')
+			.notNull()
+			.references(() => packageTable.id, { onDelete: 'cascade' }),
 		version: text().notNull(),
 		description: text(),
 		repoURL: text(),
@@ -82,13 +114,37 @@ export const versionTable = pgTable(
 		unpackedSize: integer().notNull(),
 		packedSize: integer().notNull(),
 		types: typesState().notNull(),
-		// publint: jsonb().$type<{ version: }>().notNull(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
 	},
-	(table) => [primaryKey({ columns: [table.name, table.version] })],
+	(table) => [
+		resourceIdCheck('version_resource_id', table.id),
+		resourceIdCheck('version_package_resource_id', table.packageId),
+		uniqueIndex('version_package_id_version_unique_idx').on(
+			table.packageId,
+			table.version,
+		),
+	],
+);
+
+export const publintTable = pgTable(
+	'publint',
+	{
+		id: resourceId('publ'),
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		publintVersion: text().notNull(),
+		messages: jsonb().$type<PublintMessage[]>().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('publint_resource_id', table.id),
+		resourceIdCheck('publint_version_resource_id', table.versionId),
+		uniqueIndex('publint_version_unique_idx').on(table.versionId),
+	],
 );
 
 // export const dependencyTable
 // export const repositoryTable
+// export const fundingTable

@@ -32,13 +32,11 @@ export async function process(name: string, rev: string) {
 
 	return await Result.gen(async function* () {
 		const packument = yield* Result.await(processPackument(name));
-
-		yield* Result.await(processPackage(packument));
+		const packageId = yield* Result.await(processPackage(packument, rev));
 
 		if (packument.versions) {
 			for (const pkv of Object.values(packument.versions)) {
-				yield* Result.await(processVersion(packument, pkv));
-				break;
+				yield* Result.await(processVersion(packageId, packument, pkv));
 			}
 		}
 
