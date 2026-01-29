@@ -9,18 +9,9 @@ catalogs:
     '@logtape/logtape':
       specifier: ^2.0.2
       version: 2.0.2
-    '@types/node':
-      specifier: ^24.10.9
-      version: 24.10.9
     drizzle-orm:
       specifier: ^0.45.1
       version: 0.45.1
-    postgres:
-      specifier: ^3.4.8
-      version: 3.4.8
-    prettier:
-      specifier: ^3.8.0
-      version: 3.8.1
     publint:
       specifier: ^0.3.17
       version: 0.3.17
@@ -77,6 +68,61 @@ importers:
       wrangler:
         specifier: ^4.60.0
         version: 4.60.0
+
+  packages/consumer:
+    dependencies:
+      '@logtape/logtape':
+        specifier: 'catalog:'
+        version: 2.0.2
+      '@logtape/sentry':
+        specifier: ^2.0.2
+        version: 2.0.2(@logtape/logtape@2.0.2)(@sentry/core@10.36.0)
+      '@npm.rest/db':
+        specifier: workspace:^
+        version: link:../db
+      '@npm.rest/validate':
+        specifier: workspace:^
+        version: link:../validate
+      '@publint/pack':
+        specifier: ^0.1.3
+        version: 0.1.3
+      '@sentry/node':
+        specifier: ^10.36.0
+        version: 10.36.0
+      better-result:
+        specifier: ^2.5.2
+        version: 2.5.2
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.1(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(postgres@3.4.8)
+      hosted-git-info:
+        specifier: ^9.0.2
+        version: 9.0.2
+      ofetch:
+        specifier: ^1.5.1
+        version: 1.5.1
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.17
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+      valibot:
+        specifier: 'catalog:'
+        version: 1.2.0(typescript@5.9.3)
+    devDependencies:
+      '@types/hosted-git-info':
+        specifier: ^3.0.5
+        version: 3.0.5
+      pkg-types:
+        specifier: ^2.3.0
+        version: 2.3.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/db:
     dependencies:
@@ -1851,6 +1897,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/hosted-git-info@3.0.5':
+    resolution: {integrity: sha512-Dmngh7U003cOHPhKGyA7LWqrnvcTyILNgNPmNCxlx7j8MIi54iBliiT8XqVLIQ3GchoOjVAyBzNJVyuaJjqokg==}
+
   '@types/mysql@2.15.27':
     resolution: {integrity: sha512-YfWiV16IY0OeBfBCk8+hXKmdTKrKlwKN1MNKAPBu5JYxLwBEZl7QzeEpGnlZb3VMGJrrGmB84gXiH+ofs/TezA==}
 
@@ -1922,6 +1971,9 @@ packages:
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+
+  confbox@0.2.2:
+    resolution: {integrity: sha512-1NB+BKqhtNipMsov4xI/NnhCKp9XG9NamYp5PVm9klAT0fsrNPjaFICsCFhNhwZJKNh7zB/3q8qXz0E9oaMNtQ==}
 
   consola@3.4.2:
     resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
@@ -2114,6 +2166,9 @@ packages:
 
   esrap@2.2.2:
     resolution: {integrity: sha512-zA6497ha+qKvoWIK+WM9NAh5ni17sKZKhbS5B3PoYbBvaYHZWoS33zmFybmyqpn07RLUxSmn+RCls2/XF+d0oQ==}
+
+  exsolve@1.0.8:
+    resolution: {integrity: sha512-LmDxfWXwcTArk8fUEnOfSZpHOJ6zOMUJKOtFLFqJLoKJetuQG874Uc7/Kki7zFLzYybmZhp1M7+98pfMqeX8yA==}
 
   fast-glob@3.3.3:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
@@ -2333,6 +2388,9 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  pkg-types@2.3.0:
+    resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -3881,6 +3939,8 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/hosted-git-info@3.0.5': {}
+
   '@types/mysql@2.15.27':
     dependencies:
       '@types/node': 24.10.9
@@ -3942,6 +4002,8 @@ snapshots:
   cjs-module-lexer@2.2.0: {}
 
   clsx@2.1.1: {}
+
+  confbox@0.2.2: {}
 
   consola@3.4.2: {}
 
@@ -4108,6 +4170,8 @@ snapshots:
   esrap@2.2.2:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  exsolve@1.0.8: {}
 
   fast-glob@3.3.3:
     dependencies:
@@ -4409,6 +4473,12 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  pkg-types@2.3.0:
+    dependencies:
+      confbox: 0.2.2
+      exsolve: 1.0.8
+      pathe: 2.0.3
 
   postcss@8.5.6:
     dependencies:

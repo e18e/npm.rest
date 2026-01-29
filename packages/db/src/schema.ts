@@ -9,6 +9,7 @@ import {
 	timestamp,
 	pgTable,
 	integer,
+	boolean,
 	pgEnum,
 	index,
 	jsonb,
@@ -22,7 +23,7 @@ function resourceId<T extends IdPrefix>(prefix: T) {
 		dataType() {
 			return 'text';
 		},
-	})({ prefix }).notNull();
+	})({ prefix });
 }
 
 /** Create the check constraint for resource id column */
@@ -115,8 +116,6 @@ export const versionTable = pgTable(
 			.references(() => packageTable.id, { onDelete: 'cascade' }),
 		version: text().notNull(),
 		description: text(),
-		repoURL: text(),
-		repoDir: text(),
 		homepage: text(),
 		deprecated: text(),
 		license: text(),
@@ -125,6 +124,9 @@ export const versionTable = pgTable(
 		types: typesState().notNull(),
 		moduleType: moduleType().notNull(),
 		keywords: text().array(),
+		repo: resourceId('repo').references(() => repositoryTable.id),
+		repoDirectory: text(),
+		repoBranch: text(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
@@ -156,6 +158,24 @@ export const publintTable = pgTable(
 	],
 );
 
+export const repositoryTable = pgTable(
+	'repository',
+	{
+		id: resourceId('repo').primaryKey(),
+		url: text().notNull(),
+		stars: integer(),
+		forks: integer(),
+		archived: boolean(),
+		languages: jsonb().$type<Record<string, number>>(),
+		createdAt: timestamp(),
+		updatedAt: timestamp(),
+		lastFetched: timestamp().notNull().defaultNow(),
+	},
+	(table) => [
+		resourceIdCheck('repository_resource_id', table.id),
+		uniqueIndex('repository_url_unique_idx').on(table.url),
+	],
+);
+
 // export const dependencyTable
-// export const repositoryTable
 // export const fundingTable

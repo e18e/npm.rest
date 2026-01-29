@@ -4,7 +4,9 @@ import { analyzePackageModuleType } from './module-type';
 import type { UnpackResult } from '@publint/pack';
 import { processPackument } from './packument';
 import { downloadTarball } from './tarball';
+import hostedGitInfo from 'hosted-git-info';
 import { db } from '@npm.rest/db/server';
+import { getRepository } from './repo';
 import { Result } from 'better-result';
 import { and, eq } from 'drizzle-orm';
 import { extname } from 'node:path';
@@ -96,6 +98,13 @@ export async function processVersion(
 	const types = await hasTypes(pkg.name, tarball.value);
 	if (types.isErr()) return types;
 
+	const repoInfo = pkv.repository
+		? hostedGitInfo.fromUrl(pkv.repository.url)
+		: null;
+
+	const repo = repoInfo ? await getRepository(repoInfo) : null;
+	if (repo?.isErr()) return repo;
+
 	const [record] = await db
 		.insert(versionTable)
 		.values({
@@ -103,8 +112,6 @@ export async function processVersion(
 			packageId,
 			version: pkv.version,
 			description: pkv.description,
-			repoURL: pkv.repository?.url,
-			repoDir: pkv.repository?.directory,
 			homepage: pkv.homepage,
 			deprecated: pkv.deprecated,
 			license: pkv.license,
@@ -114,6 +121,9 @@ export async function processVersion(
 			types: types.value,
 			moduleType: analyzePackageModuleType(publintResult.value.pkg),
 			keywords: pkv.keywords,
+			repo: repo?.unwrapOr(null)?.id,
+			repoDirectory: pkv.repository?.directory,
+			repoBranch: repoInfo?.treepath,
 		})
 		.returning({ id: versionTable.id });
 
