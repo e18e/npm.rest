@@ -23,6 +23,8 @@ const FussyString = v.optional(
 	),
 );
 
+// @todo empty string
+
 const Maintainer = v.strictObject({
 	name: v.string(),
 	email: Email,

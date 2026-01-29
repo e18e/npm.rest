@@ -67,6 +67,7 @@ export async function processVersion(
 	if (exists) {
 		// todo confirm what is actually immutable
 		// todo check if publint exists else process
+		// todo unpublish, maintainers, contributors
 		await db
 			.update(versionTable)
 			.set({
