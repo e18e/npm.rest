@@ -1,0 +1,26 @@
+{
+	"name": "@npm.rest/replication",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"start": "tsx src/generate.ts"
+	},
+	"packageManager": "pnpm@10.28.1",
+	"volta": {
+		"node": "24.13.0",
+		"pnpm": "10.28.1"
+	},
+	"devDependencies": {
+		"@fastify/merge-json-schemas": "^0.2.1",
+		"@npm.rest/db": "workspace:^",
+		"@npm.rest/validate": "workspace:^",
+		"@types/node": "catalog:",
+		"@typescript/native-preview": "7.0.0-dev.20260131.1",
+		"@valibot/to-json-schema": "^1.5.0",
+		"better-result": "^2.5.2",
+		"dotenv": "^17.2.3",
+		"json-schema-to-typescript": "^15.0.4",
+		"tsx": "^4.21.0",
+		"valibot": "catalog:"
+	}
+}
