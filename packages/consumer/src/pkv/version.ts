@@ -4,17 +4,18 @@ import { analyzePackageModuleType } from './module-type';
 import { getDependencies } from './dependencies';
 import { downloadTarball } from './tarball';
 import hostedGitInfo from 'hosted-git-info';
+import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { runPublint } from './publint';
 import { getRepository } from './repo';
 import { Result } from 'better-result';
-import { and, eq } from 'drizzle-orm';
 import { hasTypes } from './types';
 import {
 	type PackumentVersion,
 	type Packument,
 } from '@npm.rest/validate/packument';
 import {
+	specifierTable,
 	dependencyTable,
 	publintTable,
 	versionTable,
@@ -101,16 +102,73 @@ export async function processVersion(
 			});
 		}
 
-		await tx.insert(dependencyTable).values(
-			deps.value.map((dep): typeof dependencyTable.$inferInsert => ({
-				id: generateId('dep'),
-				name: dep.name,
-				type: dep.type,
-				specifier: dep.specifier,
-				optional: dep.optional,
-				fromVersionId: record.id,
-			})),
-		);
+		if (deps.value.length > 0) {
+			// Dedupe specs by (name, specifier)
+			const uniqueSpecs = new Map(
+				deps.value.map((dep) => [
+					`${dep.spec.name}@${dep.spec.specifier}`,
+					dep.spec,
+				]),
+			);
+
+			await tx
+				.insert(specifierTable)
+				.values(
+					uniqueSpecs
+						.values()
+						.map((spec) => ({
+							id: generateId('spc'),
+							name: spec.name,
+							specifier: spec.specifier,
+							type: spec.type,
+						}))
+						.toArray(),
+				)
+				.onConflictDoNothing();
+
+			// Fetch all spec IDs (existing + newly inserted)
+			const specs = await tx
+				.select({
+					id: specifierTable.id,
+					name: specifierTable.name,
+					specifier: specifierTable.specifier,
+				})
+				.from(specifierTable)
+				// todo I wish this wasn't - ghostdevv
+				.where(
+					or(
+						...uniqueSpecs
+							.values()
+							.map((spec) =>
+								and(
+									eq(specifierTable.name, spec.name),
+									eq(
+										specifierTable.specifier,
+										spec.specifier,
+									),
+								),
+							),
+					),
+				);
+
+			// Create lookup map
+			const specIdMap = new Map(
+				specs.map((s) => [`${s.name}@${s.specifier}`, s.id]),
+			);
+
+			// Insert version dependencies
+			await tx.insert(dependencyTable).values(
+				deps.value.map((dep) => ({
+					versionId: record.id,
+					specifierId: specIdMap.get(
+						`${dep.spec.name}@${dep.spec.specifier}`,
+					)!,
+					type: dep.depType,
+					optional: dep.optional,
+					alias: dep.alias,
+				})),
+			);
+		}
 	});
 
 	return Result.ok();

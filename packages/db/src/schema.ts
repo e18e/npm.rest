@@ -193,66 +193,41 @@ export const specifierType = pgEnum('specifier_type', [
 	'remote',
 ]);
 
-export const dependencySpecTable = pgTable(
-	'dependency_spec',
+export const specifierTable = pgTable(
+	'specifier',
 	{
-		id: resourceId('dsp').primaryKey(),
+		id: resourceId('spc').primaryKey(),
 		name: text().notNull(),
 		specifier: text().notNull(),
 		type: specifierType().notNull(),
-		resolvedPackageId: resourceId('pkv').references(() => packageTable.id),
 	},
 	(table) => [
-		resourceIdCheck('dependency_spec_resource_id', table.id),
-		uniqueIndex('dependency_spec_name_specifier_idx').on(
+		resourceIdCheck('specifier_resource_id', table.id),
+		uniqueIndex('specifier_name_specifier_idx').on(
 			table.name,
 			table.specifier,
 		),
-		index('dependency_spec_name_idx').on(table.name),
+		index('specifier_name_idx').on(table.name),
 	],
 );
 
-export const versionDependencyTable = pgTable(
-	'version_dependency',
+export const dependencyTable = pgTable(
+	'dependency',
 	{
 		versionId: resourceId('pkv')
 			.notNull()
 			.references(() => versionTable.id, { onDelete: 'cascade' }),
-		specId: resourceId('dsp')
+		specifierId: resourceId('spc')
 			.notNull()
-			.references(() => dependencySpecTable.id),
+			.references(() => specifierTable.id),
 		type: dependencyType().notNull(),
 		optional: boolean().notNull(),
 		alias: text(),
 	},
 	(table) => [
-		primaryKey({ columns: [table.versionId, table.specId, table.type] }),
-		index('version_dependency_spec_idx').on(table.specId),
+		primaryKey({
+			columns: [table.versionId, table.specifierId, table.type],
+		}),
+		index('dependency_specifier_idx').on(table.specifierId),
 	],
 );
-
-// export const dependencyTable = pgTable(
-// 	'dependency',
-// 	{
-// 		id: resourceId('dep').primaryKey(),
-// 		fromVersionId: resourceId('pkv')
-// 			.notNull()
-// 			.references(() => versionTable.id, { onDelete: 'cascade' }),
-// 		type: dependencyType().notNull(),
-// 		name: text().notNull(),
-// 		specifier: text().notNull(),
-// 		optional: boolean().notNull(),
-// 	},
-// 	(table) => [
-// 		resourceIdCheck('dependency_resource_id', table.id),
-// 		resourceIdCheck(
-// 			'dependency_from_version_resource_id',
-// 			table.fromVersionId,
-// 		),
-// 		uniqueIndex('dependency_from_version_type_name_unique_idx').on(
-// 			table.fromVersionId,
-// 			table.type,
-// 			table.name,
-// 		),
-// 	],
-// );
