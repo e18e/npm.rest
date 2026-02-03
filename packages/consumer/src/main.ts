@@ -79,10 +79,18 @@ while (true) {
 	);
 
 	for (const change of changes) {
-		logger.error(
-			`packument store ${change.result.isOk() ? 'succeeded' : 'failed'}`,
-			{ ...change },
-		);
+		if (change.result.isErr()) {
+			logger.error(`packument store failed`, {
+				name: change.name,
+				revId: change.revId,
+				error: change.result.error,
+			});
+		} else {
+			logger.debug(`packument store succeeded`, {
+				name: change.name,
+				revId: change.revId,
+			});
+		}
 
 		await db
 			.update(changeTable)
