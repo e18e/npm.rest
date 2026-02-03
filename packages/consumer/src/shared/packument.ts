@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 import { logger } from '../main';
 import * as v from 'valibot';
 
-type PackumentResult = Result<
+export type PackumentResult = Result<
 	Packument,
 	FetchError<string> | v.ValiError<typeof PackumentSchema>
 >;

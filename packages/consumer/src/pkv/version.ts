@@ -1,5 +1,7 @@
 import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.json' with { type: 'json' };
+import { Result, type UnhandledException, type InferErr } from 'better-result';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
+import type { PackumentResult } from '../shared/packument';
 import { analyzePackageModuleType } from './module-type';
 import { getDependencies } from './dependencies';
 import { downloadTarball } from './tarball';
@@ -8,7 +10,6 @@ import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { runPublint } from './publint';
 import { getRepository } from './repo';
-import { Result } from 'better-result';
 import { hasTypes } from './types';
 import {
 	type PackumentVersion,
@@ -21,11 +22,16 @@ import {
 	versionTable,
 } from '@npm.rest/db/schema';
 
+type ProcessVersionResult = Result<
+	void,
+	UnhandledException | InferErr<PackumentResult>
+>;
+
 export async function processVersion(
 	packageId: ResourceId<'pkg'>,
 	pkg: Packument,
 	pkv: PackumentVersion,
-) {
+): Promise<ProcessVersionResult> {
 	const [exists] = await db
 		.select({ id: versionTable.id })
 		.from(versionTable)
