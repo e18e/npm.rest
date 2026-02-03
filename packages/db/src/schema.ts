@@ -208,5 +208,3 @@ export const dependencyTable = pgTable(
 		),
 	],
 );
-
-// export const fundingTable
