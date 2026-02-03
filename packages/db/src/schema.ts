@@ -144,7 +144,7 @@ export const versionTable = pgTable(
 export const publintTable = pgTable(
 	'publint',
 	{
-		id: resourceId('publ'),
+		id: resourceId('publ').primaryKey(),
 		versionId: resourceId('pkv')
 			.notNull()
 			.references(() => versionTable.id, { onDelete: 'cascade' }),
@@ -183,28 +183,76 @@ export const dependencyType = pgEnum('dependency_type', [
 	'peer',
 ]);
 
-export const dependencyTable = pgTable(
-	'dependency',
+export const specifierType = pgEnum('specifier_type', [
+	'git',
+	'tag',
+	'version',
+	'range',
+	'file',
+	'directory',
+	'remote',
+]);
+
+export const dependencySpecTable = pgTable(
+	'dependency_spec',
 	{
-		id: resourceId('dep').primaryKey(),
-		fromVersionId: resourceId('pkv')
-			.notNull()
-			.references(() => versionTable.id, { onDelete: 'cascade' }),
-		type: dependencyType().notNull(),
+		id: resourceId('dsp').primaryKey(),
 		name: text().notNull(),
 		specifier: text().notNull(),
-		optional: boolean().notNull(),
+		type: specifierType().notNull(),
+		resolvedPackageId: resourceId('pkv').references(() => packageTable.id),
 	},
 	(table) => [
-		resourceIdCheck('dependency_resource_id', table.id),
-		resourceIdCheck(
-			'dependency_from_version_resource_id',
-			table.fromVersionId,
-		),
-		uniqueIndex('dependency_from_version_type_name_unique_idx').on(
-			table.fromVersionId,
-			table.type,
+		resourceIdCheck('dependency_spec_resource_id', table.id),
+		uniqueIndex('dependency_spec_name_specifier_idx').on(
 			table.name,
+			table.specifier,
 		),
+		index('dependency_spec_name_idx').on(table.name),
 	],
 );
+
+export const versionDependencyTable = pgTable(
+	'version_dependency',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		specId: resourceId('dsp')
+			.notNull()
+			.references(() => dependencySpecTable.id),
+		type: dependencyType().notNull(),
+		optional: boolean().notNull(),
+		alias: text(),
+	},
+	(table) => [
+		primaryKey({ columns: [table.versionId, table.specId, table.type] }),
+		index('version_dependency_spec_idx').on(table.specId),
+	],
+);
+
+// export const dependencyTable = pgTable(
+// 	'dependency',
+// 	{
+// 		id: resourceId('dep').primaryKey(),
+// 		fromVersionId: resourceId('pkv')
+// 			.notNull()
+// 			.references(() => versionTable.id, { onDelete: 'cascade' }),
+// 		type: dependencyType().notNull(),
+// 		name: text().notNull(),
+// 		specifier: text().notNull(),
+// 		optional: boolean().notNull(),
+// 	},
+// 	(table) => [
+// 		resourceIdCheck('dependency_resource_id', table.id),
+// 		resourceIdCheck(
+// 			'dependency_from_version_resource_id',
+// 			table.fromVersionId,
+// 		),
+// 		uniqueIndex('dependency_from_version_type_name_unique_idx').on(
+// 			table.fromVersionId,
+// 			table.type,
+// 			table.name,
+// 		),
+// 	],
+// );
