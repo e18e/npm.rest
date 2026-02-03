@@ -92,12 +92,14 @@ export async function processVersion(
 			})
 			.returning({ id: versionTable.id });
 
-		await tx.insert(publintTable).values({
-			id: generateId('publ'),
-			versionId: record.id,
-			messages: publintResult.value.messages,
-			publintVersion: PUBLINT_VERSION,
-		});
+		if (publintResult.value.messages.length > 0) {
+			await tx.insert(publintTable).values({
+				id: generateId('publ'),
+				versionId: record.id,
+				messages: publintResult.value.messages,
+				publintVersion: PUBLINT_VERSION,
+			});
+		}
 
 		await tx.insert(dependencyTable).values(
 			deps.value.map((dep): typeof dependencyTable.$inferInsert => ({
