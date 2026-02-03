@@ -5,6 +5,9 @@ import { extname } from 'node:path';
 
 const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
 
+const dtCache = new Map<string, boolean>();
+
+// todo https://github.com/arethetypeswrong/arethetypeswrong.github.io/blob/161725ad2e8957f109e44fb26b13c9d70f415c2f/packages/core/src/createPackage.ts#L186-L200
 export async function hasTypes(name: string, tarball: UnpackResult) {
 	if (name.startsWith('@types/')) {
 		return Result.ok('built-in' as const);
@@ -18,6 +21,14 @@ export async function hasTypes(name: string, tarball: UnpackResult) {
 		return Result.ok('built-in' as const);
 	}
 
+	if (dtCache.has(name)) {
+		return Result.ok(
+			dtCache.get(name)
+				? ('definitely-typed' as const)
+				: ('none' as const),
+		);
+	}
+
 	const pkg = await processPackument(
 		name.startsWith('@')
 			? name.replace('/', '__').replace('@', '@types/')
@@ -26,11 +37,13 @@ export async function hasTypes(name: string, tarball: UnpackResult) {
 
 	if (pkg.isErr()) {
 		if ('status' in pkg.error && pkg.error.status === 404) {
+			dtCache.set(name, false);
 			return Result.ok('none' as const);
 		}
 
 		return pkg;
 	}
 
+	dtCache.set(name, true);
 	return Result.ok('definitely-typed' as const);
 }
