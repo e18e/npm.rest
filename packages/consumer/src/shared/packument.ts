@@ -21,7 +21,8 @@ export async function processPackument(
 		.from(packumentTable)
 		.where(eq(packumentTable.id, name));
 
-	if (exists?.revId === rev) {
+	// todo greater than?
+	if (exists && exists.revId === rev) {
 		logger.debug(`skipped fetching packument as it exists in db`, {
 			name,
 			rev,
@@ -64,7 +65,11 @@ export async function processPackument(
 
 	await db
 		.insert(packumentTable)
-		.values({ id: name, data: parsed.output })
+		.values({
+			id: name,
+			data: parsed.output,
+			revId: parsed.output._rev || rev,
+		})
 		.onConflictDoUpdate({
 			target: packumentTable.id,
 			set: { data: parsed.output },
