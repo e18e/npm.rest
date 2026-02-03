@@ -21,7 +21,8 @@ import {
 function resourceId<T extends IdPrefix>(prefix: T) {
 	return customType<{ data: ResourceId<T>; config: { prefix: T } }>({
 		dataType() {
-			return 'text';
+			// create varchar of uuid len + prefix len + 1 for separator
+			return `varchar(${36 + prefix.length + 1})`;
 		},
 	})({ prefix });
 }
