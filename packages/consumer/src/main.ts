@@ -26,13 +26,12 @@ await configure({
 });
 
 async function dequeue() {
-	// Get up to 10 items from the queue that are pending,
-	// and aren't currently being processed - the queue table has
-	// a unique index on (name, revId) so there can always be many entries
-	// with the same name and different revIds, but not two being processed at
-	// the same time. This effectively is the logic to make sure that we
-	// aren't racing against ourselves and potentially doing the lost
-	// update problem.
+	// Get an item from the queue that is pending and isn't currently being
+	// processed - the queue table has a unique index on (name, revId) so
+	// there can always be many entries with the same name and different revIds,
+	// but not two being processed at the same time. This effectively is the
+	// logic to make sure that we aren't racing against ourselves and potentially
+	// doing the lost update problem.
 	return await db.transaction(async (tx) => {
 		const where = tx
 			.select({ name: changeTable.name })
@@ -50,7 +49,7 @@ async function dequeue() {
 				),
 			)
 			.orderBy(changeTable.createdAt)
-			.limit(10)
+			.limit(1)
 			.for('update', { skipLocked: true });
 
 		return await tx
