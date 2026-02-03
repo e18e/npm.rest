@@ -1,7 +1,7 @@
+import { processPackument } from './shared/packument';
 import { packageTable } from '@npm.rest/db/schema';
-import { processPackument } from './packument';
-import { processVersion } from './version';
-import { processPackage } from './package';
+import { processVersion } from './pkv/version';
+import { processPackage } from './pkg/package';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';

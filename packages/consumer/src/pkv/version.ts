@@ -1,8 +1,8 @@
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from './module-type';
+import { processPackument } from '../shared/packument';
 import type { UnpackResult } from '@publint/pack';
 import { getDependencies } from './dependencies';
-import { processPackument } from './packument';
 import { downloadTarball } from './tarball';
 import hostedGitInfo from 'hosted-git-info';
 import { db } from '@npm.rest/db/server';
@@ -22,7 +22,7 @@ import {
 } from '@npm.rest/db/schema';
 
 const { version: publintVersion } =
-	await import('../node_modules/publint/package.json');
+	await import('../../node_modules/publint/package.json');
 
 const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
 

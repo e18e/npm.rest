@@ -1,4 +1,3 @@
-import type { PackumentVersion } from '@npm.rest/validate/packument';
 import { repositoryTable } from '@npm.rest/db/schema';
 import type HostedGitInfo from 'hosted-git-info';
 import { generateId } from '@npm.rest/db/id';

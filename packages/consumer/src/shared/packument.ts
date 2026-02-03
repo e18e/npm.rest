@@ -4,7 +4,7 @@ import { FetchError, ofetch } from 'ofetch';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';
-import { logger } from './main';
+import { logger } from '../main';
 import * as v from 'valibot';
 
 type PackumentResult = Result<
