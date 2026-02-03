@@ -1,4 +1,4 @@
-import { type Packument } from '@npm.rest/validate/packument';
+import type { Packument } from '@npm.rest/validate/packument';
 import { packageTable } from '@npm.rest/db/schema';
 import { generateId } from '@npm.rest/db/id';
 import { db } from '@npm.rest/db/server';

@@ -16,6 +16,7 @@
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"hosted-git-info": "^9.0.2",
+		"npm-package-arg": "^13.0.2",
 		"ofetch": "^1.5.1",
 		"publint": "catalog:",
 		"tsx": "^4.21.0",
@@ -23,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@types/hosted-git-info": "^3.0.5",
+		"@types/npm-package-arg": "^6.1.4",
 		"pkg-types": "^2.3.0",
 		"typescript": "catalog:"
 	},

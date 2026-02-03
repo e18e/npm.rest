@@ -177,5 +177,36 @@ export const repositoryTable = pgTable(
 	],
 );
 
-// export const dependencyTable
+export const dependencyType = pgEnum('dependency_type', [
+	'prod',
+	'dev',
+	'peer',
+]);
+
+export const dependencyTable = pgTable(
+	'dependency',
+	{
+		id: resourceId('dep').primaryKey(),
+		fromVersionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		type: dependencyType().notNull(),
+		name: text().notNull(),
+		specifier: text().notNull(),
+		optional: boolean().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('dependency_resource_id', table.id),
+		resourceIdCheck(
+			'dependency_from_version_resource_id',
+			table.fromVersionId,
+		),
+		uniqueIndex('dependency_from_version_type_name_unique_idx').on(
+			table.fromVersionId,
+			table.type,
+			table.name,
+		),
+	],
+);
+
 // export const fundingTable

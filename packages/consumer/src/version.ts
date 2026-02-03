@@ -1,7 +1,7 @@
-import { publintTable, versionTable } from '@npm.rest/db/schema';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from './module-type';
 import type { UnpackResult } from '@publint/pack';
+import { getDependencies } from './dependencies';
 import { processPackument } from './packument';
 import { downloadTarball } from './tarball';
 import hostedGitInfo from 'hosted-git-info';
@@ -15,6 +15,11 @@ import {
 	type PackumentVersion,
 	type Packument,
 } from '@npm.rest/validate/packument';
+import {
+	dependencyTable,
+	publintTable,
+	versionTable,
+} from '@npm.rest/db/schema';
 
 const { version: publintVersion } =
 	await import('../node_modules/publint/package.json');
@@ -105,6 +110,9 @@ export async function processVersion(
 	const repo = repoInfo ? await getRepository(repoInfo) : null;
 	if (repo?.isErr()) return repo;
 
+	const deps = getDependencies(pkv);
+	if (deps.isErr()) return deps;
+
 	const [record] = await db
 		.insert(versionTable)
 		.values({
@@ -133,6 +141,17 @@ export async function processVersion(
 		messages: publintResult.value.messages,
 		publintVersion,
 	});
+
+	await db.insert(dependencyTable).values(
+		deps.value.map((dep): typeof dependencyTable.$inferInsert => ({
+			id: generateId('dep'),
+			name: dep.name,
+			type: dep.type,
+			specifier: dep.specifier,
+			optional: dep.optional,
+			fromVersionId: record.id,
+		})),
+	);
 
 	return Result.ok();
 }
