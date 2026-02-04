@@ -63,17 +63,23 @@ export async function processPackument(
 		return Result.err(new v.ValiError(parsed.issues));
 	}
 
-	await db
-		.insert(packumentTable)
-		.values({
-			id: name,
-			data: parsed.output,
-			revId: parsed.output._rev || rev,
-		})
-		.onConflictDoUpdate({
-			target: packumentTable.id,
-			set: { data: parsed.output },
-		});
+	const inserted = await Result.tryPromise(async () => {
+		await db
+			.insert(packumentTable)
+			.values({
+				id: name,
+				data: parsed.output,
+				revId: parsed.output._rev || rev,
+			})
+			.onConflictDoUpdate({
+				target: packumentTable.id,
+				set: { data: parsed.output },
+			});
+	});
+
+	if (inserted.isErr()) {
+		return inserted;
+	}
 
 	return Result.ok(parsed.output);
 }
