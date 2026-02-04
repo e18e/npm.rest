@@ -3,7 +3,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"start": "tsx src/main.ts"
+		"start": "tsx src/main.ts",
+		"build": "tsc"
 	},
 	"dependencies": {
 		"@logtape/logtape": "catalog:",
