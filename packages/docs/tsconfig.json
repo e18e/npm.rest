@@ -13,8 +13,8 @@
 		"lib": ["esnext"],
 		"module": "esnext",
 		"target": "esnext",
-		"noEmit": true,
+		"noEmit": true
 	},
 	"include": ["./src/**/*.ts", "./worker-configuration.d.ts"],
-	"exclude": ["./node_modules/**"],
+	"exclude": ["./node_modules/**"]
 }

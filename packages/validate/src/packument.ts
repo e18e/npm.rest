@@ -120,8 +120,6 @@ export const PackumentSchema = v.looseObject({
 		v.record(v.string(), Date),
 	]),
 	// maintainers: v.array(Maintainer),
-	// readme: Str,
-	// readmeFilename: v.string(),
 	// users: v.optional(v.record(v.string(), v.boolean())),
 });
 
