@@ -10,7 +10,8 @@
 	"exports": {
 		"./server": "./src/server.ts",
 		"./schema": "./src/schema.ts",
-		"./utils": "./src/utils.ts"
+		"./utils": "./src/utils.ts",
+		"./id": "./src/id.ts"
 	},
 	"dependencies": {
 		"@logtape/drizzle-orm": "^2.0.2",
@@ -21,7 +22,8 @@
 	},
 	"devDependencies": {
 		"@types/node": "catalog:",
-		"drizzle-kit": "^0.31.8"
+		"drizzle-kit": "^0.31.8",
+		"publint": "catalog:"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

@@ -43,6 +43,13 @@
       "when": 1769534170302,
       "tag": "0005_huge_captain_stacy",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1770163334699,
+      "tag": "0006_overrated_outlaw_kid",
+      "breakpoints": true
     }
   ]
 }
