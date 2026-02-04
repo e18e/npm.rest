@@ -7,14 +7,13 @@ import {
 	primaryKey,
 	customType,
 	timestamp,
-	pgTable,
 	integer,
 	boolean,
-	pgEnum,
 	index,
 	jsonb,
 	text,
 	check,
+	pgSchema,
 } from 'drizzle-orm/pg-core';
 
 /** Create a resource id column with the given prefix. */
@@ -39,12 +38,15 @@ function resourceIdCheck(name: string, column: ExtraConfigColumn) {
 	return check(name, sql`${column} LIKE '${sql.raw(prefix)}_%'`);
 }
 
-export const stateTable = pgTable('state', {
+export const internalSchema = pgSchema('internal');
+export const coreSchema = pgSchema('core');
+
+export const stateTable = internalSchema.table('state', {
 	key: text().primaryKey(),
 	value: text().notNull(),
 });
 
-export const packumentTable = pgTable(
+export const packumentTable = internalSchema.table(
 	'packument',
 	{
 		id: text().primaryKey(),
@@ -54,14 +56,14 @@ export const packumentTable = pgTable(
 	(table) => [index('packument_data_gin_idx').using('gin', table.data)],
 );
 
-export const changeState = pgEnum('change_state', [
+export const changeState = coreSchema.enum('change_state', [
 	'pending',
 	'processing',
 	'failed',
 	'completed',
 ]);
 
-export const changeTable = pgTable(
+export const changeTable = coreSchema.table(
 	'change',
 	{
 		name: text().notNull(),
@@ -76,7 +78,7 @@ export const changeTable = pgTable(
 	],
 );
 
-export const packageTable = pgTable(
+export const packageTable = coreSchema.table(
 	'package',
 	{
 		id: resourceId('pkg').primaryKey(),
@@ -93,13 +95,13 @@ export const packageTable = pgTable(
 	],
 );
 
-export const typesState = pgEnum('types_state', [
+export const typesState = coreSchema.enum('types_state', [
 	'definitely-typed',
 	'built-in',
 	'none',
 ]);
 
-export const moduleType = pgEnum('module_type', [
+export const moduleType = coreSchema.enum('module_type', [
 	'cjs',
 	'esm',
 	'dual',
@@ -108,7 +110,7 @@ export const moduleType = pgEnum('module_type', [
 	'unknown',
 ]);
 
-export const versionTable = pgTable(
+export const versionTable = coreSchema.table(
 	'version',
 	{
 		id: resourceId('pkv').primaryKey(),
@@ -142,7 +144,7 @@ export const versionTable = pgTable(
 	],
 );
 
-export const publintTable = pgTable(
+export const publintTable = coreSchema.table(
 	'publint',
 	{
 		id: resourceId('publ').primaryKey(),
@@ -159,7 +161,7 @@ export const publintTable = pgTable(
 	],
 );
 
-export const repositoryTable = pgTable(
+export const repositoryTable = coreSchema.table(
 	'repository',
 	{
 		id: resourceId('repo').primaryKey(),
@@ -178,13 +180,13 @@ export const repositoryTable = pgTable(
 	],
 );
 
-export const dependencyType = pgEnum('dependency_type', [
+export const dependencyType = coreSchema.enum('dependency_type', [
 	'prod',
 	'dev',
 	'peer',
 ]);
 
-export const specifierType = pgEnum('specifier_type', [
+export const specifierType = coreSchema.enum('specifier_type', [
 	'git',
 	'tag',
 	'version',
@@ -194,7 +196,7 @@ export const specifierType = pgEnum('specifier_type', [
 	'remote',
 ]);
 
-export const specifierTable = pgTable(
+export const specifierTable = coreSchema.table(
 	'specifier',
 	{
 		id: resourceId('spc').primaryKey(),
@@ -212,7 +214,7 @@ export const specifierTable = pgTable(
 	],
 );
 
-export const dependencyTable = pgTable(
+export const dependencyTable = coreSchema.table(
 	'dependency',
 	{
 		versionId: resourceId('pkv')
