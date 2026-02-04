@@ -4,6 +4,7 @@ packages:
     - packages/db
     - packages/api
     - packages/docs
+    - packages/consumer
 
 catalog:
     '@logtape/logtape': ^2.0.2

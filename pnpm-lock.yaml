@@ -99,6 +99,67 @@ importers:
         specifier: 'catalog:'
         version: 4.60.0
 
+  packages/consumer:
+    dependencies:
+      '@logtape/logtape':
+        specifier: 'catalog:'
+        version: 2.0.2
+      '@logtape/sentry':
+        specifier: ^2.0.2
+        version: 2.0.2(@logtape/logtape@2.0.2)(@sentry/core@10.36.0)
+      '@npm.rest/db':
+        specifier: workspace:^
+        version: link:../db
+      '@npm.rest/validate':
+        specifier: workspace:^
+        version: link:../validate
+      '@publint/pack':
+        specifier: ^0.1.3
+        version: 0.1.3
+      '@sentry/node':
+        specifier: ^10.36.0
+        version: 10.36.0
+      better-result:
+        specifier: ^2.5.2
+        version: 2.5.2
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.1(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(postgres@3.4.8)
+      hosted-git-info:
+        specifier: ^9.0.2
+        version: 9.0.2
+      npm-package-arg:
+        specifier: ^13.0.2
+        version: 13.0.2
+      ofetch:
+        specifier: ^1.5.1
+        version: 1.5.1
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.17
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+      valibot:
+        specifier: 'catalog:'
+        version: 1.2.0(typescript@5.9.3)
+    devDependencies:
+      '@types/hosted-git-info':
+        specifier: ^3.0.5
+        version: 3.0.5
+      '@types/npm-package-arg':
+        specifier: ^6.1.4
+        version: 6.1.4
+      pkg-types:
+        specifier: ^2.3.0
+        version: 2.3.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+
   packages/db:
     dependencies:
       '@logtape/drizzle-orm':
@@ -2010,6 +2071,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/hosted-git-info@3.0.5':
+    resolution: {integrity: sha512-Dmngh7U003cOHPhKGyA7LWqrnvcTyILNgNPmNCxlx7j8MIi54iBliiT8XqVLIQ3GchoOjVAyBzNJVyuaJjqokg==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -2120,6 +2184,9 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  confbox@0.2.2:
+    resolution: {integrity: sha512-1NB+BKqhtNipMsov4xI/NnhCKp9XG9NamYp5PVm9klAT0fsrNPjaFICsCFhNhwZJKNh7zB/3q8qXz0E9oaMNtQ==}
 
   consola@3.4.2:
     resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
@@ -2372,6 +2439,9 @@ packages:
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
+
+  exsolve@1.0.8:
+    resolution: {integrity: sha512-LmDxfWXwcTArk8fUEnOfSZpHOJ6zOMUJKOtFLFqJLoKJetuQG874Uc7/Kki7zFLzYybmZhp1M7+98pfMqeX8yA==}
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
@@ -2712,6 +2782,9 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  pkg-types@2.3.0:
+    resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
   pnpm@10.28.2:
     resolution: {integrity: sha512-QYcvA3rSL3NI47Heu69+hnz9RI8nJtnPdMCPGVB8MdLI56EVJbmD/rwt9kC1Q43uYCPrsfhO1DzC1lTSvDJiZA==}
@@ -4417,6 +4490,8 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/hosted-git-info@3.0.5': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/mysql@2.15.27':
@@ -4517,6 +4592,8 @@ snapshots:
   color-name@1.1.4: {}
 
   concat-map@0.0.1: {}
+
+  confbox@0.2.2: {}
 
   consola@3.4.2: {}
 
@@ -4769,6 +4846,8 @@ snapshots:
   estraverse@5.3.0: {}
 
   esutils@2.0.3: {}
+
+  exsolve@1.0.8: {}
 
   fast-deep-equal@3.1.3: {}
 
@@ -5186,6 +5265,12 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  pkg-types@2.3.0:
+    dependencies:
+      confbox: 0.2.2
+      exsolve: 1.0.8
+      pathe: 2.0.3
 
   pnpm@10.28.2: {}
 
