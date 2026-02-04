@@ -7,11 +7,13 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && oxlint --type-aware",
 		"knip": "knip",
-		"build": "pnpm -r run --if-present build"
+		"build": "pnpm -r run --if-present build",
+		"test": "vitest run"
 	},
 	"devDependencies": {
 		"@e18e/eslint-plugin": "^0.1.4",
 		"@types/node": "catalog:",
+		"@vitest/coverage-v8": "^4.0.18",
 		"add": "^2.0.6",
 		"knip": "^5.82.1",
 		"oxlint": "^1.43.0",
@@ -19,7 +21,8 @@
 		"pnpm": "^10.28.2",
 		"prettier": "catalog:",
 		"prettier-plugin-svelte": "^3.4.1",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vitest": "^4.0.18"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {
