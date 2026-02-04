@@ -26,7 +26,7 @@ await configure({
 });
 
 async function dequeue() {
-	// Get an item from the queue that is pending and isn't currently being
+	// Get n item(s) from the queue that is pending and isn't currently being
 	// processed - the queue table has a unique index on (name, revId) so
 	// there can always be many entries with the same name and different revIds,
 	// but not two being processed at the same time. This effectively is the
@@ -49,7 +49,7 @@ async function dequeue() {
 				),
 			)
 			.orderBy(changeTable.createdAt)
-			.limit(1)
+			.limit(10)
 			.for('update', { skipLocked: true });
 
 		return await tx
@@ -78,25 +78,19 @@ while (true) {
 		continue;
 	}
 
-	const changes = await Promise.all(
-		items.map(async (item) => ({
-			name: item.name,
-			revId: item.revId,
-			result: await process(item.name, item.revId),
-		})),
-	);
+	for (const item of items) {
+		const result = await process(item.name, item.revId);
 
-	for (const change of changes) {
-		if (change.result.isErr()) {
+		if (result.isErr()) {
 			logger.error(`packument store failed`, {
-				name: change.name,
-				revId: change.revId,
-				error: change.result.error,
+				name: item.name,
+				revId: item.revId,
+				error: result.error,
 			});
 		} else {
 			logger.debug(`packument store succeeded`, {
-				name: change.name,
-				revId: change.revId,
+				name: item.name,
+				revId: item.revId,
 			});
 		}
 
@@ -104,12 +98,12 @@ while (true) {
 			.update(changeTable)
 			.set({
 				updatedAt: new Date(),
-				state: change.result.isOk() ? 'completed' : 'failed',
+				state: result.isOk() ? 'completed' : 'failed',
 			})
 			.where(
 				and(
-					eq(changeTable.name, change.name),
-					eq(changeTable.revId, change.revId),
+					eq(changeTable.name, item.name),
+					eq(changeTable.revId, item.revId),
 				),
 			);
 	}
