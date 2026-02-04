@@ -51,12 +51,13 @@ export async function watchChanges() {
 		}
 
 		if (changes.length) {
-			await db.insert(changeTable).values(changes);
-			// .onConflictDoUpdate({
-			// 	target: [changeTable.name, changeTable.state],
-			// 	set: { updatedAt: new Date() },
-			// 	setWhere: eq(changeTable.state, 'pending'),
-			// });
+			await db
+				.insert(changeTable)
+				.values(changes)
+				.onConflictDoUpdate({
+					target: [changeTable.name, changeTable.revId],
+					set: { updatedAt: new Date() },
+				});
 		}
 
 		logger.debug(`changes ${response.results.length}`, {
