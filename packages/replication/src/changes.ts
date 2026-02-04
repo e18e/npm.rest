@@ -57,7 +57,6 @@ export async function watchChanges() {
 				.onConflictDoUpdate({
 					target: [changeTable.name, changeTable.state],
 					set: { updatedAt: new Date() },
-					setWhere: eq(changeTable.state, 'pending'),
 				});
 		}
 
