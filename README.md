@@ -14,21 +14,19 @@ On top of this, other projects like [npmx](https://npmx.dev/) have similar deman
 
 We are currently in very early stages of development, focusing mostly on building the initial data structure and ingestion pipelines. The current focus is on researching which endpoints we can provide, and what kind of enriched metadata would be most useful.
 
-## Initial Goals
+## Timeline
 
-We aim to provide additional metadata that is not currently available in the standard npm registry API, such as:
+Our current timeline looks roughly like this:
 
-- License types used deeply in the dependency tree
-- ESM/CJS/TypeScript usage deeply in the dependency tree
-- Engine constraints used deeply in the dependency tree
-- "User Downloads" (downloads from direct dependencies of user projects)
-- Provenance/Trusted Publisher information
+- **Phase 1**: Initial data structure and ingestion, including basic metadata enrichment
+- **Phase 2**: Building out the API and querying capabilities
+- **Phase 3**: Additional dependency tree analysis (e.g. engine constraints, license types)
+- **Phase N**: Community feedback, additional features, and ongoing maintenance
 
-In addition to this, we want to provide advanced querying capabilities, such as:
+You can track the progress of the significant parts of this here:
 
-- Finding dependents of a package
-- Finding packages within a particular engine constraint range
-- Finding packages with specific license types
+- Initial data structure (#2)
+- Initial API design (#18)
 
 ## Get Involved
 
