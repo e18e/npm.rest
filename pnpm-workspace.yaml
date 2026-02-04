@@ -8,14 +8,14 @@ packages:
 
 catalog:
     '@logtape/logtape': ^2.0.2
-    '@types/node': ^24.10.9
+    '@types/node': ^25.2.0
     drizzle-orm: ^0.45.1
     postgres: ^3.4.8
     prettier: ^3.8.0
     publint: ^0.3.17
     typescript: ^5.9.3
     valibot: ^1.2.0
-    wrangler: ^4.60.0
+    wrangler: ^4.62.0
 
 onlyBuiltDependencies:
     - esbuild
