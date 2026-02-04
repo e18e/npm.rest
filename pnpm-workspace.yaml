@@ -21,3 +21,5 @@ onlyBuiltDependencies:
     - esbuild
     - workerd
     - sharp
+
+ignoreDepScripts: true
