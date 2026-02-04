@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /packages/db/.drizzle
+/packages/api/.output
+/packages/api/worker-configuration.d.ts
+/packages/api/.wrangler
