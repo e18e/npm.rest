@@ -4,12 +4,17 @@
 	"private": true,
 	"scripts": {
 		"format": "prettier --write .",
-		"lint": "prettier --check .",
+		"lint": "prettier --check . && oxlint --type-aware",
 		"knip": "knip"
 	},
 	"devDependencies": {
+		"@e18e/eslint-plugin": "^0.1.4",
 		"@types/node": "catalog:",
+		"add": "^2.0.6",
 		"knip": "^5.82.1",
+		"oxlint": "^1.43.0",
+		"oxlint-tsgolint": "^0.11.4",
+		"pnpm": "^10.28.2",
 		"prettier": "catalog:",
 		"prettier-plugin-svelte": "^3.4.1",
 		"typescript": "catalog:"

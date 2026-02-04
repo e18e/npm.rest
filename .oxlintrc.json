@@ -1,0 +1,8 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"jsPlugins": ["@e18e/eslint-plugin"],
+	"rules": {
+		"e18e/prefer-includes": "error",
+		"unicorn/prefer-node-protocol": "error"
+	}
+}

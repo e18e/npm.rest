@@ -14,7 +14,6 @@
 		"module": "esnext",
 		"target": "esnext",
 		"noEmit": true,
-		"baseUrl": ".",
 		"paths": {
 			"$lib/*": ["./src/lib/*"]
 		}
