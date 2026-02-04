@@ -1,0 +1,10 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "npm-rest-docs",
+	"compatibility_date": "2026-02-03",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "src/index.ts",
+	"workers_dev": false,
+	"preview_urls": true,
+	"routes": [{ "pattern": "docs.npm.rest", "custom_domain": true }],
+}

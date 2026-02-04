@@ -1,0 +1,14 @@
+{
+	"name": "@npm.rest/docs",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "wrangler dev",
+		"types": "wrangler types",
+		"prepare": "pnpm types"
+	},
+	"devDependencies": {
+		"@npm.rest/db": "workspace:^",
+		"wrangler": "catalog:"
+	}
+}

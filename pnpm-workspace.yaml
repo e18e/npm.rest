@@ -3,6 +3,7 @@ packages:
     - packages/replication
     - packages/db
     - packages/api
+    - packages/docs
 
 catalog:
     '@logtape/logtape': ^2.0.2
@@ -13,6 +14,7 @@ catalog:
     publint: ^0.3.17
     typescript: ^5.9.3
     valibot: ^1.2.0
+    wrangler: ^4.60.0
 
 onlyBuiltDependencies:
     - esbuild
