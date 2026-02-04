@@ -69,6 +69,15 @@ while (true) {
 		names: items.map((item) => item.name),
 	});
 
+	if (items.length === 0) {
+		logger.info(`sleeping for 60 seconds`, {
+			until_approx: new Date(Date.now() + 60_000).toISOString(),
+		});
+
+		await setTimeout(60_000);
+		continue;
+	}
+
 	const changes = await Promise.all(
 		items.map(async (item) => ({
 			name: item.name,
@@ -105,11 +114,5 @@ while (true) {
 			);
 	}
 
-	if (items.length < 10) {
-		logger.info(`sleeping for 60 seconds`, {
-			until_approx: new Date(Date.now() + 60_000).toISOString(),
-		});
-
-		await setTimeout(60_000);
-	}
+	await setTimeout(3000);
 }
