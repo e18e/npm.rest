@@ -1,12 +1,11 @@
-import type { UnpackResult } from '@publint/pack';
+import { publint, type PackFile } from 'publint';
 import { Result } from 'better-result';
-import { publint } from 'publint';
 
-export async function runPublint(tarball: UnpackResult) {
+export async function runPublint(files: PackFile[]) {
 	return await Result.tryPromise(async () => {
 		return await publint({
-			pkgDir: tarball.rootDir,
-			pack: { files: tarball.files },
+			pkgDir: '/',
+			pack: { files },
 		});
 	});
 }
