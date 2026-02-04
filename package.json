@@ -1,6 +1,7 @@
 {
 	"name": "@e18e/npm.rest-monorepo",
 	"type": "module",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"format": "prettier --write .",
