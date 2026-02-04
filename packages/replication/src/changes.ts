@@ -26,7 +26,7 @@ export async function watchChanges() {
 		const response = await ofetch<ChangesResponse>('/registry/_changes', {
 			baseURL: 'https://replicate.npmjs.com',
 			headers: {
-				'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+				'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 			},
 			query: {
 				since: last_seq,

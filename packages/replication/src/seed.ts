@@ -29,7 +29,7 @@ export async function seed() {
 	const meta = await ofetch<MetaResponse>('/', {
 		baseURL: 'https://replicate.npmjs.com',
 		headers: {
-			'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+			'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 		},
 	});
 
@@ -42,7 +42,7 @@ export async function seed() {
 		const docs: DocsResponse = await ofetch('/registry/_all_docs', {
 			baseURL: 'https://replicate.npmjs.com',
 			headers: {
-				'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+				'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 			},
 			query: {
 				start_key: startKey ? JSON.stringify(startKey) : undefined,

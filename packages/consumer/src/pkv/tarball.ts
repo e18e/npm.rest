@@ -5,8 +5,7 @@ export async function downloadTarball(url: string, integrity?: string) {
 	const result = await Result.tryPromise(async () => {
 		const response = await fetch(url, {
 			headers: {
-				'User-Agent':
-					'npm.rest (+https://github.com/ghostdevv/npm.rest)',
+				'User-Agent': 'npm.rest (+https://github.com/e18e/npm.rest)',
 			},
 			integrity,
 		});

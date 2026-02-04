@@ -23,7 +23,8 @@ async function validateGHTokens() {
 				const res = await ofetch.raw('/meta', {
 					baseURL: 'https://api.github.com',
 					headers: {
-						'User-Agent': 'fetch',
+						'User-Agent':
+							'npm.rest (+https://github.com/e18e/npm.rest)',
 						Authorization: `token ${token.token}`,
 					},
 				});
@@ -74,7 +75,7 @@ export const ghFetch = async <T>(
 		...opts,
 		method: (opts.method || 'GET').toUpperCase() as any,
 		headers: {
-			'User-Agent': 'fetch',
+			'User-Agent': 'npm.rest (+https://github.com/e18e/npm.rest)',
 			Authorization: `token ${token.token}`,
 			...opts.headers,
 		},

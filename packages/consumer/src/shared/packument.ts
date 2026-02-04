@@ -42,7 +42,7 @@ export async function processPackument(
 			return await ofetch<Record<string, unknown>>(`/${name}`, {
 				baseURL: 'https://registry.npmjs.org',
 				headers: {
-					'User-Agent': `npm.rest (+https://github.com/ghostdevv/npm.rest)`,
+					'User-Agent': `npm.rest (+https://github.com/e18e/npm.rest)`,
 				},
 				retry: 3,
 				retryDelay: 500,
