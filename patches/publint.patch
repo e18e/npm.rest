@@ -1,0 +1,37 @@
+diff --git a/src/index.d.ts b/src/index.d.ts
+index 3b355f94e7e3855bda69c1f842dc57ecf210221d..319b6b9449c954bc111caf10de848884c69d12d1 100644
+--- a/src/index.d.ts
++++ b/src/index.d.ts
+@@ -133,9 +133,11 @@ export type Message =
+   | BaseMessage<'IMPORTS_FALLBACK_ARRAY_USE'>
+   | BaseMessage<'CJS_WITH_ESMODULE_DEFAULT_EXPORT', { filePath?: string }>
+ 
++type MaybePromiseFn<T> = T | (() => Promise<T>)
++
+ export interface PackFile {
+   name: string
+-  data: string | ArrayBuffer | Uint8Array
++  data: MaybePromiseFn<string | ArrayBuffer | Uint8Array>
+ }
+ 
+ export interface Options {
+diff --git a/src/shared/vfs-tarball.js b/src/shared/vfs-tarball.js
+index b9231ea2afeddc6aab5959949157ca5d0faf9122..eea75c7bc7689ddb895950bc8c74c9de2872dc16 100644
+--- a/src/shared/vfs-tarball.js
++++ b/src/shared/vfs-tarball.js
+@@ -28,11 +28,12 @@ export function createTarballVfs(files) {
+     readFile: async (path) => {
+       const file = files.find((file) => file.name === path)
+       if (!file) throw new Error(`Unable to read file at path: ${path}`)
+-      if (typeof file.data === 'string') {
+-        return file.data
++      const data = typeof file.data === 'function' ? await file.data() : file.data
++      if (typeof data === 'string') {
++        return data
+       } else {
+         decoder ??= new TextDecoder()
+-        return decoder.decode(file.data)
++        return decoder.decode(data)
+       }
+     },
+   }

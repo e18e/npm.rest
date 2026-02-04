@@ -21,3 +21,6 @@ onlyBuiltDependencies:
     - esbuild
     - workerd
     - sharp
+
+patchedDependencies:
+    publint: patches/publint.patch
