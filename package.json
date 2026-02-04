@@ -15,7 +15,7 @@
 		"@types/node": "catalog:",
 		"@vitest/coverage-v8": "^4.0.18",
 		"add": "^2.0.6",
-		"knip": "^5.82.1",
+		"knip": "^5.83.0",
 		"oxlint": "^1.43.0",
 		"oxlint-tsgolint": "^0.11.4",
 		"pnpm": "^10.28.2",
