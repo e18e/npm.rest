@@ -1,5 +1,5 @@
 {
-	"name": "@npm.rest/monorepo",
+	"name": "@e18e/npm.rest-monorepo",
 	"type": "module",
 	"private": true,
 	"scripts": {
