@@ -32,7 +32,9 @@ export async function downloadTarball(url: string, integrity?: string) {
 	}
 
 	return await Result.tryPromise(async () => {
-		const { rootDir, files } = await unpack(result.value.response.body!);
+		const { rootDir, files } = await unpack(
+			await result.value.response.arrayBuffer(),
+		);
 
 		return {
 			unpackedSize: files
