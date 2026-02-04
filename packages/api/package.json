@@ -9,7 +9,7 @@
 		"prepare": "pnpm types"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.21.2",
+		"@cloudflare/vite-plugin": "^1.23.0",
 		"@npm.rest/db": "workspace:^",
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
