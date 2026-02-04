@@ -67,6 +67,15 @@ export async function seed() {
 			},
 		);
 
+		if (docs.rows.length === 0) {
+			logger.info('seeding finished', {
+				last_seq: meta.update_seq,
+				count,
+			});
+			await seq.set({ last_seq: meta.update_seq });
+			break;
+		}
+
 		await db
 			.insert(changeTable)
 			.values(
@@ -84,14 +93,5 @@ export async function seed() {
 
 		count += docs.rows.length;
 		startKey = docs.rows.at(-1)?.id || null;
-
-		if (docs.rows.length === 0) {
-			logger.info('seeding finished', {
-				last_seq: meta.update_seq,
-				count,
-			});
-			await seq.set({ last_seq: meta.update_seq });
-			break;
-		}
 	}
 }
