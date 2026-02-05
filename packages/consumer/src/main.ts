@@ -1,9 +1,10 @@
 import { and, eq, inArray, sql } from 'drizzle-orm';
+import { process as processItem } from './process';
 import { changeTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
-import { db } from '@npm.rest/db/server';
 import { logger } from './shared/logger';
-import { process } from './process';
+import { db } from '@npm.rest/db/server';
+import { Result } from 'better-result';
 
 const MIN_SLEEP_MS = 1_000;
 const MAX_SLEEP_MS = 60_000;
@@ -45,8 +46,19 @@ async function dequeue() {
 }
 
 let currentSleepMs = MIN_SLEEP_MS;
+let exitRequested = false;
+
+process.on('SIGINT', () => {
+	logger.info('exit requested...');
+	exitRequested = true;
+});
 
 while (true) {
+	if (exitRequested) {
+		logger.info('exited!');
+		process.exit(0);
+	}
+
 	const items = await dequeue();
 
 	logger.debug(`dequeued ${items.length} items`, {
@@ -69,7 +81,9 @@ while (true) {
 	currentSleepMs = MIN_SLEEP_MS;
 
 	for (const item of items) {
-		const result = await process(item.name, item.revId);
+		const result = exitRequested
+			? await processItem(item.name, item.revId)
+			: Result.ok('exit' as const);
 
 		if (result.isErr()) {
 			logger.error(`packument store failed`, {
@@ -77,7 +91,7 @@ while (true) {
 				revId: item.revId,
 				error: result.error,
 			});
-		} else {
+		} else if (result.value !== 'exit') {
 			logger.debug(`packument store succeeded`, {
 				name: item.name,
 				revId: item.revId,
@@ -88,7 +102,11 @@ while (true) {
 			.update(changeTable)
 			.set({
 				updatedAt: new Date(),
-				state: result.isOk() ? 'completed' : 'failed',
+				state: result.isOk()
+					? result.value === 'exit'
+						? 'pending'
+						: 'completed'
+					: 'failed',
 			})
 			.where(
 				and(
