@@ -34,7 +34,7 @@ export async function hasTypes(
 	if (hasTypesPkg.isErr()) return hasTypesPkg;
 
 	return Result.ok(
-		hasTypesPkg ? ('definitely-typed' as const) : ('none' as const),
+		hasTypesPkg.value ? ('definitely-typed' as const) : ('none' as const),
 	);
 }
 

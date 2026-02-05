@@ -18,6 +18,14 @@ const TS_UNPACK: UnpackResult = {
 
 const REV = '1-placeholder';
 
+const createPackument = (name: string) => ({
+	name: name,
+	time: {
+		created: new Date().toISOString(),
+		modified: new Date().toISOString(),
+	},
+});
+
 vi.mock('@npm.rest/db/server', async () => {
 	const { drizzle } = await import('drizzle-orm/postgres-js');
 
@@ -69,13 +77,7 @@ describe('hasTypes()', () => {
 		await db.insert(packumentTable).values({
 			id: `@types/${name}`,
 			revId: '1-placeholder',
-			data: {
-				name: `@types/${name}`,
-				time: {
-					created: new Date().toISOString(),
-					modified: new Date().toISOString(),
-				},
-			},
+			data: createPackument(`@types/${name}`),
 		});
 
 		vi.stubGlobal(
@@ -90,5 +92,95 @@ describe('hasTypes()', () => {
 		const types = await hasTypes(name, EMPTY_UNPACK, '1-placeholder');
 		expect(types.status).toBe('ok');
 		expect(types.unwrap()).toBe('definitely-typed');
+	});
+
+	it("returns none when types not built in and types package doesn't exist", async () => {
+		const name = `:${crypto.randomUUID()}`;
+
+		vi.stubGlobal(
+			'fetch',
+			vi
+				.fn()
+				.mockResolvedValue(new Response('Not Found', { status: 404 })),
+		);
+
+		const types = await hasTypes(name, EMPTY_UNPACK, REV);
+		expect(types.status).toBe('ok');
+		expect(types.unwrap()).toBe('none');
+	});
+
+	it('returns an error when packument fetch failed', async () => {
+		const name = `:${crypto.randomUUID()}`;
+
+		vi.stubGlobal(
+			'fetch',
+			vi
+				.fn()
+				.mockResolvedValue(
+					new Response("I'm a competing registry", { status: 418 }),
+				),
+		);
+
+		const types = await hasTypes(name, EMPTY_UNPACK, REV);
+		expect(types.status).toBe('error');
+		expect(() => types.unwrap()).toThrow();
+	});
+
+	it('returns definitely-typed when package is found via packument fetch', async () => {
+		const name = `:${crypto.randomUUID()}`;
+
+		vi.stubGlobal(
+			'fetch',
+			vi.fn().mockResolvedValue(
+				new Response(JSON.stringify(createPackument(name)), {
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}),
+			),
+		);
+
+		const types = await hasTypes(name, EMPTY_UNPACK, REV);
+		expect(types.status).toBe('ok');
+		expect(types.unwrap()).toBe('definitely-typed');
+	});
+
+	it('hits typesPackageCache', async () => {
+		const name = `:${crypto.randomUUID()}`;
+
+		await db.insert(packumentTable).values({
+			id: `@types/${name}`,
+			revId: '1-placeholder',
+			data: createPackument(`@types/${name}`),
+		});
+
+		const types = await hasTypes(name, EMPTY_UNPACK, '1-placeholder');
+		expect(types.status).toBe('ok');
+		expect(types.unwrap()).toBe('definitely-typed');
+
+		await db.delete(packumentTable);
+
+		const types2 = await hasTypes(name, EMPTY_UNPACK, '1-placeholder');
+		expect(types2.status).toBe('ok');
+		expect(types2.unwrap()).toBe('definitely-typed');
+	});
+
+	it('correctly gets scoped package @types name', async () => {
+		const ftch = vi
+			.fn()
+			.mockResolvedValue(new Response('Not Found', { status: 404 }));
+
+		vi.stubGlobal('fetch', ftch);
+
+		const types = await hasTypes('@foo/bar', EMPTY_UNPACK, REV);
+		expect(types.status).toBe('ok');
+		expect(types.unwrap()).toBe('none');
+
+		expect(ftch).toHaveBeenCalledOnce();
+		expect(ftch).toHaveBeenCalledWith(
+			expect.stringContaining('/@types/foo__bar'),
+			expect.objectContaining({}),
+		);
 	});
 });
