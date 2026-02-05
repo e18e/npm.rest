@@ -19,6 +19,11 @@ await configure({
 	loggers: [
 		{ category: 'db', sinks: ['sentry'] },
 		{ category: 'replicator', sinks: ['sentry', 'console'] },
+		{
+			category: ['logtape', 'meta'],
+			sinks: ['console'],
+			lowestLevel: 'error',
+		},
 	],
 });
 
