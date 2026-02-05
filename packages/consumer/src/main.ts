@@ -25,6 +25,10 @@ await configure({
 	],
 });
 
+const MIN_SLEEP_MS = 1_000;
+const MAX_SLEEP_MS = 60_000;
+const DEQUEUE_LIMIT = 10;
+
 async function dequeue() {
 	// Get n item(s) from the queue that is pending and isn't currently being
 	// processed - the queue table has a unique index on (name, revId) so
@@ -49,7 +53,7 @@ async function dequeue() {
 				),
 			)
 			.orderBy(changeTable.createdAt)
-			.limit(10)
+			.limit(DEQUEUE_LIMIT)
 			.for('update', { skipLocked: true });
 
 		return await tx
@@ -62,6 +66,8 @@ async function dequeue() {
 
 export const logger = getLogger('consumer');
 
+let currentSleepMs = MIN_SLEEP_MS;
+
 while (true) {
 	const items = await dequeue();
 
@@ -70,13 +76,19 @@ while (true) {
 	});
 
 	if (items.length === 0) {
-		logger.info(`sleeping for 60 seconds`, {
-			until_approx: new Date(Date.now() + 60_000).toISOString(),
+		logger.info(`sleeping for ${currentSleepMs / 1000} seconds`, {
+			until_approx: new Date(Date.now() + currentSleepMs).toISOString(),
 		});
 
-		await setTimeout(60_000);
+		await setTimeout(currentSleepMs);
+
+		// Exponential backoff: double sleep time up to max
+		currentSleepMs = Math.min(currentSleepMs * 2, MAX_SLEEP_MS);
+
 		continue;
 	}
+
+	currentSleepMs = MIN_SLEEP_MS;
 
 	for (const item of items) {
 		const result = await process(item.name, item.revId);
@@ -107,6 +119,4 @@ while (true) {
 				),
 			);
 	}
-
-	// await setTimeout(3000);
 }
