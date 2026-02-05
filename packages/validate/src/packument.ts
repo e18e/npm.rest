@@ -81,7 +81,7 @@ const PackumentVersionSchema = v.looseObject({
 	peerDependenciesMeta: v.optional(
 		v.record(v.string(), v.strictObject({ optional: v.boolean() })),
 	),
-	deprecated: v.optional(v.string()),
+	deprecated: v.optional(v.union([v.string(), v.literal(false)])),
 	funding: v.optional(
 		v.union([v.string(), Funding, v.array(v.union([v.string(), Funding]))]),
 	),
