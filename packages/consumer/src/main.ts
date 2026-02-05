@@ -82,8 +82,8 @@ while (true) {
 
 	for (const item of items) {
 		const result = exitRequested
-			? await processItem(item.name, item.revId)
-			: Result.ok('exit' as const);
+			? Result.ok('exit' as const)
+			: await processItem(item.name, item.revId);
 
 		if (result.isErr()) {
 			logger.error(`packument store failed`, {
