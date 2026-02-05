@@ -3,26 +3,8 @@ import { packageTable } from '@npm.rest/db/schema';
 import { generateId } from '@npm.rest/db/id';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
-import { eq } from 'drizzle-orm';
 
-export async function processPackage(
-	packument: Packument,
-	revId: string,
-	current?: Pick<typeof packageTable.$inferSelect, 'id'>,
-) {
-	if (current) {
-		await db
-			.update(packageTable)
-			.set({
-				distTags: packument['dist-tags'],
-				npmUpdatedAt: packument.time.modified,
-				updatedAt: new Date(),
-			})
-			.where(eq(packageTable.id, current.id));
-
-		return Result.ok(current.id);
-	}
-
+export async function processPackage(packument: Packument, revId: string) {
 	const [{ id }] = await db
 		.insert(packageTable)
 		.values({
@@ -32,6 +14,15 @@ export async function processPackage(
 			distTags: packument['dist-tags'],
 			createdAt: packument.time.created,
 			npmUpdatedAt: packument.time.modified,
+		})
+		.onConflictDoUpdate({
+			target: [packageTable.name],
+			set: {
+				revId: packument._rev || revId,
+				distTags: packument['dist-tags'],
+				npmUpdatedAt: packument.time.modified,
+				updatedAt: new Date(),
+			},
 		})
 		.returning({ id: packageTable.id });
 

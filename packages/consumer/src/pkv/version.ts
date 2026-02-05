@@ -31,6 +31,7 @@ export async function processVersion(
 	packageId: ResourceId<'pkg'>,
 	pkg: Packument,
 	pkv: PackumentVersion,
+	rev: string,
 ): Promise<ProcessVersionResult> {
 	const [exists] = await db
 		.select({ id: versionTable.id })
@@ -44,8 +45,7 @@ export async function processVersion(
 
 	if (exists) {
 		// todo confirm what is actually immutable
-		// todo check if publint exists else process
-		// todo unpublish, maintainers, contributors
+		// todo unpublish
 		await db
 			.update(versionTable)
 			.set({
@@ -63,7 +63,7 @@ export async function processVersion(
 	const publintResult = await runPublint(tarball.value);
 	if (publintResult.isErr()) return publintResult;
 
-	const types = await hasTypes(pkg.name, tarball.value);
+	const types = await hasTypes(pkg.name, tarball.value, rev);
 	if (types.isErr()) return types;
 
 	const repoInfo = pkv.repository
