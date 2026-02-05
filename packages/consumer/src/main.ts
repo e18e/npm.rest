@@ -1,29 +1,9 @@
-import { configure, getConsoleSink, getLogger } from '@logtape/logtape';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { changeTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
-import { getSentrySink } from '@logtape/sentry';
 import { db } from '@npm.rest/db/server';
-import * as Sentry from '@sentry/node';
+import { logger } from './shared/logger';
 import { process } from './process';
-import { env } from 'node:process';
-import { join } from 'node:path';
-import { config } from 'dotenv';
-
-config({ path: join(import.meta.dirname, '../../../.env') });
-
-Sentry.init({ dsn: env.SENTRY_DSN, enableLogs: true });
-
-await configure({
-	sinks: {
-		console: getConsoleSink(),
-		sentry: getSentrySink(),
-	},
-	loggers: [
-		{ category: 'db', sinks: ['sentry'] },
-		{ category: 'consumer', sinks: ['sentry', 'console'] },
-	],
-});
 
 const MIN_SLEEP_MS = 1_000;
 const MAX_SLEEP_MS = 60_000;
@@ -63,8 +43,6 @@ async function dequeue() {
 			.returning();
 	});
 }
-
-export const logger = getLogger('consumer');
 
 let currentSleepMs = MIN_SLEEP_MS;
 

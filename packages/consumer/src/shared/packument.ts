@@ -1,10 +1,10 @@
 import { PackumentSchema, type Packument } from '@npm.rest/validate/packument';
 import { packumentTable } from '@npm.rest/db/schema';
 import { FetchError, ofetch } from 'ofetch';
+import { logger } from '../shared/logger';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';
-import { logger } from '../main';
 import * as v from 'valibot';
 
 export type PackumentResult = Result<

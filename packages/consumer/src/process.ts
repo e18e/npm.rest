@@ -2,10 +2,10 @@ import { processPackument } from './shared/packument';
 import { packageTable } from '@npm.rest/db/schema';
 import { processVersion } from './pkv/version';
 import { processPackage } from './pkg/package';
+import { logger } from './shared/logger';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';
-import { logger } from './main';
 import pLimit from 'p-limit';
 
 function revGreater(a: string, b: string) {
