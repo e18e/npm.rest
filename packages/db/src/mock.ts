@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
 import { PGlite } from '@electric-sql/pglite';
@@ -11,6 +11,9 @@ type MockDB = PgliteDatabase<Record<string, never>> & { $client: PGlite };
 
 vi.mock(import('./server'), async () => {
 	const { drizzle } = await import('drizzle-orm/pglite');
+
+	// Idea of using pglite from Raphaël Moreau
+	// https://github.com/rphlmr/drizzle-vitest-pg/tree/main
 	const client = new PGlite();
 
 	return {
