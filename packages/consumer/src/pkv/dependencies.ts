@@ -1,7 +1,7 @@
-import type { PackumentVersion } from '@npm.rest/validate/packument';
 import type { dependencyTable, specifierTable } from '@npm.rest/db/schema';
-import npa from 'npm-package-arg';
+import type { PackumentVersion } from '@npm.rest/validate/packument';
 import { Result } from 'better-result';
+import npa from 'npm-package-arg';
 
 type DependencyType = (typeof dependencyTable.$inferSelect)['type'];
 type SpecifierType = (typeof specifierTable.$inferSelect)['type'];
@@ -18,40 +18,6 @@ export type VersionDependency = {
 	depType: DependencyType;
 	optional: boolean;
 };
-
-/**
- * Parse a dependency specifier to determine its type and extract alias info.
- */
-function parseSpecifier(
-	name: string,
-	specifier: string,
-): { type: SpecifierType; alias: string | null } {
-	try {
-		const parsed = npa.resolve(name, specifier);
-
-		// If the name in the parsed result differs from the original name,
-		// it's an alias (e.g., "my-lodash": "npm:lodash@^4.0.0")
-		const alias = parsed.name !== name ? (parsed.name ?? null) : null;
-
-		// Map npm-package-arg types to our specifierType enum
-		const typeMap: Record<string, SpecifierType> = {
-			git: 'git',
-			tag: 'tag',
-			version: 'version',
-			range: 'range',
-			file: 'file',
-			directory: 'directory',
-			remote: 'remote',
-		};
-
-		const type = typeMap[parsed.type] ?? 'range';
-
-		return { type, alias };
-	} catch {
-		// If parsing fails, default to 'range' with no alias
-		return { type: 'range', alias: null };
-	}
-}
 
 /**
  * Helper to collect dependencies from the manifest.

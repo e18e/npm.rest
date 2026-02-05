@@ -11,12 +11,10 @@
 		"@logtape/sentry": "^2.0.2",
 		"@npm.rest/db": "workspace:^",
 		"@sentry/node": "^10.38.0",
-		"better-result": "^2.7.0",
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"ofetch": "^1.5.1",
-		"tsx": "^4.21.0",
-		"valibot": "catalog:"
+		"tsx": "^4.21.0"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

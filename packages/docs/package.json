@@ -9,7 +9,6 @@
 		"prepare": "pnpm types"
 	},
 	"devDependencies": {
-		"@npm.rest/db": "workspace:^",
 		"wrangler": "catalog:"
 	}
 }
