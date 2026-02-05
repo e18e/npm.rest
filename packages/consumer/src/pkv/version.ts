@@ -49,7 +49,8 @@ export async function processVersion(
 		await db
 			.update(versionTable)
 			.set({
-				deprecated: pkv.deprecated,
+				deprecated:
+					pkv.deprecated === false ? undefined : pkv.deprecated,
 				updatedAt: new Date(),
 			})
 			.where(eq(versionTable.id, exists.id));
@@ -85,7 +86,8 @@ export async function processVersion(
 				version: pkv.version,
 				description: pkv.description,
 				homepage: pkv.homepage,
-				deprecated: pkv.deprecated,
+				deprecated:
+					pkv.deprecated === false ? undefined : pkv.deprecated,
 				license: pkv.license,
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
