@@ -20,24 +20,15 @@ type LanguageData = Record<string, number>;
 // LRU cache to prevent unbounded memory growth
 const repoCache = new LRUCache<string, ResourceId<'repo'>>({ max: 100 });
 
-type RepoRecordResult = Result<
-	{ id: ResourceId<'repo'>; lastFetched?: Date },
-	Error
->;
-
-async function getRepoRecord(
-	url: string,
-	lastFetched: Date,
-): Promise<RepoRecordResult> {
+async function getRepoRecord(url: string) {
 	const hit = repoCache.get(url);
-	if (hit) return Result.ok({ id: hit });
+	if (hit) return Result.ok({ id: hit, created: false });
 
 	const [newRecord] = await db
 		.insert(repositoryTable)
 		.values({
 			id: generateId('repo'),
 			url: url,
-			lastFetched,
 		})
 		.onConflictDoNothing()
 		.returning({
@@ -47,7 +38,7 @@ async function getRepoRecord(
 
 	if (newRecord?.id) {
 		repoCache.set(url, newRecord.id);
-		return Result.ok(newRecord);
+		return Result.ok({ id: newRecord.id, created: true });
 	}
 
 	const [record] = await db
@@ -60,36 +51,35 @@ async function getRepoRecord(
 	}
 
 	repoCache.set(url, record.id);
-	return Result.ok(record);
+	return Result.ok({ id: record.id, created: false });
 }
 
-export function getRepository(info: HostedGitInfo) {
-	return Result.tryPromise(async () => {
-		const url = new URL(info.https({ noGitPlus: true }));
+export async function getRepository(info: HostedGitInfo) {
+	const url = URL.parse(info.https({ noGitPlus: true }));
+	if (!url) return Result.err(new Error('failed to parse repo url'));
 
-		url.hash = '';
+	url.hash = '';
 
-		for (const key of url.searchParams.keys()) {
-			url.searchParams.delete(key);
-		}
+	for (const key of url.searchParams.keys()) {
+		url.searchParams.delete(key);
+	}
 
-		const lastFetched = new Date();
-		const record = (
-			await getRepoRecord(url.toString(), lastFetched)
-		).unwrap();
+	const record = await getRepoRecord(url.toString());
+	if (record.isErr()) return record;
 
-		// If we didn't just create the record or it's not github,
-		// let's just return it. @todo we could also do a recency check instead
-		if (
-			lastFetched.getTime() !== record.lastFetched?.getTime() ||
-			url.hostname !== 'github.com'
-		) {
-			return record;
-		}
+	if (url.hostname !== 'github.com' || !record.value.created) {
+		return record;
+	}
 
+	// If the repo is from GitHub and we just created we can process the metadata
+	return await Result.tryPromise(async () => {
 		const base = `/repos/${info.user}/${info.project}`;
-		const repo = await ghFetch<RepoData>(base);
-		const languageData = await ghFetch<LanguageData>(`${base}/languages`);
+
+		// Fetch repo data and languages in parallel
+		const [repo, languageData] = await Promise.all([
+			ghFetch<RepoData>(base),
+			ghFetch<LanguageData>(`${base}/languages`),
+		]);
 
 		await db
 			.update(repositoryTable)
@@ -102,6 +92,8 @@ export function getRepository(info: HostedGitInfo) {
 				updatedAt: new Date(repo.updated_at),
 				lastFetched: new Date(),
 			})
-			.where(eq(repositoryTable.id, record.id));
+			.where(eq(repositoryTable.id, record.value.id));
+
+		return record.value;
 	});
 }
