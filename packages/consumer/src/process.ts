@@ -6,6 +6,7 @@ import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';
 import { logger } from './main';
+import pLimit from 'p-limit';
 
 function revGreater(a: string, b: string) {
 	if (a === b) return false;
@@ -31,19 +32,35 @@ export async function process(name: string, rev: string) {
 		return Result.ok();
 	}
 
-	return await Result.gen(async function* () {
-		const packument = yield* Result.await(processPackument(name, rev));
+	const packument = await processPackument(name, rev);
+	if (packument.isErr()) return packument;
 
-		const packageId = yield* Result.await(
-			processPackage(packument, rev, exists),
+	const packageId = await processPackage(packument.value, rev, exists);
+	if (packageId.isErr()) return packageId;
+
+	if (packument.value.versions) {
+		const limit = pLimit(3);
+
+		// Process N versions in parallel
+		const results = await Promise.all(
+			Object.values(packument.value.versions).map((pkv) =>
+				limit(async () => {
+					return await processVersion(
+						packageId.value,
+						packument.value,
+						pkv,
+					);
+				}),
+			),
 		);
 
-		if (packument.versions) {
-			for (const pkv of Object.values(packument.versions)) {
-				yield* Result.await(processVersion(packageId, packument, pkv));
+		// Return first error if any version failed
+		for (const result of results) {
+			if (result.isErr()) {
+				return result;
 			}
 		}
+	}
 
-		return Result.ok();
-	});
+	return Result.ok();
 }
