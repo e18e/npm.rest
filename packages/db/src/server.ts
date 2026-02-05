@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { config } from 'dotenv';
 import postgres from 'postgres';
 
-config({ path: join(import.meta.dirname, '../../../.env') });
+config({ path: join(import.meta.dirname, '../../../.env'), quiet: true });
 
 const pg = postgres({
 	user: env.POSTGRES_USER!,

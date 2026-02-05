@@ -5,7 +5,7 @@ import { env } from 'node:process';
 import { join } from 'node:path';
 import { config } from 'dotenv';
 
-config({ path: join(import.meta.dirname, '../../../.env') });
+config({ path: join(import.meta.dirname, '../../../.env'), quiet: true });
 
 Sentry.init({ dsn: env.SENTRY_DSN, enableLogs: true });
 
