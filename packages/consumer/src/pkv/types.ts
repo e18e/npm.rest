@@ -9,7 +9,11 @@ import { eq } from 'drizzle-orm';
 
 const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
 
-export async function hasTypes(name: string, tarball: UnpackResult) {
+export async function hasTypes(
+	name: string,
+	tarball: UnpackResult,
+	rev: string,
+) {
 	if (name.startsWith('@types/')) {
 		return Result.ok('built-in' as const);
 	}
@@ -26,7 +30,7 @@ export async function hasTypes(name: string, tarball: UnpackResult) {
 		? name.replace('/', '__').replace('@', '@types/')
 		: `@types/${name}`;
 
-	const hasTypesPkg = await typesPackageExists(typesPkgName);
+	const hasTypesPkg = await typesPackageExists(typesPkgName, rev);
 	if (hasTypesPkg.isErr()) return hasTypesPkg;
 
 	return Result.ok(
@@ -37,7 +41,7 @@ export async function hasTypes(name: string, tarball: UnpackResult) {
 const typesPackageCache = new LRUCache<string, boolean>({ max: 1000 });
 
 // todo https://github.com/arethetypeswrong/arethetypeswrong.github.io/blob/161725ad2e8957f109e44fb26b13c9d70f415c2f/packages/core/src/createPackage.ts#L186-L200
-async function typesPackageExists(typesPkgName: string) {
+async function typesPackageExists(typesPkgName: string, rev: string) {
 	if (typesPackageCache.has(typesPkgName)) {
 		return Result.ok(true);
 	}
@@ -53,7 +57,7 @@ async function typesPackageExists(typesPkgName: string) {
 		return Result.ok(true);
 	}
 
-	const packument = await processPackument(typesPkgName);
+	const packument = await processPackument(typesPkgName, rev);
 
 	if (packument.isErr()) {
 		if ('status' in packument.error && packument.error.status === 404) {

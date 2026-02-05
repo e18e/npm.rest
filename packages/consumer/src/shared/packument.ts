@@ -12,18 +12,28 @@ export type PackumentResult = Result<
 	FetchError<string> | v.ValiError<typeof PackumentSchema>
 >;
 
+function revGreater(a: string, b: string) {
+	if (a === b) return false;
+	const aNum = Number.parseInt(a.split('-')[1]);
+	const bNum = Number.parseInt(b.split('-')[1]);
+	return aNum > bNum;
+}
+
 export async function processPackument(
 	name: string,
-	rev?: string,
+	rev: string,
 ): Promise<PackumentResult> {
 	const [exists] = await db
 		.select()
 		.from(packumentTable)
 		.where(eq(packumentTable.id, name));
 
-	// todo greater than?
-	if (exists && exists.revId === rev) {
+	if (
+		exists?.revId &&
+		(exists.revId === rev || revGreater(exists.revId, rev))
+	) {
 		logger.debug(`skipped fetching packument as it exists in db`, {
+			existingRev: exists.revId,
 			name,
 			rev,
 		});
