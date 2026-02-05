@@ -1,0 +1,58 @@
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import type { PgliteDatabase } from 'drizzle-orm/pglite';
+import { migrate } from 'drizzle-orm/pglite/migrator';
+import { PGlite } from '@electric-sql/pglite';
+import { join } from 'node:path';
+import { db } from './server';
+import * as s from './schema';
+
+type RealDB = typeof db;
+type MockDB = PgliteDatabase<Record<string, never>> & { $client: PGlite };
+
+vi.mock(import('./server'), async () => {
+	const { drizzle } = await import('drizzle-orm/pglite');
+	const client = new PGlite();
+
+	return {
+		db: drizzle(client, { casing: 'snake_case' }) as unknown as RealDB,
+	};
+});
+
+function isMockDB(db: unknown): asserts db is MockDB {
+	if (
+		typeof db === 'object' &&
+		db !== null &&
+		'$client' in db &&
+		db.$client instanceof PGlite
+	) {
+		return;
+	}
+
+	throw new Error('Expected a mock database');
+}
+
+beforeAll(async () => {
+	isMockDB(db);
+
+	await migrate(db, {
+		migrationsFolder: join(import.meta.dirname, '../.drizzle'),
+	});
+});
+
+afterEach(async () => {
+	isMockDB(db);
+	await db.delete(s.stateTable);
+	await db.delete(s.packumentTable);
+	await db.delete(s.repositoryTable);
+	await db.delete(s.changeTable);
+	await db.delete(s.packageTable);
+	await db.delete(s.versionTable);
+	await db.delete(s.specifierTable);
+	await db.delete(s.dependencyTable);
+	await db.delete(s.publintTable);
+});
+
+afterAll(async () => {
+	isMockDB(db);
+	await db.$client.close();
+});

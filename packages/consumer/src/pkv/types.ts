@@ -53,6 +53,7 @@ async function typesPackageExists(typesPkgName: string) {
 		return Result.ok(true);
 	}
 
+	// @todo this will always skip db
 	const packument = await processPackument(typesPkgName);
 
 	if (packument.isErr()) {

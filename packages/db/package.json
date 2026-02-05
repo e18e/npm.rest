@@ -12,7 +12,8 @@
 		"./server": "./src/server.ts",
 		"./schema": "./src/schema.ts",
 		"./utils": "./src/utils.ts",
-		"./id": "./src/id.ts"
+		"./id": "./src/id.ts",
+		"./mock": "./src/mock.ts"
 	},
 	"dependencies": {
 		"@logtape/drizzle-orm": "^2.0.2",
@@ -22,6 +23,7 @@
 		"postgres": "catalog:"
 	},
 	"devDependencies": {
+		"@electric-sql/pglite": "^0.3.15",
 		"@types/node": "catalog:",
 		"drizzle-kit": "^0.31.8",
 		"publint": "catalog:"
