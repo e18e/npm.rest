@@ -1,11 +1,12 @@
 import { processPackument } from '../shared/packument';
 import type { UnpackResult } from '@publint/pack';
 import { Result } from 'better-result';
+import { LRUCache } from 'lru-cache';
 import { extname } from 'node:path';
 
 const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
 
-const dtCache = new Map<string, boolean>();
+const dtCache = new LRUCache<string, boolean>({ max: 1000 });
 
 // todo https://github.com/arethetypeswrong/arethetypeswrong.github.io/blob/161725ad2e8957f109e44fb26b13c9d70f415c2f/packages/core/src/createPackage.ts#L186-L200
 export async function hasTypes(name: string, tarball: UnpackResult) {

@@ -2,6 +2,7 @@ import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { repositoryTable } from '@npm.rest/db/schema';
 import type HostedGitInfo from 'hosted-git-info';
 import { db } from '@npm.rest/db/server';
+import { LRUCache } from 'lru-cache';
 import { Result } from 'better-result';
 import { ghFetch } from './github';
 import { eq } from 'drizzle-orm';
@@ -16,7 +17,8 @@ interface RepoData {
 
 type LanguageData = Record<string, number>;
 
-const repoCache = new Map<string, ResourceId<'repo'>>();
+// LRU cache to prevent unbounded memory growth
+const repoCache = new LRUCache<string, ResourceId<'repo'>>({ max: 100 });
 
 type RepoRecordResult = Result<
 	{ id: ResourceId<'repo'>; lastFetched?: Date },
