@@ -71,11 +71,11 @@ export async function watchChanges() {
 		last_seq = response.last_seq;
 
 		if (response.results.length < 1000) {
-			logger.info(`sleeping for 180 seconds`, {
-				until_approx: new Date(Date.now() + 180_000).toISOString(),
+			logger.info(`sleeping for 90 seconds`, {
+				until_approx: new Date(Date.now() + 90_000).toISOString(),
 			});
 
-			await setTimeout(180_000);
+			await setTimeout(90_000);
 		}
 	}
 }
