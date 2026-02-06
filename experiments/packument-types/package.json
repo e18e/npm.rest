@@ -3,7 +3,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"start": "tsx src/generate.ts"
+		"start": "tsx src/generate.ts",
+		"build": "tsc"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {
