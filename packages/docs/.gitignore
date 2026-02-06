@@ -1,0 +1,8 @@
+node_modules
+.data
+.nitro
+.output
+.env
+.env.local
+.wrangler
+/worker-configuration.d.ts

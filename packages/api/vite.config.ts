@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 	process.env[HYPERDRIVE_VAR] ??= env[HYPERDRIVE_VAR];
 }
 
-export default defineConfig({
+export default defineConfig((env) => ({
 	plugins: [
 		nitro({
 			serverDir: './src',
@@ -32,7 +32,7 @@ export default defineConfig({
 			openAPI: {
 				production: 'runtime',
 				route: '/_openapi.json',
-				ui: { scalar: false, swagger: false },
+				ui: { scalar: env.mode === 'development', swagger: false },
 				meta: {
 					title: 'npm.rest',
 				},
@@ -45,4 +45,4 @@ export default defineConfig({
 			$lib: join(import.meta.dirname, './src/lib'),
 		},
 	},
-});
+}));

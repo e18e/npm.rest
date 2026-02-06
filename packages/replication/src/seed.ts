@@ -29,7 +29,7 @@ export async function seed() {
 	const meta = await ofetch<MetaResponse>('/', {
 		baseURL: 'https://replicate.npmjs.com',
 		headers: {
-			'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+			'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 		},
 	});
 
@@ -42,7 +42,7 @@ export async function seed() {
 		const docs: DocsResponse = await ofetch('/registry/_all_docs', {
 			baseURL: 'https://replicate.npmjs.com',
 			headers: {
-				'User-Agent': `npm-alt (+https://github.com/ghostdevv/npm-alt)`,
+				'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 			},
 			query: {
 				start_key: startKey ? JSON.stringify(startKey) : undefined,
@@ -67,6 +67,15 @@ export async function seed() {
 			},
 		);
 
+		if (docs.rows.length === 0) {
+			logger.info('seeding finished', {
+				last_seq: meta.update_seq,
+				count,
+			});
+			await seq.set({ last_seq: meta.update_seq });
+			break;
+		}
+
 		await db
 			.insert(changeTable)
 			.values(
@@ -84,14 +93,5 @@ export async function seed() {
 
 		count += docs.rows.length;
 		startKey = docs.rows.at(-1)?.id || null;
-
-		if (docs.rows.length === 0) {
-			logger.info('seeding finished', {
-				last_seq: meta.update_seq,
-				count,
-			});
-			await seq.set({ last_seq: meta.update_seq });
-			break;
-		}
 	}
 }

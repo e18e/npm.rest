@@ -14,11 +14,10 @@
 		"module": "esnext",
 		"target": "esnext",
 		"noEmit": true,
-		"baseUrl": ".",
 		"paths": {
-			"$lib/*": ["./src/lib/*"],
-		},
+			"$lib/*": ["./src/lib/*"]
+		}
 	},
 	"include": ["./src/**/*.ts", "./worker-configuration.d.ts"],
-	"exclude": ["./node_modules/**"],
+	"exclude": ["./node_modules/**"]
 }

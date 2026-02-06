@@ -3,7 +3,7 @@
 	"name": "npm-rest",
 	"compatibility_date": "2026-01-27",
 	"compatibility_flags": ["nodejs_compat"],
-	"workers_dev": true,
+	"workers_dev": false,
 	"preview_urls": true,
 	"observability": {
 		"enabled": true,
@@ -16,4 +16,5 @@
 			"id": "858281c7640747608e7863966a6e955a",
 		},
 	],
+	"routes": [{ "pattern": "npm.rest", "custom_domain": true }],
 }

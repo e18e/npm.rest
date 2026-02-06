@@ -1,18 +1,27 @@
 {
-	"name": "@npm.rest/monorepo",
+	"name": "@e18e/npm.rest-monorepo",
 	"type": "module",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"format": "prettier --write .",
-		"lint": "prettier --check .",
-		"knip": "knip"
+		"lint": "prettier --check . && oxlint --type-aware",
+		"knip": "knip",
+		"build": "pnpm -r run --if-present build",
+		"test": "vitest"
 	},
 	"devDependencies": {
+		"@e18e/eslint-plugin": "^0.1.4",
 		"@types/node": "catalog:",
-		"knip": "^5.82.1",
+		"@vitest/coverage-v8": "^4.0.18",
+		"@vitest/ui": "4.0.18",
+		"knip": "^5.83.0",
+		"oxlint": "^1.43.0",
+		"oxlint-tsgolint": "^0.11.4",
 		"prettier": "catalog:",
 		"prettier-plugin-svelte": "^3.4.1",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vitest": "^4.0.18"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

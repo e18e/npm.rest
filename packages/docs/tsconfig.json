@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"moduleResolution": "bundler",
+		"lib": ["esnext"],
+		"module": "esnext",
+		"target": "esnext",
+		"noEmit": true
+	},
+	"include": ["./src/**/*.ts", "./worker-configuration.d.ts"],
+	"exclude": ["./node_modules/**"]
+}

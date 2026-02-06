@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { env } from 'node:process';
 import { config } from 'dotenv';
 
-config({ path: resolve('../../.env') });
+config({ path: resolve('../../.env'), quiet: true });
 
 export default defineConfig({
 	out: './.drizzle',

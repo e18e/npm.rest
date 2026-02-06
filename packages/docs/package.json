@@ -1,0 +1,14 @@
+{
+	"name": "@npm.rest/docs",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"dev": "wrangler dev",
+		"types": "wrangler types",
+		"prepare": "pnpm types"
+	},
+	"devDependencies": {
+		"wrangler": "catalog:"
+	}
+}
