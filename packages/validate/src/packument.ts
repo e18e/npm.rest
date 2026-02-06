@@ -9,15 +9,16 @@ const FussyString = v.optional(
 	v.nullable(
 		v.pipe(
 			v.string(),
-			v.transform((value) =>
-				// Some old packuments seem to have some null unicode characters
-				// postgres throws a fit by default if we include these so this
-				// tries to remove them.
-				value.replace(
-					/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]+/g,
-					'',
-				),
-			),
+			// temporarily disabling as want to do further research
+			// v.transform((value) =>
+			// 	// Some old packuments seem to have some null unicode characters
+			// 	// postgres throws a fit by default if we include these so this
+			// 	// tries to remove them.
+			// 	value.replace(
+			// 		/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]+/g,
+			// 		'',
+			// 	),
+			// ),
 			v.transform((value) => (value?.trim() === '' ? undefined : value)),
 		),
 	),
