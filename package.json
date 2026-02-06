@@ -6,8 +6,9 @@
 	"scripts": {
 		"format": "prettier --write .",
 		"lint": "prettier --check . && oxlint --type-aware",
-		"knip": "knip",
+		"check": "pnpm -r run --if-present check",
 		"build": "pnpm -r run --if-present build",
+		"knip": "knip",
 		"test": "vitest"
 	},
 	"devDependencies": {

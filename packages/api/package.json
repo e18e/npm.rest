@@ -4,6 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
+		"check": "tsc && wrangler types --check",
 		"dev": "vite",
 		"types": "wrangler types",
 		"prepare": "pnpm types"

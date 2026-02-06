@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "tsx --env-file '../../.env' src/main.ts",
-		"build": "tsc"
+		"check": "tsc"
 	},
 	"dependencies": {
 		"@logtape/logtape": "catalog:",
