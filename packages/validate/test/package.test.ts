@@ -18,6 +18,7 @@ describe('PackageNameSchema', () => {
 		);
 	});
 
+	// todo https://github.com/npm/validate-npm-package-name/pull/160
 	// test('accepts valid edge case name', () => {
 	// 	expect(v.parse(PackageNameSchema, '-@1.0.0')).toBe('-@1.0.0');
 	// });
