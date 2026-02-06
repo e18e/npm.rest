@@ -1,7 +1,6 @@
 // Taken from MIT Licensed code from Anthony Fu
 // https://github.com/antfu/node-modules-inspector/blob/63f2156d33aad0b5a73e403622552743d3b4fe03/packages/node-modules-tools/src/analyze-esm.ts
 // https://github.com/antfu/node-modules-inspector/blob/63f2156d33aad0b5a73e403622552743d3b4fe03/packages/node-modules-tools/src/types/node.ts#L8
-// @todo PR node-modules-tools to export this
 
 // Ported and modified from: https://github.com/wooorm/npm-esm-vs-cjs/blob/main/script/crawl.js
 // Copyright (c) Titus Wormer <tituswormer@gmail.com>
