@@ -127,6 +127,12 @@ export const PackumentSchema = v.looseObject({
 		{
 			created: Date,
 			modified: Date,
+			unpublished: v.optional(
+				v.strictObject({
+					time: Date,
+					versions: v.array(v.string()),
+				}),
+			),
 		},
 		Date,
 	),

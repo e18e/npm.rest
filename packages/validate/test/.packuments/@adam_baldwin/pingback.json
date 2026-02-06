@@ -1,0 +1,22 @@
+{
+  "_id": "@adam_baldwin/pingback",
+  "_rev": "4-064aade4d7dc8584429aaea24dd37fd7",
+  "name": "@adam_baldwin/pingback",
+  "time": {
+    "created": "2020-01-28T17:48:40.697Z",
+    "1.0.0": "2020-01-28T17:48:40.894Z",
+    "modified": "2022-06-01T09:26:56.416Z",
+    "unpublished": {
+      "time": "2022-06-01T09:26:53.516Z",
+      "versions": [
+        "1.0.0"
+      ]
+    }
+  },
+  "maintainers": [
+    {
+      "email": "npm@npmjs.com",
+      "name": "npm"
+    }
+  ]
+}
