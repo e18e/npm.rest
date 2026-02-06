@@ -16,16 +16,16 @@ export async function process(name: string, rev: string) {
 
 		// Process N versions in parallel
 		const results = await Promise.all(
-			Object.values(packument.value.versions).map((pkv) =>
-				limit(async () => {
+			Object.values(packument.value.versions).map(async (pkv) => {
+				return await limit(async () => {
 					return await processVersion(
 						packageId.value,
 						packument.value,
 						pkv,
 						rev,
 					);
-				}),
-			),
+				});
+			}),
 		);
 
 		// Return first error if any version failed

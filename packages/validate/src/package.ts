@@ -10,7 +10,7 @@ export const PackageNameSchema = v.pipe(
 		const result = validatePackageName(dataset.value);
 		if (result.validForOldPackages) return dataset.value;
 
-		for (const message of result.errors.concat(result.warnings || [])) {
+		for (const message of [...result.errors, ...(result.warnings ?? [])]) {
 			addIssue({ message });
 		}
 
@@ -41,7 +41,7 @@ export const SpecifierSchema = v.pipe(
 				name: result.name,
 				fetchSpec: result.fetchSpec,
 			};
-		} catch (error) {
+		} catch {
 			addIssue({ message: 'invalid specifier' });
 			return NEVER;
 		}

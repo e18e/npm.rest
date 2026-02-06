@@ -7,7 +7,7 @@ import {
 	SpecifierSchema,
 } from '../src/package.ts';
 
-describe('PackageNameSchema', () => {
+describe('PackageNameSchema validation', () => {
 	test('accepts valid unscoped name', () => {
 		expect(v.parse(PackageNameSchema, 'my-pkg')).toBe('my-pkg');
 	});
@@ -44,7 +44,7 @@ describe('PackageNameSchema', () => {
 	});
 });
 
-describe('SemverSchema', () => {
+describe('SemverSchema validation', () => {
 	test('parses valid semver', () => {
 		expect(v.parse(SemverSchema, '1.0.0')).toBe('1.0.0');
 	});
@@ -62,7 +62,7 @@ describe('SemverSchema', () => {
 	});
 });
 
-describe('SpecifierExactSchema', () => {
+describe('SpecifierExactSchema validation', () => {
 	test('accepts valid name and version', () => {
 		expect(
 			v.parse(SpecifierExactSchema, {
@@ -88,7 +88,7 @@ describe('SpecifierExactSchema', () => {
 	});
 });
 
-describe('SpecifierSchema', () => {
+describe('SpecifierSchema validation', () => {
 	test('parses name@version specifier', () => {
 		const result = v.parse(SpecifierSchema, 'my-pkg@4.17.21');
 		expect(result).toEqual({

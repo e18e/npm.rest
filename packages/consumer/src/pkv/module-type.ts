@@ -6,6 +6,9 @@
 // Copyright (c) Titus Wormer <tituswormer@gmail.com>
 // MIT Licensed
 
+// oxlint-disable-next-line unicorn/no-abusive-eslint-disable
+// oxlint-disable
+
 import type { PackageJson } from 'pkg-types';
 
 type PackageModuleType = 'cjs' | 'esm' | 'dual' | 'faux' | 'dts' | 'unknown';
@@ -42,7 +45,7 @@ export function analyzePackageModuleType(
 
 	// If there are no explicit exports:
 	if (cjs === undefined && esm === undefined) {
-		if (type === 'module' || (main && /\.mjs$/.test(main))) {
+		if (type === 'module' || main?.endsWith('.mjs')) {
 			esm = true;
 		} else if (main) {
 			cjs = true;
@@ -108,16 +111,16 @@ export function analyzePackageModuleType(
 					cjs = true;
 				}
 
-				const defaults = record.node || record.default;
+				const defaults = record.node ?? record.default;
 
 				if (typeof defaults === 'string' && !explicit) {
-					if (/\.mjs$/.test(defaults)) esm = true;
-					if (/\.cjs$/.test(defaults)) cjs = true;
+					if (defaults.endsWith('.mjs')) esm = true;
+					if (defaults.endsWith('.cjs')) cjs = true;
 				}
 			}
 		} else if (typeof value === 'string') {
-			if (/\.mjs$/.test(value)) esm = true;
-			if (/\.cjs$/.test(value)) cjs = true;
+			if (value.endsWith('.mjs')) esm = true;
+			if (value.endsWith('.cjs')) cjs = true;
 		} else if (value === null) {
 			// Something explicitly not available,
 			// for a particular condition,

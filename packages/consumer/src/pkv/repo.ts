@@ -72,7 +72,7 @@ export async function getRepository(info: HostedGitInfo) {
 	}
 
 	// If the repo is from GitHub and we just created we can process the metadata
-	return await Result.tryPromise(async () => {
+	return Result.tryPromise(async () => {
 		const base = `/repos/${info.user}/${info.project}`;
 
 		// Fetch repo data and languages in parallel

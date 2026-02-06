@@ -14,7 +14,7 @@ export function createState<T>(db: PostgresJsDatabase, key: string) {
 				return null;
 			}
 
-			return JSON.parse(record.value);
+			return JSON.parse(record.value) as T;
 		},
 		async set(value: T) {
 			await db

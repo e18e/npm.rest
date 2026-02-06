@@ -9,7 +9,7 @@ export async function processPackage(packument: Packument, revId: string) {
 		.insert(packageTable)
 		.values({
 			id: generateId('pkg'),
-			revId: packument._rev || revId,
+			revId: packument._rev ?? revId,
 			name: packument.name,
 			distTags: packument['dist-tags'],
 			createdAt: packument.time.created,
@@ -18,7 +18,7 @@ export async function processPackage(packument: Packument, revId: string) {
 		.onConflictDoUpdate({
 			target: [packageTable.name],
 			set: {
-				revId: packument._rev || revId,
+				revId: packument._rev ?? revId,
 				distTags: packument['dist-tags'],
 				npmUpdatedAt: packument.time.modified,
 				updatedAt: new Date(),

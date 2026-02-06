@@ -1,10 +1,11 @@
 import { PackumentSchema, type Packument } from '@npm.rest/validate/packument';
 import { packumentTable } from '@npm.rest/db/schema';
-import { FetchError, ofetch } from 'ofetch';
 import { logger } from '../shared/logger';
+import type { FetchError } from 'ofetch';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import { eq } from 'drizzle-orm';
+import { ofetch } from 'ofetch';
 import * as v from 'valibot';
 
 export type PackumentResult = Result<
@@ -14,8 +15,8 @@ export type PackumentResult = Result<
 
 function revGreater(a: string, b: string) {
 	if (a === b) return false;
-	const aNum = Number.parseInt(a.split('-')[1]);
-	const bNum = Number.parseInt(b.split('-')[1]);
+	const aNum = Number.parseInt(a.split('-')[1], 10);
+	const bNum = Number.parseInt(b.split('-')[1], 10);
 	return aNum > bNum;
 }
 
@@ -79,7 +80,7 @@ export async function processPackument(
 			.values({
 				id: name,
 				data: parsed.output,
-				revId: parsed.output._rev || rev,
+				revId: parsed.output._rev ?? rev,
 			})
 			.onConflictDoUpdate({
 				target: packumentTable.id,

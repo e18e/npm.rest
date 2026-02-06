@@ -11,7 +11,7 @@ const pg = postgres({
 	user: env.POSTGRES_USER!,
 	password: env.POSTGRES_PASSWORD!,
 	database: env.POSTGRES_DB!,
-	port: Number.parseInt(env.POSTGRES_PORT!),
+	port: Number.parseInt(env.POSTGRES_PORT!, 10),
 	host: env.POSTGRES_HOST!,
 });
 

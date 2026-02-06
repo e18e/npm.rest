@@ -3,7 +3,7 @@ import * as v from 'valibot';
 const Date = v.pipe(v.string(), v.toDate());
 // const Link = v.pipe(v.string(), v.url());
 const Link = v.string(); // will be fixed later
-const Email = v.pipe(v.string(), v.email());
+// const Email = v.pipe(v.string(), v.email());
 
 const FussyString = v.optional(
 	v.nullable(
@@ -19,6 +19,7 @@ const FussyString = v.optional(
 			// 		'',
 			// 	),
 			// ),
+			// oxlint-disable-next-line eslint/no-undefined: needed
 			v.transform((value) => (value?.trim() === '' ? undefined : value)),
 		),
 	),
@@ -26,10 +27,10 @@ const FussyString = v.optional(
 
 // @todo empty string
 
-const Maintainer = v.strictObject({
-	name: v.string(),
-	email: Email,
-});
+// const Maintainer = v.strictObject({
+// 	name: v.string(),
+// 	email: Email,
+// });
 
 const Repository = v.strictObject({
 	type: v.optional(v.union([v.literal('git')])),
@@ -45,11 +46,11 @@ const Bugs = v.strictObject({
 	url: Link,
 });
 
-const Author = v.strictObject({
-	name: v.string(),
-	email: v.optional(Email),
-	url: v.optional(Link),
-});
+// const Author = v.strictObject({
+// 	name: v.string(),
+// 	email: v.optional(Email),
+// 	url: v.optional(Link),
+// });
 
 const PackumentVersionSchema = v.looseObject({
 	name: v.string(),

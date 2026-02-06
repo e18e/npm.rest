@@ -25,7 +25,7 @@ export function toSchema(
 	const schema = inferSchema(obj, required, additionalProperties);
 
 	// Add $schema if this is the root call
-	if ($schema !== undefined || $schema === null) {
+	if (typeof $schema !== 'undefined' || $schema === null) {
 		return {
 			$schema: $schema || 'http://json-schema.org/draft-07/schema#',
 			...schema,
@@ -80,7 +80,7 @@ function inferSchema(
 				markRequired,
 				allowAdditionalProps,
 			);
-			if (markRequired && val !== undefined) {
+			if (markRequired && typeof val !== 'undefined') {
 				requiredFields.push(key);
 			}
 		}
@@ -126,13 +126,17 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 
 	// Get all unique types
 	const types = new Set<JsonSchemaType>();
+	// oxlint-disable-next-line eslint/no-unused-vars: ??
 	let hasObject = false;
+	// oxlint-disable-next-line eslint/no-unused-vars: ??
 	let hasArray = false;
 
 	for (const schema of schemas) {
 		if (schema.type) {
 			if (Array.isArray(schema.type)) {
-				schema.type.forEach((t) => types.add(t));
+				for (const t of schema.type) {
+					types.add(t);
+				}
 			} else {
 				types.add(schema.type);
 				if (schema.type === 'object') hasObject = true;
@@ -162,7 +166,9 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 					}
 				}
 				if (schema.required) {
-					schema.required.forEach((key) => allRequired.add(key));
+					for (const key of schema.required) {
+						allRequired.add(key);
+					}
 				}
 			}
 
@@ -174,7 +180,7 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 			return {
 				type: 'object',
 				properties: mergedProperties,
-				required: Array.from(allRequired),
+				required: [...allRequired],
 				additionalProperties: schemas[0].additionalProperties,
 			};
 		}
@@ -183,7 +189,7 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 			// Merge array items
 			const itemSchemas = schemas
 				.map((s) => s.items)
-				.filter((item): item is JsonSchema => item !== undefined);
+				.filter((item): item is JsonSchema => !!item);
 
 			return {
 				type: 'array',
@@ -196,6 +202,6 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 
 	// Multiple types - use union
 	return {
-		type: Array.from(types) as JsonSchemaType[],
+		type: types.values().toArray(),
 	};
 }

@@ -4,7 +4,7 @@
 import { ofetch, type FetchOptions } from 'ofetch';
 import { env } from 'node:process';
 
-const _tokens = (env.GITHUB_TOKENS || '')
+const _tokens = (env.GITHUB_TOKENS ?? '')
 	.split(',')
 	.map((token) => token.trim())
 	.filter(Boolean);
@@ -30,11 +30,13 @@ async function validateGHTokens() {
 				});
 
 				token.remaining = Number.parseInt(
-					res.headers.get('x-ratelimit-remaining') || '0',
+					res.headers.get('x-ratelimit-remaining') ?? '0',
+					10,
 				);
 
 				token.limit = Number.parseInt(
-					res.headers.get('x-ratelimit-limit') || '0',
+					res.headers.get('x-ratelimit-limit') ?? '0',
+					10,
 				);
 
 				token.valid = true;
@@ -50,7 +52,7 @@ async function validateGHTokens() {
 function getGHToken() {
 	const validTokens = ghTokens
 		.filter((token) => token.valid && token.remaining > 0)
-		.sort((a, b) => b.remaining - a.remaining);
+		.toSorted((a, b) => b.remaining - a.remaining);
 
 	return validTokens[0];
 }
@@ -70,17 +72,20 @@ export const ghFetch = async <T>(
 		throw new Error('No valid GitHub token available');
 	}
 
-	return ofetch<T>(url, {
-		baseURL: 'https://api.github.com',
-		...opts,
-		method: (opts.method || 'GET').toUpperCase() as any,
-		headers: {
-			'User-Agent': 'npm.rest (+https://github.com/e18e/npm.rest)',
-			Authorization: `token ${token.token}`,
-			...opts.headers,
-		},
-	}).catch(async (error_) => {
+	const headers = new Headers(opts.headers);
+	headers.set('Authorization', `token ${token.token}`);
+	headers.set('User-Agent', 'npm.rest (+https://github.com/e18e/npm.rest)');
+
+	try {
+		return await ofetch<T>(url, {
+			baseURL: 'https://api.github.com',
+			...opts,
+			method: (opts.method ?? 'GET').toUpperCase(),
+			headers,
+		});
+	} catch (error) {
+		// oxlint-disable-next-line eslint(no-empty-function)
 		await validateGHTokens().catch(() => {});
-		throw error_;
-	});
+		throw error;
+	}
 };

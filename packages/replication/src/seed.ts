@@ -24,7 +24,7 @@ interface MetaResponse {
 }
 
 export async function seed() {
-	logger.info`starting seed`;
+	logger.info('starting seed');
 
 	const meta = await ofetch<MetaResponse>('/', {
 		baseURL: 'https://replicate.npmjs.com',
@@ -45,6 +45,7 @@ export async function seed() {
 				'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 			},
 			query: {
+				// oxlint-disable-next-line eslint(no-undefined)
 				start_key: startKey ? JSON.stringify(startKey) : undefined,
 				limit: 5000,
 			},
@@ -92,6 +93,6 @@ export async function seed() {
 			});
 
 		count += docs.rows.length;
-		startKey = docs.rows.at(-1)?.id || null;
+		startKey = docs.rows.at(-1)?.id ?? null;
 	}
 }

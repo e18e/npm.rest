@@ -11,10 +11,7 @@ import { db } from '@npm.rest/db/server';
 import { runPublint } from './publint';
 import { getRepository } from './repo';
 import { hasTypes } from './types';
-import {
-	type PackumentVersion,
-	type Packument,
-} from '@npm.rest/validate/packument';
+import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
 import {
 	specifierTable,
 	dependencyTable,
@@ -49,8 +46,7 @@ export async function processVersion(
 		await db
 			.update(versionTable)
 			.set({
-				deprecated:
-					pkv.deprecated === false ? undefined : pkv.deprecated,
+				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
 				updatedAt: new Date(),
 			})
 			.where(eq(versionTable.id, exists.id));
@@ -86,8 +82,7 @@ export async function processVersion(
 				version: pkv.version,
 				description: pkv.description,
 				homepage: pkv.homepage,
-				deprecated:
-					pkv.deprecated === false ? undefined : pkv.deprecated,
+				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
 				license: pkv.license,
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,

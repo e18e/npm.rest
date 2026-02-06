@@ -1,5 +1,7 @@
 // Warning, while this isn't vibe coded, please send help
 // - ghostdevv
+//
+// oxlint-disable eslint/no-unused-vars
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { toJsonSchema } from '@valibot/to-json-schema';
@@ -112,7 +114,7 @@ const Root = v.looseObject({
 	),
 });
 
-async function packumentToSchema(packument: unknown) {
+function packumentToSchema(packument: unknown) {
 	const parsed = v.safeParse(
 		v.looseObject({
 			...Root.entries,
@@ -134,7 +136,7 @@ async function packumentToSchema(packument: unknown) {
 			...data
 		} = parsed.output;
 
-		const versionsSchema = Object.values(versions || {})
+		const versionsSchema = Object.values(versions ?? {})
 			.map(
 				({
 					scripts,
@@ -166,10 +168,7 @@ async function packumentToSchema(packument: unknown) {
 					);
 				},
 			)
-			.reduce(
-				(acc, schema) => mergeSchemas(acc, schema),
-				{} as JsonSchema,
-			);
+			.reduce<JsonSchema>((acc, schema) => mergeSchemas(acc, schema), {});
 
 		const schema = mergeSchemas(
 			toSchema(data),
@@ -203,7 +202,8 @@ async function checkpoint(offset: number, schema: JsonSchema | null) {
 	);
 
 	if (schema) {
-		const ts = await compile(schema as unknown as any, 'Packument');
+		// @ts-expect-error todo
+		const ts = await compile(schema, 'Packument');
 		await writeFile(join(OUTPUT_DIR, './types.ts'), ts);
 	}
 }
@@ -243,7 +243,7 @@ while (true) {
 	console.log('another', packuments.length, 'with offset', offset);
 
 	for (const { packument } of packuments) {
-		const newSchema = await packumentToSchema(packument);
+		const newSchema = packumentToSchema(packument);
 
 		if (newSchema.isErr()) {
 			await checkpoint(offset, schema);

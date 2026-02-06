@@ -17,11 +17,12 @@ export async function downloadTarball(url: string, integrity?: string) {
 		}
 
 		const length = Number.parseInt(
-			response.headers.get('Content-Length') || '',
+			response.headers.get('Content-Length') ?? '',
+			10,
 		);
 
 		if (Number.isNaN(length)) {
-			throw new Error('Content-Length header is missing');
+			throw new TypeError('Content-Length header is missing');
 		}
 
 		return { response, length };

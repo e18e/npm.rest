@@ -7,7 +7,7 @@ import { db } from './server';
 import * as s from './schema';
 
 type RealDB = typeof db;
-type MockDB = PgliteDatabase<Record<string, never>> & { $client: PGlite };
+type MockDB = PgliteDatabase & { $client: PGlite };
 
 vi.mock(import('./server'), async () => {
 	const { drizzle } = await import('drizzle-orm/pglite');

@@ -1,11 +1,11 @@
+import { PackumentSchema } from '../src/packument.ts';
 import { describe, expect, test } from 'vitest';
 import * as v from 'valibot';
-import { PackumentSchema } from '../src/packument.ts';
 
 // Helper to create a minimal valid packument object
-function createValidPackument() {
+function createValidPackument(): v.InferInput<typeof PackumentSchema> {
 	const version = '1.0.0';
-	const isoNow = new Date().toISOString();
+
 	return {
 		name: 'my-package',
 		description: 'A test package',
@@ -24,14 +24,14 @@ function createValidPackument() {
 			},
 		},
 		time: {
-			created: isoNow,
-			modified: isoNow,
-			[version]: isoNow,
+			created: new Date().toISOString(),
+			modified: new Date().toISOString(),
+			[version]: new Date().toISOString(),
 		},
-	} as const;
+	};
 }
 
-describe('PackumentSchema', () => {
+describe('PackumentSchema validation', () => {
 	test('parses a minimal valid packument', () => {
 		const packument = createValidPackument();
 		const result = v.parse(PackumentSchema, packument);
@@ -45,18 +45,17 @@ describe('PackumentSchema', () => {
 	test('parses version with repository string and transforms to object', () => {
 		const packument = createValidPackument();
 		// Add repository as a simple string "owner/repo"
-		(packument.versions as any)['1.0.0'].repository = 'owner/repo';
+		packument.versions!['1.0.0'].repository = 'owner/repo';
 		const result = v.parse(PackumentSchema, packument);
-		const repo = result.versions?.['1.0.0'].repository as any;
-		expect(repo.url).toBe('https://github.com/owner/repo');
-		expect(repo.directory).toBeNull();
+		const repo = result.versions?.['1.0.0'].repository;
+		expect(repo?.url).toBe('https://github.com/owner/repo');
+		expect(repo?.directory).toBeNull();
 	});
 
 	test('fails safeParse with invalid date strings in time', () => {
 		const packument = createValidPackument();
-		// corrupt created date
-		(packument.time as any).created = 'not-a-date';
+		packument.time['created'] = 'not-a-date';
 		const result = v.safeParse(PackumentSchema, packument);
-		expect(result.success).toBe(false);
+		expect(result.success).toBeFalsy();
 	});
 });

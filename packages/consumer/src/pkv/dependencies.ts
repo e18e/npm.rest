@@ -6,22 +6,20 @@ import npa from 'npm-package-arg';
 type DependencyType = (typeof dependencyTable.$inferSelect)['type'];
 type SpecifierType = (typeof specifierTable.$inferSelect)['type'];
 
-export type DependencySpec = {
+export interface DependencySpec {
 	name: string;
 	specifier: string;
 	type: SpecifierType;
-};
+}
 
-export type VersionDependency = {
+export interface VersionDependency {
 	spec: DependencySpec;
 	alias: string | null;
 	depType: DependencyType;
 	optional: boolean;
-};
+}
 
-/**
- * Helper to collect dependencies from the manifest.
- */
+// Helper to collect dependencies from the manifest.
 function collect(
 	deps: Record<string, string> | undefined,
 	depType: DependencyType,
@@ -46,7 +44,7 @@ function collect(
 					spec: {
 						name: parsed.subSpec.name!,
 						specifier: parsed.subSpec.fetchSpec!,
-						type: parsed.subSpec.type! as SpecifierType, // nested aliases aren't a thing,
+						type: parsed.subSpec.type as SpecifierType, // nested aliases aren't a thing,
 					},
 					alias: name,
 					optional: isOptional,
@@ -72,11 +70,8 @@ export function getDependencies(manifest: PackumentVersion) {
 	return Result.try<VersionDependency[]>(() => {
 		return [
 			// Production dependencies (excluding those also declared as optional)
-			...collect(
-				manifest.dependencies,
-				'prod',
-				false,
-				(name) => !!manifest.optionalDependencies?.[name],
+			...collect(manifest.dependencies, 'prod', false, (name) =>
+				Boolean(manifest.optionalDependencies?.[name]),
 			),
 
 			// Development dependencies

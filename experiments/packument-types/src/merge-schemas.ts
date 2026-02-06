@@ -26,8 +26,8 @@ export function mergeSchemas(
 	}
 
 	// Handle anyOf in inputs - flatten them
-	const schemas1 = schema1.anyOf ? schema1.anyOf : [schema1];
-	const schemas2 = schema2.anyOf ? schema2.anyOf : [schema2];
+	const schemas1 = schema1.anyOf ?? [schema1];
+	const schemas2 = schema2.anyOf ?? [schema2];
 
 	// If types are completely different, create anyOf union
 	if (schema1.type && schema2.type && schema1.type !== schema2.type) {
@@ -58,8 +58,8 @@ export function mergeSchemas(
 		if (
 			schema1.enum ||
 			schema2.enum ||
-			schema1.const !== undefined ||
-			schema2.const !== undefined
+			typeof schema1.const !== 'undefined' ||
+			typeof schema2.const !== 'undefined'
 		) {
 			return createMergedAnyOf([...schemas1, ...schemas2]);
 		}
@@ -76,10 +76,10 @@ function mergeObjectSchemas(
 	schema1: JsonSchema,
 	schema2: JsonSchema,
 ): JsonSchema {
-	const props1 = schema1.properties || {};
-	const props2 = schema2.properties || {};
-	const required1 = new Set(schema1.required || []);
-	const required2 = new Set(schema2.required || []);
+	const props1 = schema1.properties ?? {};
+	const props2 = schema2.properties ?? {};
+	const required1 = new Set(schema1.required);
+	const required2 = new Set(schema2.required);
 
 	// Get all property keys
 	const allKeys = new Set([...Object.keys(props1), ...Object.keys(props2)]);
@@ -119,8 +119,8 @@ function mergeObjectSchemas(
 
 	// Merge additionalProperties
 	if (
-		schema1.additionalProperties !== undefined ||
-		schema2.additionalProperties !== undefined
+		typeof schema1.additionalProperties !== 'undefined' ||
+		typeof schema2.additionalProperties !== 'undefined'
 	) {
 		const addProps1 = schema1.additionalProperties ?? true;
 		const addProps2 = schema2.additionalProperties ?? true;
@@ -163,7 +163,7 @@ function mergeArraySchemas(
 
 	return {
 		type: 'array',
-		items: mergeSchemas(items1 as JsonSchema, items2 as JsonSchema),
+		items: mergeSchemas(items1, items2),
 	};
 }
 
@@ -183,7 +183,7 @@ function mergeProperties(schema1: JsonSchema, schema2: JsonSchema): JsonSchema {
 
 		if (val1 === val2) {
 			result[key] = val1;
-		} else if (val1 !== undefined && val2 !== undefined) {
+		} else if (typeof val1 !== 'undefined' && typeof val2 !== 'undefined') {
 			// Values differ - would need anyOf
 			return createMergedAnyOf([schema1, schema2]);
 		} else {

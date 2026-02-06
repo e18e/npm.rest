@@ -5,6 +5,7 @@ import { config } from 'dotenv';
 
 config({ path: resolve('../../.env'), quiet: true });
 
+// oxlint-disable-next-line eslint-plugin-import(no-default-export))
 export default defineConfig({
 	out: './.drizzle',
 	schema: './src/schema.ts',
@@ -14,7 +15,7 @@ export default defineConfig({
 		user: env.POSTGRES_USER!,
 		password: env.POSTGRES_PASSWORD!,
 		database: env.POSTGRES_DB!,
-		port: Number.parseInt(env.POSTGRES_PORT!),
+		port: Number.parseInt(env.POSTGRES_PORT!, 10),
 		host: env.POSTGRES_HOST!,
 	},
 });

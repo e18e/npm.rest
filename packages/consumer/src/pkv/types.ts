@@ -7,7 +7,7 @@ import { LRUCache } from 'lru-cache';
 import { extname } from 'node:path';
 import { eq } from 'drizzle-orm';
 
-const TS_FILE_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx'];
+const TS_FILE_EXTENSIONS = new Set(['.ts', '.cts', '.mts', '.tsx']);
 
 export async function hasTypes(
 	name: string,
@@ -19,7 +19,7 @@ export async function hasTypes(
 	}
 
 	const containsTypes = tarball.files.some((file) =>
-		TS_FILE_EXTENSIONS.includes(extname(file.name)),
+		TS_FILE_EXTENSIONS.has(extname(file.name)),
 	);
 
 	if (containsTypes) {
@@ -60,6 +60,7 @@ async function typesPackageExists(typesPkgName: string, rev: string) {
 	const packument = await processPackument(typesPkgName, rev);
 
 	if (packument.isErr()) {
+		// oxlint-disable-next-line notypescript-eslint(prefer-optional-chain): I can't
 		if ('status' in packument.error && packument.error.status === 404) {
 			typesPackageCache.set(typesPkgName, false);
 			return Result.ok(false);

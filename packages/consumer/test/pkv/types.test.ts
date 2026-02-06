@@ -132,7 +132,7 @@ describe('hasTypes()', () => {
 		vi.stubGlobal(
 			'fetch',
 			vi.fn().mockResolvedValue(
-				new Response(JSON.stringify(createPackument(name)), {
+				Response.json(createPackument(name), {
 					status: 200,
 					headers: {
 						'Content-Type': 'application/json',

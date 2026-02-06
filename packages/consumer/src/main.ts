@@ -6,7 +6,7 @@ import { logger } from './shared/logger';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 
-const MIN_SLEEP_MS = 1_000;
+const MIN_SLEEP_MS = 1000;
 const MAX_SLEEP_MS = 60_000;
 const DEQUEUE_LIMIT = 10;
 

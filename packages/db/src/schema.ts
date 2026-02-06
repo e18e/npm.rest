@@ -16,7 +16,10 @@ import {
 	pgSchema,
 } from 'drizzle-orm/pg-core';
 
-/** Create a resource id column with the given prefix. */
+/**
+ * Create a resource id column
+ * @param prefix prefix for the resource id
+ */
 function resourceId<T extends IdPrefix>(prefix: T) {
 	return customType<{ data: ResourceId<T>; config: { prefix: T } }>({
 		dataType() {
@@ -26,9 +29,15 @@ function resourceId<T extends IdPrefix>(prefix: T) {
 	})({ prefix });
 }
 
-/** Create the check constraint for resource id column */
+/**
+ * Create the check constraint for resource id column
+ *
+ * @param name name of the check constraint
+ * @param column column to check
+ */
 function resourceIdCheck(name: string, column: ExtraConfigColumn) {
 	// @ts-expect-error shhh
+	// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment, typescript-eslint/no-unsafe-member-access
 	const prefix = column.config?.fieldConfig?.prefix;
 
 	if (!isIdPrefix(prefix)) {

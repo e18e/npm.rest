@@ -17,8 +17,8 @@ defineRouteMeta({
 	},
 });
 
-export default defineHandler(async (event) => {
-	const db = await getDB(env);
+export default defineHandler(async () => {
+	const db = getDB(env);
 
 	const changes = await db
 		.select({

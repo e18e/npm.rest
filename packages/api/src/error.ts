@@ -8,7 +8,7 @@ export default defineErrorHandler((error) => {
 	const data = {
 		success: false,
 		status: error.status,
-		statusText: error.statusText || null,
+		statusText: error.statusText ?? null,
 		message: error.unhandled
 			? 'Internal Server Error'
 			: error.message || null,
