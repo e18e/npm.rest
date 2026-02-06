@@ -1,8 +1,9 @@
 {
 	"$schema": "./node_modules/oxlint/configuration_schema.json",
-	"jsPlugins": ["@e18e/eslint-plugin"],
-	"rules": {
-		"e18e/prefer-includes": "error",
-		"unicorn/prefer-node-protocol": "error"
-	}
+	"extends": [
+		"./node_modules/@rlly/pedantic/oxlint/core.json",
+		"./node_modules/@rlly/pedantic/oxlint/e18e.json",
+		"./node_modules/@rlly/pedantic/oxlint/type-aware.json",
+		"./node_modules/@rlly/pedantic/oxlint/vitest.json"
+	]
 }

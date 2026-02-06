@@ -41,6 +41,9 @@ importers:
       '@e18e/eslint-plugin':
         specifier: ^0.1.4
         version: 0.1.4(eslint@9.39.2(jiti@2.6.1))
+      '@rlly/pedantic':
+        specifier: ^0.1.1
+        version: 0.1.1(@e18e/eslint-plugin@0.1.4(eslint@9.39.2(jiti@2.6.1)))(oxlint-tsgolint@0.11.4)(oxlint@1.43.0(oxlint-tsgolint@0.11.4))
       '@types/node':
         specifier: 'catalog:'
         version: 25.2.1
@@ -1884,6 +1887,19 @@ packages:
   '@publint/pack@0.1.4':
     resolution: {integrity: sha512-HDVTWq3H0uTXiU0eeSQntcVUTPP3GamzeXI41+x7uU9J65JgWQh3qWZHblR1i0npXfFtF+mxBiU2nJH8znxWnQ==}
     engines: {node: '>=18'}
+
+  '@rlly/pedantic@0.1.1':
+    resolution: {integrity: sha512-0ZD8XDR3bXAQxiHlAPDnSf04wdCuH16jMnv4c/juo5Zjl/0GTksIV++0t26EvSdcQcW1urL6QM2vn42CNBfYAQ==}
+    engines: {node: ^24.0.0}
+    peerDependencies:
+      '@e18e/eslint-plugin': ^0.1.4
+      oxlint: ^1.43.0
+      oxlint-tsgolint: ^0.11.4
+    peerDependenciesMeta:
+      '@e18e/eslint-plugin':
+        optional: true
+      oxlint-tsgolint:
+        optional: true
 
   '@rolldown/binding-android-arm64@1.0.0-rc.1':
     resolution: {integrity: sha512-He6ZoCfv5D7dlRbrhNBkuMVIHd0GDnjJwbICE1OWpG7G3S2gmJ+eXkcNLJjzjNDpeI2aRy56ou39AJM9AD8YFA==}
@@ -4618,6 +4634,13 @@ snapshots:
       - supports-color
 
   '@publint/pack@0.1.4': {}
+
+  '@rlly/pedantic@0.1.1(@e18e/eslint-plugin@0.1.4(eslint@9.39.2(jiti@2.6.1)))(oxlint-tsgolint@0.11.4)(oxlint@1.43.0(oxlint-tsgolint@0.11.4))':
+    dependencies:
+      oxlint: 1.43.0(oxlint-tsgolint@0.11.4)
+    optionalDependencies:
+      '@e18e/eslint-plugin': 0.1.4(eslint@9.39.2(jiti@2.6.1))
+      oxlint-tsgolint: 0.11.4
 
   '@rolldown/binding-android-arm64@1.0.0-rc.1':
     optional: true
