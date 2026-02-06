@@ -15,10 +15,7 @@ import { Result } from 'better-result';
 import { existsSync } from 'node:fs';
 import { inspect } from 'node:util';
 import { join } from 'node:path';
-import { config } from 'dotenv';
 import * as v from 'valibot';
-
-config({ path: join(import.meta.dirname, '../../../.env') });
 
 const OUTPUT_DIR = join(import.meta.dirname, '../output');
 

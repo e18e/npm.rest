@@ -4,14 +4,13 @@
 	"private": true,
 	"scripts": {
 		"build": "tsc",
-		"start": "tsx src/main.ts"
+		"start": "tsx --env-file '../../.env' src/main.ts"
 	},
 	"dependencies": {
 		"@logtape/logtape": "catalog:",
 		"@logtape/sentry": "^2.0.2",
 		"@npm.rest/db": "workspace:^",
 		"@sentry/node": "^10.38.0",
-		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"ofetch": "^1.5.1",
 		"tsx": "^4.21.0"

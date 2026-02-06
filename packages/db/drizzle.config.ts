@@ -1,6 +1,7 @@
 import { defineConfig } from 'drizzle-kit';
 import { resolve } from 'node:path';
 import { env } from 'node:process';
+// oxlint-disable-next-line e18e/ban-dependencies
 import { config } from 'dotenv';
 
 config({ path: resolve('../../.env'), quiet: true });

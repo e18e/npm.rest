@@ -1,11 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { getLogger } from '@logtape/drizzle-orm';
 import { env } from 'node:process';
-import { join } from 'node:path';
-import { config } from 'dotenv';
 import postgres from 'postgres';
-
-config({ path: join(import.meta.dirname, '../../../.env'), quiet: true });
 
 const pg = postgres({
 	user: env.POSTGRES_USER!,
