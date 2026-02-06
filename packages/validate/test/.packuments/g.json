@@ -1,0 +1,458 @@
+{
+  "_id": "g",
+  "_rev": "20-90b4fa059db8158b16df9e6af756202e",
+  "name": "g",
+  "description": "Globalize module functions",
+  "dist-tags": {
+    "latest": "2.0.1"
+  },
+  "versions": {
+    "1.0.0": {
+      "name": "g",
+      "version": "1.0.0",
+      "description": "Globalizes module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/sleeplessinc/g.git"
+      },
+      "_npmJsonOpts": {
+        "file": "/Users/josephhitchens/.npm/g/1.0.0/package/package.json",
+        "wscript": false,
+        "contributors": false,
+        "serverjs": false
+      },
+      "_id": "g@1.0.0",
+      "dependencies": {},
+      "devDependencies": {},
+      "engines": {
+        "node": "*"
+      },
+      "_engineSupported": true,
+      "_npmVersion": "1.0.22",
+      "_nodeVersion": "v0.4.10",
+      "_defaultsLoaded": true,
+      "dist": {
+        "shasum": "97f0d6eee6cb6e70df721c48f7b293d396420576",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.0.tgz",
+        "integrity": "sha512-OZgTXoYc16f9oU6w3G5X5HCWkHTZPAhxTI5pWX+dsGpXxr3N1Y+3N+op/j78OYt0aPtYV4JWuzXCw7C/z1zwzw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCICZ27/5OAsOrDFL/JFu3S2vDRaST1AoT27Q30Sz3zYSOAiEA/vwufLuJk2b2o7deFM+BC79nllZNNEgvz/V2UtzQqOk="
+          }
+        ]
+      },
+      "scripts": {},
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "1.0.1": {
+      "name": "g",
+      "version": "1.0.1",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/sleeplessinc/g.git"
+      },
+      "_id": "g@1.0.1",
+      "dist": {
+        "shasum": "eb5bd36ecd8aaf55d7cf905288b66d9f89ade143",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.1.tgz",
+        "integrity": "sha512-MmrubTUTGAB2xdhtbf8ouxRurhT2FBChGmXsBuM28RuhB2Do+CXfkYIfV///xCbS16yodvo9GiyK8v6mcAwCnQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQCPxw3pKoN6dy0kycJ/mOSODSHgfPJpe6yLvFIaMIZOXwIgPue78VTNJPfNBWG04r3KIXENOhMeIPoIxpuG5/gkX3A="
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.2.11",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "1.0.2": {
+      "name": "g",
+      "version": "1.0.2",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/sleeplessinc/g.git"
+      },
+      "_id": "g@1.0.2",
+      "dist": {
+        "shasum": "7176efe99be840518ffd05aff9625d38d7bc3225",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.2.tgz",
+        "integrity": "sha512-BUKamCPZ0riGzGxjI/+fL+pN+sieaHyplO5nAPrb4VlJE/mGm/nBpaq+1WMC6hj/ZAt3EJjnhEnGBD1fkNA7PQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQCvFNUU131IbLTDxOjyUCw/rscl055lxC+G4axsJb4WPgIgYEpo0lCcXsZyTfOm97iyrQ4qtvsaWT9iNnncLwbScZg="
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.2.11",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "1.0.3": {
+      "name": "g",
+      "version": "1.0.3",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+      },
+      "bugs": {
+        "url": "https://github.com/sleeplessinc/g/issues"
+      },
+      "homepage": "https://github.com/sleeplessinc/g",
+      "_id": "g@1.0.3",
+      "dist": {
+        "shasum": "80b793a70a8bc1676055377dfefb408e4f053cd8",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.3.tgz",
+        "integrity": "sha512-YkWue2KJI10XO+ZuSPEygtePlk4D0xhWB/1tzgAKqu+ZD0VTuCZJBiD4F9ksiu9H+RKhEvEc9c/6JZvgIjAFqw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDKgkg0wiTvqJh9hMYx59VJd1uHSpPCLgQolIFGlQs5ygIgdaHiaDEbJ56YKNYXJXRhZNKUS2dsAen8isAa3T0ypNE="
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.4.3",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "1.0.4": {
+      "name": "g",
+      "version": "1.0.4",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+      },
+      "bugs": {
+        "url": "https://github.com/sleeplessinc/g/issues"
+      },
+      "homepage": "https://github.com/sleeplessinc/g",
+      "_id": "g@1.0.4",
+      "dist": {
+        "shasum": "bdafe8633a8e84b1420da6e41c202996dd3c41a5",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.4.tgz",
+        "integrity": "sha512-0uQ4NEp7zf7AXsTf2j4zriYsZ1Ryva27CQOIs9f3OfsJILbVPiFd290xVNNqVOMKWuGfxLO3N5FMv2xLgZvDTQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQD5vnae+l1EgIZcIKx0RAqeUdRsI2LaXdpLeHafcPT+/wIhAOlfYCPsrUDZwX742zPHKgteGd1xlRvqI+HspNGMF+BQ"
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.4.3",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "1.0.5": {
+      "name": "g",
+      "version": "1.0.5",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repositories": [
+        {
+          "type": "git",
+          "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+        }
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://sleeplessinc@github.com/sleeplessinc/g.git"
+      },
+      "bugs": {
+        "url": "https://github.com/sleeplessinc/g/issues"
+      },
+      "homepage": "https://github.com/sleeplessinc/g",
+      "_id": "g@1.0.5",
+      "dist": {
+        "shasum": "a9ab9d6d2fe7e20119f123087577839720633871",
+        "tarball": "https://registry.npmjs.org/g/-/g-1.0.5.tgz",
+        "integrity": "sha512-TLnBPq4lhT9NvSLHwozdfOTRvrRbgBI/aCUxjTCz6QirtaCqqijyTRwRJafbkULUWY1IhWOhHpO9LWYfynhXBA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIE/AO2MWStF9XoeCBuQGbwz+l59Jab758E8PNdTyngWKAiBS1g3fl2bsK7Utgw6jaa/8CHUKatDJOIrNHqHS6hCeUg=="
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.4.3",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "2.0.0": {
+      "name": "g",
+      "version": "2.0.0",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/sleeplessinc/g.git"
+      },
+      "bugs": {
+        "url": "https://github.com/sleeplessinc/g/issues"
+      },
+      "homepage": "https://github.com/sleeplessinc/g",
+      "_id": "g@2.0.0",
+      "dist": {
+        "shasum": "7a77ca0d66b65b206ce1d362428b4b8ee6b3a420",
+        "tarball": "https://registry.npmjs.org/g/-/g-2.0.0.tgz",
+        "integrity": "sha512-xXPsKUgx3j1Umz3b6GPnDzeTobVYD4DWrVxAj7mLtACBdpRhP7wQ8xpI4ne/0k4gNSe2AD10T57WTrjT34hlQg==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIF/XamL3Oyq6EPkZd8nf/fC28qsvCPKI4WAZMRhTUoXQAiAyIF3jVqouQu1b4MbpRreSC+LMKT+qSdT6oPANWglHMA=="
+          }
+        ]
+      },
+      "_from": ".",
+      "_npmVersion": "1.4.3",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ]
+    },
+    "2.0.1": {
+      "name": "g",
+      "version": "2.0.1",
+      "description": "Globalize module functions",
+      "author": {
+        "name": "Joe Hitchens",
+        "email": "joe@sleepless.com",
+        "url": "sleepless.com"
+      },
+      "license": {
+        "type": "MIT",
+        "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/sleeplessinc/g.git"
+      },
+      "gitHead": "e41e07d5a0c6e657faa1653b942ffe50b09903e2",
+      "bugs": {
+        "url": "https://github.com/sleeplessinc/g/issues"
+      },
+      "homepage": "https://github.com/sleeplessinc/g",
+      "_id": "g@2.0.1",
+      "scripts": {},
+      "_shasum": "0b5963ebd0ca70e3bc8c6766934a021821c8b857",
+      "_from": ".",
+      "_npmVersion": "2.14.7",
+      "_nodeVersion": "4.2.3",
+      "_npmUser": {
+        "name": "sleeplessinc",
+        "email": "joe@sleepless.com"
+      },
+      "maintainers": [
+        {
+          "name": "sleeplessinc",
+          "email": "joe@sleepless.com"
+        }
+      ],
+      "dist": {
+        "shasum": "0b5963ebd0ca70e3bc8c6766934a021821c8b857",
+        "tarball": "https://registry.npmjs.org/g/-/g-2.0.1.tgz",
+        "integrity": "sha512-Fi6Ng5fZ/ANLQ15H11hCe+09sgUoNvDEBevVgx3KoYOhsH5iLNPn54hx0jPZ+3oSWr+xajnp2Qau9VmPsc7hTA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIASG+27/dG0avz0/CR7nwV8Hi1VXbqZ8zSYgclp3p75OAiEAuYDBcueolwwCdZQrxVkenVqOEDYCKik8kXkYC3AUmOg="
+          }
+        ]
+      },
+      "_npmOperationalInternal": {
+        "host": "packages-12-west.internal.npmjs.com",
+        "tmp": "tmp/g-2.0.1.tgz_1463195960896_0.4076719731092453"
+      }
+    }
+  },
+  "maintainers": [
+    {
+      "name": "sleeplessinc",
+      "email": "joe@sleepless.com"
+    }
+  ],
+  "time": {
+    "modified": "2022-06-18T04:36:37.993Z",
+    "created": "2011-09-17T04:28:07.973Z",
+    "1.0.0": "2011-09-17T04:28:09.207Z",
+    "1.0.1": "2013-10-17T05:31:53.390Z",
+    "1.0.2": "2014-01-19T02:40:09.792Z",
+    "1.0.3": "2015-02-19T20:41:45.120Z",
+    "1.0.4": "2015-02-19T20:51:18.457Z",
+    "1.0.5": "2015-02-19T21:44:20.978Z",
+    "2.0.0": "2015-03-06T23:07:14.622Z",
+    "2.0.1": "2016-05-14T03:19:21.383Z"
+  },
+  "author": {
+    "name": "Joe Hitchens",
+    "email": "joe@sleepless.com",
+    "url": "sleepless.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sleeplessinc/g.git"
+  },
+  "readme": "\n# g\n\nLet's you easily get some module functions made into globals:\n\n    require(\"g\")(\"util\");\n\tinspect([\"foo\"]);\n\nor\n\n    require(\"g\")(\"log5\");\n\tI(\"Hi mom\");\n\n\n## Yes, I know ...\n\nYes, I know.\nIt rubs you the wrong way. \nIt goes against everything you've been taught.\nIt's sick and wrong. \nIt's dangerous and irresponsible.\nIt's immoral and a crime against humanity.\n\nSo ...\n\nTHIS IS NOT FOR PRODUCTION SOFTWARE.\nONLY USE IT FOR PROTOTYPING AND PROOF-OF-CONCEPT WORK.\nDO NOT USE THIS FOR ANYTHING TRULY IMPORTANT.\n\nOkay?  We good?  Alright then.\n\n\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/sleeplessinc/g",
+  "bugs": {
+    "url": "https://github.com/sleeplessinc/g/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/sleeplessinc/g/raw/master/LICENSE"
+  }
+}

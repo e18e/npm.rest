@@ -1,9 +1,31 @@
+import { readFile, writeFile } from 'node:fs/promises';
 import { PackumentSchema } from '../src/packument.ts';
 import { describe, expect, test } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import * as v from 'valibot';
 
+const PACKUMENTS_PATH = join(import.meta.dirname, './.packuments');
+const PACKUMENTS = ['g'];
+
+type PackumentInput = v.InferInput<typeof PackumentSchema>;
+
+async function fetchPackument(name: string): Promise<PackumentInput> {
+	const path = join(PACKUMENTS_PATH, `${name}.json`);
+
+	if (existsSync(path)) {
+		return JSON.parse(await readFile(path, 'utf-8')) as PackumentInput;
+	}
+
+	const response = await fetch(`https://registry.npmjs.org/${name}`);
+	const data = (await response.json()) as PackumentInput;
+
+	await writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
+	return data;
+}
+
 // Helper to create a minimal valid packument object
-function createValidPackument(): v.InferInput<typeof PackumentSchema> {
+function createValidPackument(): PackumentInput {
 	const version = '1.0.0';
 
 	return {
@@ -56,6 +78,13 @@ describe('PackumentSchema validation', () => {
 		const packument = createValidPackument();
 		packument.time['created'] = 'not-a-date';
 		const result = v.safeParse(PackumentSchema, packument);
+		expect(result.success).toBeFalsy();
+	});
+
+	test.for(PACKUMENTS)('parses real packument "%s"', async (name) => {
+		const packument = await fetchPackument(name);
+		const result = v.parse(PackumentSchema, packument);
+		expect(result.name).toBe(name);
 		expect(result.success).toBeFalsy();
 	});
 });

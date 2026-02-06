@@ -83,7 +83,10 @@ export async function processVersion(
 				description: pkv.description,
 				homepage: pkv.homepage,
 				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
-				license: pkv.license,
+				license:
+					typeof pkv.license === 'string'
+						? pkv.license
+						: pkv.license?.type,
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
 				publishedAt: pkg.time[pkv.version],

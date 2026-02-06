@@ -58,7 +58,16 @@ const PackumentVersionSchema = v.looseObject({
 	version: v.string(),
 	keywords: v.optional(v.array(v.string())),
 	// author: v.optional(v.union([Author, Str])),
-	license: v.optional(v.string()),
+	license: v.optional(
+		v.union([
+			v.string(),
+			v.strictObject({
+				type: v.optional(v.string()),
+				name: v.optional(v.string()),
+				url: v.string(),
+			}),
+		]),
+	),
 	// maintainers: v.optional(v.array(Maintainer)),
 	homepage: v.optional(Link),
 	bugs: v.optional(Bugs),
