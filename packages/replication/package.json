@@ -12,8 +12,8 @@
 		"@npm.rest/db": "workspace:^",
 		"@sentry/node": "^10.38.0",
 		"drizzle-orm": "catalog:",
-		"ofetch": "^1.5.1",
-		"tsx": "^4.21.0"
+		"ofetch": "catalog:",
+		"tsx": "catalog:"
 	},
 	"packageManager": "pnpm@10.28.1",
 	"volta": {

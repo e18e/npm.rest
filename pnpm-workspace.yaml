@@ -12,6 +12,9 @@ catalog:
     typescript: ^5.9.3
     valibot: ^1.2.0
     wrangler: ^4.62.0
+    better-result: ^2.7.0
+    tsx: ^4.21.0
+    ofetch: ^1.5.1
 
 ignoreDepScripts: true
 
