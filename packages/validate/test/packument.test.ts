@@ -470,6 +470,18 @@ describe('packument-version validation', () => {
 			});
 		});
 
+		it('url is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {
+				type: 'MIT',
+			};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject({
+				type: 'MIT',
+			});
+		});
+
 		it('supports multiple license objects', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = [
