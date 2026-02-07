@@ -17,6 +17,7 @@
 		"drizzle-orm": "catalog:",
 		"hosted-git-info": "^9.0.2",
 		"lru-cache": "^11.0.2",
+		"node-modules-tools": "^1.3.2",
 		"npm-package-arg": "^13.0.2",
 		"ofetch": "^1.5.1",
 		"p-limit": "^7.3.0",
@@ -28,7 +29,6 @@
 		"@npm.rest/test": "workspace:^",
 		"@types/hosted-git-info": "^3.0.5",
 		"@types/npm-package-arg": "^6.1.4",
-		"pkg-types": "^2.3.0",
 		"typescript": "catalog:"
 	},
 	"packageManager": "pnpm@10.28.1",

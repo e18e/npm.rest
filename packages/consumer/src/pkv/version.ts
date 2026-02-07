@@ -1,8 +1,9 @@
 import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.json' with { type: 'json' };
+import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
 import { Result, type UnhandledException, type InferErr } from 'better-result';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
+import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
-import { analyzePackageModuleType } from './module-type';
 import { getDependencies } from './dependencies';
 import { downloadTarball } from './tarball';
 import hostedGitInfo from 'hosted-git-info';
@@ -11,7 +12,6 @@ import { db } from '@npm.rest/db/server';
 import { runPublint } from './publint';
 import { getRepository } from './repo';
 import { hasTypes } from './types';
-import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
 import {
 	specifierTable,
 	dependencyTable,

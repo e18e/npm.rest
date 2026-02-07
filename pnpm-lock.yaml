@@ -172,6 +172,9 @@ importers:
       lru-cache:
         specifier: ^11.0.2
         version: 11.2.4
+      node-modules-tools:
+        specifier: ^1.3.2
+        version: 1.3.2
       npm-package-arg:
         specifier: ^13.0.2
         version: 13.0.2
@@ -200,9 +203,6 @@ importers:
       '@types/npm-package-arg':
         specifier: ^6.1.4
         version: 6.1.4
-      pkg-types:
-        specifier: ^2.3.0
-        version: 2.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -2958,6 +2958,9 @@ packages:
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
 
+  node-modules-tools@1.3.2:
+    resolution: {integrity: sha512-VtTnHLj29HP+QMjZiAPeOLaPynh50En7/WMU4WXwbXw+8bUKS2yvs53emnOj/QT0ldoNXuBl92xswI/WBT6dLw==}
+
   npm-package-arg@13.0.2:
     resolution: {integrity: sha512-IciCE3SY3uE84Ld8WZU23gAPPV9rIYod4F+rc+vJ7h7cwAJt9Vk6TVsK60ry7Uj3SRS3bqRRIGuTp9YVlk6WNA==}
     engines: {node: ^20.17.0 || >=22.9.0}
@@ -3153,6 +3156,11 @@ packages:
 
   semver@7.7.3:
     resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.7.4:
+    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -5663,6 +5671,17 @@ snapshots:
 
   node-fetch-native@1.6.7: {}
 
+  node-modules-tools@1.3.2:
+    dependencies:
+      js-yaml: 4.1.1
+      p-limit: 7.3.0
+      package-manager-detector: 1.6.0
+      pathe: 2.0.3
+      pkg-types: 2.3.0
+      publint: 0.3.17
+      semver: 7.7.4
+      tinyexec: 1.0.2
+
   npm-package-arg@13.0.2:
     dependencies:
       hosted-git-info: 9.0.2
@@ -5946,6 +5965,8 @@ snapshots:
       mri: 1.2.0
 
   semver@7.7.3: {}
+
+  semver@7.7.4: {}
 
   sharp@0.34.5:
     dependencies:
