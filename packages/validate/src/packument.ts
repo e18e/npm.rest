@@ -30,9 +30,18 @@ const Funding = v.strictObject({
 	type: v.optional(v.union([v.literal('patreon'), v.literal('individual')])),
 });
 
-const Bugs = v.object({
-	url: Link,
-});
+// export const BugsObjectSchema = v.object({
+// 	url: Link,
+// 	email: v.optional(v.string()),
+// });
+
+// export const BugsSchema = v.union([
+// 	v.pipe(
+// 		v.string(),
+// 		v.transform((value) => ({ url: value })),
+// 	),
+// 	BugsObjectSchema,
+// ]);
 
 export const LicenseObjectSchema = v.strictObject({
 	type: v.optional(EmptyableString, null),
@@ -72,7 +81,7 @@ export const PackumentVersionSchema = v.looseObject({
 	keywords: v.optional(KeywordsSchema),
 	license: v.optional(LicenseSchema, null),
 	homepage: v.optional(v.fallback(EmptyableLink, null)),
-	bugs: v.optional(Bugs),
+	// bugs: v.optional(BugsObjectSchema),
 	dist: v.object({
 		shasum: v.string(),
 		tarball: Link,
