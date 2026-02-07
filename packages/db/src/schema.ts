@@ -69,6 +69,7 @@ export const changeState = coreSchema.enum('change_state', [
 	'pending',
 	'processing',
 	'failed',
+	'skipped',
 	'completed',
 ]);
 
@@ -78,6 +79,7 @@ export const changeTable = coreSchema.table(
 		name: text().notNull(),
 		revId: text().notNull(),
 		state: changeState().notNull(),
+		deleted: boolean().notNull().default(false),
 		createdAt: timestamp().defaultNow().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
 	},

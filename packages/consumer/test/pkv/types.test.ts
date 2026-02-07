@@ -26,14 +26,6 @@ const createPackument = (name: string) => ({
 	},
 });
 
-vi.mock('@npm.rest/db/server', async () => {
-	const { drizzle } = await import('drizzle-orm/postgres-js');
-
-	return {
-		db: drizzle.mock({}),
-	};
-});
-
 vi.mock(import('../../src/shared/logger'), async () => {
 	const { getLogger } = await import('@logtape/logtape');
 

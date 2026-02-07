@@ -1,8 +1,8 @@
-import { packumentTable, changeTable } from '@npm.rest/db/schema';
+import { changeTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
+import { and, eq, not, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { logger, seq } from './shared';
-import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';
 
 interface ChangeResult {
@@ -34,37 +34,52 @@ export async function watchChanges() {
 			},
 		});
 
-		const changes: (typeof changeTable.$inferInsert)[] = [];
+		const changes = response.results.map(
+			(change): typeof changeTable.$inferInsert => ({
+				name: change.id,
+				revId: change.changes[0].rev,
+				state: 'pending',
+				deleted: change.deleted,
+			}),
+		);
 
-		for (const change of response.results) {
-			if (change.deleted) {
-				await db
-					.delete(packumentTable)
-					.where(eq(packumentTable.id, change.id));
-			} else {
-				changes.push({
-					name: change.id,
-					revId: change.changes[0].rev,
-					state: 'pending',
-				});
-			}
-		}
+		const deletions = changes.filter((change) => change.deleted);
 
 		if (changes.length) {
-			await db
-				.insert(changeTable)
-				.values(changes)
-				.onConflictDoUpdate({
-					target: [changeTable.name, changeTable.revId],
-					set: { updatedAt: new Date() },
-				});
+			await db.transaction(async (tx) => {
+				await tx
+					.insert(changeTable)
+					.values(changes)
+					.onConflictDoUpdate({
+						target: [changeTable.name, changeTable.revId],
+						set: { updatedAt: new Date() },
+					});
+
+				for (const deletion of deletions) {
+					await tx
+						.update(changeTable)
+						.set({ state: 'skipped', updatedAt: new Date() })
+						.where(
+							and(
+								eq(changeTable.name, deletion.name),
+								or(
+									eq(changeTable.state, 'failed'),
+									and(
+										eq(changeTable.state, 'pending'),
+										not(eq(changeTable.deleted, true)),
+									),
+								),
+							),
+						);
+				}
+			});
 		}
 
 		logger.debug(`changes ${response.results.length}`, {
 			results_len: response.results.length,
 			last_seq: response.last_seq,
 			change_count: changes.length,
-			deletion_count: response.results.length - changes.length,
+			deletion_count: deletions.length,
 		});
 
 		await seq.set({ last_seq: response.last_seq });
