@@ -115,6 +115,43 @@ describe('packument', () => {
 			expect(v.is(PackumentSchema, packument)).toBeFalsy();
 		});
 	});
+
+	describe('dist-tags', () => {
+		it('is required', () => {
+			const packument = createPackument();
+			// @ts-expect-error tests
+			packument['dist-tags'] = null;
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('passes with empty dist-tags', () => {
+			const packument = createPackument();
+			packument['dist-tags'] = {};
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+
+		it('fails with effectively empty dist-tags', () => {
+			const packument = createPackument();
+			packument['dist-tags'] = { '': '' };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('returns null when empty', () => {
+			const packument = createPackument();
+			packument['dist-tags'] = {};
+			const parsed = v.safeParse(PackumentSchema, packument);
+			expect(parsed.output).toMatchObject({ 'dist-tags': null });
+		});
+
+		it('supports missing latest in dist-tags', () => {
+			const packument = createPackument();
+			packument['dist-tags'] ??= {};
+			// oxlint-disable-next-line eslint(no-undefined)
+			packument['dist-tags'].latest = undefined;
+
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];

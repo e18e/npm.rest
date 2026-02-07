@@ -21,3 +21,16 @@ export const Rev = v.pipe(
 export const Date = v.pipe(v.string(), v.trim(), v.toDate());
 export const Email = v.pipe(v.string(), v.trim(), v.email());
 export const Link = v.pipe(v.string(), v.trim(), v.url());
+
+export function nullOnEmpty<
+	TInput,
+	TOutput extends Record<string, unknown>,
+	TIssue extends v.BaseIssue<unknown> = v.BaseIssue<unknown>,
+>(schema: v.GenericSchema<TInput, TOutput, TIssue>) {
+	return v.pipe(
+		schema,
+		v.transform((value) => {
+			return Object.keys(value).length === 0 ? null : value;
+		}),
+	);
+}
