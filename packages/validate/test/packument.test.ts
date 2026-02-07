@@ -259,7 +259,7 @@ describe('packument', () => {
 
 				packument.time.unpublished = {
 					time: new Date().toISOString(),
-					versions: [],
+					versions: ['2.0.0'],
 					// @ts-expect-error tests
 					foo: 'bar',
 				};
@@ -267,13 +267,13 @@ describe('packument', () => {
 				expect(v.is(PackumentSchema, packument)).toBeFalsy();
 			});
 
-			it('requires at least one version', () => {
+			it('can have no versions', () => {
 				const packument = createPackument();
 				packument.time.unpublished = {
 					time: new Date().toISOString(),
 					versions: [],
 				};
-				expect(v.is(PackumentSchema, packument)).toBeFalsy();
+				expect(v.is(PackumentSchema, packument)).toBeTruthy();
 			});
 
 			it('trims time before parsing', () => {
@@ -896,7 +896,12 @@ describe('packument-version validation', () => {
 // 	});
 // });
 
-const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
+const PACKUMENTS = [
+	'g',
+	'@aaamrh/first-package',
+	'@4399ywkf/cli',
+	'@porsche-data-layer/library',
+];
 
 describe('real world tests', () => {
 	it.for(PACKUMENTS)('parses real packument "%s"', async (name) => {
