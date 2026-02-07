@@ -79,7 +79,7 @@ export async function processPackument(
 			.insert(packumentTable)
 			.values({
 				id: name,
-				data: parsed.output,
+				data: raw.value, // intentionally save the raw packument
 				revId: parsed.output._rev ?? rev,
 			})
 			.onConflictDoUpdate({
