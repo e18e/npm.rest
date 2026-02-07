@@ -440,6 +440,103 @@ describe('packument-version validation', () => {
 			]);
 		});
 	});
+
+	describe('license', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.license = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('supports single license', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = 'MIT';
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBe('MIT');
+		});
+
+		it('supports license object', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {
+				type: 'MIT',
+				url: 'https://opensource.org/licenses/MIT',
+			};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject({
+				type: 'MIT',
+				url: 'https://opensource.org/licenses/MIT',
+			});
+		});
+
+		it('supports multiple license objects', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = [
+				{ type: 'MIT', url: 'https://opensource.org/licenses/MIT' },
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			];
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject([
+				{ type: 'MIT', url: 'https://opensource.org/licenses/MIT' },
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			]);
+		});
+
+		it('supports array of string licenses', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = ['MIT', 'Apache-2.0'];
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject(['MIT', 'Apache-2.0']);
+		});
+
+		it('supports mixed array of string and object licenses', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = [
+				'MIT',
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			];
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject([
+				'MIT',
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			]);
+		});
+
+		it('strips empty strings from license array', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = [
+				'MIT',
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			];
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject([
+				'MIT',
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			]);
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];

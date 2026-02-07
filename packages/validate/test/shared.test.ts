@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
 	EmptyableString,
+	EmptyableLink,
 	StrictString,
 	Email,
 	Date,
@@ -79,6 +80,27 @@ describe('link', () => {
 
 	it('fails on empty link', () => {
 		expect(v.is(Link, '')).toBeFalsy();
+	});
+});
+
+describe('emptyable link', () => {
+	it('finds a valid link', () => {
+		expect(v.is(EmptyableLink, 'https://example.com')).toBeTruthy();
+	});
+
+	it('trims a link', () => {
+		const result = v.parse(EmptyableLink, ' https://example.com ');
+		expect(result).toBe('https://example.com');
+	});
+
+	it('turns an empty link into null', () => {
+		const result = v.parse(EmptyableLink, '');
+		expect(result).toBeNull();
+	});
+
+	it('turns an effectively empty link into null', () => {
+		const result = v.parse(EmptyableLink, ' ');
+		expect(result).toBeNull();
 	});
 });
 

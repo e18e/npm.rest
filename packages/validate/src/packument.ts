@@ -1,6 +1,7 @@
 import * as v from 'valibot';
 import {
 	EmptyableString,
+	EmptyableLink,
 	StrictString,
 	nullOnEmpty,
 	Date,
@@ -33,6 +34,21 @@ const Bugs = v.object({
 	url: Link,
 });
 
+export const LicenseObjectSchema = v.strictObject({
+	type: v.optional(EmptyableString, null),
+	name: v.optional(EmptyableString, null),
+	url: EmptyableLink,
+});
+
+export const LicenseSchema = v.union([
+	EmptyableString,
+	LicenseObjectSchema,
+	v.pipe(
+		v.array(v.union([StrictString, LicenseObjectSchema])),
+		v.filterItems((item) => item !== null),
+	),
+]);
+
 export const KeywordsSchema = v.union([
 	v.pipe(
 		EmptyableString,
@@ -54,16 +70,7 @@ export const PackumentVersionSchema = v.looseObject({
 	description: v.optional(EmptyableString, null),
 	version: StrictString,
 	keywords: v.optional(KeywordsSchema),
-	license: v.optional(
-		v.union([
-			v.string(),
-			v.strictObject({
-				type: v.optional(v.string()),
-				name: v.optional(v.string()),
-				url: v.string(),
-			}),
-		]),
-	),
+	license: v.optional(LicenseSchema, null),
 	homepage: v.optional(Link),
 	bugs: v.optional(Bugs),
 	dist: v.object({

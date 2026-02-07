@@ -22,6 +22,16 @@ export const Date = v.pipe(v.string(), v.trim(), v.toDate());
 export const Email = v.pipe(v.string(), v.trim(), v.email());
 export const Link = v.pipe(v.string(), v.trim(), v.url());
 
+export const EmptyableLink = v.union([
+	v.pipe(
+		v.string(),
+		v.trim(),
+		v.empty(),
+		v.transform(() => null),
+	),
+	Link,
+]);
+
 export function nullOnEmpty<
 	TInput,
 	TOutput extends Record<string, unknown>,
