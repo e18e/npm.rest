@@ -254,3 +254,168 @@ exports[`dependencies parsing > handles catalog: spec 1`] = `
   },
 ]
 `;
+
+exports[`dependencies parsing > handles workspace: spec 1`] = `
+[
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@aa-lib/contracts",
+      "specifier": "workspace:*",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@aa-lib/utils",
+      "specifier": "workspace:*",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@ethersproject/abstract-provider",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@ethersproject/abstract-signer",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@ethersproject/networks",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@ethersproject/properties",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@ethersproject/providers",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@types/debug",
+      "specifier": "^4.1.7",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "debug",
+      "specifier": "^4.3.4",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "ethers",
+      "specifier": "^5.7.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@nomicfoundation/hardhat-chai-matchers",
+      "specifier": "^1.0.3",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@nomicfoundation/hardhat-toolbox",
+      "specifier": "^1.0.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@nomiclabs/hardhat-ethers",
+      "specifier": "^2.0.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "chai",
+      "specifier": "^4.3.6",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "hardhat",
+      "specifier": "^2.11.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "typescript",
+      "specifier": "^4.9.4",
+      "type": "range",
+    },
+  },
+]
+`;

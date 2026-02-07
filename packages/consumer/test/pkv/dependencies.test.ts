@@ -12,4 +12,14 @@ describe('dependencies parsing', () => {
 		expect(deps.status).toBe('ok');
 		expect(deps.unwrap()).toMatchSnapshot();
 	});
+
+	it('handles workspace: spec', async () => {
+		const pkg = await fetchPackument('@aa-lib/sdk');
+		const version = pkg.versions?.['0.1.0'];
+		expect(version).toBeTruthy();
+
+		const deps = getDependencies(version!);
+		expect(deps.status).toBe('ok');
+		expect(deps.unwrap()).toMatchSnapshot();
+	});
 });

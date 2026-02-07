@@ -1,0 +1,703 @@
+{
+  "_id": "@aa-lib/sdk",
+  "_rev": "8-4a6f10ca1e766bcdd983d54f34aca06b",
+  "name": "@aa-lib/sdk",
+  "dist-tags": {
+    "latest": "0.1.8"
+  },
+  "versions": {
+    "0.1.0": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.0",
+      "main": "./dist/src/index.js",
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "tsc": "tsc",
+        "watch-tsc": "tsc -w --preserveWatchOutput"
+      },
+      "dependencies": {
+        "@aa-lib/contracts": "workspace:*",
+        "@aa-lib/utils": "workspace:*",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.0",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.0",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.0"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.0.0",
+        "chai": "^4.3.6",
+        "hardhat": "^2.11.0",
+        "typescript": "^4.9.4"
+      },
+      "types": "./dist/src/index.d.ts",
+      "gitHead": "a525746bf8f0026e4b5a618cc70f5981eb058898",
+      "description": "This package provides 2 APIs for using UserOperations:",
+      "_id": "@aa-lib/sdk@0.1.0",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-XnWgJHs2KBPcyib87IaX2w9XBNugAjgbftmS10EuBJIgciNBvDpIcDv8kweXWe/2iibiCdLm3Jbhwpg6zoVxBg==",
+        "shasum": "551c55d6a868d8435d1e1369986948ec044d069a",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.0.tgz",
+        "fileCount": 50,
+        "unpackedSize": 104932,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIEeY3FMglJCty/g2AE8UcOZyCwvl2uredM7qDQY89oEEAiBzMmiossvYZfEr9bt4CmQy70JMDl8+KgZS+L1zQa6X5Q=="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj08KvACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2Vmr/IhAAkGdgqX/BMFLdVCoZ/khbrMKVIaBPgijQpPmxcryRsZhfAHXn\r\nRAQy2kw9ty3chjV0BpGGUs7XZBSMItlIsCtWXkB3+ImjECVVc76ztyTnRvzl\r\nLAhMbW3oZxQHO0EY/G6F9+FNp1qTMzF3d1BOwFVTax8iMydC2j2+/ATEcMfq\r\n6U4n0RXSdz1HnjE1afM/HXmUmZlPovwTTgcchd6qjTCOmYreYHZQ/yKQfJOH\r\n9bjrdT93fR86VpnoV+pbXJw4Tn4pk28MGhlRd6JzT1VvdBICU9OHC+KGKpQx\r\n20y+v8spkIvqu/iURCbLymbeCmNggZdv1aHwK3dvt8EeCPfAaxpi64mvhLTW\r\nd6hEtCjprsnr2xD5RRegwfdz0Logi4GUbgCBlNQMa9iT2z3L2E2HJaf/Gur2\r\n3LwceSeEOQnEEXlFic6zGA/ILnliyKIXUd/DjIcKUt3njWLGB0xPpErbFVZV\r\n81OTDe9spso26H5hFnrCV8qLYWC8N+aZv7bh8ICSUOSVsJKy+3JIFgTyzd3C\r\neqqxF8whATiQTZTzdoO3IGrvixkPZ9HaClw1EBr+IStSTXAZ8EcIzO6csP42\r\n5ya/gx2hYLucxra2zEX9lM4CSQKiCwwZ8tsep1fFEwgk/BGimjdJ2ug7l+3C\r\n06Z7qZC9vzDPw4hfy0DnD7oU0QEk6Risvok=\r\n=xcZm\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.0_1674822319765_0.35634023241917734"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.1": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.1",
+      "main": "./dist/src/index.js",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.0",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.0",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.0",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.0"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.0.0",
+        "chai": "^4.3.6",
+        "hardhat": "^2.11.0",
+        "typescript": "^4.9.4"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "tsc": "tsc",
+        "watch-tsc": "tsc -w --preserveWatchOutput"
+      },
+      "_id": "@aa-lib/sdk@0.1.1",
+      "_integrity": "sha512-UQbW8qNzfPzEZjOQZQ3fghpgMTfkWqmY/SF66ZNwDZdyVk6Xj3axi0mH9VR68mEKXqFVsbAlf+gY59ZcCuOZqg==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/7d46fa88f95deec5d570ac98cad001c6/aa-lib-sdk-0.1.1.tgz",
+      "_from": "file:aa-lib-sdk-0.1.1.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-UQbW8qNzfPzEZjOQZQ3fghpgMTfkWqmY/SF66ZNwDZdyVk6Xj3axi0mH9VR68mEKXqFVsbAlf+gY59ZcCuOZqg==",
+        "shasum": "280bbf258f8a102ac829f68d7706505891c8baf1",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.1.tgz",
+        "fileCount": 2,
+        "unpackedSize": 2922,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQDK49xTvKgrGExIlpoEQAvXx0CbNwkgXgzivCMV8CgCgAIhAMv0jBN6a3v/PU5qxbp1nqf8AOQ2gPQkCdWZAehdpHrB"
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj4KtmACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmqicA/+J2FSI1atecVUntgwd0jC2fjNRHhvwHEdfARWiZ7V9gqu8VXb\r\ntQNovlcRFD9yJTUYkl4xzy+fzQxddl8NB84oLgUL8uIV3VxU37KDqswnFc7G\r\nbVF9s8JhyA87kq0Xhu41P7WuoEsgMJviDcW6OVarI/REUSvstc4CpmIpyUNH\r\nMRq/skn7u+Z6SRzufUlRzkCngTrbA4I3TKqzZ6h/1dnosXcmYWnVyKM6GGLH\r\n4ZgGdpT/oUQnO+kyeNNbTQ74vm1edTth+bbrwHWh0gUC60Yh6+qElkrFRFl/\r\nRjMhQY4LgpR0GuZGF0jUmjZS8BrKA5+TETRpJOQJNwdjOhaQFxAFf9IYZQKg\r\n2TEmCaky4+yoeFx6lsgS68/YQ2UGTWEDfLot08h8LN1jAcscf7F442I7Ot5Z\r\nCP4kMTOLyP5sM38V0KcyWFKqSHFxP6rV1N/OUpwMMBzVH735gt7ilwEW6otW\r\nzy1aBujUY/Gm+OeLhayr3uL1rjr56ZDAUgGcFEZOEgFMKOWB6M6KF39s0co3\r\nQhyygmwZzJwH3n/IgWXwFj3+IEaPX8NSVX83+RgtDZ/H4FYy6SfDmQSSiuP3\r\nwlgD90CkD3c0Bgbg0IHfhrJSy6XrHWAOLdyR7RaRnY2p0SC220OuesKkJHYP\r\nE32P9Vzu+Q813ukixSyXaiaswMr2A7whvOs=\r\n=ygOz\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.1_1675668326530_0.312408532342338"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.2": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.2",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.0",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.0",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.0",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.0"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.0.0",
+        "chai": "^4.3.6",
+        "hardhat": "^2.11.0",
+        "typescript": "^4.9.4"
+      },
+      "main": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsup",
+        "dev": "DEV=true tsup"
+      },
+      "_id": "@aa-lib/sdk@0.1.2",
+      "_integrity": "sha512-MwdCRFIyeyn0eC5aYIQGPsTVDuO0KuQgQjWEKW3+Fy54qC7Pu8KDU5IU02wibuZZIVx6QwE90QxMjxehUjMQcw==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/34b84b0b183b0096a9bd016e74887371/aa-lib-sdk-0.1.2.tgz",
+      "_from": "file:aa-lib-sdk-0.1.2.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-MwdCRFIyeyn0eC5aYIQGPsTVDuO0KuQgQjWEKW3+Fy54qC7Pu8KDU5IU02wibuZZIVx6QwE90QxMjxehUjMQcw==",
+        "shasum": "68dcea55e9f40263b415241451533652aed25372",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.2.tgz",
+        "fileCount": 35,
+        "unpackedSize": 71807,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIGfuAa49HIH0jqoBKgJFaVPW18l2Lwf/s0VDKmA3Sud/AiA8lY2jk7LPkyAS+JGLPSwlDApAEddmLtBqTT2Pe+gCbQ=="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj4KwxACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmqiRw/9GMCU6V38JdRmv+A9RHg/ab+1x8Lv5QYPJOIxmFeGo9HfKdLm\r\nJvbGTnorB0tTUIKDvsgyRjxXe8yYmv+ExvCAQdJJ5vsn2P118JfsXlulJ4w5\r\nnfbf8TRrL8CxOD523dwfHcJQbN/56ZtJP47sh8/E9FRxZToqQqf2SefGE6xu\r\nPCEzwQdVpb9DhMcZlnsySsUpbGITRSh1SqsoNytDSK5tkWY4mDeKQPxTpYpT\r\nuS5KUT07bqEANRIGOZRWigwKMEvIay50yHfOmegP2adYSnHViitvyzkqzC8P\r\n40LDol6yBp4nIj1IHUVuvfswF49Rdy07dX1zYaW8rE/67SGwL6S6FO9vyFaQ\r\npV//wszWlxDeb8GADju5fNWZlorHiWKzzRoBaN0TIOgGIZdBonzyxCmwsStk\r\njB0mTPrjzRUpQ19QLgj5DFXDWZOnDSDwWl50j6aOi+YNXseknRp4ii9HFt4j\r\nZUVYMnU924FBK9w38m7P1byGeQnNNLGdqjSCkCJUP/TtyGrxd86HTsoXSoE5\r\nxC/+PlIfIcw/GFzJkm63H+R6ezYiBAJ0gzaAGNjeZ0BwmRgxIqXfj3qRpSp9\r\ndfRluv8E97s4U3vCxnknUcDejlxC4KGnZ0J3UDfhGE3pgRMMMMDj3MSF/3im\r\ngHL9a5IHHNIl6SQwwrO7F51PB2Tul8Tt5Sc=\r\n=00Ru\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.2_1675668529449_0.787253074045339"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.3": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.3",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.1",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "main": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsup",
+        "dev": "DEV=true tsup"
+      },
+      "_id": "@aa-lib/sdk@0.1.3",
+      "_integrity": "sha512-QvqybtFdxLQ17qlagChaT2LzX2panmbPFw6o8V0txZajMlnv5BI2cwbxQ+b+K7ZfIpCFviD0OHl8j8sC6EHWNQ==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/02290731bf5028ae5d20bc9188435cda/aa-lib-sdk-0.1.3.tgz",
+      "_from": "file:aa-lib-sdk-0.1.3.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-QvqybtFdxLQ17qlagChaT2LzX2panmbPFw6o8V0txZajMlnv5BI2cwbxQ+b+K7ZfIpCFviD0OHl8j8sC6EHWNQ==",
+        "shasum": "40e24b72e0dec692927616e7d2c0d43decc2b526",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.3.tgz",
+        "fileCount": 3,
+        "unpackedSize": 3088,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIDHsKfBENZEIEL5C24itahTSXRgribX6FVNTh61PsDb+AiAPELSjlwJA5WX2cIFHtqc665TtttqR5m5rgCaESo4oZw=="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj4kjGACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmoOTQ/+LURr/WiZt8KvR7Cqy6Jf18mOWVwJiqqow2fgd/baP9LK0lwV\r\nUgLfa0F27ZSdnGokawbwD9JC73cY92k+UZXMc28Sw9+oBnSJ+K7/M9rn6qS5\r\nDyj2VjOTvi/f/o2Q/teKyUGIKRCJzuIyyXiojSMRxvvIhnui61ZQ4/Nu3AyT\r\nnmgatuOuiLMuU5R1s/EMelgK4TuaNjtFtPkXL0HPJ5oS7UiW4BV9Ka9o9G4I\r\n6gPwKFATrkN8s1u1gCibB1NCUbfeRTrlUFyy+JyBXjpNCEh24u52Yn68VEzr\r\nh6zuKEdc4GfBL0KaJV8BRucisDyYdfLL/8e632JQbM63NI6mLvps0rHhBrdt\r\nocVazO4Rqxy1T7WoxioExXzQjROfrVRsu5LHwarOywyKx3L2mDBx+X2MOe44\r\n5gDg1+rtko4BIuwiizAJNAtPayicIn3haO7a1xqcwX+JpCY7eqcnaj6NwRv5\r\nWAG7eOlwPh/7ruYaOXvCWJKszR4jP6mhM2cwHgAo3bEajYtgpuh9q9lfdsBj\r\nT6xaiMs1bBPIogqvxwy1eUENPe+JYQs8NN8SGKEQO6U+qt+4UEj2R0Mqqwun\r\nIyDouRtqs7Y5kYgTRvJhzgtrDScjQ84ojZ1lvfJByzwAc+wcqjDd2R/BkPpT\r\nYULzxYYtrbQWbMKFdeZIG13aXOhbN4lnayg=\r\n=0sj7\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.3_1675774149943_0.5882200854451403"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.4": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.4",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.1",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "main": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsup",
+        "dev": "DEV=true tsup"
+      },
+      "_id": "@aa-lib/sdk@0.1.4",
+      "_integrity": "sha512-iZqvZHaPZlQUn8Duf/xbzfFKB6P5yY8BiWOvPtXbiNE/PkjJUVs3jYdbtpcauPMzh1T50PTvxo+3cw7LuJGtAQ==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/7a1f7028940075471d378308ecb6f708/aa-lib-sdk-0.1.4.tgz",
+      "_from": "file:aa-lib-sdk-0.1.4.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-iZqvZHaPZlQUn8Duf/xbzfFKB6P5yY8BiWOvPtXbiNE/PkjJUVs3jYdbtpcauPMzh1T50PTvxo+3cw7LuJGtAQ==",
+        "shasum": "d34b2a869557bf80b5a1291e9034d3299836f491",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.4.tgz",
+        "fileCount": 35,
+        "unpackedSize": 71807,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIFUza528pnVoERApaU6YWv1v8yIopIkqLPEOv2Ti7YCHAiEAxvfMeEj9aodjGCsXGJkSCzJPIwQG84ZLSINFmtKq3Ec="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj4kp3ACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmpPPw/9Efhuuvpuu34zjuQ/na1aNfQ6YkOCgTY3z4KboExyHkhfIIx0\r\nSjhgZjtMfwArIVbcOA2z8B2WsLBhtKX3iawnTjXflBzlH4TJ2ZGNX1eJqfVI\r\nqIw5dBCC5QCndtPsbZvo8pR/3zvnt0je3nyvYcjRlGAR2Yny7RdzvoIWImju\r\nmjBYwlISrwOp9unXUaVHmFB3j3Q2QkhqBNwN6o6TnAEsLYig6B5e5I/szbYG\r\n06QiRNu+3hc4jSWLGLi004BSahLBxHcnn58EcUOi7Hxk0MNq/PJW4TyizZ7b\r\nae6ifCsXkjoBLJm87BIoSLz90MBNrB2n6+PvoFoRTfKUyA0GJZwwuG0S6H2p\r\nLU4cuHN2bgk5wU/0REnZEcgQPZ+MBMfX69WRxELe0KwyvTFfY3HyC5fHJBJB\r\nzHQGEJDahYMu/HfLAG+0ubSVGbAgH4eFoP2rCMr8nMj1EA9ayFFf6qyI39Su\r\nzQKEtFfm/O914QUZbhRe/7JgqAD1nUrponHxc2UbJCjRF7OAYUOGZJTp7DwQ\r\nxmQED/qCuFmjzLRC9k04llyC9jj9M1wWwFySgkguZOX7dw69LNuF9b473Qlc\r\nZYkOmENelBmz7ZxjHlHXgDdWxtsm4/aZjRs14ghMh8nU9cJQ2ghYii+LpxOD\r\nOZc9IjGApYczzitaMHzEoytAiLVN5OJViog=\r\n=CEJl\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.4_1675774583175_0.9480377998061162"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.5": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.5",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.1",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "main": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsup",
+        "dev": "DEV=true tsup"
+      },
+      "_id": "@aa-lib/sdk@0.1.5",
+      "_integrity": "sha512-tPicB8OxJH629/Z/Fq3bHH0H5yI2VkuEojZoVm+W+aEKC6/fD+pzsLygKhKck7U8/fLFwjQN5oaoPfxpnnGjPA==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/437bd8cea19d2f590bff7960e5bfae82/aa-lib-sdk-0.1.5.tgz",
+      "_from": "file:aa-lib-sdk-0.1.5.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-tPicB8OxJH629/Z/Fq3bHH0H5yI2VkuEojZoVm+W+aEKC6/fD+pzsLygKhKck7U8/fLFwjQN5oaoPfxpnnGjPA==",
+        "shasum": "aa2f608351e4c900355930a7e46ac0a71aab3bff",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.5.tgz",
+        "fileCount": 19,
+        "unpackedSize": 57153,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQCL+LVx0bCKSnuUZEQobvmwaUjUljerzhhzZJJluOtY0wIgZZJwFiy0wvmV+ecjhNVJbltCgRooS7oc21RNwvdIMfE="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj4nYrACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmqWQxAAlYTChz0XyA50VtAzDbLjR8YhvPbIsWJXrFJZo9u6i7tQDMrx\r\nKC1zF9WkQmDDBYsGOrRujCmTETEY8IcqvwuST4B1Pi+Q95f2qoJCvivDceHl\r\nwMYwiicl1qsUlRobulr6cRkwPKYOQKZm1Hcq9bUYJaRhVLBRbV01w/ZoeCKm\r\n87+922H4ttEpA+SMEr8DF72KIZrqwP2wQoiyi+HJQNoUgx2oTPj5j43wGjhR\r\nI4dwhunS/hGKnhJAS/O2mEu3GYSs8udv3aYi84E+CcNCau1lT0SvNfepeFv9\r\nP82WMNXr4xlGXP5BfSP8TSU/scLk+VRNso75nHvznYlxJeoj2EVcdDruQwWX\r\n8cowZsaj1m80XvZNetGLjbXqZZ7MKA67/p/Y3YV/6PG3euLCzOkpvcZedbQb\r\n3W9l8Y/EMj69k/aRWulUQuQdgVihTVMUJbWpP8wMdApkFMMjN6JkWVQb4BT0\r\nfGqYuoxjYvXJbYAf86v4wAuL/pYobTrTAc9X8rscPYB0i21bK40gc10Y1xUA\r\nZhsb/fQH+r7gOKvs1k5VOgpiVODlIm4WzjWjMeNDqtCyRXgZOmI0NUo0edMA\r\njIpjGW1SV1y5K+a9i84wB/s4oZ3jRAi55yRk+MyMc8dsrrdWkgo6bRytPce9\r\nkVfKRAPEkXL6xw+ED5FM6AY1F1NsPFWPUdY=\r\n=7RQo\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.5_1675785771038_0.7753743796804302"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.6": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.6",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.4",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "@types/node": "^18.13.0",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "main": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts",
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsc --project tsconfig.json",
+        "build-all": "pnpm clear && pnpm build",
+        "dev": "tsc --project tsconfig.dev.json",
+        "dev-all": "pnpm clear && pnpm dev"
+      },
+      "_id": "@aa-lib/sdk@0.1.6",
+      "_integrity": "sha512-R5ino1ke8NeWsecVRYREZpsIOZ1vEAW8tUWCW1HrKovKVYsCnD3GwvdfBbu0g7ej2onKc8+LP09pGxd5/EtNmQ==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/7d9196f8762f2225e213a6bb5fe15dd5/aa-lib-sdk-0.1.6.tgz",
+      "_from": "file:aa-lib-sdk-0.1.6.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-R5ino1ke8NeWsecVRYREZpsIOZ1vEAW8tUWCW1HrKovKVYsCnD3GwvdfBbu0g7ej2onKc8+LP09pGxd5/EtNmQ==",
+        "shasum": "59ca224f491aefdc313e09fdd4a023299728e5c7",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.6.tgz",
+        "fileCount": 69,
+        "unpackedSize": 222633,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIHKELv31qzgGFbxvUZXxiDhq8Zko7VHlWzO6gVcI7iXoAiEA3hg9wGHhYo6uYwq6y7+Mkf3vy5iV9EmA9YMAjCCc1GA="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj47kvACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmrqpA/5ALTDGKQ1NRQ3USWp1hW/z3tQH7ZnKsDJuvjfhnCtj5k+8+7u\r\nUenKteZwHyNmdmrd/1TKbxtCtWq0NZLwrfKbX2wEvHH+zcd/vzgs0lXbVp8x\r\no+IChY577YIjRVXUP8OYSB1HlYzleMMpOMMOgt7vo4U9IxN5g4KO29mC3yLS\r\nLudCDPOHW3vJpmVsEoJm+E5DZDfBkmLW1O2TIesX8xBJOOPad/pavmQDw6FK\r\n0eMiSTFgFAdCEnZijvNvwdMKZM3/hxvckO5jSUwEi4+sWjKWvLNqfubNg1Mj\r\nXMwDMOUzgXmdCfLdLyiMCxdbLbRCWGF1WKl8yrHyq6XSoqDX1a5VeG2iOXDa\r\n4Jj3hyRPm2IAkC+49VCDsW/DetJYAjDfFZQXZnUkl9/i9wqzFnS1Km5A5S0h\r\ny3BkN5KY6F4e3DAL7rnHQOVxNuGVSgJGZbREJ8T2Y8HkAHh2kHr0yho1LiJ2\r\n6z5640Xi51L4MckpD38clZiiaRYoTk+o4ElnUIf0ayZNVDeT5e9S5qk67l9K\r\ne5cevvGkzpmZj9HEj1gzcJ/LMmYwwdc+znwCZb39IYwgXrsM3FKHwHxVVYna\r\nOLPwoInyL1m9+KGWj+q/kQUItlnOa60KTC4ZXgi8Fq/+2kVxTob5M8DApvkI\r\n+7G32Y1Ypa7mpL6T2GTuWFgYMWZM4dlBTXg=\r\n=CTic\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.6_1675868462881_0.7866508219649553"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.7": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.7",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.5",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "@types/node": "^18.13.0",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "main": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts",
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "tsc --project tsconfig.json",
+        "build-all": "pnpm clear && pnpm build",
+        "dev": "tsc --project tsconfig.dev.json",
+        "dev-all": "pnpm clear && pnpm dev"
+      },
+      "_id": "@aa-lib/sdk@0.1.7",
+      "_integrity": "sha512-MQa+MCm3jCZb/XWaa38E5G+n2D9IOr6AfpSiNJ4iftwbqjGdkrZ9IXWPB9vsATF9vsOgbQ1VnZrKy9K9V4JVTw==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/d3d44c6b20a44ef759e50903a84c06df/aa-lib-sdk-0.1.7.tgz",
+      "_from": "file:aa-lib-sdk-0.1.7.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-MQa+MCm3jCZb/XWaa38E5G+n2D9IOr6AfpSiNJ4iftwbqjGdkrZ9IXWPB9vsATF9vsOgbQ1VnZrKy9K9V4JVTw==",
+        "shasum": "96c00c749efa28d93ba0a0fe8e76b14c81a9fcea",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.7.tgz",
+        "fileCount": 69,
+        "unpackedSize": 222766,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQDApXQlnJa/fi/vuw21Nr6LDcIBBj44Jvro1L3IHKMy3wIhAP4dc1g0m6n4e5WDHJomf5G09zxHYtb5iNWbd7Jsnz1K"
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj47vYACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmokXRAAi9gDCf16tBeQlMRXGeDDApUlsx1P5yhJ/zcHEloOWfRq4pNq\r\nnElt99Mf+QbIie6JwVLcwP/HSLquwXXmac9xetDPl9d+TYVBGRyVx1zfX8T8\r\nJYGtypYMgkhBu6f+y1EYdkR88yHWqwpnSppGxhHj/46w9pnlBFaCEf+jmZCE\r\nG0rTmV6kcrACXFY+F+Giug3VHpqoSW6uFhsz5X6kleG1KsC2OVGZMkren45R\r\nu0vyglLRm5t5y9x3yHbX68UeixeahLv8rRXdpfrVIapgjVxSQPnK6vOtRXVb\r\nXxRHRm++SOm7yWQY990EOMwLaZ5zLuHr1qkZCD7qMRuVcXmZfb9UCHaM+v49\r\n/Ms5W0SO+e/FMT5205AABduPTIsBqZoW4k6LKtM2/d+HcJls/annD70EaMRB\r\nUepyDOEA9el+i+fCXzYGahorg66aofsQI+9sNqRFrGicjNzCjq5QN9hioPkb\r\nUBdIOjCjIw2N240C5DYV0Me8CDLXYCxRuu/gulA9alJfcwxMtQSAigJw3oTa\r\n9A7hq/v3AMjLk/ZBFTH/UVplr7i4MaNaj+15vYM0lpfziF9YNK5lOD1dztpS\r\n6o49Q5AUrTqFKSShCZKoP6ekoQYgi9tu059b9Jdan7Kue1aUmjNb5uZVBzZR\r\nNpdjO/KOcMYqDA64fSU5p+enOhOLzlbHRqE=\r\n=jzWm\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.7_1675869143828_0.9908340051980729"
+      },
+      "_hasShrinkwrap": false
+    },
+    "0.1.8": {
+      "name": "@aa-lib/sdk",
+      "version": "0.1.8",
+      "main": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts",
+      "dependencies": {
+        "@aa-lib/contracts": "0.1.0",
+        "@aa-lib/utils": "0.1.5",
+        "@ethersproject/abstract-provider": "^5.7.0",
+        "@ethersproject/abstract-signer": "^5.7.0",
+        "@ethersproject/networks": "^5.7.1",
+        "@ethersproject/properties": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2",
+        "@types/debug": "^4.1.7",
+        "debug": "^4.3.4",
+        "ethers": "^5.7.2"
+      },
+      "devDependencies": {
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+        "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+        "@nomiclabs/hardhat-ethers": "^2.2.2",
+        "@types/node": "^18.13.0",
+        "chai": "^4.3.7",
+        "hardhat": "^2.12.6",
+        "typescript": "^4.9.5"
+      },
+      "scripts": {
+        "clear": "rm -rf dist artifacts cache",
+        "lint": "eslint -f unix .",
+        "lint-fix": "eslint -f unix . --fix",
+        "test": "hardhat test",
+        "hardhat-test": "hardhat test",
+        "build": "pnpm clear && tsc --project tsconfig.json",
+        "dev": "pnpm clear && tsc --project tsconfig.dev.json"
+      },
+      "_id": "@aa-lib/sdk@0.1.8",
+      "_integrity": "sha512-jHxKnOUhalkEejS7BaRfrG73PfTXt7buj4tbzCL77Oe6q9xXHNc8uEY6O42WK5lVDelU1ezW6g28WR+CNdJYZA==",
+      "_resolved": "/private/var/folders/rd/8_zs9fd146l1cd0jbm0sqd2m0000gn/T/ae3ac08b9fdeddc8821d05f115f6b899/aa-lib-sdk-0.1.8.tgz",
+      "_from": "file:aa-lib-sdk-0.1.8.tgz",
+      "_nodeVersion": "16.14.2",
+      "_npmVersion": "8.5.0",
+      "dist": {
+        "integrity": "sha512-jHxKnOUhalkEejS7BaRfrG73PfTXt7buj4tbzCL77Oe6q9xXHNc8uEY6O42WK5lVDelU1ezW6g28WR+CNdJYZA==",
+        "shasum": "5c022378e1fbb441bbce8a90fe9e04b225519805",
+        "tarball": "https://registry.npmjs.org/@aa-lib/sdk/-/sdk-0.1.8.tgz",
+        "fileCount": 50,
+        "unpackedSize": 107042,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDwtMYY83bLtizjyjakEdDX+k4qZskVZZo9BKenUGGpfQIgWJFR/pdvW4cHK1/gzKhSLtZFPUp/Ga91bDM54G+7SV4="
+          }
+        ],
+        "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJj8R2FACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmqcXg//VkQUb/x6c8d6v7/AUQrm5+lRBKhgyL/vaYWcVVtK+yRPLfMh\r\nQDcQFnYEtHYy6D8woNl87kczj70wnWB15JcJfZ0vqxw4agpU5ipgHD/WWT3x\r\nfiMiczypb1ZwagXtv5/29bnixOUUVJ8FSCQ8R9UBIQ9Cg+6IamAHwcVM4UKj\r\n0b5Ue+gPy3JLTiy+VtxTQH2KKUtrFTCL8eayG1p/tmYi+WV/rHlGIC0rgcFt\r\n4J+b7d8P/lZj4rsu1U+8LMfxSlK83oHqg31RQATW/10IgqSAOjq1H7hLsaVw\r\ntTVHWrYQzD1/UT6rm6dgPU/gBY7zy6GtNN1OzM86pVyEdoLuDvWLbODZrbWj\r\nGb77g8RSMDQFwArH0V3u8WzcFHhwE043DiTLiMSYyu616e2ZG+H200KewvUz\r\n2SZ5/BCjeCy0LwbKCL3ZkS1DhIeLMmP4ZP+1PacpxzEtqnrjPd1x3Rqj4Cdb\r\neE9Xm7rFbRMrbLKmcl5RKPYIz5n/gO+sv8UkVLwsYLCg2b6T5/CEtenij0F3\r\nWVvo4vYRVH+dzYoFHlrx1UwHqmc9092Xr/gZVnwllWHWh4Y6qNyY4X5bJXTr\r\niaSPCHbJ2LJUTDns5BbLW7Kh9V4uFj6G44H2u49jnqsrfL/bXw9zpYcxPXt/\r\nFRL7X+9ERrokf3DoW/wHuiK3nOV5l0eRDWU=\r\n=V407\r\n-----END PGP SIGNATURE-----\r\n"
+      },
+      "_npmUser": {
+        "name": "amagiddmxh",
+        "email": "AmagiDDmxh@gmail.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "amagiddmxh",
+          "email": "AmagiDDmxh@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/sdk_0.1.8_1676746116966_0.7380597005087706"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2023-01-27T12:25:19.662Z",
+    "0.1.0": "2023-01-27T12:25:19.930Z",
+    "modified": "2023-02-18T18:48:37.235Z",
+    "0.1.1": "2023-02-06T07:25:26.710Z",
+    "0.1.2": "2023-02-06T07:28:49.645Z",
+    "0.1.3": "2023-02-07T12:49:10.144Z",
+    "0.1.4": "2023-02-07T12:56:23.338Z",
+    "0.1.5": "2023-02-07T16:02:51.198Z",
+    "0.1.6": "2023-02-08T15:01:03.176Z",
+    "0.1.7": "2023-02-08T15:12:24.035Z",
+    "0.1.8": "2023-02-18T18:48:37.137Z"
+  },
+  "maintainers": [
+    {
+      "name": "amagiddmxh",
+      "email": "AmagiDDmxh@gmail.com"
+    }
+  ],
+  "readme": "",
+  "readmeFilename": ""
+}
