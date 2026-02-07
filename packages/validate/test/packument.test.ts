@@ -1,12 +1,12 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { PackumentSchema } from '../src/packument.ts';
 import { describe, expect, test } from 'vitest';
+import { dirname, join } from 'node:path';
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import * as v from 'valibot';
 
 const PACKUMENTS_PATH = join(import.meta.dirname, './.packuments');
-const PACKUMENTS = ['g'];
+const PACKUMENTS = ['g', '@aaamrh/first-package'];
 
 type PackumentInput = v.InferInput<typeof PackumentSchema>;
 
@@ -20,6 +20,7 @@ async function fetchPackument(name: string): Promise<PackumentInput> {
 	const response = await fetch(`https://registry.npmjs.org/${name}`);
 	const data = (await response.json()) as PackumentInput;
 
+	await mkdir(dirname(path), { recursive: true });
 	await writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
 	return data;
 }

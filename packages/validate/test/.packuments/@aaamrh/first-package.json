@@ -1,0 +1,1142 @@
+{
+  "_id": "@aaamrh/first-package",
+  "_rev": "11-243e37d5b08536d83c2b2c59175e0109",
+  "name": "@aaamrh/first-package",
+  "dist-tags": {
+    "latest": "2.1.0"
+  },
+  "versions": {
+    "1.0.0": {
+      "name": "@aaamrh/first-package",
+      "version": "1.0.0",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.0.0",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "d7668c454f3bd4e272986ec2f1043653df0786c5",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.0.0.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-iZEZ97sROJpuHT/z/+cM3J9vZ12q57cnXtirAVUqYyAqL49+i/zippnugZ9Le7I3c0x57nmq5eWpWL0qibu4Zw==",
+        "signatures": [
+          {
+            "sig": "MEUCIQC7UXZETdkmEycerL688HVciWHyc9TutWUThfD3DP6rAQIgGVTlHJIn3OEm6Fu1qp3mOyXQKp/xgbIujR1+aZwJvKE=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 9831
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "55f5e4c6938563e97df08297d715ce8f53a4cadf",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.0.0_1720610063277_0.12765043086412975",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "1.0.1": {
+      "name": "@aaamrh/first-package",
+      "version": "1.0.1",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.0.1",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "b2da2733781d1d862a3de1b16d4e4043a9e53ae4",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.0.1.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-nOK8/6BvLYH/MIkB9AGnSXT+3FOtqSvgm9HNK9ZI9CLq8twIwregGs5/MMDUZwxp3fn94veJRDu7hzHACVOFfQ==",
+        "signatures": [
+          {
+            "sig": "MEYCIQDbBbwhTIT/yr62DkoqiT7DyWBP5Sq1X55PWaKzqZADsAIhAMUBdcXNKSW4iLb3oqmuBY5ksmNxTvb+RQ/x+Dv8zrLS",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 10370
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "11026365bf1a0f7a009914695f50539bdfaa37c9",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.0.1_1720611292131_0.31633865979534836",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "1.1.0": {
+      "name": "@aaamrh/first-package",
+      "version": "1.1.0",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.1.0",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "f77ef0d419257155c067b608a23c447415dd9eb1",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.1.0.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-BbApM44COAGH3jElJ8mf7o9m6+yFZ/SEhlkZOubQtwuQnKa41O2DUpTwdKldq0yM+1/FUOmP7fOpyJR3jwTvJQ==",
+        "signatures": [
+          {
+            "sig": "MEUCIHYNi2CzvcdNU8h8x5W3yBnKUKYMLFaW5GEq2ihbLXHxAiEA9XTbKRpgStNSmrSU8hhamCIir7lbapu7I6M7ycJrXmU=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 10988
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "d65a5dbcfa7663afa0706976aede29267a20377d",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.1.0_1720611721870_0.6497323537898472",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "1.1.1": {
+      "name": "@aaamrh/first-package",
+      "version": "1.1.1",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.1.1",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "06ee5577678b4c9605a167cde5ea95811f62970b",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.1.1.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-SMkxAuWsTlRwG3epMAETBDtfTfuGd/5Kq9aQWqPVnn1YOUR5xw3+HpJE7Nv2JMzUmwOs+d8dqigHmYQtvkauzQ==",
+        "signatures": [
+          {
+            "sig": "MEYCIQDYolCq9a4mE0lASEAm7r4ezZ5Gkli9pnQhSm+NWwi8EgIhANB17FcUiGKeVCOHb40+pZoMb9pmWnbN4NG6WIyBwhco",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 11250
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "11d08145218343d28a5b1c6ce6ac877065518986",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "release-it",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.1.1_1720612009877_0.590705982437596",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "1.2.0": {
+      "name": "@aaamrh/first-package",
+      "version": "1.2.0",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.2.0",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "6bb42b27b0c5df8bc3fb91a89cd15070744560c7",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.2.0.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-+EEm589aCkA1h3Pb5sGoxxog1pEh5YOvD6hdZPVkUlKgdnjXrL1/JYyu7DyhixSMT++uiX27iwWf5sZQ5Cu6Gw==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDGf3Ys6KXJR9Oq8jfsaCnnAUCYd3K7mms4N8MJC1XzyQIgPEivG0hFfgCJk+6F7EHA0d8JKIxsojKoOjxyjaUU/NE=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 11362
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "8b746b74475356bd58e7c50be175003a44e79748",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "release-it",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.2.0_1720612518027_0.9884737957252443",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "1.2.1": {
+      "name": "@aaamrh/first-package",
+      "version": "1.2.1",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@1.2.1",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "6a1d2475ac91661adddd0118823eb95a592a8c9f",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-1.2.1.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-hBnprEj6mPVjPqltXd176KjDYPagPlwcyfLzCts40RhJ56ajCDhxSP68N5ELhIbjunYvYkeaEG96s+LzAA2ndw==",
+        "signatures": [
+          {
+            "sig": "MEQCIHDr7VR1Es0Z/Av1WGrKpSFTbphAOq3g3KM+XpRZiq3UAiB/7kzyfKE11WrGbDGUJ1UON892Hnyj8eMx+Ie1ClCAbA==",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 11570
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "888e6a802291faec8216431f2308ff97bc2d7735",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "release-it",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_1.2.1_1720612928377_0.8032192390914878",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.0.0": {
+      "name": "@aaamrh/first-package",
+      "version": "2.0.0",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@2.0.0",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "6b61b2d6d447f91289d7cf4cfae5070e68b3bb39",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.0.0.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-IIKQZ9sv0nmtLJGJnNyTmf3enhzPmTbHy10Cq4uVnkhzH+egXnAd3fUDnq0CYtZzJ9yO7hElLl1qaY8GCFHuSw==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDB4ii+ki1VFgY8ZezIT232m5J2YzodH5KgXo5vu+Ns8QIgMVOFDaHL7t/6EPkq6ZS1MI7/ECMA3o8VhGCOpT48+zg=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 12146
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "188fbdda319f5c0f3c5cc802ca783e7b4fdb9401",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "release-it",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_2.0.0_1720613568716_0.3273119671340796",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.0.1": {
+      "name": "@aaamrh/first-package",
+      "version": "2.0.1",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@2.0.1",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "915a17563a63f22ff6c78bbbfdc4f1985307df64",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.0.1.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-PX/KiGWGXnK8haHdOk4eLIGfm6l4w2RwwUumbuXVRbims/gG01nci2W5EEXTQIg1N2LR+H+3RpI2V+otB/sc8g==",
+        "signatures": [
+          {
+            "sig": "MEUCICllt7hKZ9U6T5R3/0vXUOLBmTLO/4j4I5ntzpVbf6NvAiEApuI2XH8tI6vfIfgo9p3vw7eM/19+J2fo4Mee6hugJRg=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 12946
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "3a54ccf75be3d89f649e9c7bffca16cc6282be86",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "release-it",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_2.0.1_1720614166593_0.6046254836752052",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.0.2": {
+      "name": "@aaamrh/first-package",
+      "version": "2.0.2",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@2.0.2",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "4c2551252616df5100e6c77d16adc7ee041a33d1",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.0.2.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-AZy55+/+JPL3Uaa6fv9oGIdyfsdLCgWjJpmqTPB+YaIOgjZLKp7YJ5waskX+UadKN4HoR8GwenMfZG6XQNxI5Q==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDjTQsX0mPztWzMw2p87U+WngKdiBglzGhzgr261dWMXQIgNkOnfz7MxusFwQMt2hWRdNXr+0EsYUnPG2H1F6DvS00=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 13641
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "fa7809bb98f6b0a24d0c801a868d8742347b66a9",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "dotenv release-it --",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "dotenv-cli": "^7.4.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_2.0.2_1720615713076_0.9715762057401742",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.0.4": {
+      "name": "@aaamrh/first-package",
+      "version": "2.0.4",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@2.0.4",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "afc1d45e9c3b83c510462f7e2a1c6a002386d413",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.0.4.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-XmKLW2BwZDsCnPU9li0w9oaYrHtNGHHgOVNycEhwitP5YOHXUe8A78zfI8GeZw2Z2Ukcp75DKySjqQdRA/Yx9Q==",
+        "signatures": [
+          {
+            "sig": "MEUCIQCD69s2grH7H7HUufedsUPHXwHNgWZddtZHzNwp0rfSjQIgWgavmTXKagfO5hIhEQd+d4Ud/sOCYAtyN1RmI8K5n9E=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 13641
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "b815091181aa75a6eebc95ea0bd49750b649f90f",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "dotenv release-it --",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "dotenv-cli": "^7.4.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_2.0.4_1720616456485_0.10308773401826343",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.0.5": {
+      "name": "@aaamrh/first-package",
+      "version": "2.0.5",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "author": {
+        "url": "https://github.com/aaamrh/first-package",
+        "name": "Ryan",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "_id": "@aaamrh/first-package@2.0.5",
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "dist": {
+        "shasum": "d8847d2d240baaa0dce21f8f8df6f6603f83d915",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.0.5.tgz",
+        "fileCount": 8,
+        "integrity": "sha512-oFbJPRY7UpjvoxGB5cQmFXbkUL0bQuIDSn/Aih+0jUSuMu+8mmCQEPAYcn6DhYK5JRLE2Yt4CbpGz+RyRZwDOg==",
+        "signatures": [
+          {
+            "sig": "MEUCIG0HiVRxy6yHxaPJD6JzqjTfGXOCO+QCiDtzmcczf19nAiEAun7dpP4ezD7g/9u5IZbvTwDdjRyOX9A37C7U+K9LO/I=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 13649
+      },
+      "main": "./dist/cjs/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "module": "./dist/esm/TweetButton.js",
+      "gitHead": "a52e55a00ad1017b9bcbc7a2e62bc386a05f32f3",
+      "scripts": {
+        "test": "jest --config jest.config.ts",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "prepare": "husky",
+        "release": "dotenv release-it --",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build:esm": "tsc",
+        "copy-files": "cp ./src/index.css dist/"
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/aaamrh/first-package.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.7.0",
+      "description": "A mini package to send thank you tweets",
+      "directories": {},
+      "_nodeVersion": "20.14.0",
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "husky": "^9.0.11",
+        "react": "^18.3.1",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "dotenv-cli": "^7.4.2",
+        "release-it": "^17.5.0",
+        "typescript": "^5.5.3",
+        "@types/react": "^18.3.3",
+        "@commitlint/cli": "^19.3.0",
+        "jest-transform-css": "^6.0.1",
+        "@testing-library/react": "^16.0.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/first-package_2.0.5_1720617868506_0.5074354116320057",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "2.1.0": {
+      "name": "@aaamrh/first-package",
+      "version": "2.1.0",
+      "main": "./dist/cjs/TweetButton.js",
+      "module": "./dist/esm/TweetButton.js",
+      "types": "./dist/esm/TweetButton.d.ts",
+      "description": "A mini package to send thank you tweets",
+      "author": {
+        "name": "Ryan",
+        "email": "aaamrh@163.com",
+        "url": "https://github.com/aaamrh/first-package"
+      },
+      "homepage": "https://github.com/aaamrh/first-package#readme",
+      "keywords": [
+        "tweet",
+        "twitter",
+        "button",
+        "thank you",
+        "thanks"
+      ],
+      "scripts": {
+        "release": "dotenv release-it --",
+        "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files",
+        "build:esm": "tsc",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "copy-files": "cp ./src/index.css dist/",
+        "test": "jest --config jest.config.ts",
+        "prepare": "husky"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aaamrh/first-package.git"
+      },
+      "bugs": {
+        "url": "https://github.com/aaamrh/first-package/issues",
+        "email": "aaamrh@163.com"
+      },
+      "license": "ISC",
+      "devDependencies": {
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "@release-it/conventional-changelog": "^8.0.1",
+        "@testing-library/react": "^16.0.0",
+        "@types/react": "^18.3.3",
+        "dotenv-cli": "^7.4.2",
+        "husky": "^9.0.11",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "jest-transform-css": "^6.0.1",
+        "react": "^18.3.1",
+        "release-it": "^17.5.0",
+        "ts-jest": "^29.2.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3"
+      },
+      "peerDependencies": {
+        "react": "^18.3.1"
+      },
+      "_id": "@aaamrh/first-package@2.1.0",
+      "gitHead": "426298a502011156affbb9455dd881f75c5292c9",
+      "_nodeVersion": "20.14.0",
+      "_npmVersion": "10.7.0",
+      "dist": {
+        "integrity": "sha512-5MzxKH6qBbUoNjEPvMb2KF5Uq+Rr9MVFJRQBvUlvW3xHT9d67Yr1dSRkonCHCQLnp0a/JuPRfQuvU2aBA+D7Zw==",
+        "shasum": "f81ffef21d95764950f1de21eba4277da6feeb41",
+        "tarball": "https://registry.npmjs.org/@aaamrh/first-package/-/first-package-2.1.0.tgz",
+        "fileCount": 8,
+        "unpackedSize": 13543,
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQCPpJ2wkPmf+UVxlSF9V/4CqPrvXckZa49+f/P+3cfXewIhAKSmVONrRZ904Q5SD2AI1bhSp1zuf8qYk//GA6UkpzfD"
+          }
+        ]
+      },
+      "_npmUser": {
+        "name": "aaamrh",
+        "email": "aaamrh@163.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "aaamrh",
+          "email": "aaamrh@163.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages",
+        "tmp": "tmp/first-package_2.1.0_1720618055142_0.22924883846534994"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2024-07-10T11:14:23.147Z",
+    "modified": "2024-07-10T13:27:35.475Z",
+    "1.0.0": "2024-07-10T11:14:23.474Z",
+    "1.0.1": "2024-07-10T11:34:52.267Z",
+    "1.1.0": "2024-07-10T11:42:02.028Z",
+    "1.1.1": "2024-07-10T11:46:50.043Z",
+    "1.2.0": "2024-07-10T11:55:18.234Z",
+    "1.2.1": "2024-07-10T12:02:08.544Z",
+    "2.0.0": "2024-07-10T12:12:48.849Z",
+    "2.0.1": "2024-07-10T12:22:46.746Z",
+    "2.0.2": "2024-07-10T12:48:33.205Z",
+    "2.0.4": "2024-07-10T13:00:56.749Z",
+    "2.0.5": "2024-07-10T13:24:28.673Z",
+    "2.1.0": "2024-07-10T13:27:35.321Z"
+  },
+  "bugs": {
+    "url": "https://github.com/aaamrh/first-package/issues",
+    "email": "aaamrh@163.com"
+  },
+  "author": {
+    "name": "Ryan",
+    "email": "aaamrh@163.com",
+    "url": "https://github.com/aaamrh/first-package"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/aaamrh/first-package#readme",
+  "keywords": [
+    "tweet",
+    "twitter",
+    "button",
+    "thank you",
+    "thanks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaamrh/first-package.git"
+  },
+  "description": "A mini package to send thank you tweets",
+  "maintainers": [
+    {
+      "name": "aaamrh",
+      "email": "aaamrh@163.com"
+    }
+  ],
+  "readme": "# first-package\n\n- npm init -y\n- .gitignore\n- 配置 package.json : bugs, repository\n- `npm i react typescript @types/react -D`\n  - react 也用 -D 是可以防止用户在安装包时必须下载React，这样如果他们的项目已经存在 react 包，就不需要再安装额外的了。 问题来了，我们的package 是react的包，用户没有安装react怎么办\n- 把 devDependencies 的 react 复制一份到 peerDependencies, 代表告诉包管理工具，检查 app 是否安装了相关的包。如果没有找到，高版本的 npm 包会自动安装，低版本的（3-6）会显示 warning\n- test react component: `npm i -D jest @testing-library/react`\n- `npm i -D ts-jest`, 创建 jest.config.ts , 配置支持 ts 语法\n- `npm i -D ts-node` jest 需要 ts-node 来读取 ts 配置文件\n- `npm i -D jest-environment-jsdom`  jest 默认测试环境是 nodejs, 因此当创建web相关的包的时候需要明确一个类似浏览器环境，安装后在 jest.config.ts 中配置 testEnvironment: 'jsdom'; 然后更新 package.json scripts `test: jest --config jest.config.ts`\n\n------\n\n- 创建 TweetButton.tsx TweetButton.test.tsx, 编写内容\n- `npm run test TweetButton.test.tsx`\n- git add commit push\n\n------\n\n规范 git 提交\n\n- `npm i -D @commitlint/config-conventional @commitlint/cli`\n- 创建 commitlint.config.ts\n- `npm i -D husky` 配置 hooks\n\n------\n\nGit Action\n\nAdd the Commitlint GitHub Action to your team’s workflow.\n\n- 创建文件 `mkdir .github`\n- `mkdir .github/workflows`\n- `touch .github/workflows/commitlint.yml`\n\n------\n\nStyling React Components\n\n- index.css 添加样式，并再 TweetButton.tsx 中添加 className\n- 现在 jest 测试是会报错, 因为 jest 默认不能处理 css 文件\n- `npm i -D jest-transform-css` 可以将 stylesheets 导入到 jest 的 dom 环境中\n- 在 jest.config.ts 中添加 `\"^.+\\\\.css$\": \"jest-transform-css\"`\n\n------\n\nCompiling React to JavaScript\n\n```json\n  \"build\": \"rimraf dist && npm run build:esm && npm run build:cjs\",\n  \"build:esm\": \"tsc\",\n  \"build:cjs\": \"tsc --module commonjs --outDir dist/cjs\",\n```\n\n------\n\n将组建移到 src/components 中, 并在 tsconfig.json 中添加相应配置\n\n`\"include\": [\"src/**/*\"]` `\"exclude\": [\"src/**/*.test.tsx\"]`\n\n define a script for copying the stylesheet to the dist directory during each build\n\n ``` json\n  \"build\": \"rimraf dist && npm run build:esm && npm run build:cjs && npm run copy-files\",\n  \"build:esm\": \"tsc\",\n  \"build:cjs\": \"tsc --module commonjs --outDir dist/cjs\",\n  \"copy-files\": \"cp ./src/index.css dist/\",\n\n ```\n\n------\n\n定义 pkg 的 entry point\n\n现在打包结果有两种格式, 应该使使用软件包的工具意识到它们可以在ES或CommonJS模块之间进行选择。因此，他们可以选择他们支持的一个。\n\n默认情况下，大多数使用软件包的工具都希望在 package.json 的 main 字段中找到一个CommonJS模块\n\n因此，请使用该字段来引用您的CommonJS模块。并将ECMAScript编译添加到该模块属性中。\n\n``` json\n\"main\": \"./dist/cjs/TweetButton.js\",\n\"module\": \"./dist/esm/TweetButton.js\",\n```\n\n------\n\n指定包含程序包的类型定义的声明文件也是一个很好的做法 `\"types\": \"./dist/esm/TweetButton.d.ts\"`\n\n------\n\n本地测试未发布的包\n\n- `npm link` tells NPM to create a symlink (symbolic link) in your system’s global directory that links to your package.\n\n- 创建 nextjs 项目\n  - `npx create-next-app@latest`\n  - 再创建的额项目下, `npm link package-name`\n    - NPM disconnects the symlink automatically whenever you install or uninstall packages. So, remember to re-run thenpm link package-namecommand after installing or uninstalling any library.\n  - 在 page.tsx 中使用组件 🎉\n  - 再 nextjs 项目下执行 `npm unlink package-name` 会取消link\n  - `npm rm --global package-name` 删除全局的 link\n  - `npm ls --global package-name` 查看是否删除\n\n------\n\nCreating LICENSE\n\n- 创建 LICENSE 文件\n\n如果你不申请开源许可，所有为你的项目做出贡献的人都会成为他们作品的独家版权所有者。\n这意味着没有人可以使用、复制、分发或修改他们的贡献, 你也不行\n\n------\n\npublish to npm\n\n- 在 package.json 中添加 description, keywords, author, homepage\n- 声明你想发布的目录 `\"files\": [\"./dist\"]`, \"main\" 字段中的文件, package.json README LICENSE 默认会被包含进去\n- `npm publish --dry-run` ，npm 会执行发布包的所有步骤，但不会实际将包上传到 npm , 可以帮助你确保你的 package.json files 配置是否正确, 是否有遗漏; 帮助你预览版本号, 包名等重要信息;\n- `npm run test`\n- `npm run build`\n- `npm login`\n- `npm search pkg-name` 确保名字可以用. 我们可以在名字前加个前缀 `@<username>/first-package` 代表包作为 NPM 用户名的一个作用域的发布。\n- `npm publish` 恭喜, 报错啦 !!!\n  - 如果限定了包的名称, NPM的默认会假设这个有作用域的包是一个私有项目。因此，如果您使用npm publish 发布命令来共享它，就会得到一个错误。因此，要将您的包作为用户名的范围发布，请将——访问=公共标志添加到thenpm发布命令：\n  - `npm publish --access=public` 执行\n  \n------\n\n测试包的使用\n\n- `npm i @aaamrh/first-package`\n- 本地测试\n- 将测试用的 nextjs 项目提交到 github 上, 部署到 <https://vercel.com/> 上, 后续好测试\n\n------\n\nUpdating Package’s Versions\n\n- `npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]`\n- 修改下组件标签 `npm run build`\n- `npm version patch`\n- `git push -u origin main`\n- `npm publish` 版本 v1.0.0 => v1.0.1\n- 增加一个 feature => `npm run build` => git add commit => `npm version minor` => git push => npm publish\n- `npm version major` 同理\n\n------\n\nAutomating Version Management\n\n- `npm i -D release-it`\n- package.json  scripts 增加·`\"release\": \"release-it\"`\n- git add commit\n- `npm run release`\n\n------\n\n覆盖 release-it 的默认配置\n\n- 创建 .release-it.json 并配置, 也可以写在 package.json 中\n\n给 release-it 提供一个推荐版本\n\n- `npm i -D @release-it/conventional-changelog` , 配置到 .release-it.json 中\n- 会发现已经不会在提示让你选择版本\n\n------\n\n自动日志管理\n\n- 添加 infile 字段到 .release-it.json 的 plugins 中, 它规定了 日志文件名字\n- 我们增加一个 feature\n- `npm run test => npm run build => git add => git commit -m 'feat(tweetbutton)!: 内容' => npm run release`\n  - commit 中的 ! 代表 breaking change\n  - 这时候会生成 CHANGELOG.md, 也就是上面的 infile\n- 为什么 CHANGELOG 会忽略一些提交？\n  - 因为 @release-it/conventional-changelog 预制了如下类型选项\n\n ``` json\n  \"types\": [\n    {\"type\": \"feat\", \"section\": \"Features\"},\n    {\"type\": \"fix\", \"section\": \"Bug Fixes\"},\n    {\"type\": \"chore\", \"hidden\": true},\n    {\"type\": \"docs\", \"hidden\": true},\n    {\"type\": \"style\", \"hidden\": true},\n    {\"type\": \"refactor\", \"hidden\": true},\n    {\"type\": \"perf\", \"hidden\": true},\n    {\"type\": \"test\", \"hidden\": true}\n  ]\n\n ```\n\n可以在 .release-it.json 中覆盖配置\n\n- 继续修改一点组件\n- 重复上述流程 test -> build -> ...\n\n------\n\ngithub 自动发布\n\n- github 生成一个 access token\n- 创建 github 环境变量  GitHub 项目的 settings => Secrets and variables => Actions => New repository secret => 填写 access token, 还有名:  RELEASE_IT_GITHUB_TOKEN\n- 配置 .release-it.json\n  - \"github\": {\n    \"release\": true,\n    \"tokenRef\": \"RELEASE_IT_GITHUB_TOKEN\"\n  },\n- 创建 .env , .gitignore 忽略 .env\n- `npm i -D dotenv-cli`\n- 修改 package.json scripts release `\"release\": \"dotenv release-it --\"`\n- git add commit\n- 修改我们的组件  重复上述流程 test -> build -> ...\n\n------\n",
+  "readmeFilename": "README.md"
+}

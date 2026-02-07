@@ -42,7 +42,7 @@ const Funding = v.strictObject({
 	type: v.optional(v.union([v.literal('patreon'), v.literal('individual')])),
 });
 
-const Bugs = v.strictObject({
+const Bugs = v.object({
 	url: Link,
 });
 
