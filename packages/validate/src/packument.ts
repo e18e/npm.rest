@@ -1,3 +1,4 @@
+import { Date, EmptyableString, Link } from './shared';
 import * as v from 'valibot';
 
 // const Maintainer = v.strictObject({
@@ -10,33 +11,6 @@ import * as v from 'valibot';
 // 	email: v.optional(Email),
 // 	url: v.optional(Link),
 // });
-
-const Date = v.pipe(v.string(), v.toDate());
-// const Link = v.pipe(v.string(), v.url());
-const Link = v.string(); // will be fixed later
-// const Email = v.pipe(v.string(), v.email());
-
-const FussyString = v.optional(
-	v.nullable(
-		v.pipe(
-			v.string(),
-			// temporarily disabling as want to do further research
-			// v.transform((value) =>
-			// 	// Some old packuments seem to have some null unicode characters
-			// 	// postgres throws a fit by default if we include these so this
-			// 	// tries to remove them.
-			// 	value.replace(
-			// 		/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]+/g,
-			// 		'',
-			// 	),
-			// ),
-			// oxlint-disable-next-line eslint/no-undefined: needed
-			v.transform((value) => (value?.trim() === '' ? undefined : value)),
-		),
-	),
-);
-
-// @todo empty string
 
 const Repository = v.strictObject({
 	type: v.optional(v.union([v.literal('git')])),
@@ -54,7 +28,7 @@ const Bugs = v.object({
 
 export const PackumentVersionSchema = v.looseObject({
 	name: v.string(),
-	description: FussyString,
+	description: EmptyableString,
 	version: v.string(),
 	keywords: v.optional(v.array(v.string())),
 	license: v.optional(
@@ -107,7 +81,7 @@ export type PackumentVersion = v.InferOutput<typeof PackumentVersionSchema>;
 export const PackumentSchema = v.looseObject({
 	_rev: v.optional(v.string()),
 	name: v.string(),
-	description: FussyString,
+	description: EmptyableString,
 	'dist-tags': v.optional(
 		v.objectWithRest({ latest: v.string() }, v.string()),
 	),
