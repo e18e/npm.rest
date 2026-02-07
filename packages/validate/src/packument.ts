@@ -1,4 +1,4 @@
-import { Date, EmptyableString, Link } from './shared';
+import { Date, EmptyableString, Link, Rev } from './shared';
 import * as v from 'valibot';
 
 // const Maintainer = v.strictObject({
@@ -79,7 +79,7 @@ export const PackumentVersionSchema = v.looseObject({
 export type PackumentVersion = v.InferOutput<typeof PackumentVersionSchema>;
 
 export const PackumentSchema = v.looseObject({
-	_rev: v.optional(v.string()),
+	_rev: v.optional(Rev),
 	name: v.string(),
 	description: EmptyableString,
 	'dist-tags': v.optional(

@@ -6,7 +6,26 @@ import {
 	Email,
 	Date,
 	Link,
+	Rev,
 } from '../src/shared';
+
+describe('rev', () => {
+	it('finds a valid revision', () => {
+		expect(v.is(Rev, '354-e8064ff271d875ac7fe653ef1084e6ec')).toBeTruthy();
+	});
+
+	it('fails on an invalid revision', () => {
+		expect(v.is(Rev, 'invalid')).toBeFalsy();
+	});
+
+	it('fails on a revision without a number', () => {
+		expect(v.is(Rev, 'hi-e8064ff271d875ac7fe653ef1084e6ec')).toBeFalsy();
+	});
+
+	it('fails on a revision without a hash', () => {
+		expect(v.is(Rev, '354-')).toBeFalsy();
+	});
+});
 
 describe('strict string', () => {
 	it('finds a valid string', () => {

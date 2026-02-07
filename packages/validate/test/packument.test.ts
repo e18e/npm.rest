@@ -60,6 +60,26 @@ describe('packument', () => {
 		const result = v.safeParse(PackumentSchema, packument);
 		expect(result.success).toBeFalsy();
 	});
+
+	describe('_rev', () => {
+		it('behaves as expected', () => {
+			const packument = createPackument();
+			packument._rev = '1-placeholder';
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed._rev).toBe('1-placeholder');
+		});
+
+		it('is not required', () => {
+			const packument = createPackument();
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+
+		it('fails when invalid structure', () => {
+			const packument = createPackument();
+			packument._rev = 'invalid';
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];

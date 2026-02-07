@@ -10,6 +10,14 @@ export const EmptyableString = v.nullable(
 
 export const StrictString = v.pipe(v.string(), v.trim(), v.nonEmpty());
 
+export const Rev = v.pipe(
+	StrictString,
+	v.check((value) => {
+		const [num, rest] = value.split('-');
+		return !Number.isNaN(Number.parseInt(num, 10)) && rest.length > 0;
+	}),
+);
+
 export const Date = v.pipe(v.string(), v.trim(), v.toDate());
 export const Email = v.pipe(v.string(), v.trim(), v.email());
 export const Link = v.pipe(v.string(), v.trim(), v.url());
