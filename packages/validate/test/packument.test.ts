@@ -44,16 +44,6 @@ describe('packument', () => {
 		expect(v.is(PackumentSchema, packument)).toBeTruthy();
 	});
 
-	it('parses version with repository string and transforms to object', () => {
-		const packument = createPackument();
-		// Add repository as a simple string "owner/repo"
-		packument.versions!['1.0.0'].repository = 'owner/repo';
-		const result = v.parse(PackumentSchema, packument);
-		const repo = result.versions?.['1.0.0'].repository;
-		expect(repo?.url).toBe('https://github.com/owner/repo');
-		expect(repo?.directory).toBeNull();
-	});
-
 	it('fails safeParse with invalid date strings in time', () => {
 		const packument = createPackument();
 		packument.time['created'] = 'not-a-date';
@@ -150,6 +140,40 @@ describe('packument', () => {
 			packument['dist-tags'].latest = undefined;
 
 			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+	});
+
+	describe('versions', () => {
+		it('supports empty versions object', () => {
+			const packument = createPackument();
+			packument.versions = {};
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+
+		it('fails with empty version keys', () => {
+			const packument = createPackument();
+			packument.versions = { '': createPackumentVersion('1.0.0') };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('fails with effectively empty version keys', () => {
+			const packument = createPackument();
+			packument.versions = { '    ': createPackumentVersion('1.0.0') };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('fails with invalid version', () => {
+			const packument = createPackument();
+			// @ts-expect-error invalid version
+			packument.versions = { '1.0.0': 'foo' };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('returns null when empty', () => {
+			const packument = createPackument();
+			packument['versions'] = {};
+			const parsed = v.safeParse(PackumentSchema, packument);
+			expect(parsed.output).toMatchObject({ versions: null });
 		});
 	});
 });

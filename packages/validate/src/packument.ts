@@ -96,7 +96,9 @@ export const PackumentSchema = v.looseObject({
 			),
 		),
 	),
-	versions: v.optional(v.record(v.string(), PackumentVersionSchema)),
+	versions: v.optional(
+		nullOnEmpty(v.record(StrictString, PackumentVersionSchema)),
+	),
 	time: v.objectWithRest(
 		{
 			created: Date,
