@@ -71,7 +71,7 @@ export const PackumentVersionSchema = v.looseObject({
 	version: StrictString,
 	keywords: v.optional(KeywordsSchema),
 	license: v.optional(LicenseSchema, null),
-	homepage: v.optional(Link),
+	homepage: v.optional(v.fallback(EmptyableLink, null)),
 	bugs: v.optional(Bugs),
 	dist: v.object({
 		shasum: v.string(),

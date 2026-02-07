@@ -537,6 +537,39 @@ describe('packument-version validation', () => {
 			]);
 		});
 	});
+
+	describe('homepage', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.homepage = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('supports single string', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.homepage = 'https://example.com';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('becomes null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.homepage = '';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('becomes null when effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.homepage = '  ';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('becomes null when invalid', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.homepage = 'invalid';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
