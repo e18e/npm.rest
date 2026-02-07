@@ -44,13 +44,6 @@ describe('packument', () => {
 		expect(v.is(PackumentSchema, packument)).toBeTruthy();
 	});
 
-	it('fails safeParse with invalid date strings in time', () => {
-		const packument = createPackument();
-		packument.time['created'] = 'not-a-date';
-		const result = v.safeParse(PackumentSchema, packument);
-		expect(result.success).toBeFalsy();
-	});
-
 	describe('_rev', () => {
 		it('behaves as expected', () => {
 			const packument = createPackument();
@@ -174,6 +167,125 @@ describe('packument', () => {
 			packument['versions'] = {};
 			const parsed = v.safeParse(PackumentSchema, packument);
 			expect(parsed.output).toMatchObject({ versions: null });
+		});
+	});
+
+	describe('time', () => {
+		it('is required', () => {
+			const packument = createPackument();
+			// @ts-expect-error tests
+			packument.time = {};
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('requires created and modified', () => {
+			const packument = createPackument();
+
+			// @ts-expect-error tests
+			packument.time = { created: new Date().toISOString() };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+
+			// @ts-expect-error tests
+			packument.time = { modified: new Date().toISOString() };
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+
+			packument.time = {
+				created: new Date().toISOString(),
+				modified: new Date().toISOString(),
+			};
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+
+		it('parses date', () => {
+			const packument = createPackument();
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed.time.created).instanceOf(Date);
+			expect(parsed.time.modified).instanceOf(Date);
+		});
+
+		it('fails on invalid dates', () => {
+			const packument = createPackument();
+			packument.time = {
+				created: 'invalid-date',
+				modified: 'invalid-date',
+			};
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('trims before parsing to date', () => {
+			const packument = createPackument();
+			const created = new Date();
+			const modified = new Date();
+			packument.time = {
+				created: `  ${created.toISOString()}  `,
+				modified: `  ${modified.toISOString()}  `,
+			};
+
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed.time.created).instanceOf(Date);
+			expect(parsed.time.created.getTime()).toBe(created.getTime());
+			expect(parsed.time.modified).instanceOf(Date);
+			expect(parsed.time.modified.getTime()).toBe(modified.getTime());
+		});
+
+		it('supports version dates', () => {
+			const packument = createPackument();
+			const versionDate = new Date();
+			packument.time = {
+				created: new Date().toISOString(),
+				modified: new Date().toISOString(),
+				'2.0.0': versionDate.toISOString(),
+			};
+
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed.time['2.0.0']).instanceOf(Date);
+			expect(parsed.time['2.0.0']?.getTime()).toBe(versionDate.getTime());
+		});
+
+		describe('unpublished', () => {
+			it('is optional', () => {
+				const packument = createPackument();
+				// oxlint-disable-next-line eslint(no-undefined)
+				packument.time.unpublished = undefined;
+				expect(v.is(PackumentSchema, packument)).toBeTruthy();
+			});
+
+			it('is strict', () => {
+				const packument = createPackument();
+
+				packument.time.unpublished = {
+					time: new Date().toISOString(),
+					versions: [],
+					// @ts-expect-error tests
+					foo: 'bar',
+				};
+
+				expect(v.is(PackumentSchema, packument)).toBeFalsy();
+			});
+
+			it('requires at least one version', () => {
+				const packument = createPackument();
+				packument.time.unpublished = {
+					time: new Date().toISOString(),
+					versions: [],
+				};
+				expect(v.is(PackumentSchema, packument)).toBeFalsy();
+			});
+
+			it('trims time before parsing', () => {
+				const packument = createPackument();
+				const date = new Date();
+				packument.time.unpublished = {
+					time: ` ${date.toISOString()} `,
+					versions: ['1.0.0'],
+				};
+
+				const parsed = v.parse(PackumentSchema, packument);
+				expect(parsed.time.unpublished?.time).instanceOf(Date);
+				expect(parsed.time.unpublished?.time?.getTime()).toBe(
+					date.getTime(),
+				);
+			});
 		});
 	});
 });
