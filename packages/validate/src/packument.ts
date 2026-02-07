@@ -20,11 +20,49 @@ import {
 // 	url: v.optional(Link),
 // });
 
-const Repository = v.strictObject({
-	type: v.optional(v.union([v.literal('git')])),
-	directory: v.optional(v.string()),
-	url: v.optional(Link),
-});
+// export const RepositoryObjectSchema = v.pipe(
+// 	v.strictObject({
+// 		type: v.optional(
+// 			v.pipe(
+// 				v.string(),
+// 				v.toLowerCase(),
+// 				v.union([
+// 					v.literal('git'),
+// 					v.pipe(
+// 						v.literal('github'),
+// 						v.transform(() => 'git' as const),
+// 					),
+// 					v.literal('npm'),
+// 					v.literal('https'),
+// 				]),
+// 			),
+// 		),
+// 		directory: v.optional(v.string()),
+// 		url: v.optional(Link),
+// 		branch: v.optional(v.string()),
+// 	}),
+// 	v.transform((value) => {
+// 		return value.type === 'npm' ? null : value;
+// 	}),
+// );
+
+// export type RepositoryObject = v.InferOutput<typeof RepositoryObjectSchema>;
+
+// export const RepositorySchema = v.union([
+// 	v.pipe(
+// 		v.string(),
+// 		v.transform((value): RepositoryObject | null => {
+// 			return URL.canParse(value) ? { url: value } : null;
+// 		}),
+// 	),
+// 	RepositoryObjectSchema,
+// 	v.pipe(
+// 		v.array(RepositoryObjectSchema),
+// 		v.filterItems((item) => item !== null),
+// 	), // todo remove null from this type
+// ]);
+
+// export type Repository = v.InferOutput<typeof RepositorySchema>;
 
 // export const FundingObject = v.strictObject({
 // 	type: v.optional(
@@ -108,27 +146,13 @@ export const PackumentVersionSchema = v.looseObject({
 	}),
 	deprecated: v.optional(v.union([EmptyableString, v.boolean()])),
 	// funding: v.optional(Funding),
+	// repository: v.optional(RepositorySchema),
 	dependencies: v.optional(v.record(v.string(), v.string())),
 	devDependencies: v.optional(v.record(v.string(), v.string())),
 	optionalDependencies: v.optional(v.record(v.string(), v.string())),
 	peerDependencies: v.optional(v.record(v.string(), v.string())),
 	peerDependenciesMeta: v.optional(
 		v.record(v.string(), v.strictObject({ optional: v.boolean() })),
-	),
-	repository: v.optional(
-		v.union([
-			v.pipe(
-				v.string(),
-				v.transform((repo) => ({
-					url: URL.canParse(repo)
-						? repo
-						: // should validate this assumption
-							`https://github.com/${repo}`,
-					directory: null,
-				})),
-			),
-			Repository,
-		]),
 	),
 });
 

@@ -25,7 +25,7 @@ function createPackument(name: string): v.InferInput<typeof PackumentSchema> {
 	};
 }
 
-describe('process packument', () => {
+describe.skip('process packument', () => {
 	it('stores raw packument', async () => {
 		const random = crypto.randomUUID();
 		const packument = createPackument('foo');

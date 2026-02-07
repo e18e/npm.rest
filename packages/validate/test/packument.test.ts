@@ -656,6 +656,66 @@ describe('packument-version validation', () => {
 	});
 });
 
+// describe('Repository validation', () => {
+// 	it('supports git type', () => {
+// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'git' });
+// 		expect(parsed?.type).toBe('git');
+// 	});
+
+// 	it.skip('parses version with repository string and transforms to object', () => {
+// 		const packument = createValidPackument();
+// 		// Add repository as a simple string "owner/repo"
+// 		packument.versions!['1.0.0'].repository = 'owner/repo';
+// 		const result = v.parse(PackumentSchema, packument);
+// 		const repo = result.versions?.['1.0.0'].repository;
+// 		expect(Array.isArray(repo)).toBeFalsy();
+// 		expect(repo).toMatchObject({
+// 			url: 'https://github.com/owner/repo',
+// 			directory: null,
+// 		});
+// 	});
+
+// 	it('supports weirdly cased git type', () => {
+// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'Git' });
+// 		expect(parsed?.type).toBe('git');
+// 	});
+
+// 	it('transforms GitHub type to git', () => {
+// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'github' });
+// 		expect(parsed?.type).toBe('git');
+// 	});
+
+// 	it('discards repository object with npm type', () => {
+// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'npm' });
+// 		expect(parsed).toBeNull();
+// 	});
+
+// 	it.skip('does something with https type', () => {});
+
+// 	it('discards repository that is a non-url string', () => {
+// 		const parsed = v.parse(RepositorySchema, 'example/repo');
+// 		expect(parsed).toBeNull();
+// 	});
+
+// 	it.skip('discards repository object that has non-url url', () => {
+// 		const parsed = v.parse(RepositoryObjectSchema, { url: 'example/repo' });
+// 		expect(parsed).toBeNull();
+// 	});
+
+// 	it('discards null repository objects in array of repository objects', () => {
+// 		const parsed = v.parse(RepositorySchema, [
+// 			{ type: 'git', url: 'https://example.com' },
+// 			{ type: 'npm', url: 'https://foo.com' },
+// 			{ type: 'github', url: 'https://github.com/example/repo' },
+// 		]);
+
+// 		expect(parsed).toMatchObject([
+// 			{ type: 'git', url: 'https://example.com' },
+// 			{ type: 'git', url: 'https://github.com/example/repo' },
+// 		]);
+// 	});
+// });
+
 // describe('Funding validation', () => {
 // 	it('supports url', () => {
 // 		const parsed = v.parse(FundingObject, { url: 'https://example.com' });
