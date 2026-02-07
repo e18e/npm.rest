@@ -1,0 +1,156 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dependencies parsing > handles workspace: spec 1`] = `
+[
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "react",
+      "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "unocss",
+      "specifier": "^66.4.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "vitest",
+      "specifier": "^3.2.4",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "react-dom",
+      "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "playwright",
+      "specifier": "^1.53.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "typescript",
+      "specifier": "^5.8.3",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@rslib/core",
+      "specifier": "^0.10.4",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@types/node",
+      "specifier": "^22.15.34",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@types/react",
+      "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@rsbuild/core",
+      "specifier": "^1.4.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@biomejs/biome",
+      "specifier": "^2.1.1",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@playwright/test",
+      "specifier": "^1.53.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@types/react-dom",
+      "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "simple-git-hooks",
+      "specifier": "^2.13.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "dev",
+    "optional": false,
+    "spec": {
+      "name": "@rsbuild/plugin-react",
+      "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+]
+`;

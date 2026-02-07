@@ -19,6 +19,24 @@ export interface VersionDependency {
 	optional: boolean;
 }
 
+const EXTRA_ALIASES = ['catalog:', 'workspace:'];
+
+function resolve(name: string, spec: string) {
+	for (const alias of EXTRA_ALIASES) {
+		if (spec.startsWith(alias)) {
+			const result = npa.resolve(name, spec.slice(alias.length));
+
+			if (result.type === 'alias') {
+				throw new Error('alias not supported on sub special spec');
+			}
+
+			return result;
+		}
+	}
+
+	return npa.resolve(name, spec);
+}
+
 // Helper to collect dependencies from the manifest.
 function collect(
 	deps: Record<string, string> | undefined,
@@ -37,7 +55,7 @@ function collect(
 			const isOptional =
 				typeof optional === 'function' ? optional(name) : optional;
 
-			const parsed = npa.resolve(name, specifier);
+			const parsed = resolve(name, specifier);
 
 			if (parsed.type === 'alias') {
 				return {
