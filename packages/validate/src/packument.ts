@@ -1,5 +1,16 @@
 import * as v from 'valibot';
 
+// const Maintainer = v.strictObject({
+// 	name: v.string(),
+// 	email: Email,
+// });
+
+// const Author = v.strictObject({
+// 	name: v.string(),
+// 	email: v.optional(Email),
+// 	url: v.optional(Link),
+// });
+
 const Date = v.pipe(v.string(), v.toDate());
 // const Link = v.pipe(v.string(), v.url());
 const Link = v.string(); // will be fixed later
@@ -27,11 +38,6 @@ const FussyString = v.optional(
 
 // @todo empty string
 
-// const Maintainer = v.strictObject({
-// 	name: v.string(),
-// 	email: Email,
-// });
-
 const Repository = v.strictObject({
 	type: v.optional(v.union([v.literal('git')])),
 	directory: v.optional(v.string()),
@@ -46,18 +52,11 @@ const Bugs = v.object({
 	url: Link,
 });
 
-// const Author = v.strictObject({
-// 	name: v.string(),
-// 	email: v.optional(Email),
-// 	url: v.optional(Link),
-// });
-
-const PackumentVersionSchema = v.looseObject({
+export const PackumentVersionSchema = v.looseObject({
 	name: v.string(),
 	description: FussyString,
 	version: v.string(),
 	keywords: v.optional(v.array(v.string())),
-	// author: v.optional(v.union([Author, Str])),
 	license: v.optional(
 		v.union([
 			v.string(),
@@ -68,22 +67,12 @@ const PackumentVersionSchema = v.looseObject({
 			}),
 		]),
 	),
-	// maintainers: v.optional(v.array(Maintainer)),
 	homepage: v.optional(Link),
 	bugs: v.optional(Bugs),
 	dist: v.object({
 		shasum: v.string(),
 		tarball: Link,
 		integrity: v.string(),
-		// signatures: v.array(
-		// 	v.strictObject({
-		// 		sig: v.string(),
-		// 		keyid: v.string(),
-		// 	}),
-		// ),
-		// unpackedSize: v.optional(v.number()),
-		// fileCount: v.optional(v.number()),
-		// 'npm-signature': v.optional(v.string()),
 	}),
 	dependencies: v.optional(v.record(v.string(), v.string())),
 	devDependencies: v.optional(v.record(v.string(), v.string())),
@@ -130,8 +119,6 @@ export const PackumentSchema = v.looseObject({
 		},
 		Date,
 	),
-	// maintainers: v.array(Maintainer),
-	// users: v.optional(v.record(v.string(), v.boolean())),
 });
 
 export type Packument = v.InferOutput<typeof PackumentSchema>;

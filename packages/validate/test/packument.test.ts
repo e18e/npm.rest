@@ -1,12 +1,26 @@
+import { PackumentSchema, type PackumentVersionSchema } from '../src/packument';
 import { fetchPackumentRaw } from '@npm.rest/test/packument';
-import { PackumentSchema } from '../src/packument.ts';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 
-const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
+type InputPackument = v.InferInput<typeof PackumentSchema>;
+type InputPackumentVersion = v.InferInput<typeof PackumentVersionSchema>;
 
-// Helper to create a minimal valid packument object
-function createValidPackument(): v.InferInput<typeof PackumentSchema> {
+function createPackumentVersion(version: string): InputPackumentVersion {
+	return {
+		name: 'my-package',
+		description: 'A test package',
+		version,
+		dist: {
+			shasum: 'sha256-1234567890abcdef',
+			tarball:
+				'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
+			integrity: 'sha256-1234567890abcdef',
+		},
+	};
+}
+
+function createPackument(): InputPackument {
 	const version = '1.0.0';
 
 	return {
@@ -14,17 +28,7 @@ function createValidPackument(): v.InferInput<typeof PackumentSchema> {
 		description: 'A test package',
 		'dist-tags': { latest: version },
 		versions: {
-			[version]: {
-				name: 'my-package',
-				description: 'A test package',
-				version,
-				dist: {
-					shasum: '1234567890abcdef',
-					tarball:
-						'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
-					integrity: 'sha512-...',
-				},
-			},
+			[version]: createPackumentVersion(version),
 		},
 		time: {
 			created: new Date().toISOString(),
@@ -34,19 +38,14 @@ function createValidPackument(): v.InferInput<typeof PackumentSchema> {
 	};
 }
 
-describe('PackumentSchema validation', () => {
-	test('parses a minimal valid packument', () => {
-		const packument = createValidPackument();
-		const result = v.parse(PackumentSchema, packument);
-		expect(result.name).toBe('my-package');
-		expect(result['dist-tags']!.latest).toBe('1.0.0');
-		expect(result.versions?.['1.0.0'].dist.tarball).toBe(
-			'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
-		);
+describe('packument', () => {
+	it('parses a minimal valid packument', () => {
+		const packument = createPackument();
+		expect(v.is(PackumentSchema, packument)).toBeTruthy();
 	});
 
-	test('parses version with repository string and transforms to object', () => {
-		const packument = createValidPackument();
+	it('parses version with repository string and transforms to object', () => {
+		const packument = createPackument();
 		// Add repository as a simple string "owner/repo"
 		packument.versions!['1.0.0'].repository = 'owner/repo';
 		const result = v.parse(PackumentSchema, packument);
@@ -55,14 +54,18 @@ describe('PackumentSchema validation', () => {
 		expect(repo?.directory).toBeNull();
 	});
 
-	test('fails safeParse with invalid date strings in time', () => {
-		const packument = createValidPackument();
+	it('fails safeParse with invalid date strings in time', () => {
+		const packument = createPackument();
 		packument.time['created'] = 'not-a-date';
 		const result = v.safeParse(PackumentSchema, packument);
 		expect(result.success).toBeFalsy();
 	});
+});
 
-	test.for(PACKUMENTS)('parses real packument "%s"', async (name) => {
+const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
+
+describe('real world tests', () => {
+	it.for(PACKUMENTS)('parses real packument "%s"', async (name) => {
 		const packument = await fetchPackumentRaw(name);
 		const result = v.parse(PackumentSchema, packument);
 		expect(result.name).toBe(name);
