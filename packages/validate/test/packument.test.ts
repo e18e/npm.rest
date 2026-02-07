@@ -80,6 +80,41 @@ describe('packument', () => {
 			expect(v.is(PackumentSchema, packument)).toBeFalsy();
 		});
 	});
+
+	describe('name', () => {
+		it('behaves as expected', () => {
+			const packument = createPackument();
+			packument.name = 'hello-world';
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed.name).toBe('hello-world');
+		});
+
+		it('is required', () => {
+			const packument = createPackument();
+			// @ts-expect-error tests
+			packument.name = null;
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('trims whitespace', () => {
+			const packument = createPackument();
+			packument.name = ' hello-world ';
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed.name).toBe('hello-world');
+		});
+
+		it('fails with empty name', () => {
+			const packument = createPackument();
+			packument.name = '';
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('fails with effectively empty name', () => {
+			const packument = createPackument();
+			packument.name = '    ';
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
