@@ -6,7 +6,7 @@ import npa from 'npm-package-arg';
 type DependencyType = (typeof dependencyTable.$inferSelect)['type'];
 type SpecifierType = (typeof specifierTable.$inferSelect)['type'];
 
-export interface DependencySpec {
+interface DependencySpec {
 	name: string;
 	specifier: string;
 	type: SpecifierType;

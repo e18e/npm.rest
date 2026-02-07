@@ -82,21 +82,12 @@ importers:
 
   experiments/packument-types:
     devDependencies:
-      '@fastify/merge-json-schemas':
-        specifier: ^0.2.1
-        version: 0.2.1
       '@npm.rest/db':
         specifier: workspace:^
         version: link:../../packages/db
-      '@npm.rest/validate':
-        specifier: workspace:^
-        version: link:../../packages/validate
       '@types/node':
         specifier: 'catalog:'
         version: 25.2.1
-      '@typescript/native-preview':
-        specifier: 7.0.0-dev.20260131.1
-        version: 7.0.0-dev.20260131.1
       '@valibot/to-json-schema':
         specifier: ^1.5.0
         version: 1.5.0(valibot@1.2.0(typescript@5.9.3))
@@ -1068,9 +1059,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@fastify/merge-json-schemas@0.2.1':
-    resolution: {integrity: sha512-OA3KGBCy6KtIvLf8DINC5880o5iBlDX4SxzLQS8HorJAbqluzLRn80UXU0bxZn7UOFhFgpRJDasfwn9nG4FG4A==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2216,45 +2204,6 @@ packages:
   '@types/validate-npm-package-name@4.0.2':
     resolution: {integrity: sha512-lrpDziQipxCEeK5kWxvljWYhUvOiB2A9izZd9B2AFarYAkqZshb4lPbRs7zKEic6eGtH8V/2qJW+dPp9OtF6bw==}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-f6lulb0m7uN1tvT4SX4gLpGpkdoTUD8lXcpbhDSOS79lh61BuozEB7yDaIFCHACJcQOjf+pSKj7ouXuRKXKbTg==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-S2hV8ucpfmJpfyjlBloeZyLw0vFX3Y2vPm58MWWMGmnwxoDMpmYwQPkHwYePoY0DSDc2pDVZlvCXwwJoSs5/Dg==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-lrDU5aE4+VmnoCnNcQI88QIV1aj0Thk+wVTRrvPPc2yXN5KjskPG5vuhERHNjK8F9pgNKGQcqRJPX0Yxi2VJWg==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-X3+ZmIGEXkSYym8SGkSnDywM8AGU6eFElZlWd9PhNeCzs0P0n/TB8z5DiRAljM9q8UzovBKpeWIY3mxWP9e4vg==}
-    cpu: [arm]
-    os: [linux]
-
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-3IeODG6qcbtlFeDgyzNvtBYfNEvMhfX/xCAQDpyo9Qtk9nrN/cLVm/C6rvmI0ohS1U3gyHVh3pi4rDJKhnFxjA==}
-    cpu: [x64]
-    os: [linux]
-
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-qcO/OdyehtzLHjfElIULSgwlKvPOTeoIDaf4y5J8svXLA50FttSbJYW+kJpAkpW5hREpARuQUT3uVrvXGG5t1g==}
-    cpu: [arm64]
-    os: [win32]
-
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-ys+nGNklbVwpIgJq4PlVUH6FNhIstc+m7F49NNCBjG5hvyfX7RajWBNf1FP+Jkw/Iuwdl8WnWhTA9UDFBzSHig==}
-    cpu: [x64]
-    os: [win32]
-
-  '@typescript/native-preview@7.0.0-dev.20260131.1':
-    resolution: {integrity: sha512-bMGqUBvyazwCC6Ycst2JbtP/JOcR4ifYtP8tBnq0G92iooNp47/0aMziQQT6voF1tEYntpMC+TWenLz3pdhwpQ==}
-    hasBin: true
-
   '@valibot/to-json-schema@1.5.0':
     resolution: {integrity: sha512-GE7DmSr1C2UCWPiV0upRH6mv0cCPsqYGs819fb6srCS1tWhyXrkGGe+zxUiwzn/L1BOfADH4sNjY/YHCuP8phQ==}
     peerDependencies:
@@ -2456,10 +2405,6 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
-
-  dequal@2.0.3:
-    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
-    engines: {node: '>=6'}
 
   destr@2.0.5:
     resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
@@ -3986,10 +3931,6 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@fastify/merge-json-schemas@0.2.1':
-    dependencies:
-      dequal: 2.0.3
-
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -4916,37 +4857,6 @@ snapshots:
 
   '@types/validate-npm-package-name@4.0.2': {}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20260131.1':
-    optional: true
-
-  '@typescript/native-preview@7.0.0-dev.20260131.1':
-    optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260131.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260131.1
-
   '@valibot/to-json-schema@1.5.0(valibot@1.2.0(typescript@5.9.3))':
     dependencies:
       valibot: 1.2.0(typescript@5.9.3)
@@ -5124,8 +5034,6 @@ snapshots:
       ms: 2.1.3
 
   deep-is@0.1.4: {}
-
-  dequal@2.0.3: {}
 
   destr@2.0.5: {}
 
