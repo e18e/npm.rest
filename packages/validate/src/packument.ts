@@ -83,9 +83,11 @@ export const PackumentVersionSchema = v.looseObject({
 	homepage: v.optional(v.fallback(EmptyableLink, null)),
 	// bugs: v.optional(BugsObjectSchema),
 	dist: v.object({
-		shasum: v.string(),
 		tarball: Link,
-		integrity: v.string(),
+		shasum: StrictString,
+		integrity: v.optional(
+			v.pipe(v.string(), v.regex(/^sha(256|384|512)-[A-Za-z0-9+/=]+$/)),
+		),
 	}),
 	dependencies: v.optional(v.record(v.string(), v.string())),
 	devDependencies: v.optional(v.record(v.string(), v.string())),

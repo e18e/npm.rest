@@ -570,6 +570,48 @@ describe('packument-version validation', () => {
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
 	});
+
+	describe('dist', () => {
+		it('is required', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.dist = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it("can't be empty", () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.dist = {};
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		describe.todo('tarball');
+		describe.todo('shasum');
+
+		describe('integrity', () => {
+			it('is optional', () => {
+				const version = createPackumentVersion('1.0.0');
+				// oxlint-disable-next-line eslint(no-undefined)
+				version.dist.integrity = undefined;
+				expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+			});
+
+			it('works as expected', () => {
+				const version = createPackumentVersion('1.0.0');
+				version.dist.integrity = 'sha512-abc123';
+				const parsed = v.parse(PackumentVersionSchema, version);
+				expect(parsed.dist.integrity).toBe('sha512-abc123');
+			});
+
+			it('fails on invalid integrity', () => {
+				const version = createPackumentVersion('1.0.0');
+				version.dist.integrity = 'invalid';
+				expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			});
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
