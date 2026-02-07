@@ -6,6 +6,7 @@ import { LRUCache } from 'lru-cache';
 import { Result } from 'better-result';
 import { ghFetch } from './github';
 import { eq } from 'drizzle-orm';
+import { FetchError } from 'ofetch';
 
 interface RepoData {
 	stargazers_count: number;
@@ -72,7 +73,7 @@ export async function getRepository(info: HostedGitInfo) {
 	}
 
 	// If the repo is from GitHub and we just created we can process the metadata
-	return Result.tryPromise(async () => {
+	const result = await Result.tryPromise(async () => {
 		const base = `/repos/${info.user}/${info.project}`;
 
 		// Fetch repo data and languages in parallel
@@ -93,7 +94,17 @@ export async function getRepository(info: HostedGitInfo) {
 				lastFetched: new Date(),
 			})
 			.where(eq(repositoryTable.id, record.value.id));
-
-		return record.value;
 	});
+
+	if (
+		result.isOk() ||
+		// oxlint-disable-next-line typescript-eslint(prefer-optional-chain): ??
+		(result.isErr() &&
+			result.error.cause instanceof FetchError &&
+			result.error.cause.status === 404)
+	) {
+		return record;
+	}
+
+	return result;
 }
