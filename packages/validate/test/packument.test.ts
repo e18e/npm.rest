@@ -612,6 +612,48 @@ describe('packument-version validation', () => {
 			});
 		});
 	});
+
+	describe('deprecated', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.deprecated = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = '';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is null when effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = '         ';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('allows false', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = false;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('allows true', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = true;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('parses as expected', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = 'This version is deprecated';
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				deprecated: 'This version is deprecated',
+			});
+		});
+	});
 });
 
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
