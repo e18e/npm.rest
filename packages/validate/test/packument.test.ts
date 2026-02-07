@@ -654,6 +654,58 @@ describe('packument-version validation', () => {
 			});
 		});
 	});
+
+	describe.for([
+		'dependencies' as const,
+		'devDependencies' as const,
+		'optionalDependencies' as const,
+		'peerDependencies' as const,
+		// oxlint-disable-next-line jest/valid-describe-callback todo report bug?
+	])('%s', (type) => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = {};
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is nullable', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = null;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('becomes null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = {};
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({ [type]: null });
+		});
+
+		it('keys must not be empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { '': '1.0.0' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('keys must not be effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { '  ': '1.0.0' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('values can be empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { foo: '' };
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('values become null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { foo: '' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({ [type]: { foo: null } });
+		});
+	});
 });
 
 // describe('Repository validation', () => {

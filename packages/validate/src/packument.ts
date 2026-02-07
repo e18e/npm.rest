@@ -147,10 +147,22 @@ export const PackumentVersionSchema = v.looseObject({
 	deprecated: v.optional(v.union([EmptyableString, v.boolean()])),
 	// funding: v.optional(Funding),
 	// repository: v.optional(RepositorySchema),
-	dependencies: v.optional(v.record(v.string(), v.string())),
-	devDependencies: v.optional(v.record(v.string(), v.string())),
-	optionalDependencies: v.optional(v.record(v.string(), v.string())),
-	peerDependencies: v.optional(v.record(v.string(), v.string())),
+	dependencies: v.optional(
+		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
+		null,
+	),
+	devDependencies: v.optional(
+		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
+		null,
+	),
+	optionalDependencies: v.optional(
+		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
+		null,
+	),
+	peerDependencies: v.optional(
+		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
+		null,
+	),
 	peerDependenciesMeta: v.optional(
 		v.record(v.string(), v.strictObject({ optional: v.boolean() })),
 	),
