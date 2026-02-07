@@ -1,4 +1,4 @@
-import '@npm.rest/db/mock';
+import '@npm.rest/test/mock-db';
 import { packageTable, packumentTable } from '@npm.rest/db/schema';
 import { describe, expect, it, vi } from 'vitest';
 import type { UnpackResult } from '@publint/pack';

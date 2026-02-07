@@ -2,14 +2,14 @@ import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
 import { PGlite } from '@electric-sql/pglite';
+import * as s from '@npm.rest/db/schema';
+import { db } from '@npm.rest/db/server';
 import { join } from 'node:path';
-import { db } from './server';
-import * as s from './schema';
 
 type RealDB = typeof db;
 type MockDB = PgliteDatabase & { $client: PGlite };
 
-vi.mock(import('./server'), async () => {
+vi.mock(import('@npm.rest/db/server'), async () => {
 	const { drizzle } = await import('drizzle-orm/pglite');
 
 	// Idea of using pglite from Raphaël Moreau
@@ -38,7 +38,7 @@ beforeAll(async () => {
 	isMockDB(db);
 
 	await migrate(db, {
-		migrationsFolder: join(import.meta.dirname, '../.drizzle'),
+		migrationsFolder: join(import.meta.dirname, '../../db/.drizzle'),
 	});
 });
 

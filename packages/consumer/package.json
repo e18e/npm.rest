@@ -25,6 +25,7 @@
 		"valibot": "catalog:"
 	},
 	"devDependencies": {
+		"@npm.rest/test": "workspace:^",
 		"@types/hosted-git-info": "^3.0.5",
 		"@types/npm-package-arg": "^6.1.4",
 		"pkg-types": "^2.3.0",

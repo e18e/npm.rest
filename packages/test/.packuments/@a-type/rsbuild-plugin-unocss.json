@@ -1,0 +1,909 @@
+{
+  "_id": "@a-type/rsbuild-plugin-unocss",
+  "_rev": "8-03b11e1d0f6fd04311bd8e17ecfb386f",
+  "name": "@a-type/rsbuild-plugin-unocss",
+  "dist-tags": {
+    "latest": "0.0.10"
+  },
+  "versions": {
+    "0.0.2": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.2",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.2",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "e7a13fba00a4449f5341f0c33478e60e9d47f770",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.2.tgz",
+        "fileCount": 13,
+        "integrity": "sha512-PX3JcSbfic0nVOUc7GiM1Xx1Gqh+dsaP4xqU/AQAcYLqHpIivbPVYY/6SwArqU+sjvBfqomfwpKn6m3rXzy8Ig==",
+        "signatures": [
+          {
+            "sig": "MEQCIE0opgSMBKu7u0o2IQRZ+o8sYq7yqITZST6lfSWrQE0iAiAZRZeoTT0O343J0RSRV2IYdA4Uin6YAldvfY46W/kiOQ==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 31656
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "2144550cca84d22304d36e02dfc83b40376c70b0",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "unocss": "^66.4.2",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "simple-git-hooks": "^2.13.0"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "npm run lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.2_1755830925868_0.019318280318698866",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.3": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.3",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.3",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "b6850060575fb2e712fcf4de46af1be1d01bddee",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.3.tgz",
+        "fileCount": 3,
+        "integrity": "sha512-TZ3VRCz5eOVuecsa6eduzI9OiJ6SV7KHwyitYS3BQsSxwZKIJBcAxqF7hNFsoEm9oM7QMhqHRnSo3tNaDpXL/A==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDQfilndOSRvOLm4W6MRyoKY4Nxi6ztdVawFybw2umbrgIgFBNXr/WNrgs3+bwwtYhhl3uIRprB1bcxw4lF8QxYxBA=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 6263
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "8bd1b3706fa3eab122ac3710e11379e9e95aab6d",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "unocss": "^66.4.2",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "simple-git-hooks": "^2.13.0"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.3_1756064017013_0.20338633803554806",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.4": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.4",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.4",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "d9fb099755579f18865d08879ef6c85fb08f7a9c",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.4.tgz",
+        "fileCount": 3,
+        "integrity": "sha512-CEPU0LDGRLvZ/7mAurcr/kXzzH1H4RRHAi2q/bNgtOJFims9xhR6Zl85XYTxyY++iIRbi7Ce8uo1FdJSVS2Jxg==",
+        "signatures": [
+          {
+            "sig": "MEQCICnOOioXkc3I5XjfxAdRci0SSeespsDkvaKfq9NQyl0IAiBUac42SqvJ8q3Q93zXyK/Fgc280oMaBIKQ0n194Hxfaw==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 6263
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "f75b7482af79a4ca5ab78b8b2ab11d292b1f9c0e",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "unocss": "^66.4.2",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "simple-git-hooks": "^2.13.0"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.4_1756065028426_0.15331127437038194",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.5": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.5",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.5",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "057652c3ab336daea05813080c0e04e63a37e8ba",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.5.tgz",
+        "fileCount": 15,
+        "integrity": "sha512-fg+Gps5f3iHUW0HEp4gShHEwWHqNxTANOg6tylelqoCt4gQrVh3hTRz01eGuWEJ+lIKnouCA1wiRGy7IhV1irQ==",
+        "signatures": [
+          {
+            "sig": "MEUCIGBFfDOpqzpQCN7FzU61pXrTHrFzgVYBi8noRamSQwrwAiEAh/c/vsStoAQ/ztWcNGL3tTN6BWXyeGGe78TJWGPBHLs=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 53529
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "fc2d49cf5002a6322a7779df80e530a6c11383ec",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "unocss": "^66.4.2",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "simple-git-hooks": "^2.13.0"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.5_1756065353623_0.29194702311497767",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.6": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.6",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.6",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "2a23597f192ba0de07c26a6686cc56c0e9055296",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.6.tgz",
+        "fileCount": 16,
+        "integrity": "sha512-rVZxVkwEDh9bS6/BIx1WTC4ZS7zfS9PGXiM3GpeIONodiWXrL8BK+q5R/lzI3X1B2UNBGAmsQzENQaHbo+aSeg==",
+        "signatures": [
+          {
+            "sig": "MEUCIQCy1p6ZcyZllDpFrdOGpKkh8SugRRZnvnawFh78gYTbTAIgc93xRDDf3RRxcgd89R1vJ0NHVGpJe29bVxJdQ3q/PtE=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 59033
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "d35400722d3605266b51055686356c8a1ac10e60",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "react": "catalog:",
+        "unocss": "^66.4.2",
+        "vitest": "^3.2.4",
+        "react-dom": "catalog:",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@types/react": "catalog:",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "@types/react-dom": "catalog:",
+        "simple-git-hooks": "^2.13.0",
+        "@rsbuild/plugin-react": "catalog:"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.6_1756174787045_0.6848471503549669",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.7": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.7",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.7",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "ef8ad570134fb86398d7a9eeb73ee10c46fdc0b2",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.7.tgz",
+        "fileCount": 16,
+        "integrity": "sha512-sRHRWn+MsXredtLtUz6ZaM7R8sdvFxBcbxqCbtr1Q790gQe+TiGDOSaFQI4z8C16pmVPLrAi2mcCT1h1xek97w==",
+        "signatures": [
+          {
+            "sig": "MEUCIQCDNJ6a0vex75P3cyhBdwah328IDhJwQT9wBDp7tEN0owIgd4rwjs8Vak8kgrL9fdx78rA286h1c8tTzKiUuxcFp7o=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 60286
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "a8e753195815827652172a86b85d5f2eda147953",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "react": "catalog:",
+        "unocss": "^66.4.2",
+        "vitest": "^3.2.4",
+        "react-dom": "catalog:",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@types/react": "catalog:",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "@types/react-dom": "catalog:",
+        "simple-git-hooks": "^2.13.0",
+        "@rsbuild/plugin-react": "catalog:"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.7_1756241001660_0.451306934587429",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.8": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.8",
+      "license": "MIT",
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.8",
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "dist": {
+        "shasum": "82628ec6b653df52d2a5ca5da2b302f89285f1d6",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.8.tgz",
+        "fileCount": 16,
+        "integrity": "sha512-gmW4V7EV0Vj9x4vWShka4rN19trD1CYel4h5THtPkAFy9FcCFOGErztigTAa/BD1Htx8r3l6jP4mUhv+ORfVAw==",
+        "signatures": [
+          {
+            "sig": "MEUCID3OloyOpcy0ez/n9J0o6Z+e1BJBYXIF2/ZsVBeKU+5mAiEApk8geAOA5TSJIPXPY8zL9jaS1MfT2/KbU2WWmh/DKjo=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 60286
+      },
+      "main": "./dist/index.js",
+      "type": "module",
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.mjs",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "gitHead": "e35230085b78fed5f63905eeda51a76bb3430610",
+      "scripts": {
+        "dev": "rslib build --watch",
+        "bump": "pnpx bumpp",
+        "lint": "biome check .",
+        "test": "playwright test",
+        "build": "rslib build",
+        "prepare": "simple-git-hooks",
+        "lint:write": "biome check . --write",
+        "prepublishOnly": "pnpm build"
+      },
+      "_npmUser": {
+        "name": "a-type",
+        "email": "gaforres@gmail.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "[WIP] A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "directories": {},
+      "_nodeVersion": "22.18.0",
+      "dependencies": {
+        "pathe": "^2.0.3",
+        "chokidar": "^4.0.3",
+        "tinyglobby": "^0.2.14",
+        "@unocss/core": "^66.4.2",
+        "magic-string": "^0.30.17",
+        "@unocss/config": "^66.4.2",
+        "unplugin-utils": "^0.3.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "rsbuild-plugin-virtual-module": "^0.3.1"
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "_hasShrinkwrap": false,
+      "packageManager": "pnpm@10.12.4",
+      "devDependencies": {
+        "react": "catalog:",
+        "unocss": "^66.4.2",
+        "vitest": "^3.2.4",
+        "react-dom": "catalog:",
+        "playwright": "^1.53.2",
+        "typescript": "^5.8.3",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@types/react": "catalog:",
+        "@rsbuild/core": "^1.4.2",
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "@types/react-dom": "catalog:",
+        "simple-git-hooks": "^2.13.0",
+        "@rsbuild/plugin-react": "catalog:"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.8_1756241109578_0.5129563155440386",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.10": {
+      "name": "@a-type/rsbuild-plugin-unocss",
+      "version": "0.0.10",
+      "repository": {
+        "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+      },
+      "license": "MIT",
+      "type": "module",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
+      },
+      "main": "./dist/index.js",
+      "module": "./dist/index.mjs",
+      "types": "./dist/index.d.ts",
+      "simple-git-hooks": {
+        "pre-commit": "pnpm lint:write"
+      },
+      "devDependencies": {
+        "@biomejs/biome": "^2.1.1",
+        "@playwright/test": "^1.53.2",
+        "@rsbuild/core": "^1.4.2",
+        "@rsbuild/plugin-react": "1.3.5",
+        "@rslib/core": "^0.10.4",
+        "@types/node": "^22.15.34",
+        "@types/react": "19.1.11",
+        "@types/react-dom": "19.1.7",
+        "playwright": "^1.53.2",
+        "react": "19.1.1",
+        "react-dom": "19.1.1",
+        "simple-git-hooks": "^2.13.0",
+        "typescript": "^5.8.3",
+        "unocss": "^66.4.2",
+        "vitest": "^3.2.4"
+      },
+      "peerDependencies": {
+        "@rsbuild/core": "1.x"
+      },
+      "peerDependenciesMeta": {
+        "@rsbuild/core": {
+          "optional": true
+        }
+      },
+      "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+      },
+      "dependencies": {
+        "@jridgewell/remapping": "^2.3.5",
+        "@unocss/config": "^66.4.2",
+        "@unocss/core": "^66.4.2",
+        "chokidar": "^4.0.3",
+        "magic-string": "^0.30.17",
+        "pathe": "^2.0.3",
+        "rsbuild-plugin-virtual-module": "^0.3.1",
+        "tinyglobby": "^0.2.14",
+        "unplugin-utils": "^0.3.0"
+      },
+      "scripts": {
+        "build": "rslib build",
+        "dev": "rslib build --watch",
+        "lint": "biome check .",
+        "lint:write": "biome check . --write",
+        "test": "playwright test",
+        "bump": "pnpx bumpp"
+      },
+      "_id": "@a-type/rsbuild-plugin-unocss@0.0.10",
+      "description": "A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+      "bugs": {
+        "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+      },
+      "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+      "_integrity": "sha512-rYCkKcnIZTKvk6LVM/sGy7o1XHxFqSozxxX/7Qcbh5yoJO3z8ky25zlG4XOrCbMTR2lU2lv+jgOE5BIKHo1unA==",
+      "_resolved": "/tmp/d6f2d21ad0fa44d5348ff0d29e9f6ff5/a-type-rsbuild-plugin-unocss-0.0.10.tgz",
+      "_from": "file:a-type-rsbuild-plugin-unocss-0.0.10.tgz",
+      "_nodeVersion": "22.22.0",
+      "_npmVersion": "11.9.0",
+      "dist": {
+        "integrity": "sha512-rYCkKcnIZTKvk6LVM/sGy7o1XHxFqSozxxX/7Qcbh5yoJO3z8ky25zlG4XOrCbMTR2lU2lv+jgOE5BIKHo1unA==",
+        "shasum": "d2183455e23ef87e1fde1e94297947f0f71af2f5",
+        "tarball": "https://registry.npmjs.org/@a-type/rsbuild-plugin-unocss/-/rsbuild-plugin-unocss-0.0.10.tgz",
+        "fileCount": 16,
+        "unpackedSize": 63112,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@a-type%2frsbuild-plugin-unocss@0.0.10",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "signatures": [
+          {
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+            "sig": "MEUCIC301hpfiXwL7uwvJQ1zqqhgYccDooOY3pbHYqO9604KAiEAz8rV1duK6YXI6YVS2BHyLSh7hpfYYyZnPSiI18xV+Lo="
+          }
+        ]
+      },
+      "_npmUser": {
+        "name": "GitHub Actions",
+        "email": "npm-oidc-no-reply@github.com",
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "oidc:b1ab2f54-4701-424d-9367-3ca10c2cacb5"
+        }
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "a-type",
+          "email": "gaforres@gmail.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages-npm-production",
+        "tmp": "tmp/rsbuild-plugin-unocss_0.0.10_1770428719956_0.8325670258892313"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2025-08-22T02:48:45.774Z",
+    "modified": "2026-02-07T01:45:20.687Z",
+    "0.0.2": "2025-08-22T02:48:46.066Z",
+    "0.0.3": "2025-08-24T19:33:37.265Z",
+    "0.0.4": "2025-08-24T19:50:28.627Z",
+    "0.0.5": "2025-08-24T19:55:53.823Z",
+    "0.0.6": "2025-08-26T02:19:47.235Z",
+    "0.0.7": "2025-08-26T20:43:21.848Z",
+    "0.0.8": "2025-08-26T20:45:09.869Z",
+    "0.0.10": "2026-02-07T01:45:20.114Z"
+  },
+  "bugs": {
+    "url": "https://github.com/a-type/rsbuild-plugin-unocss/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/a-type/rsbuild-plugin-unocss#readme",
+  "repository": {
+    "url": "git+https://github.com/a-type/rsbuild-plugin-unocss.git"
+  },
+  "description": "A minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.",
+  "maintainers": [
+    {
+      "name": "a-type",
+      "email": "gaforres@gmail.com"
+    }
+  ],
+  "readme": "# @a-type/rsbuild-plugin-unocss\n\nA minimal but stable Rsbuild plugin for UnoCSS, handwritten for Rsbuild instead of unplugin.\n\n<p>\n  <a href=\"https://npmjs.com/package/@a-type/rsbuild-plugin-unocss\">\n   <img src=\"https://img.shields.io/npm/v/rsbuild-plugin-unocss?style=flat-square&colorA=564341&colorB=EDED91\" alt=\"npm version\" />\n  </a>\n  <img src=\"https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91\" alt=\"license\" />\n  <a href=\"https://npmcharts.com/compare/@a-type/rsbuild-plugin-unocss?minimal=true\"><img src=\"https://img.shields.io/npm/dm/@a-type/rsbuild-plugin-unocss.svg?style=flat-square&colorA=564341&colorB=EDED91\" alt=\"downloads\" /></a>\n</p>\n\n## Features\n\nThis plugin doesn't support all UnoCSS features, but it does support some features not available in PostCSS and some workflows I wanted to experiment with for external libraries.\n\n- ✅ Transforms: rewrites source files (`pre` transforms only for now)\n- ✅ Filesystem watches in addition to bundled files (using `unoConfig.content.filesystem`)\n- ✅ Process `// @unocss-include` comments on selected external modules, even if not matched by your `content.pipeline` rules. This one makes it easy to add this magic comment to your output files in a component library and then run Uno on its output files when it's used in your actual app!\n- 🚫 Uno config watching (TODO)\n- 🚫 Uno scopes (not actually sure what these are)\n\n## Usage\n\nInstall:\n\n```bash\nnpm add @a-type/rsbuild-plugin-unocss -D\n```\n\nAdd plugin to your `rsbuild.config.ts`:\n\n```ts\n// rsbuild.config.ts\nimport { pluginUnoCss } from \"@a-type/rsbuild-plugin-unocss\";\n\nexport default {\n  plugins: [pluginUnoCss({\n    config: // a path or literal Uno config\n  })],\n};\n```\n\nImport `uno.css` in your app:\n\n```ts\nimport 'uno.css';\n```\n\n## Options\n\n### config\n\nA path to an Uno config, or a literal config object. Otherwise it should be inferred as `uno.config.ts`.\n\n- Type: `string`\n- Default: `undefined`\n- Example:\n\n```js\npluginUnoCss({\n\tconfig: 'uno.branded.config.ts',\n});\n```\n\n### enableIncludeCommentCheck\n\nPass a filter function which takes the absolute path of a bundled source file and returns `true` if you want to check it for an `@unocss-include` comment. The file does _not_ have to be in your UnoCSS `content.pipeline` matchers. You can use this to extract CSS from precompiled NPM libraries without including them in your actual UnoCSS pipeline, as long as those libraries' built sources are postprocessed to add `// @unocss-include`.\n\n- Type: `(filePath: string) => boolean`\n- Default: `undefined`\n- Example:\n\n```js\npluginUnoCss({\n\tenableIncludeCommentCheck: (filePath) =>\n\t\t// make sure your test is compatible with OS-dependent path formats\n\t\t// by using path.join.\n\t\t// I also recommend including the dist/output dir in your test, to avoid\n\t\t// nested node_modules.\n\t\tfilePath.includes(path.join('@your-scope', 'component-library', 'dist')),\n});\n```\n\n### enableCacheExtractedCSS\n\nPass a filter function to enable caching the extracted CSS classes from particular files. By default this caches any extractions from files in `node_modules` (see `enableIncludeCommentCheck` for why you might have extracted files from `node_modules`).\n\nYou may need to change this if you are in a monorepo and want to extract CSS from other projects linked via `node_modules`. Without excluding them using this filter, their initial extracted CSS will be cached and they won't be scanned for changes. Return `false` for files matching your monorepo projects to re-enable live CSS reloading on them.\n\n- Type: `(filePath: string) => boolean`\n- Default: `(filePath: string) => filePath.includes('node_modules')`\n- Example:\n\n```js\npluginUnoCss({\n\tenableCacheExtractedCSS: (filePath) =>\n\t\tfilePath.includes(`@my-monorepo-scope`)\n\t\t\t? false\n\t\t\t: filePath.includes('node_modules'),\n});\n```\n\n### disableTransform\n\nSelectively disable applying your Uno transforms on specific files. This can speed up builds if you know certain files don't need transforms, particularly if you have included pre-transformed files in your content.pipeline configuration.\n\n- Type: `(filePath: string) => boolean`\n- Default: `(filePath: string) => filePath.includes('node_modules')`\n- Example:\n\n```js\npluginUnoCss({\n\tdisableTransform: (filePath) => filePath.includes('tests'),\n});\n```\n\n## License\n\n[MIT](./LICENSE).\n",
+  "readmeFilename": "README.md"
+}

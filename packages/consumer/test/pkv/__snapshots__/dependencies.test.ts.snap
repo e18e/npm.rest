@@ -1,7 +1,97 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`dependencies parsing > handles workspace: spec 1`] = `
+exports[`dependencies parsing > handles catalog: spec 1`] = `
 [
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "pathe",
+      "specifier": "^2.0.3",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "chokidar",
+      "specifier": "^4.0.3",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "tinyglobby",
+      "specifier": "^0.2.14",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@unocss/core",
+      "specifier": "^66.4.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "magic-string",
+      "specifier": "^0.30.17",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@unocss/config",
+      "specifier": "^66.4.2",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "unplugin-utils",
+      "specifier": "^0.3.0",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "@jridgewell/remapping",
+      "specifier": "^2.3.5",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "prod",
+    "optional": false,
+    "spec": {
+      "name": "rsbuild-plugin-virtual-module",
+      "specifier": "^0.3.1",
+      "type": "range",
+    },
+  },
   {
     "alias": null,
     "depType": "dev",
@@ -149,6 +239,16 @@ exports[`dependencies parsing > handles workspace: spec 1`] = `
     "spec": {
       "name": "@rsbuild/plugin-react",
       "specifier": "catalog:",
+      "type": "range",
+    },
+  },
+  {
+    "alias": null,
+    "depType": "peer",
+    "optional": true,
+    "spec": {
+      "name": "@rsbuild/core",
+      "specifier": "1.x",
       "type": "range",
     },
   },
