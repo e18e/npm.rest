@@ -26,9 +26,26 @@ const Repository = v.strictObject({
 	url: v.optional(Link),
 });
 
-const Funding = v.strictObject({
-	type: v.optional(v.union([v.literal('patreon'), v.literal('individual')])),
-});
+// export const FundingObject = v.strictObject({
+// 	type: v.optional(
+// 		v.union([
+// 			v.literal('patreon'),
+// 			v.literal('individual'),
+// 			v.literal('github'),
+// 			v.literal('opencollective'),
+// 			v.literal('paypal'),
+// 			v.literal('ko_fi'),
+// 			v.literal('buymeacoffee'),
+// 		]),
+// 	),
+// 	url: v.optional(v.string()),
+// });
+
+// export const Funding = v.union([
+// 	v.string(),
+// 	FundingObject,
+// 	v.array(v.union([v.string(), FundingObject])),
+// ]);
 
 // export const BugsObjectSchema = v.object({
 // 	url: Link,
@@ -90,15 +107,13 @@ export const PackumentVersionSchema = v.looseObject({
 		),
 	}),
 	deprecated: v.optional(v.union([EmptyableString, v.boolean()])),
+	// funding: v.optional(Funding),
 	dependencies: v.optional(v.record(v.string(), v.string())),
 	devDependencies: v.optional(v.record(v.string(), v.string())),
 	optionalDependencies: v.optional(v.record(v.string(), v.string())),
 	peerDependencies: v.optional(v.record(v.string(), v.string())),
 	peerDependenciesMeta: v.optional(
 		v.record(v.string(), v.strictObject({ optional: v.boolean() })),
-	),
-	funding: v.optional(
-		v.union([v.string(), Funding, v.array(v.union([v.string(), Funding]))]),
 	),
 	repository: v.optional(
 		v.union([

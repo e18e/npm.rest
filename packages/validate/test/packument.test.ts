@@ -656,6 +656,18 @@ describe('packument-version validation', () => {
 	});
 });
 
+// describe('Funding validation', () => {
+// 	it('supports url', () => {
+// 		const parsed = v.parse(FundingObject, { url: 'https://example.com' });
+// 		expect(parsed.url).toBe('https://example.com');
+// 	});
+
+// 	it('supports array of funding objects', () => {
+// 		const parsed = v.parse(Funding, [{ url: 'https://example.com' }]);
+// 		expect(parsed).toMatchObject([{ url: 'https://example.com' }]);
+// 	});
+// });
+
 const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
 
 describe('real world tests', () => {
