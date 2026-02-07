@@ -34,9 +34,9 @@ const Bugs = v.object({
 });
 
 export const PackumentVersionSchema = v.looseObject({
-	name: v.string(),
-	description: EmptyableString,
-	version: v.string(),
+	name: StrictString,
+	description: v.optional(EmptyableString, null),
+	version: StrictString,
 	keywords: v.optional(v.array(v.string())),
 	license: v.optional(
 		v.union([

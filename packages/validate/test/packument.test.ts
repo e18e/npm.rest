@@ -1,4 +1,4 @@
-import { PackumentSchema, type PackumentVersionSchema } from '../src/packument';
+import { PackumentSchema, PackumentVersionSchema } from '../src/packument';
 import { fetchPackumentRaw } from '@npm.rest/test/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
@@ -286,6 +286,82 @@ describe('packument', () => {
 					date.getTime(),
 				);
 			});
+		});
+	});
+});
+
+describe('packument-version validation', () => {
+	describe('name', () => {
+		it('parses', () => {
+			const packument = createPackument();
+			packument.name = 'hello-world';
+			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+		});
+
+		it('is required', () => {
+			const packument = createPackument();
+			// @ts-expect-error tests
+			packument.name = null;
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('fails with empty name', () => {
+			const packument = createPackument();
+			packument.name = '';
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+
+		it('fails with effectively empty name', () => {
+			const packument = createPackument();
+			packument.name = '    ';
+			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+		});
+	});
+
+	describe('description', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = null;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = '';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is null when effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = '    ';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+	});
+
+	describe('version', () => {
+		it('parses', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.name = 'hello-world';
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('is required', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.name = null;
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('fails when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.name = '';
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('fails when effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.name = '    ';
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
 		});
 	});
 });
