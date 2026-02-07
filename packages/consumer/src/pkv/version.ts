@@ -63,7 +63,7 @@ export async function processVersion(
 	const types = await hasTypes(pkg.name, tarball.value, rev);
 	if (types.isErr()) return types;
 
-	const repoInfo = pkv.repository
+	const repoInfo = pkv.repository?.url
 		? hostedGitInfo.fromUrl(pkv.repository.url)
 		: null;
 

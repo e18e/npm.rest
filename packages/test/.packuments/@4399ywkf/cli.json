@@ -1,0 +1,2348 @@
+{
+  "_id": "@4399ywkf/cli",
+  "_rev": "26-8cfc78f7ba50a6012c2c8a923f614275",
+  "name": "@4399ywkf/cli",
+  "dist-tags": {
+    "latest": "1.0.9"
+  },
+  "versions": {
+    "0.0.1": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.1",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.1",
+      "homepage": "https://github.com/Emma-Alpha/ywkf-cli#readme",
+      "bugs": {
+        "url": "https://github.com/Emma-Alpha/ywkf-cli/issues"
+      },
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "b2c86ab866d5090c4f762fb2eeaeb49cf427bf88",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.1.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-PkW25dyeOmz18JVMDY3CCbaW3I6jbzi+uztB9pr7pV/TNa8z2Gu0Aj3tSJNfN0lSNhR8wIlR5wVEPsvPkpn2Xw==",
+        "signatures": [
+          {
+            "sig": "MEUCIEclys8n3w9LPi7dXPhEahu13riC64lEqQWJoNN9ZlTjAiEAsc3TznIaF9nf0KcN6GNEKWpclutuMSE5h4qKgdBJRAw=",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 6065
+      },
+      "main": "index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "82eacb9b635924ac2e1b88ca5e6d156c89284da6",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/Emma-Alpha/ywkf-cli.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.2.3",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "20.10.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.1_1719803558674_0.5555429515672372",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "0.0.2": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.2",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.2",
+      "homepage": "https://github.com/Emma-Alpha/ywkf-cli#readme",
+      "bugs": {
+        "url": "https://github.com/Emma-Alpha/ywkf-cli/issues"
+      },
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "0982f248e5ee251e2e3ac7f1ff517e5afa39cd87",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.2.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-oxa9CWGaGdQgWtZvCmszHoek3imK0JNd91a0xrphe/LMNNNwFtAPW8j05tYQXUWWCyzLcUiT3D7LpUcywB1Wjw==",
+        "signatures": [
+          {
+            "sig": "MEQCIE5DiM+rbyrRTbSqpbg2Fvnr34dUdJxKPPsy0et1Acu/AiBiAK7jWqodzdQJtPjmrVnu2B9kvhzYvPhXw6yp8w2Seg==",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 6666
+      },
+      "main": "index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "28256042600233436429ef6edf659ff9ce7efee4",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "url": "git+https://github.com/Emma-Alpha/ywkf-cli.git",
+        "type": "git"
+      },
+      "_npmVersion": "10.2.3",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "20.10.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.2_1719805571552_0.14809003516382724",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "0.0.3": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.3",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.3",
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "1d3aed8df88e208bd2dae6cdc843b4a03ab9b3ec",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.3.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-GsmOkVXYRjo02rvv/CH2xsx4xiJ/i0i344UzVsSSACGe3oBjEt27b90l1Yq6O3ELzexiKWux77emLkL3O/fGHA==",
+        "signatures": [
+          {
+            "sig": "MEQCIAgGyzkj++sUJvGLjM1MwKlgO8HwC1ylzvevBl4LTPQyAiBUwsaQLTMQUznrU4ru/d747BoqQ5A8cGvCpjMVP79avQ==",
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+          }
+        ],
+        "unpackedSize": 6607
+      },
+      "main": "index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "90f73d19e6bc2e336b583e8a944622660d76316b",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.2.3",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "20.10.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.3_1719806623172_0.7742381198388597",
+        "host": "s3://npm-registry-packages"
+      }
+    },
+    "0.0.4": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.4",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.4",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "e09a2772287230b05403cc92c94a792246dbcbb1",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.4.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-N41US6odgE5JJwdLowWscjP3JGX9q3TUZYmVLDUG5r8uPAl/heDM1BOINpm5F0fjfln389rHWMl/QPczhghy0Q==",
+        "signatures": [
+          {
+            "sig": "MEYCIQD3iythTzgZxkzSIfehpLmUpZuSB9GFJf7lkxh73a1qLQIhAONsWeA/DSUoqj2pj8T4v98nzsYbFdSU+voyolOW2UEt",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 10222
+      },
+      "main": "index.js",
+      "_from": "file:4399ywkf-cli-0.0.4.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/8fd5dccd7223d5a72a6fdbc4ce487cd7/4399ywkf-cli-0.0.4.tgz",
+      "_integrity": "sha512-N41US6odgE5JJwdLowWscjP3JGX9q3TUZYmVLDUG5r8uPAl/heDM1BOINpm5F0fjfln389rHWMl/QPczhghy0Q==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.4_1749200703701_0.49626885976601165",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.5": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.5",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.5",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "3d7df9f1578147cda4d43a47e79d99564485321a",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.5.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-9QaDrGa5hbz6QNjVPentE2uQp+xiWvzWRoba1QEIxQ/X5IKinFr5z0TMK+eSYqRZdUDOKMYNQziuM6zj9fcPXg==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDe9XFxPJ3yYUZbqnHkr38JgoHZuw3y8Y0+MTKYRc9v0gIgK1nwnWwZXurjRZ3eMZ027M8zMp/DISqXZ9yo18/ziEc=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 15209
+      },
+      "main": "index.js",
+      "_from": "file:4399ywkf-cli-0.0.5.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "actor": {
+          "name": "ywjszx",
+          "type": "user",
+          "email": "ywjszx@4399.com"
+        },
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/c93a296a37d20821f7c431df2d0053f0/4399ywkf-cli-0.0.5.tgz",
+      "_integrity": "sha512-9QaDrGa5hbz6QNjVPentE2uQp+xiWvzWRoba1QEIxQ/X5IKinFr5z0TMK+eSYqRZdUDOKMYNQziuM6zj9fcPXg==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.5_1750326302321_0.08984917869866504",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.7": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.7",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.7",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "29ca5fd1467a66e274da4e69ea7644c40e8c804e",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.7.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-N/NsQhH5Kwv1eAFMhRD/fQlH1OuGJgRlB1Gp9Ksog6Nz/5BHMVxBgSP4fXeSky+qk5ru6KS/Mee2+t7poMjyYQ==",
+        "signatures": [
+          {
+            "sig": "MEQCIDUIBqepjNqZWXiPWbyqdm+Lkoa75xAg+i+K+FpwECJ3AiAL3Lg+oui+xMZZBecrQbwuyLcAt17eHgPoDENRJNAwKQ==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 15275
+      },
+      "main": "index.js",
+      "_from": "file:4399ywkf-cli-0.0.7.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "actor": {
+          "name": "ywjszx",
+          "type": "user",
+          "email": "ywjszx@4399.com"
+        },
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/5eac4c03ae0fde6e6f3d1fc7645739d4/4399ywkf-cli-0.0.7.tgz",
+      "_integrity": "sha512-N/NsQhH5Kwv1eAFMhRD/fQlH1OuGJgRlB1Gp9Ksog6Nz/5BHMVxBgSP4fXeSky+qk5ru6KS/Mee2+t7poMjyYQ==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.7_1750412746465_0.645037714479268",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.8": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.8",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.8",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "bin/cli.js"
+      },
+      "dist": {
+        "shasum": "e29de09dbe825c43d288df1245eb45c159416f2d",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.8.tgz",
+        "fileCount": 5,
+        "integrity": "sha512-+wnJ3JftSso2H72qwEnM2QmXLh/Ok1FcYvUXK5fRnYZt6UF3nUnKPrjQrFGy+KuT1tUcdXwXHuO4Hg93Y70LhA==",
+        "signatures": [
+          {
+            "sig": "MEQCICMhd+zRtt1kjpI5qwq5TzLCAvTf4lUtWxhaN3kzXeBGAiBboYA0g1EkrC/HuDuImFYINFgqRuWqqqe8PvoJgBy4rA==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 19100
+      },
+      "main": "index.js",
+      "_from": "file:4399ywkf-cli-0.0.8.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "actor": {
+          "name": "ywjszx",
+          "type": "user",
+          "email": "ywjszx@4399.com"
+        },
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/7b1629e02ecede5c6f30bf1b51525144/4399ywkf-cli-0.0.8.tgz",
+      "_integrity": "sha512-+wnJ3JftSso2H72qwEnM2QmXLh/Ok1FcYvUXK5fRnYZt6UF3nUnKPrjQrFGy+KuT1tUcdXwXHuO4Hg93Y70LhA==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.8_1751267479637_0.5687983317007528",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.10": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.10",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.10",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "7fdc7de993a1988087b7e8827e433e645cf1fd62",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.10.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-c0NWw/uPSGckbikMDLnN2TwjTcb8K+GgESCyfXJrgrzXf5mDs3ZzfM6hpJvN01MSo1ix1fxcOEN8tbHW+yMKYg==",
+        "signatures": [
+          {
+            "sig": "MEYCIQCEPzyl4PhqDHQfzgCcEjGlJoUXmhxrcizj7hUe7aNK4AIhAPlukKWT6ZZ/F4zN5kPJxN2ew+IbTAnIRHqUMgLcLQBc",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23190
+      },
+      "main": "dist/index.js",
+      "type": "module",
+      "_from": "file:4399ywkf-cli-0.0.10.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "release": "pnpm build && pnpm changeset && pnpm changeset:version && pnpm changeset:publish",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/7ce9450a9b37e0dab4c74dde268cedc6/4399ywkf-cli-0.0.10.tgz",
+      "_integrity": "sha512-c0NWw/uPSGckbikMDLnN2TwjTcb8K+GgESCyfXJrgrzXf5mDs3ZzfM6hpJvN01MSo1ix1fxcOEN8tbHW+yMKYg==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.10_1755593037999_0.4079276854735938",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.11": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.11",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.11",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "d47db84b07d24a74333f4007b2daf2eacaa520d0",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.11.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-NFSOdJDMBDsQ6W7l6Por14fBL1LtTB0PuB59y8MVjN1MzSkGBZ/oaXLDu5nPNYk/y/raNRUjLfQWInho9F0SOg==",
+        "signatures": [
+          {
+            "sig": "MEQCIGUlqD8vaM+qO4qvdowL1v/P3UeO8b/H5tNWP0MqwuV5AiBumFOEgOWL4e/73azLLiYb2LFsaHEl9AeRJpaDRgXm1g==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23181
+      },
+      "main": "dist/index.js",
+      "type": "module",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "6a3f96147b841262c38482378490eeb91e6bbe2a",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.11_1755593171934_0.43586696770458144",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.12": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.12",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.12",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "1e21404ecc546b3d5c0e4e3609bb724b174e5364",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.12.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-9jpuaI6xnkuSMP5OYzvXQ52FpFiGVTiMApFYOwolo5Ab/CV50qKtF1YelG7S0vdpfzDyx0yGnR40RTXnYbDyaw==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDb5+dq9RtCuuMv7+kX0h8i75nvKW/TYMkCDOsT4xFkdAIgfXkEgDaWX0e35TG/amoVe+yNZKj0P0LNcFylsmFgZIs=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23091
+      },
+      "main": "dist/index.js",
+      "type": "module",
+      "_from": "file:4399ywkf-cli-0.0.12.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/d1e655662197afe2d631adbe90c9f961/4399ywkf-cli-0.0.12.tgz",
+      "_integrity": "sha512-9jpuaI6xnkuSMP5OYzvXQ52FpFiGVTiMApFYOwolo5Ab/CV50qKtF1YelG7S0vdpfzDyx0yGnR40RTXnYbDyaw==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.12_1755593221013_0.07272412529020356",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.13": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.13",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.13",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "56f7a8c97e25d5b46d8afc7a0f9d1aa4815feaf9",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.13.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-aujH939vnzp7q2PlsnxQZu6ejmyovlrBD4qmhjQ5y2neTV/WSfQhQe5B90pEfUTYPXNtfc1Nr7/49tG4qfGQrg==",
+        "signatures": [
+          {
+            "sig": "MEUCIFLTsJv/gI+kmknzUi86zdN1Cm47s9yPLn1p/749KnaWAiEAs13OvgONYZNwbiANkeAqNZx1cgKTf2z61lvJhIfvBIM=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23071
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.13.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/2f353fac2d9b7acb3972b3f02c2b7fe5/4399ywkf-cli-0.0.13.tgz",
+      "_integrity": "sha512-aujH939vnzp7q2PlsnxQZu6ejmyovlrBD4qmhjQ5y2neTV/WSfQhQe5B90pEfUTYPXNtfc1Nr7/49tG4qfGQrg==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.13_1755593439107_0.2484859859127786",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.14": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.14",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.14",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "4027b7069378ca4a4983609d8ed5d2944ae0ebb9",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.14.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-OJVF2+OzhWFYkSEqLUKkzOUQWCIGtydJGLO3jm/ak+E81LUiGOmJVGL623u5Me4xQcNRcEdPxXkABbpitOM8pw==",
+        "signatures": [
+          {
+            "sig": "MEUCIAS4cxDsOdbiASE/7zUK21CzObyz5Yn8nB6bqWkZA/SXAiEArHNszq3vvO6GteHWwPLUpcGlzTlLb3bRMEf9mgd8910=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23051
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.14.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/23d190f5bc55164e3dce3e2bf0718611/4399ywkf-cli-0.0.14.tgz",
+      "_integrity": "sha512-OJVF2+OzhWFYkSEqLUKkzOUQWCIGtydJGLO3jm/ak+E81LUiGOmJVGL623u5Me4xQcNRcEdPxXkABbpitOM8pw==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.14_1755593613183_0.8141868223724877",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.15": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.15",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.15",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "8df236ab7c5203091fc77e9801739014e66a4c65",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.15.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-qsdjvAzmWtQn3KrZtO+LDgYIcTZUBwOdP2I0f9E7HOYB2ViQKK2QpYuep9ATQgZ4a3uED4beUaUJ0bZ/yX8UYQ==",
+        "signatures": [
+          {
+            "sig": "MEYCIQDifoqFlg0Iw2EoC/qXLmEv5XJdX2N9xUak4VuHMCQ5sgIhALy7TmHHh+Odmg3usB0iHplPue7r3olRBkMIIYIWT/Rm",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 23940
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.15.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/842c0f9d3597c0e721d1004a4986afda/4399ywkf-cli-0.0.15.tgz",
+      "_integrity": "sha512-qsdjvAzmWtQn3KrZtO+LDgYIcTZUBwOdP2I0f9E7HOYB2ViQKK2QpYuep9ATQgZ4a3uED4beUaUJ0bZ/yX8UYQ==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.15_1755593846792_0.546044154984894",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.18": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.18",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.18",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "f82e015a05f0db7fe1863b48518b27b85d4d3f2d",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.18.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-JUGzn1S0R7HbWpaKhK6evblYzYWjsY1dgeBfdTAP9wQSN3pdqLTBT3tbP0bhF2cvUOCG+mxt4EnAomE2dpoLVg==",
+        "signatures": [
+          {
+            "sig": "MEYCIQDnHB5kELElguD4v5KyJVkLD7nsurQQBP02yiZgnheqPwIhAKONOZolimWJP/UjjZSmABA6G6f9JeKblqvGd/6SXHs4",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 29267
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.18.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/868bc3723b8857be611e1633a7ba91c8/4399ywkf-cli-0.0.18.tgz",
+      "_integrity": "sha512-JUGzn1S0R7HbWpaKhK6evblYzYWjsY1dgeBfdTAP9wQSN3pdqLTBT3tbP0bhF2cvUOCG+mxt4EnAomE2dpoLVg==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.18_1755594652826_0.22117465335470343",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.19": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.19",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.19",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "6e61c3eee1edc278b6b8d7a2a5d6a33e51244f6a",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.19.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-FqvXFROa+UNsY4e/L7KZ9CvSVtwegz1YxSIFtp3FCjnqY/zlijMwVDsNTCsilU9xlAG5HtTWuwSKKcwJ/zH0pA==",
+        "signatures": [
+          {
+            "sig": "MEUCIGxCU8avwtgkNlo2jHgq7+V+5jap/ZNIhuzwexuSwC7QAiEAyUoNdLQWoZ7Hfm0pRISzVNk9P1+ntMYGFXDRKLX+WHw=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 29522
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.19.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/6f68494eb5d30939ccd6d6d577ba4b51/4399ywkf-cli-0.0.19.tgz",
+      "_integrity": "sha512-FqvXFROa+UNsY4e/L7KZ9CvSVtwegz1YxSIFtp3FCjnqY/zlijMwVDsNTCsilU9xlAG5HtTWuwSKKcwJ/zH0pA==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.19_1755594808879_0.09159992190572197",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.20": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.20",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.20",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "c35eb1d88f6ae7b70f882b1d7aed2cf28e2807f6",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.20.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-5N1hF1N4J2Gex46ZMwvdQxLIyZozg95Jmbc4DnNM++DLU5eYMBEVmu0G0gCyBijFyeKqqVyuovUmP6ZkhkEMZA==",
+        "signatures": [
+          {
+            "sig": "MEQCIAwiTwAtcr9hwD0eWiMvnzFBITV3hWJHNtv+yXiEaLQiAiA4BiX7WrKs/9d7ApGR20AIvUiKdF1TaAL8BqVe2lgiUw==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 26866
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.20.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/545cb162187418d5b5850a08acbc9d40/4399ywkf-cli-0.0.20.tgz",
+      "_integrity": "sha512-5N1hF1N4J2Gex46ZMwvdQxLIyZozg95Jmbc4DnNM++DLU5eYMBEVmu0G0gCyBijFyeKqqVyuovUmP6ZkhkEMZA==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.1.0",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.14.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.20_1755595598074_0.272589785865738",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.21": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.21",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.21",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "5cd9c1cb3705292de8e9e3452ff7e93b0d737691",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.21.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-WOIBwGxr/esqsc4bIocY0ozhR5p1ff3g3n5E612ShgsrOC5Cjg8cgha7rYyKYWi1PFeCLELlhDggSq07pq1EGg==",
+        "signatures": [
+          {
+            "sig": "MEUCIBvSBEsHXKaF46RdwWYqPSrNfqa2QWN9aT2/xO/cca2nAiEAhpBOwD+3I3mJBXiYyztNtC56Q2uGTlzpokkZo/Nfk1g=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 28477
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.21.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/ae57f8411f544ac7de92587b26a5084e/4399ywkf-cli-0.0.21.tgz",
+      "_integrity": "sha512-WOIBwGxr/esqsc4bIocY0ozhR5p1ff3g3n5E612ShgsrOC5Cjg8cgha7rYyKYWi1PFeCLELlhDggSq07pq1EGg==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.19.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.21_1762830704277_0.1684431030908753",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "0.0.22": {
+      "name": "@4399ywkf/cli",
+      "version": "0.0.22",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@0.0.22",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "db7080067e770e2b36849778137067a48f200b1e",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-0.0.22.tgz",
+        "fileCount": 6,
+        "integrity": "sha512-nRAL21m0rqQzZ7uve6Itsd/Hrq0R/gpfK3QyO8EneCINXgODAu1j1xjMiMIhOUQ+a3YiXEdTyBjz59Ilr1xCgQ==",
+        "signatures": [
+          {
+            "sig": "MEYCIQD2Ql1Cy0GyO2zKYzAwmRJ1HN142aY6OHmFCPSuqSwKmAIhAJIiNxZgb6yFhJrxgFg7xA5I9450hE1mrFC7AjiX28R4",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 28504
+      },
+      "main": "dist/index.js",
+      "_from": "file:4399ywkf-cli-0.0.22.tgz",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/6df425f071fb85f79685ebf73d78ef61/4399ywkf-cli-0.0.22.tgz",
+      "_integrity": "sha512-nRAL21m0rqQzZ7uve6Itsd/Hrq0R/gpfK3QyO8EneCINXgODAu1j1xjMiMIhOUQ+a3YiXEdTyBjz59Ilr1xCgQ==",
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "11.5.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.19.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_0.0.22_1762831795138_0.9453698973742224",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.2": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.2",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.2",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "7f1b471608952f64232a961ea9ad68ef9511555a",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.2.tgz",
+        "fileCount": 801,
+        "integrity": "sha512-Sa7eB6w9mX3+5zpDoQEP446a6jwJFHiOULZU9HjhE+aT7Wq9p0ZjKX3NV2ukQ7WZvI+bTH6mqz9EeSXS0el9lA==",
+        "signatures": [
+          {
+            "sig": "MEUCIQDmEcQPOyNbqtmdilrjhNF06ij1bDjR2f3FlfYB61lNugIgV+fkGhHSuQOThOGBifHN23+Mli8KolO9qvORvFXofHI=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3843810
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "2b71a61e9684a298fc6e1b16010fbddaa6d7e518",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.2_1766580606343_0.5937931232870586",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.3": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.3",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.3",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "bbd5a8cace621cdb0400ed1f66a431e19498f6d1",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.3.tgz",
+        "fileCount": 801,
+        "integrity": "sha512-VnmZsVkBXBzzHu9ug23ciF94WS4pzYIkmKo0vmja4nJ1ailwlATiJuFFvc72CId05a1/AvBumA8iPV7w/0ddNw==",
+        "signatures": [
+          {
+            "sig": "MEUCIAroWwZsuDRDgVwfSCWqvx0m4CTjnuCZsF2W1vaftKvRAiEA4M3M9c/yV6oXkDufv5+YSNNERZqzvVTxDcfDDAgF9Fo=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3843830
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "2b71a61e9684a298fc6e1b16010fbddaa6d7e518",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.3_1766580988673_0.561821462025414",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.4": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.4",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.4",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "593119b3d06f584dd971bddf1fb955cae175d35a",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.4.tgz",
+        "fileCount": 801,
+        "integrity": "sha512-hq4pubEPiZqh/Hbzz82dtUL28CgabwpbgFElgQIDHnk5jX18Wvqaum6/oyXeY661o61CQeWIrnv0AZcvA4tiVQ==",
+        "signatures": [
+          {
+            "sig": "MEUCIQC9Vmy5Zyo1YeSBDYM10MtO90WAgWn0N+9ZnyMik1NbjQIgPLJ/0bgx3payqLJWk93kRkUeGGXKkB4qqEgffZE2Xhs=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3858963
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "2b71a61e9684a298fc6e1b16010fbddaa6d7e518",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.4_1766581252405_0.7119853629165762",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.5": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.5",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.5",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "dce62e3240c28d84f03aa5c29623323610cca9eb",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.5.tgz",
+        "fileCount": 806,
+        "integrity": "sha512-8eDVJw/AtUYAgF9UhjYJqGUeFJZ0ZgjDYO8YrdFmzNPouYpY14JpCx9N/FLIUbqAIbpC3UqAu1c/j3yloQQtEg==",
+        "signatures": [
+          {
+            "sig": "MEQCIET6aTBNElzfZsVn83P9xHKsBQk3g+EITLRyJUtId5U7AiAY9gndMbDFzZ1td+4tFMBevNWeGVBdsE8yLzbKhGm11g==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3851220
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "cb102c71209dd7b42bd60212b37d3fca27ae941e",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.5_1766581814139_0.16323278094358473",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.6": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.6",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.6",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "0748f0e6bf8229e74e8014001f3ea9a1efdcd002",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.6.tgz",
+        "fileCount": 675,
+        "integrity": "sha512-IJUajMWqm/0Jj4We3Vw7F0ilS0IGwOmAvKFrs++sKZ566TfOU11SKfLYCP9vK2/b1XxyvrlTMnS8sV7aNWKLTA==",
+        "signatures": [
+          {
+            "sig": "MEQCIH0WoCiHuHidXbipUfy//OG6B/ugwl1Emkg+W7UOAutjAiB/r8DTOj0xTCXnp0AnDmaBkHLZVbpHRVnlgzwjWCK5fw==",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3671407
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "0c921eecb4daf8e72b460bfdc7caf494e5fbd1c4",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.6_1766581957473_0.8086879998284411",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.7": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.7",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.7",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "6d175a4b5200ea65fd8e2712eab74df46124b5a2",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.7.tgz",
+        "fileCount": 675,
+        "integrity": "sha512-m5vKvzT5cQ3QEkoDDZHSEywbY38USFDZAjg+3qdpuW32qGgRS4Fg6yES9XcWoPN07hPhSlYaKXoNai4aD+7Reg==",
+        "signatures": [
+          {
+            "sig": "MEUCIBm3eegDD7dDaI83KEC/DxcuJhXyETArAokr6UuIeaNcAiEApDoMkL6iKFUSxCLfsFlqjlRlCOSTTLqdRsL918jiyQU=",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3672003
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "0c921eecb4daf8e72b460bfdc7caf494e5fbd1c4",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.7_1766582364404_0.9131587510262384",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.8": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.8",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "_id": "@4399ywkf/cli@1.0.8",
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "dist": {
+        "shasum": "284073c407294cb33f691735c003f7b984a1fb90",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.8.tgz",
+        "fileCount": 662,
+        "integrity": "sha512-LiykuQLdQY8P3yTLGfMhCorxbdhuXd/DCQ4EnpasnkIC455WuEzQdtDpxBrohnGstKw72HltfndsCNhgzFbMjg==",
+        "signatures": [
+          {
+            "sig": "MEYCIQCJK0sqe0pd0jAC9GFewnQ+XaSzZnR1/mELgHE50y98PgIhAPn/mN5gPNmja369IEXe0TeszLu9cVwp0KawM17ypyVK",
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+          }
+        ],
+        "unpackedSize": 3529936
+      },
+      "main": "dist/index.js",
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "gitHead": "ea2cf4768a57a22dbb9afb2cabf6cf4480a19fe4",
+      "scripts": {
+        "dev": "node bin/cli.js",
+        "link": "npm link",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build:watch": "rollup -c -w",
+        "postpublish": "pnpm build && git push && git push --tags",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "prepublishOnly": "npm run build",
+        "changeset:publish": "changeset publish",
+        "changeset:version": "changeset version",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo"
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "_npmVersion": "10.9.2",
+      "description": "运维开发部脚手架",
+      "directories": {},
+      "_nodeVersion": "22.16.0",
+      "dependencies": {
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "commander": "^10.0.1",
+        "@umijs/utils": "4.6.14",
+        "child_process": "^1.0.2",
+        "@changesets/cli": "^2.29.5",
+        "download-git-repo": "^3.0.2"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "_hasShrinkwrap": false,
+      "devDependencies": {
+        "tslib": "^2.8.1",
+        "rollup": "^4.46.3",
+        "@biomejs/biome": "2.3.2",
+        "rollup-plugin-copy": "^3.5.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@rollup/plugin-node-resolve": "^15.3.1"
+      },
+      "_npmOperationalInternal": {
+        "tmp": "tmp/cli_1.0.8_1766734369734_0.7830137812766533",
+        "host": "s3://npm-registry-packages-npm-production"
+      }
+    },
+    "1.0.9": {
+      "name": "@4399ywkf/cli",
+      "version": "1.0.9",
+      "description": "运维开发部脚手架",
+      "main": "dist/index.js",
+      "bin": {
+        "ywkf-cli": "dist/cli.js"
+      },
+      "publishConfig": {
+        "access": "public"
+      },
+      "repository": {
+        "type": "git"
+      },
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "dependencies": {
+        "@changesets/cli": "^2.29.5",
+        "@umijs/utils": "4.6.14",
+        "boxen": "^5.1.2",
+        "chalk": "^4.1.2",
+        "child_process": "^1.0.2",
+        "commander": "^10.0.1",
+        "download-git-repo": "^3.0.2",
+        "figlet": "^1.5.2",
+        "fs-extra": "^11.1.1",
+        "inquirer": "^8.2.5",
+        "ora": "^5.4.1"
+      },
+      "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-node-resolve": "^15.3.1",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "rollup": "^4.46.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "rollup-plugin-esbuild": "^6.2.1",
+        "tslib": "^2.8.1",
+        "@biomejs/biome": "2.3.2"
+      },
+      "authors": [
+        "ywjszx@4399.com"
+      ],
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "node bin/cli.js",
+        "debug": "node --inspect-brk bin/cli.js",
+        "debug:create": "node --inspect-brk bin/cli.js create test-project",
+        "debug:create-with-template": "node --inspect-brk bin/cli.js create test-project -t webpack-mainApplicate_demo",
+        "debug:create-with-template-rspack": "node --inspect-brk bin/cli.js create test-project -t rspack-subApplicate_demo",
+        "debug:help": "node --inspect-brk bin/cli.js --help",
+        "build": "rollup -c && node scripts/postbuild.js",
+        "build:watch": "rollup -c -w",
+        "link": "npm link",
+        "unlink": "npm unlink -g",
+        "changeset": "changeset",
+        "changeset:version": "changeset version",
+        "changeset:publish": "changeset publish"
+      },
+      "_id": "@4399ywkf/cli@1.0.9",
+      "_integrity": "sha512-pke28I+p59IJ0B7fBsl1XVdXMY5F98bCQyhqeey/aYlE0LFI8Vq6mdnlgE4D/QJU6IebG65WK7ic3X7t5zd6ng==",
+      "_resolved": "/private/var/folders/c4/212btq_16qb7p6bpb_59pb_m0000gn/T/47ec08c2052afe9cda490ddf5dc33dfd/4399ywkf-cli-1.0.9.tgz",
+      "_from": "file:4399ywkf-cli-1.0.9.tgz",
+      "_nodeVersion": "22.16.0",
+      "_npmVersion": "10.9.2",
+      "dist": {
+        "integrity": "sha512-pke28I+p59IJ0B7fBsl1XVdXMY5F98bCQyhqeey/aYlE0LFI8Vq6mdnlgE4D/QJU6IebG65WK7ic3X7t5zd6ng==",
+        "shasum": "ddd00f8835eea95d17ea3db2c571548eb137bb2c",
+        "tarball": "https://registry.npmjs.org/@4399ywkf/cli/-/cli-1.0.9.tgz",
+        "fileCount": 738,
+        "unpackedSize": 3757879,
+        "signatures": [
+          {
+            "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+            "sig": "MEYCIQDvUATgTKztqZsKVPmmEBzYSu7q8eCD8wbKRwSma/i1RAIhANi3Oq/xczvCec0KPHMeXuqLiMYAtILyDhjcSf7mCCi1"
+          }
+        ]
+      },
+      "_npmUser": {
+        "name": "ywjszx",
+        "email": "ywjszx@4399.com"
+      },
+      "directories": {},
+      "maintainers": [
+        {
+          "name": "ywjszx",
+          "email": "ywjszx@4399.com"
+        }
+      ],
+      "_npmOperationalInternal": {
+        "host": "s3://npm-registry-packages-npm-production",
+        "tmp": "tmp/cli_1.0.9_1770279036584_0.7554171708154434"
+      },
+      "_hasShrinkwrap": false
+    }
+  },
+  "time": {
+    "created": "2024-07-01T03:12:38.550Z",
+    "modified": "2026-02-05T08:10:36.959Z",
+    "0.0.1": "2024-07-01T03:12:38.795Z",
+    "0.0.2": "2024-07-01T03:46:11.702Z",
+    "0.0.3": "2024-07-01T04:03:43.392Z",
+    "0.0.4": "2025-06-06T09:05:03.879Z",
+    "0.0.5": "2025-06-19T09:45:02.498Z",
+    "0.0.7": "2025-06-20T09:45:46.629Z",
+    "0.0.8": "2025-06-30T07:11:19.809Z",
+    "0.0.10": "2025-08-19T08:43:58.190Z",
+    "0.0.11": "2025-08-19T08:46:12.120Z",
+    "0.0.12": "2025-08-19T08:47:01.196Z",
+    "0.0.13": "2025-08-19T08:50:39.306Z",
+    "0.0.14": "2025-08-19T08:53:33.353Z",
+    "0.0.15": "2025-08-19T08:57:26.956Z",
+    "0.0.18": "2025-08-19T09:10:53.006Z",
+    "0.0.19": "2025-08-19T09:13:29.086Z",
+    "0.0.20": "2025-08-19T09:26:38.247Z",
+    "0.0.21": "2025-11-11T03:11:44.466Z",
+    "0.0.22": "2025-11-11T03:29:55.332Z",
+    "1.0.2": "2025-12-24T12:50:06.549Z",
+    "1.0.3": "2025-12-24T12:56:28.885Z",
+    "1.0.4": "2025-12-24T13:00:52.653Z",
+    "1.0.5": "2025-12-24T13:10:14.348Z",
+    "1.0.6": "2025-12-24T13:12:38.131Z",
+    "1.0.7": "2025-12-24T13:19:24.627Z",
+    "1.0.8": "2025-12-26T07:32:50.028Z",
+    "1.0.9": "2026-02-05T08:10:36.818Z"
+  },
+  "license": "ISC",
+  "keywords": [],
+  "repository": {
+    "type": "git"
+  },
+  "description": "运维开发部脚手架",
+  "maintainers": [
+    {
+      "name": "ywjszx",
+      "email": "ywjszx@4399.com"
+    }
+  ],
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": ""
+}

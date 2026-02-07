@@ -35,7 +35,7 @@ const FussyString = v.optional(
 const Repository = v.strictObject({
 	type: v.optional(v.union([v.literal('git')])),
 	directory: v.optional(v.string()),
-	url: Link,
+	url: v.optional(Link),
 });
 
 const Funding = v.strictObject({

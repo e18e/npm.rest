@@ -3,7 +3,7 @@ import { PackumentSchema } from '../src/packument.ts';
 import { describe, expect, test } from 'vitest';
 import * as v from 'valibot';
 
-const PACKUMENTS = ['g', '@aaamrh/first-package'];
+const PACKUMENTS = ['g', '@aaamrh/first-package', '@4399ywkf/cli'];
 
 // Helper to create a minimal valid packument object
 function createValidPackument(): v.InferInput<typeof PackumentSchema> {
