@@ -13,4 +13,5 @@ bun.lockb
 /packages/api/.wrangler
 /docs/worker-configuration.d.ts
 /experiments/packument-types/output
+/experiments/verify-validate/output
 /packages/test/.packuments
