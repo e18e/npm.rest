@@ -1,7 +1,11 @@
-import { PackumentSchema, PackumentVersionSchema } from '../src/packument';
 import { fetchPackumentRaw } from '@npm.rest/test/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
+import {
+	PackumentVersionSchema,
+	PackumentSchema,
+	KeywordsSchema,
+} from '../src/packument';
 
 type InputPackument = v.InferInput<typeof PackumentSchema>;
 type InputPackumentVersion = v.InferInput<typeof PackumentVersionSchema>;
@@ -362,6 +366,78 @@ describe('packument-version validation', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.name = '    ';
 			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+	});
+
+	describe('keywords', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.keywords = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('supports single keyword', () => {
+			const result = v.parse(KeywordsSchema, 'foo');
+			expect(result).toMatchObject(['foo']);
+		});
+
+		it('supports multiple keywords', () => {
+			const result = v.parse(KeywordsSchema, ['foo', 'bar']);
+			expect(result).toMatchObject(['foo', 'bar']);
+		});
+
+		it('supports nested keyword array', () => {
+			const result = v.parse(KeywordsSchema, [
+				'abc',
+				['foo', 'bar'],
+				['baz', 'qux'],
+			]);
+
+			expect(result).toMatchObject(['abc', 'foo', 'bar', 'baz', 'qux']);
+		});
+
+		it('deduplicates keywords', () => {
+			const result = v.parse(KeywordsSchema, [
+				'foo',
+				'bar',
+				'foo',
+				'baz',
+			]);
+			expect(result).toMatchObject(['foo', 'bar', 'baz']);
+		});
+
+		it('deduplicates nested keywords', () => {
+			const result = v.parse(KeywordsSchema, [
+				'foo',
+				['bar', 'foo'],
+				['baz', 'qux'],
+			]);
+
+			expect(result).toMatchObject(['foo', 'bar', 'baz', 'qux']);
+		});
+
+		it('removes empty keywords', () => {
+			const result = v.parse(KeywordsSchema, ['foo', 'bar', '', 'baz']);
+			expect(result).toMatchObject(['foo', 'bar', 'baz']);
+		});
+
+		it('removes empty nested keywords', () => {
+			const result = v.parse(KeywordsSchema, [
+				'foo',
+				['bar', 'foo'],
+				['baz', 'qux', ''],
+				['quux', 'corge'],
+			]);
+
+			expect(result).toMatchObject([
+				'foo',
+				'bar',
+				'baz',
+				'qux',
+				'quux',
+				'corge',
+			]);
 		});
 	});
 });

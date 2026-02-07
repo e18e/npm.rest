@@ -33,11 +33,27 @@ const Bugs = v.object({
 	url: Link,
 });
 
+export const KeywordsSchema = v.union([
+	v.pipe(
+		EmptyableString,
+		v.transform((value) => (value ? [value] : null)),
+	),
+	v.pipe(
+		v.array(v.union([EmptyableString, v.array(EmptyableString)])),
+		v.transform((value): string[] => {
+			return new Set(value.flat())
+				.values()
+				.filter((item) => typeof item === 'string')
+				.toArray();
+		}),
+	),
+]);
+
 export const PackumentVersionSchema = v.looseObject({
 	name: StrictString,
 	description: v.optional(EmptyableString, null),
 	version: StrictString,
-	keywords: v.optional(v.array(v.string())),
+	keywords: v.optional(KeywordsSchema),
 	license: v.optional(
 		v.union([
 			v.string(),
