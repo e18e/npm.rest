@@ -1,0 +1,13 @@
+diff --git a/lib/index.js b/lib/index.js
+index 93d77b76b3dd29c333074fb6c685e45783a8a318..03cc4adfe5fc6ab0b523f78eeed54ab2cc84d06e 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -35,7 +35,7 @@ function validate (name) {
+   }
+ 
+   if (name.startsWith('-')) {
+-    errors.push('name cannot start with a hyphen')
++    warnings.push('name cannot start with a hyphen')
+   }
+ 
+   if (name.match(/^_/)) {

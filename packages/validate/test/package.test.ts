@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import npa from 'npm-package-arg';
 import * as v from 'valibot';
 import {
 	PackageNameSchema,
@@ -19,9 +20,14 @@ describe('PackageNameSchema validation', () => {
 	});
 
 	// todo https://github.com/npm/validate-npm-package-name/pull/160
-	// test('accepts valid edge case name', () => {
-	// 	expect(v.parse(PackageNameSchema, '-@1.0.0')).toBe('-@1.0.0');
-	// });
+	test('accepts name with hyphen', () => {
+		expect(v.parse(PackageNameSchema, '-')).toBe('-');
+		expect(npa('-@1.2.3')).toMatchObject({
+			type: 'version',
+			name: '-',
+			fetchSpec: '1.2.3',
+		});
+	});
 
 	test('rejects empty string', () => {
 		expect(() => v.parse(PackageNameSchema, '')).toThrow();

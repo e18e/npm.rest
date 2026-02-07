@@ -34,6 +34,11 @@ catalogs:
       specifier: ^4.62.0
       version: 4.63.0
 
+patchedDependencies:
+  validate-npm-package-name:
+    hash: 738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa
+    path: patches/validate-npm-package-name.patch
+
 importers:
 
   .:
@@ -273,7 +278,7 @@ importers:
         version: 1.2.0(typescript@5.9.3)
       validate-npm-package-name:
         specifier: ^7.0.2
-        version: 7.0.2
+        version: 7.0.2(patch_hash=738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa)
     devDependencies:
       '@types/npm-package-arg':
         specifier: ^6.1.4
@@ -5642,7 +5647,7 @@ snapshots:
       hosted-git-info: 9.0.2
       proc-log: 6.1.0
       semver: 7.7.3
-      validate-npm-package-name: 7.0.2
+      validate-npm-package-name: 7.0.2(patch_hash=738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa)
 
   obug@2.1.1: {}
 
@@ -6072,7 +6077,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  validate-npm-package-name@7.0.2: {}
+  validate-npm-package-name@7.0.2(patch_hash=738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa): {}
 
   vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(tsx@4.21.0):
     dependencies:
