@@ -706,6 +706,110 @@ describe('packument-version validation', () => {
 			expect(parsed).toMatchObject({ [type]: { foo: null } });
 		});
 	});
+
+	describe('peerDependenciesMeta', () => {
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {};
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('becomes null when empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {};
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({ peerDependenciesMeta: null });
+		});
+
+		it('keys must not be empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = { '': { optional: false } };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('keys must not be effectively empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = { '  ': { optional: false } };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('strips unknown keys', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				// @ts-expect-error tests
+				foo: { optional: true, bar: 'baz' },
+			};
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: { foo: { optional: true } },
+			});
+		});
+
+		it('maps incorrect key values to null', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.peerDependenciesMeta = { foo: 'bar' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: { foo: null },
+			});
+		});
+
+		it('maps string value to null', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.peerDependenciesMeta = { foo: '^1.0.0' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: { foo: null },
+			});
+		});
+
+		it('maps boolean value to null', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.peerDependenciesMeta = { foo: true };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: { foo: null },
+			});
+		});
+
+		it('preserves correct values amongst incorrect ones', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				bar: { optional: false },
+				// @ts-expect-error tests
+				foo: true,
+				baz: { optional: true },
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: {
+					bar: { optional: false },
+					foo: null,
+					baz: { optional: true },
+				},
+			});
+		});
+
+		it('parses strings pretending to be booleans', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				bar: { optional: 'false' },
+				baz: { optional: 'true' },
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: {
+					bar: { optional: false },
+					baz: { optional: true },
+				},
+			});
+		});
+	});
 });
 
 // describe('Repository validation', () => {

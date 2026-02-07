@@ -1,6 +1,7 @@
 import * as v from 'valibot';
 import {
 	EmptyableString,
+	PretendBoolean,
 	EmptyableLink,
 	StrictString,
 	nullOnEmpty,
@@ -164,7 +165,15 @@ export const PackumentVersionSchema = v.looseObject({
 		null,
 	),
 	peerDependenciesMeta: v.optional(
-		v.record(v.string(), v.strictObject({ optional: v.boolean() })),
+		nullOnEmpty(
+			v.record(
+				StrictString,
+				v.fallback(
+					v.nullable(v.object({ optional: PretendBoolean })),
+					null,
+				),
+			),
+		),
 	),
 });
 

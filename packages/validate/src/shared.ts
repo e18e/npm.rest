@@ -32,6 +32,18 @@ export const EmptyableLink = v.union([
 	Link,
 ]);
 
+export const PretendBoolean = v.union([
+	v.boolean(),
+	v.pipe(
+		v.literal('true'),
+		v.transform(() => true),
+	),
+	v.pipe(
+		v.literal('false'),
+		v.transform(() => false),
+	),
+]);
+
 export function nullOnEmpty<
 	TInput,
 	TOutput extends Record<string, unknown>,

@@ -136,3 +136,5 @@ describe('email', () => {
 });
 
 describe.todo('null-on-empty');
+
+describe.todo('pretend-boolean');
