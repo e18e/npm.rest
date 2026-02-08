@@ -913,6 +913,16 @@ describe('packument-version validation', () => {
 				[type]: null,
 			});
 		});
+
+		it('turns string into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = 'foo';
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				[type]: null,
+			});
+		});
 	});
 
 	describe('peerDependenciesMeta', () => {
@@ -1123,6 +1133,7 @@ const PACKUMENTS = [
 	'@4399ywkf/cli',
 	'@porsche-data-layer/library',
 	'bento',
+	'drceglamoney',
 ];
 
 describe('real world tests', () => {

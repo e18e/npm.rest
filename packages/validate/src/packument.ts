@@ -136,6 +136,19 @@ export const KeywordsSchema = v.union([
 	),
 ]);
 
+const AnyDependencyType = v.optional(
+	v.nullable(
+		v.union([
+			nullOnEmpty(v.record(StrictString, EmptyableString)),
+			v.pipe(
+				v.string(),
+				v.transform(() => null),
+			),
+		]),
+	),
+	null,
+);
+
 export const PackumentVersionSchema = v.looseObject({
 	name: StrictString,
 	description: v.optional(EmptyableString, null),
@@ -167,22 +180,10 @@ export const PackumentVersionSchema = v.looseObject({
 	),
 	// funding: v.optional(Funding),
 	// repository: v.optional(RepositorySchema),
-	dependencies: v.optional(
-		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
-		null,
-	),
-	devDependencies: v.optional(
-		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
-		null,
-	),
-	optionalDependencies: v.optional(
-		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
-		null,
-	),
-	peerDependencies: v.optional(
-		v.nullable(nullOnEmpty(v.record(StrictString, EmptyableString))),
-		null,
-	),
+	dependencies: AnyDependencyType,
+	devDependencies: AnyDependencyType,
+	optionalDependencies: AnyDependencyType,
+	peerDependencies: AnyDependencyType,
 	peerDependenciesMeta: v.optional(
 		nullOnEmpty(
 			v.record(
