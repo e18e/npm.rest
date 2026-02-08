@@ -498,6 +498,22 @@ describe('packument-version validation', () => {
 			});
 		});
 
+		it('supports file property', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {
+				type: 'MIT',
+				name: 'MIT License',
+				file: 'LICENSE',
+			};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject({
+				type: 'MIT',
+				name: 'MIT License',
+				file: 'LICENSE',
+			});
+		});
+
 		it('supports multiple license objects', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = [
