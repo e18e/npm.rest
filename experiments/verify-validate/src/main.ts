@@ -1,5 +1,5 @@
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { PackumentSchema } from '@npm.rest/validate/packument';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { packumentTable } from '@npm.rest/db/schema';
 import { db } from '@npm.rest/db/server';
 import { existsSync } from 'node:fs';
@@ -28,19 +28,23 @@ const ISSUES_DIR = join(OUTPUT_DIR, './issues');
 if (!existsSync(ISSUES_DIR)) {
 	await mkdir(ISSUES_DIR, { recursive: true });
 } else {
-	const clear = await confirm({
-		message: 'clean issues directory',
-		initialValue: false,
-	});
+	const files = await readdir(ISSUES_DIR);
 
-	if (isCancel(clear)) {
-		cancel('exiting');
-		process.exit(1);
-	}
+	if (files.length) {
+		const clear = await confirm({
+			message: 'clean issues directory',
+			initialValue: false,
+		});
 
-	if (clear) {
-		await rm(ISSUES_DIR, { recursive: true });
-		await mkdir(ISSUES_DIR, { recursive: true });
+		if (isCancel(clear)) {
+			cancel('exiting');
+			process.exit(1);
+		}
+
+		if (clear) {
+			await rm(ISSUES_DIR, { recursive: true });
+			await mkdir(ISSUES_DIR, { recursive: true });
+		}
 	}
 }
 
