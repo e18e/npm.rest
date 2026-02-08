@@ -112,6 +112,10 @@ export const LicenseSchema = v.union([
 		v.array(v.union([StrictString, LicenseObjectSchema])),
 		v.filterItems((item) => item !== null),
 	),
+	v.pipe(
+		v.literal(false),
+		v.transform(() => 'UNLICENSED'),
+	),
 ]);
 
 export const KeywordsSchema = v.union([

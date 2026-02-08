@@ -548,6 +548,29 @@ describe('packument-version validation', () => {
 				},
 			]);
 		});
+
+		it('supports license of boolean false', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = false;
+
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('maps false license to UNLICENSED', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = false;
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBe('UNLICENSED');
+		});
+
+		it('only supports license false top level', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.license = [false];
+
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
 	});
 
 	describe('homepage', () => {
