@@ -17,7 +17,6 @@ function createPackumentVersion(version: string): InputPackumentVersion {
 		description: 'A test package',
 		version,
 		dist: {
-			shasum: 'sha256-1234567890abcdef',
 			tarball:
 				'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
 			integrity: 'sha256-1234567890abcdef',
@@ -701,8 +700,6 @@ describe('packument-version validation', () => {
 				expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
 			});
 		});
-
-		describe.todo('shasum');
 
 		describe('integrity', () => {
 			it('is optional', () => {

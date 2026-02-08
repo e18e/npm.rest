@@ -146,7 +146,6 @@ export const PackumentVersionSchema = v.looseObject({
 	// bugs: v.optional(BugsObjectSchema),
 	dist: v.object({
 		tarball: Link,
-		shasum: StrictString,
 		integrity: v.optional(
 			v.pipe(v.string(), v.regex(/^sha(256|384|512)-[A-Za-z0-9+/=]+$/)),
 		),

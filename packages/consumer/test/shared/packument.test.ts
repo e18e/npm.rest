@@ -35,7 +35,6 @@ describe.skip('process packument', () => {
 			name: 'foo',
 			version: '1.0.0',
 			dist: {
-				shasum: '1234567890abcdef',
 				tarball:
 					'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
 				integrity: 'sha512-foo',
