@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
 	EmptyableString,
+	PretendBoolean,
 	EmptyableLink,
 	StrictString,
 	Email,
@@ -137,4 +138,28 @@ describe('email', () => {
 
 describe.todo('null-on-empty');
 
-describe.todo('pretend-boolean');
+describe('pretend boolean', () => {
+	it('supports real true', () => {
+		const result = v.parse(PretendBoolean, true);
+		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		expect(result).toBe(true);
+	});
+
+	it('supports real false', () => {
+		const result = v.parse(PretendBoolean, false);
+		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		expect(result).toBe(false);
+	});
+
+	it('supports pretend true', () => {
+		const result = v.parse(PretendBoolean, 'true');
+		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		expect(result).toBe(true);
+	});
+
+	it('supports pretend false', () => {
+		const result = v.parse(PretendBoolean, 'false');
+		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		expect(result).toBe(false);
+	});
+});
