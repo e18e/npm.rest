@@ -680,7 +680,28 @@ describe('packument-version validation', () => {
 			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
 		});
 
-		describe.todo('tarball');
+		describe('tarball', () => {
+			it('works as expected', () => {
+				const version = createPackumentVersion('1.0.0');
+				version.dist.tarball = 'https://example.com/tarball';
+				const parsed = v.parse(PackumentVersionSchema, version);
+				expect(parsed.dist.tarball).toBe('https://example.com/tarball');
+			});
+
+			it('is required', () => {
+				const version = createPackumentVersion('1.0.0');
+				// @ts-expect-error tests
+				version.dist.tarball = null;
+				expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			});
+
+			it('must be a url', () => {
+				const version = createPackumentVersion('1.0.0');
+				version.dist.tarball = 'invalid';
+				expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			});
+		});
+
 		describe.todo('shasum');
 
 		describe('integrity', () => {
