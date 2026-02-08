@@ -1,0 +1,1377 @@
+{
+  "_id": "ljon-r2-test-2",
+  "_rev": "60-8223f31c2d5652e0799e0ca891506045",
+  "name": "ljon-r2-test-2",
+  "dist-tags": {
+    "latest": "1.0.28"
+  },
+  "versions": {
+    "1.0.0": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.0",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "ISC",
+      "_id": "ljon-r2-test-2@1.0.0",
+      "_shasum": "178aeee7595e3c03c338ed85d178c747bb2c3725",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "178aeee7595e3c03c338ed85d178c747bb2c3725",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.0.tgz",
+        "integrity": "sha512-jwUoLy1sgmT6pdu1r7PS7PvYGq0f15k6SmCVZos/NBAAIx7K2esxQc114yYALy6+EtAtwZXdYsSAr0y3H9DP8A==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCICnGzECVIrbDP5c6lsjlv1SF/7RmAo3qoT4kDo14rVsUAiBCOgZI68kPNU8DiUUK56jA6oiyJOxUfnDwHlJCmlFwLQ=="
+          }
+        ]
+      }
+    },
+    "1.0.1": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.1",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "ISC",
+      "url": "javascript:alert(1)",
+      "_id": "ljon-r2-test-2@1.0.1",
+      "_shasum": "07a27ee2b2efed0e1556cd3657d0ead08174921b",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "07a27ee2b2efed0e1556cd3657d0ead08174921b",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.1.tgz",
+        "integrity": "sha512-PVtL9eRF5Vkope659MoyOgz5WWtBLgOckvocyzA4PZul0vPpIrCOaASdRHZhF2/KqugCu9467Z4nhM8evg0R+w==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQD5nJMjj9pmY6CpEmWou+Mvu2rCtI4aw6c52AeYmANKpgIhAOBd8+GFrBwoh3hxjHDhDgh9PUYMwYlQ+LqiA54swZUE"
+          }
+        ]
+      }
+    },
+    "1.0.2": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.2",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "HGLv2<!--",
+      "url": "javascript:alert(1)",
+      "_id": "ljon-r2-test-2@1.0.2",
+      "_shasum": "f104665913c3ad213692127fedfea833bc130bbb",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "f104665913c3ad213692127fedfea833bc130bbb",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.2.tgz",
+        "integrity": "sha512-WWweWO9n32ryA041L5nEsUvdXpq8M5gtAs1I3/3hJO3ad9rDeRIOHceryC4Wov4q9rSTrhlzdH9p5P3MYqzoew==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQC6zWPaCEtKquBp9IpqwTzDVJU1etQqJQ8BghKLFpA3hQIhALyQQdvwhJ7fqsG9PFwhcNgS0Os8eV+337v/4Hl/8UbG"
+          }
+        ]
+      }
+    },
+    "1.0.3": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.3",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "HGLv2<!--\"",
+      "url": "javascript:alert(1)",
+      "_id": "ljon-r2-test-2@1.0.3",
+      "_shasum": "4ca0ba5f689425f25929fd63945396574dfc5493",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "4ca0ba5f689425f25929fd63945396574dfc5493",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.3.tgz",
+        "integrity": "sha512-2xWuLe1pQ4BwLNPqTrA2McWrUlK8miLM0kxFdgOaEj3B0x0NsxxpIJ/7iZfA1/QX9DIFyiIcQcoG0XhjFYjARw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQCmwMz1CS8/5+EDJTZU/qoBCu6SCeX30b+988Tu0Gj04QIhAIC5o2/i0bjXpwY0caVCbbGSXFvedlFmvMlufpFDKgUC"
+          }
+        ]
+      }
+    },
+    "1.0.4": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.4",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "HGLv2<!--\" onmouseover=alert(1)",
+      "url": "javascript:alert(1)",
+      "_id": "ljon-r2-test-2@1.0.4",
+      "_shasum": "01b2253ab702fdd8bef3cdc5518a377fa9401a03",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "01b2253ab702fdd8bef3cdc5518a377fa9401a03",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.4.tgz",
+        "integrity": "sha512-R8qub3AVRkiAd512UeNKG0VMBPh0aqanSDmErkgd5zzqPHgPQyLXgAScvOpRCxmrjiRqN9q0Ez1NchEbshmm2A==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIDx1IA4kaD0aal88IflApdggi4gWijdQdMD3FDE+hXgUAiBltmwEya+1hq2g/UR3rXeIlR+d/2xoUDrg0Xdi9b0DBg=="
+          }
+        ]
+      }
+    },
+    "1.0.5": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.5",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "HGLv2<!--\" onmouseover=alert(1)",
+      "url": "javascript:alert(1)",
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.5",
+      "_shasum": "adba7a5a7b2ffaeca1a669e2e5a9ac0bf49351b8",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "adba7a5a7b2ffaeca1a669e2e5a9ac0bf49351b8",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.5.tgz",
+        "integrity": "sha512-TO3yg1/HuADN7m/JN1ZgX21FdUpBNRGnKeddmne4YebBQ2CEpyh62/KEBpIWE1oj4NKDQ1weAHMxgI3ptBT4xw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQCP9KXw67ZXrU1l7w8IxJwX2MYwdE4/os/cTB26JNcxDAIhAIIvjNmxjmAtgXhUi9QRDCfgxphy4J5dajBzbqsHV0DG"
+          }
+        ]
+      }
+    },
+    "1.0.6": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.6",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": "HGLv2<!--\" onmouseover=alert(1)",
+      "url": "javascript:alert(1)",
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.6",
+      "_shasum": "111c29250d354892b0b8353cbef2318115b5fde3",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "111c29250d354892b0b8353cbef2318115b5fde3",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.6.tgz",
+        "integrity": "sha512-k9ToeZINKWbsa+vBfp0IBV0U6pwfULm3NYeUoRknbM2Igp2KrM5MYuq6Yo64ucprqJe/d02C11H4MHm8DTjG8Q==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQCcOepJfcFArM4QxxcksFWersRpVDVBPnZrd4vn2l2sRQIgAf8BhWiTcxOjq6koktMww6/N4SFADBU61AQ27DCEQxY="
+          }
+        ]
+      }
+    },
+    "1.0.7": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.7",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.7",
+      "_shasum": "5ed7c31b7c2b412d56fff49277c19315f16c4159",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "5ed7c31b7c2b412d56fff49277c19315f16c4159",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.7.tgz",
+        "integrity": "sha512-dzsnLHvzH9fa2hBedeAWLrmRHDESvCCKc4Ll9YqTj7jeDcOyAfVZcf31AQZ+atTszKNhJEpvI01qfVnw4SMrMQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIDPGNx/XdzmI07eq37ZWv/fJ2L0YRJA4zoyaU2sbss5KAiAp5ztb9S6dP0ycf5thAEzcS9+Mcj6BBo5xZGv50QR7cA=="
+          }
+        ]
+      }
+    },
+    "1.0.8": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.8",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "issues": "https://github.com/liftsecurity/bizzarolout/issues",
+      "bugs": {
+        "url": "https://github.com/liftsecurity/bizzarolout/issues"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.8",
+      "_shasum": "30503027278fc5cb9363737ba03117b7a3a69741",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "30503027278fc5cb9363737ba03117b7a3a69741",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.8.tgz",
+        "integrity": "sha512-4U59bJvf4o6J2YhqivD9UbNorW9KbdkQ765X2Loqe5k1LW++1Ab7cctVI8S4Bfu8LqgLtRVmUTiDWmDUTYn5aw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIEDGUbR/5IIRzY37dVrYaR1xh7Ec64iebYxFqaJEH7Y+AiAraM2KnocYdvkboCD4Gyt7/SuolcYaks1hB7v9QXGmQA=="
+          }
+        ]
+      }
+    },
+    "1.0.9": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.9",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\" onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.9",
+      "_shasum": "ea788ef4d060d1f78ec8eae07fbd7b9b3e2cf2a2",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "ea788ef4d060d1f78ec8eae07fbd7b9b3e2cf2a2",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.9.tgz",
+        "integrity": "sha512-TE5FH5Hl50DsP/ox17ydnP0WZIC3lw9M3wYdziHW3+HK7VJzcPIu5C1msOs119gAlCudaH5t+i+rjrLQPUN4HA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDNBRPrVvG8+X3K0TiNbvoCutr3Y7mG2gTr1OYT9D5v5AIgdSrVEDV28XEYjTZsecCKOLdoGGLGMaOujSpRXhGeiQg="
+          }
+        ]
+      }
+    },
+    "1.0.10": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.10",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\" onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.10",
+      "_shasum": "ea788ef4d060d1f78ec8eae07fbd7b9b3e2cf2a2",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "ea788ef4d060d1f78ec8eae07fbd7b9b3e2cf2a2",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.10.tgz",
+        "integrity": "sha512-TE5FH5Hl50DsP/ox17ydnP0WZIC3lw9M3wYdziHW3+HK7VJzcPIu5C1msOs119gAlCudaH5t+i+rjrLQPUN4HA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIH1agJESvrmDf6GW/OJHyNqUXM1NqoDcXj034wygiTtyAiEAtCswggAmeyeAr8QhBDJF2QCnyfq9JkZ41cSewvwWN/M="
+          }
+        ]
+      }
+    },
+    "1.0.11": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.11",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\" onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\" onmouseover=alert(1)"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.11",
+      "_shasum": "f5176186fec35ea18260b8792633fe1059d9e41c",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "f5176186fec35ea18260b8792633fe1059d9e41c",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.11.tgz",
+        "integrity": "sha512-mDCenzvuD/mCqEZaQXao+HyLHBfaQTTtLhJR0G+bqnI7Y0+++9gHHBp7tDMdoZzsJEkQBtvb9PjMRtcTnex1Rg==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIEgJgx6PZDtaYLcXEwriYi9ue4IvcR13psN251m2GsFKAiBU13g2HGwVySAtIusKgNJ19YyCaIflMDOsWDUfQKtzcg=="
+          }
+        ]
+      }
+    },
+    "1.0.12": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.12",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.12",
+      "_shasum": "f1c718861f09143ebf684498b6d9a3b3c66b50ac",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "f1c718861f09143ebf684498b6d9a3b3c66b50ac",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.12.tgz",
+        "integrity": "sha512-96OKaRvlhNhz9WXdrqHVQw7T7O+g2Qy07mEC3Pkrh3AwmmNqhp1g46HRT2dViVyedfsc+enhLzNxXg8vvQ6OOw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQDZTvkQyDwsxSB4IkMQv0O8w6FUvmX5BQlHCHUcC9Yf8wIhANCXUChxThDNwLFwK+6e7MOcbuevC1zIN41hM4L2hNSE"
+          }
+        ]
+      }
+    },
+    "1.0.13": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.13",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "jrk": "@npm/jrk"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.13",
+      "_shasum": "05cbc2143288b391cf9e45eedc41e70e1a739bb6",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "05cbc2143288b391cf9e45eedc41e70e1a739bb6",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.13.tgz",
+        "integrity": "sha512-UvwVYK7ctI/vhzmaxXHAOBtV+DCdbiV2IeZK3KMZue3kPwnmNKoI6Rc2SmLPmJW7rnejx6p3Xz2mBww2rWXIKw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQCQuHOAfSptEv17IV861J2yDhV9qrDN6O6mUIK5bobbcgIhAI7UrMBLeN8lb++jYVx1sMcWDb9Q/zMKa9czbQiX47hg"
+          }
+        ]
+      }
+    },
+    "1.0.14": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.14",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "jrk": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.14",
+      "_shasum": "a268bf27a1e4f1cb2ed4d7585ee5e7dc1a9ba487",
+      "_from": ".",
+      "_npmVersion": "1.4.28",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "a268bf27a1e4f1cb2ed4d7585ee5e7dc1a9ba487",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.14.tgz",
+        "integrity": "sha512-N5sTL/YO5VzHiwRDD8Hh6USJgnMso7NQbYE8aahUnesEn105e3H+PGDJ+20Q5HeOBpMFiqFOPmHDEeulxRYm5A==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIBUFmyxRnnSiPzvHrRwQT3SM5eK4h56F0KATcQ/kVz8fAiEApruxpqfoBpih33Hx0ZYA8UOGSFoLk5qBhwmWUkynEKc="
+          }
+        ]
+      }
+    },
+    "1.0.15": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.15",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "<svg/onload=alert(1)//<!--": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.15",
+      "_shasum": "35e5b6eee12aa4fbc02597e4cd956b986e014cc8",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "35e5b6eee12aa4fbc02597e4cd956b986e014cc8",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.15.tgz",
+        "integrity": "sha512-oTcVHf9tsPcG2QZoSmW/OSI8tjP4reLMKP5LjjPDa/pMdYw0OH3fvXPp3NrVV12caA99wRNhpZvrgB7QRZk8OA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEQCIGNjHlqUMhZr64LGqZiQsvwM2e1T5f0OdxNW9bbPiqEmAiB466uZmawRRj9TCaogcSnUTtlyQd42ZBBzvQA7JbTtPg=="
+          }
+        ]
+      }
+    },
+    "1.0.16": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.16",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" onmouseover=alert(1)//": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.16",
+      "_shasum": "632fc3e32bf903322ae0f73a49cc42cac66c8dad",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "632fc3e32bf903322ae0f73a49cc42cac66c8dad",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.16.tgz",
+        "integrity": "sha512-LH5Z9rxxJwK2pFOmvoiIg+fGPRVjSZyLr5fAOBmbX/gXV8Zy/DVi56r2p7MRpNia0zohL5AWFIqX5lmYEVvK3Q==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQCJSAYKmUT/IpTByI41UHKBcuGcu7Ir3CeuO9JoTiV+RAIhAKYV3L2GAFqSRFDS1b75JV304vWwRs+I4kuoksDkHY0S"
+          }
+        ]
+      }
+    },
+    "1.0.17": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.17",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.17",
+      "_shasum": "dfd41d89ac9656627ad2d65b69811a3f8d2775a3",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "dfd41d89ac9656627ad2d65b69811a3f8d2775a3",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.17.tgz",
+        "integrity": "sha512-+1dlIM4i3bhz2Xv/9dXt1Ok9mRHJf3e+ey1ASaR74SplBC9N5O0KMRtnUGC0fAkdLjkFPze99QoP5X6ny/LeAQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQD6TeB1d/zsLZ5ZxvrZ8u38mGhFyHIA7K5enEqO9nlGsQIhAN4mKwIw26sqQ1wYVjkKmuUp1rf40hYMmAnK3Z54vOm+"
+          }
+        ]
+      }
+    },
+    "1.0.18": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.18",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.18",
+      "_shasum": "b686c938266d47a7f5a69659cdb9d66c60d03ca2",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "b686c938266d47a7f5a69659cdb9d66c60d03ca2",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.18.tgz",
+        "integrity": "sha512-dtC3oElKPCeupIhast8uiDsTq1Cje6Aeg2NgMVtv1ns4hQm0lCIIFqqf7cnAOckJFObAYXGHCxCjYhMuDOAv2Q==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDQiMBIhxzwEIRbBoRKz0DjQlJFDGRG5scliVNTQb8neQIgaSvMCnN2ZdoZxuqCYxUjFIttkUQIY36sz7pgpaGTiK4="
+          }
+        ]
+      }
+    },
+    "1.0.19": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.19",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "type": "NewLicense!",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.19",
+      "_shasum": "14443fe48ba99ad70f6ef0a09fbdc70bf814df7c",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "14443fe48ba99ad70f6ef0a09fbdc70bf814df7c",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.19.tgz",
+        "integrity": "sha512-CYdyXmha6iljQeXpZgQr3eIu7GXBCN+FE46zkbYVxoTgV/Hswjja53hdrioVJJgOc4A+a9Hzadmrv83H97fJPA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIDXj8Lee9PKHMnDQuoMjW0dJIkZBbvjLl8ila1EnAz+1AiEAoaypEktXtQpZ9gwF274HQxM28DAQREeF2d2ZdSRe8Tc="
+          }
+        ]
+      }
+    },
+    "1.0.20": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.20",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "name": {
+          "toLowerCase": "constructor"
+        },
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.20",
+      "_shasum": "678ad0ea42c7ea841a0f48fb81f84d740807f695",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "678ad0ea42c7ea841a0f48fb81f84d740807f695",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.20.tgz",
+        "integrity": "sha512-qaPzJcDuN0NetzKkSHomxd/lG7x1INzRERElSLm2k0CcQvxZov9VmyZP8pepJqYtNi8ECQ5XVOcklHJSHcCNTQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQC4xg4z9j9xwE65M9fD558KJKFcKLgiZz6i6U1i3PjeIQIgG0M6o0+S/q3S2RiBiAtKcJ/EDx1mVOs2q6Xnz87pv/4="
+          }
+        ]
+      }
+    },
+    "1.0.21": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.21",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "name": {
+          "toLowerCase": "toString"
+        },
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.21",
+      "_shasum": "c2bcebc8da59cc36f759e76078f7b0af96f7be59",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "c2bcebc8da59cc36f759e76078f7b0af96f7be59",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.21.tgz",
+        "integrity": "sha512-VltFM87uiK1gITpND1cPcifVezSbRiNo2aH38/mv1RU+4fxNOKCqvM/+WE2hZKPWhNGpHrsDsiN5779YZFvYsg==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIBIu5UBg69fImtT8O8PmdhdVv/xYE4DM29EenkTfEp4eAiEA3ExjHceUz2Wd84QApRM2asUiCgXJiUEVYNoLV7Pf2us="
+          }
+        ]
+      }
+    },
+    "1.0.22": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.22",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "name": "constructor",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.22",
+      "_shasum": "410560452170b377ef6396b992982e60756d247b",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "410560452170b377ef6396b992982e60756d247b",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.22.tgz",
+        "integrity": "sha512-9tJeze+GxAerrhKZR9lu7zW1qTg30eYgpjeUcCWkQ2QUWCkgll8QS96QyFp9Ie+c/t830TlpjXoKVugPvKpvlQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEMCIAtchh7zhAa3DZ+Rddt6vfUina7Dnz32y9dXXjcLU4g4Ah9STKBn0EtkdZt5VcbNhW36dhHjAsmIon2l3k1yH1qF"
+          }
+        ]
+      }
+    },
+    "1.0.23": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.23",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "",
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.23",
+      "_shasum": "8e5eadd91976ea6af9b8abe1d9de1e7426b0fdda",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "8e5eadd91976ea6af9b8abe1d9de1e7426b0fdda",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.23.tgz",
+        "integrity": "sha512-AhAJO3vAdoofvvDXHaSzA+1XOCdPm30e/w0Z+C4bVH/RY3Te4eLD0JvM1zNvyM7F95IHbjBQKv6enTPHah5g5A==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDd7ZywwaILXu0RjyhoQN2bD0VS/EkbZPLlF7RV0iyTywIgWh0h6c1kN9UTgxI37V9UdyRnAnH+1vrw9JlrGZvQIyI="
+          }
+        ]
+      }
+    },
+    "1.0.24": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.24",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": {},
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.24",
+      "_shasum": "ab8710b563b4b59b99c23850b0f3fb1f5ef3a803",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "ab8710b563b4b59b99c23850b0f3fb1f5ef3a803",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.24.tgz",
+        "integrity": "sha512-k+99R22Kk068K3q3Jdmopwp6wdCyYGhnf4yiJbH85/nPcFL2nd+cc6S3tga0iTWHGaqXHDoi3eUJVBLV01MqBQ==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQDWB4WlOoInTcP/Wu8+RiTBAOegw6qNxC28TyWuKOF38wIgUEz+EEDHpdzJnMu57zF2PbovVIznslDCR2h1p1xGNlA="
+          }
+        ]
+      }
+    },
+    "1.0.25": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.25",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": {},
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "keywords": [
+        "filter",
+        "map",
+        "constructor"
+      ],
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.25",
+      "_shasum": "8c71c074dbd2cf60d867857a537b1d17f1c6d6af",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "8c71c074dbd2cf60d867857a537b1d17f1c6d6af",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.25.tgz",
+        "integrity": "sha512-5d4KUeXnOfi2/GAW4jtEj6atcMuTPLjjZWhfBdtYKpat3ga6lpui6dItugK54Iu+Jr6tLV/isTaIBzWErvXAtA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCID5MAHdcGgbs6mjE38MS0FsmUIMYuGwv3NY5Hjr2OGo1AiEAvcU/bKX0h5mFmaax9OtTS4Q6LAss7I2K+ZTa+nojJWI="
+          }
+        ]
+      }
+    },
+    "1.0.26": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.26",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": {},
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "keywords": [
+        "filter<",
+        "<!--map",
+        "constructor"
+      ],
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.26",
+      "_shasum": "c41340533dd24ed075b02b83608e9654fc73a4cd",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "c41340533dd24ed075b02b83608e9654fc73a4cd",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.26.tgz",
+        "integrity": "sha512-GC4yM9JrsXtLvR1V9ll23WDRMOCHPmtH2TV61B/vWnz7pj8sESOxJ45Cki6SHSenA+6y+RHBysjEbMczcpGEmA==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIQC/UrdNFHxyZXxLsFibkuiy4i7GQ4ac6aDXbR0Y+g7IXwIgAzrV0i5jMIBd99tMVP5d1lGhQ+NJkmY30UKBIEgyNFk="
+          }
+        ]
+      }
+    },
+    "1.0.27": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.27",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": {},
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "keywords": [
+        "\">filter<",
+        "<!--map",
+        "constructor"
+      ],
+      "description": "",
+      "_id": "ljon-r2-test-2@1.0.27",
+      "_shasum": "e11a01cb829e9908498c776d860507e708798560",
+      "_from": ".",
+      "_npmVersion": "2.4.1",
+      "_nodeVersion": "1.0.3",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "e11a01cb829e9908498c776d860507e708798560",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.27.tgz",
+        "integrity": "sha512-Y6qMlJN4Epyj39mDyStA2fCohTYUhlTxYRPjaWM7Hdpbhk+mebjlGNyr294FqNpUV9XTnlvnfpZdGDRW8ed9gw==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEYCIQC6IovbAiJUwD5cPrP46LW61LRM8MQA+6QyLw8dWSUr3gIhAP2YyRk8DLfI0Wog7H+2feKbG9q0PTvHrtwPbIqFZAE2"
+          }
+        ]
+      }
+    },
+    "1.0.28": {
+      "name": "ljon-r2-test-2",
+      "version": "1.0.28",
+      "main": "index.js",
+      "description": "<svg/onload=alert(1)>",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": {},
+      "license": {
+        "name": "__proto__",
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "issues": "javascript:alert(1)//\"' onmouseover=alert(1)",
+      "bugs": {
+        "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+      },
+      "dependencies": {
+        "hapi": "^8.2.0",
+        "abcd\" &gt;onmouseover=alert(1)\\": "@npm/jrk",
+        "tmz": "@mtv/tmz"
+      },
+      "keywords": [
+        "\">filter<",
+        "<!--map",
+        "constructor"
+      ],
+      "_id": "ljon-r2-test-2@1.0.28",
+      "_shasum": "8a72bbb2c448cbd1d46cbe7e9927665ca7d8b683",
+      "_from": ".",
+      "_npmVersion": "2.5.1",
+      "_nodeVersion": "0.10.36",
+      "_npmUser": {
+        "name": "ljon",
+        "email": "jonl@andyet.net"
+      },
+      "maintainers": [
+        {
+          "name": "ljon",
+          "email": "jonl@andyet.net"
+        }
+      ],
+      "dist": {
+        "shasum": "8a72bbb2c448cbd1d46cbe7e9927665ca7d8b683",
+        "tarball": "https://registry.npmjs.org/ljon-r2-test-2/-/ljon-r2-test-2-1.0.28.tgz",
+        "integrity": "sha512-KY/ADmAQO6hlQkMBjYsI05xLQ8yN5DCho3oBDhH0cbc0mU9MMzQDWgrOEOixHxzDBd/+lCFyCAJtWtwmCWFYVg==",
+        "signatures": [
+          {
+            "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+            "sig": "MEUCIBxMU46e6H8eaNw+4IoTVJjgaOkHpGEMbD1gSEW7JpyoAiEA0jqiuxNn+yNRRWV3ISnd+BhPPxWVg/VfknjjMKp9ZjI="
+          }
+        ]
+      }
+    }
+  },
+  "readme": "## a.pick(arrayOfObjects, ...property\\) ⇒ <code>Array.&lt;object&gt;</code>\n",
+  "maintainers": [
+    {
+      "name": "ljon",
+      "email": "jonl@andyet.net"
+    }
+  ],
+  "time": {
+    "modified": "2022-06-19T13:03:49.798Z",
+    "created": "2015-02-12T00:17:20.912Z",
+    "1.0.0": "2015-02-12T00:17:20.912Z",
+    "1.0.1": "2015-02-12T00:24:37.671Z",
+    "1.0.2": "2015-02-12T00:25:26.946Z",
+    "1.0.3": "2015-02-12T00:27:03.043Z",
+    "1.0.4": "2015-02-12T00:27:51.613Z",
+    "1.0.5": "2015-02-12T05:46:39.221Z",
+    "1.0.6": "2015-02-12T05:48:31.180Z",
+    "1.0.7": "2015-02-12T06:16:17.269Z",
+    "1.0.8": "2015-02-12T06:17:28.262Z",
+    "1.0.9": "2015-02-12T06:24:12.251Z",
+    "1.0.10": "2015-02-12T06:26:55.093Z",
+    "1.0.11": "2015-02-12T06:33:59.990Z",
+    "1.0.12": "2015-02-12T06:36:17.531Z",
+    "1.0.13": "2015-02-12T22:17:25.220Z",
+    "1.0.14": "2015-02-12T22:20:41.375Z",
+    "1.0.15": "2015-02-17T02:08:44.253Z",
+    "1.0.16": "2015-02-17T02:10:29.480Z",
+    "1.0.17": "2015-02-17T02:13:02.308Z",
+    "1.0.18": "2015-02-17T02:18:46.849Z",
+    "1.0.19": "2015-02-17T02:24:53.400Z",
+    "1.0.20": "2015-02-17T02:49:48.929Z",
+    "1.0.21": "2015-02-17T02:52:21.850Z",
+    "1.0.22": "2015-02-17T02:56:10.322Z",
+    "1.0.23": "2015-02-17T02:56:41.887Z",
+    "1.0.24": "2015-02-17T03:00:02.210Z",
+    "1.0.25": "2015-02-17T03:02:27.636Z",
+    "1.0.26": "2015-02-17T03:04:20.319Z",
+    "1.0.27": "2015-02-17T03:06:33.281Z",
+    "1.0.28": "2015-02-20T04:47:29.214Z"
+  },
+  "license": {
+    "name": "__proto__",
+    "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "javascript:alert(1)//\"' onmouseover=alert(1)"
+  },
+  "author": {},
+  "keywords": [
+    "\">filter<",
+    "<!--map",
+    "constructor"
+  ],
+  "description": "<svg/onload=alert(1)>"
+}

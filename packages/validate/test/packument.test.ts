@@ -657,6 +657,15 @@ describe('packument-version validation', () => {
 			const parsed = v.parse(LicenseSchema, [false]);
 			expect(parsed).toBeNull();
 		});
+
+		it('fallsback to null when failing to parse name', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.license = { name: { foo: 'bar' } };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.license).toBeNull();
+		});
 	});
 
 	describe('homepage', () => {
@@ -1205,6 +1214,7 @@ const PACKUMENTS = [
 	'bento',
 	'drceglamoney',
 	'brixo-framework',
+	'ljon-r2-test-2',
 ];
 
 describe('real world tests', () => {

@@ -101,7 +101,7 @@ import {
 
 export const LicenseObjectSchema = v.object({
 	type: v.optional(EmptyableString, null),
-	name: v.optional(EmptyableString, null),
+	name: v.optional(v.fallback(EmptyableString, null), null),
 	url: v.optional(v.fallback(EmptyableLink, null), null),
 	file: v.optional(EmptyableString, null),
 });
