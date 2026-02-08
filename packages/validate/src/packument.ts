@@ -136,27 +136,36 @@ export const KeywordsSchema = v.union([
 	),
 ]);
 
-const AnyDependencyType = v.optional(
-	v.nullable(
-		v.union([
-			nullOnEmpty(
-				v.pipe(
-					v.record(v.pipe(v.string(), v.trim()), EmptyableString),
-					v.transform((obj) =>
-						Object.fromEntries(
-							Object.entries(obj).filter(([key]) => key !== ''),
+function dependency<TInput, TOutput, TIssue extends v.BaseIssue<unknown>>(
+	schema: v.BaseSchema<TInput, TOutput, TIssue>,
+) {
+	return v.optional(
+		v.nullable(
+			v.union([
+				nullOnEmpty(
+					v.pipe(
+						v.record(
+							v.pipe(v.string(), v.trim()),
+							v.fallback(v.nullable(schema), null),
+						),
+						v.transform((obj) =>
+							Object.fromEntries(
+								Object.entries(obj).filter(
+									([key]) => key !== '',
+								),
+							),
 						),
 					),
 				),
-			),
-			v.pipe(
-				v.string(),
-				v.transform(() => null),
-			),
-		]),
-	),
-	null,
-);
+				v.pipe(
+					v.string(),
+					v.transform(() => null),
+				),
+			]),
+		),
+		null,
+	);
+}
 
 export const PackumentVersionSchema = v.looseObject({
 	name: StrictString,
@@ -189,21 +198,11 @@ export const PackumentVersionSchema = v.looseObject({
 	),
 	// funding: v.optional(Funding),
 	// repository: v.optional(RepositorySchema),
-	dependencies: AnyDependencyType,
-	devDependencies: AnyDependencyType,
-	optionalDependencies: AnyDependencyType,
-	peerDependencies: AnyDependencyType,
-	peerDependenciesMeta: v.optional(
-		nullOnEmpty(
-			v.record(
-				StrictString,
-				v.fallback(
-					v.nullable(v.object({ optional: PretendBoolean })),
-					null,
-				),
-			),
-		),
-	),
+	dependencies: dependency(EmptyableString),
+	devDependencies: dependency(EmptyableString),
+	optionalDependencies: dependency(EmptyableString),
+	peerDependencies: dependency(EmptyableString),
+	peerDependenciesMeta: dependency(v.object({ optional: PretendBoolean })),
 });
 
 export type PackumentVersion = v.InferOutput<typeof PackumentVersionSchema>;

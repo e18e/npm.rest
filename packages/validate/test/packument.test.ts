@@ -925,6 +925,18 @@ describe('packument-version validation', () => {
 				[type]: null,
 			});
 		});
+
+		it('fallsback to null when value is unparsable', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version[type] = { foo: { bar: 'baz' }, quz: '1.0.0' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed[type]).toStrictEqual({
+				quz: '1.0.0',
+				foo: null,
+			});
+		});
 	});
 
 	describe('peerDependenciesMeta', () => {
@@ -941,16 +953,30 @@ describe('packument-version validation', () => {
 			expect(parsed).toMatchObject({ peerDependenciesMeta: null });
 		});
 
-		it('keys must not be empty', () => {
+		it('empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
-			version.peerDependenciesMeta = { '': { optional: false } };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			version.peerDependenciesMeta = {
+				'': { optional: false },
+				foo: { optional: true },
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.peerDependenciesMeta).toStrictEqual({
+				foo: { optional: true },
+			});
 		});
 
-		it('keys must not be effectively empty', () => {
+		it('effectively empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
-			version.peerDependenciesMeta = { '  ': { optional: false } };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			version.peerDependenciesMeta = {
+				'  ': { optional: false },
+				foo: { optional: true },
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.peerDependenciesMeta).toStrictEqual({
+				foo: { optional: true },
+			});
 		});
 
 		it('strips unknown keys', () => {
@@ -1136,6 +1162,7 @@ const PACKUMENTS = [
 	'@porsche-data-layer/library',
 	'bento',
 	'drceglamoney',
+	'brixo-framework',
 ];
 
 describe('real world tests', () => {
