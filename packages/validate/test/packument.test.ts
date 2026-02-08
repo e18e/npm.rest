@@ -454,6 +454,20 @@ describe('packument-version validation', () => {
 				'corge',
 			]);
 		});
+
+		it('discard all keywords if junk is present', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.keywords = {};
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.keywords).toBeNull();
+
+			const version2 = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.keywords = [1, {}, [3]];
+			const result2 = v.parse(PackumentVersionSchema, version2);
+			expect(result2.keywords).toBeNull();
+		});
 	});
 
 	describe('license', () => {

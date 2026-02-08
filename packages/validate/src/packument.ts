@@ -140,7 +140,7 @@ export const PackumentVersionSchema = v.looseObject({
 	name: StrictString,
 	description: v.optional(EmptyableString, null),
 	version: StrictString,
-	keywords: v.optional(KeywordsSchema),
+	keywords: v.optional(v.fallback(KeywordsSchema, null), null),
 	license: v.optional(LicenseSchema, null),
 	homepage: v.optional(v.fallback(EmptyableLink, null)),
 	// bugs: v.optional(BugsObjectSchema),
