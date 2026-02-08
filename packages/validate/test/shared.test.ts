@@ -188,25 +188,25 @@ describe('null on empty', () => {
 describe('pretend boolean', () => {
 	it('supports real true', () => {
 		const result = v.parse(PretendBoolean, true);
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest(prefer-to-be-truthy)
 		expect(result).toBe(true);
 	});
 
 	it('supports real false', () => {
 		const result = v.parse(PretendBoolean, false);
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest(prefer-to-be-falsy)
 		expect(result).toBe(false);
 	});
 
 	it('supports pretend true', () => {
 		const result = v.parse(PretendBoolean, 'true');
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest(prefer-to-be-truthy)
 		expect(result).toBe(true);
 	});
 
 	it('supports pretend false', () => {
 		const result = v.parse(PretendBoolean, 'false');
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest(prefer-to-be-falsy)
 		expect(result).toBe(false);
 	});
 });
