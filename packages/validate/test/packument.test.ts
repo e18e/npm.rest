@@ -482,6 +482,22 @@ describe('packument-version validation', () => {
 			});
 		});
 
+		it('fallback to null when url fails to parse', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {
+				type: 'MIT',
+				name: 'MIT License',
+				url: '../../LICENSE',
+			};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toMatchObject({
+				type: 'MIT',
+				name: 'MIT License',
+				url: null,
+			});
+		});
+
 		it('supports multiple license objects', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = [

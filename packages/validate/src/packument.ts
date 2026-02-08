@@ -102,7 +102,7 @@ import {
 export const LicenseObjectSchema = v.strictObject({
 	type: v.optional(EmptyableString, null),
 	name: v.optional(EmptyableString, null),
-	url: v.optional(EmptyableLink, null),
+	url: v.optional(v.fallback(EmptyableLink, null), null),
 });
 
 export const LicenseSchema = v.union([
