@@ -81,7 +81,7 @@ while (true) {
 		.from(packumentTable)
 		.orderBy(packumentTable.id)
 		.offset(offset)
-		.limit(100);
+		.limit(1000);
 
 	if (packuments.length === 0) {
 		break;
