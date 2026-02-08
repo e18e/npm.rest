@@ -54,7 +54,11 @@ export function nullOnEmpty<
 	return v.pipe(
 		schema,
 		v.transform((value) => {
-			return Object.keys(value).length === 0 ? null : value;
+			const empty = Object.values(value).every(
+				(value) => value === null || typeof value === 'undefined',
+			);
+
+			return empty ? null : value;
 		}),
 	);
 }

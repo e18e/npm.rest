@@ -5,6 +5,7 @@ import {
 	PretendBoolean,
 	EmptyableLink,
 	StrictString,
+	nullOnEmpty,
 	Email,
 	Date,
 	Link,
@@ -136,7 +137,53 @@ describe('email', () => {
 	});
 });
 
-describe.todo('null-on-empty');
+describe('null on empty', () => {
+	const schema = nullOnEmpty(
+		v.object({
+			foo: v.optional(v.nullable(v.string())),
+			bar: v.optional(v.nullable(v.string())),
+		}),
+	);
+
+	it('works as expected', () => {
+		const result = v.parse(schema, {});
+		expect(result).toBeNull();
+	});
+
+	it("doesn't null when not empty", () => {
+		const result = v.parse(schema, { foo: 'bar' });
+		expect(result).toMatchObject({ foo: 'bar' });
+	});
+
+	it('works when array pretends to be object', () => {
+		const result = v.parse(schema, []);
+		expect(result).toBeNull();
+	});
+
+	it('strips when values are null', () => {
+		const result = v.parse(schema, { foo: null, bar: null });
+		expect(result).toBeNull();
+	});
+
+	it("doesn't strip when values are not all null", () => {
+		const result = v.parse(schema, { foo: null, bar: 'imagine' });
+		expect(result).toMatchObject({ foo: null, bar: 'imagine' });
+	});
+
+	it('strips when values are undefined', () => {
+		// oxlint-disable-next-line eslint(no-undefined)
+		const result = v.parse(schema, { foo: undefined, bar: undefined });
+		// oxlint-disable-next-line eslint(no-undefined)
+		expect(result).toBeNull();
+	});
+
+	it("doesn't strip when values are not all undefined", () => {
+		// oxlint-disable-next-line eslint(no-undefined)
+		const result = v.parse(schema, { foo: undefined, bar: 'imagine' });
+		// oxlint-disable-next-line eslint(no-undefined)
+		expect(result).toMatchObject({ foo: undefined, bar: 'imagine' });
+	});
+});
 
 describe('pretend boolean', () => {
 	it('supports real true', () => {

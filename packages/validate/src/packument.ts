@@ -108,15 +108,16 @@ export const LicenseObjectSchema = v.object({
 
 export const LicenseSchema = v.union([
 	EmptyableString,
-	LicenseObjectSchema,
 	v.pipe(
 		v.array(v.union([StrictString, LicenseObjectSchema])),
 		v.filterItems((item) => item !== null),
+		v.transform((licenses) => (licenses.length === 0 ? null : licenses)),
 	),
 	v.pipe(
 		v.literal(false),
 		v.transform(() => 'UNLICENSED'),
 	),
+	nullOnEmpty(LicenseObjectSchema),
 ]);
 
 export const KeywordsSchema = v.union([

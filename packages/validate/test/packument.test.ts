@@ -5,6 +5,7 @@ import {
 	PackumentVersionSchema,
 	PackumentSchema,
 	KeywordsSchema,
+	LicenseSchema,
 } from '../src/packument';
 
 type InputPackument = v.InferInput<typeof PackumentSchema>;
@@ -470,6 +471,26 @@ describe('packument-version validation', () => {
 			});
 		});
 
+		it('maps to null when object is empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBeNull();
+		});
+
+		it('maps to null when all object values are null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = {
+				type: null,
+				url: null,
+				file: null,
+			};
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBeNull();
+		});
+
 		it('url is optional', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = {
@@ -581,6 +602,14 @@ describe('packument-version validation', () => {
 			]);
 		});
 
+		it('returns null when array is empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = [];
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBeNull();
+		});
+
 		it('supports license of boolean false', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = false;
@@ -597,11 +626,8 @@ describe('packument-version validation', () => {
 		});
 
 		it('only supports license false top level', () => {
-			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
-			version.license = [false];
-
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			const parsed = v.parse(LicenseSchema, [false]);
+			expect(parsed).toBeNull();
 		});
 	});
 
@@ -823,9 +849,22 @@ describe('packument-version validation', () => {
 
 		it('values become null when empty', () => {
 			const version = createPackumentVersion('1.0.0');
-			version[type] = { foo: '' };
+			version[type] = { foo: '', bar: '2.0.0' };
+
 			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed).toMatchObject({ [type]: { foo: null } });
+			expect(parsed).toMatchObject({
+				[type]: { foo: null, bar: '2.0.0' },
+			});
+		});
+
+		it('values become null when all values are null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { foo: null, bar: null };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				[type]: null,
+			});
 		});
 	});
 
@@ -869,18 +908,26 @@ describe('packument-version validation', () => {
 
 		it('maps incorrect key values to null', () => {
 			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
-			version.peerDependenciesMeta = { foo: 'bar' };
+			version.peerDependenciesMeta = {
+				// @ts-expect-error tests
+				foo: 'bar',
+				baz: { optional: true },
+			};
+
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed).toMatchObject({
-				peerDependenciesMeta: { foo: null },
+				peerDependenciesMeta: { foo: null, baz: { optional: true } },
 			});
 		});
 
 		it('maps string value to null', () => {
 			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
-			version.peerDependenciesMeta = { foo: '^1.0.0' };
+			version.peerDependenciesMeta = {
+				// @ts-expect-error tests
+				foo: '^1.0.0',
+				bar: { optional: true },
+			};
+
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed).toMatchObject({
 				peerDependenciesMeta: { foo: null },
@@ -889,11 +936,28 @@ describe('packument-version validation', () => {
 
 		it('maps boolean value to null', () => {
 			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
-			version.peerDependenciesMeta = { foo: true };
+			version.peerDependenciesMeta = {
+				// @ts-expect-error tests
+				foo: true,
+				bar: { optional: true },
+			};
+
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed).toMatchObject({
-				peerDependenciesMeta: { foo: null },
+				peerDependenciesMeta: { foo: null, bar: { optional: true } },
+			});
+		});
+
+		it('maps to null when all values are null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				foo: null,
+				bar: null,
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed).toMatchObject({
+				peerDependenciesMeta: null,
 			});
 		});
 
