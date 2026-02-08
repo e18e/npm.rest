@@ -99,7 +99,7 @@ import {
 // 	BugsObjectSchema,
 // ]);
 
-export const LicenseObjectSchema = v.strictObject({
+export const LicenseObjectSchema = v.object({
 	type: v.optional(EmptyableString, null),
 	name: v.optional(EmptyableString, null),
 	url: v.optional(v.fallback(EmptyableLink, null), null),
