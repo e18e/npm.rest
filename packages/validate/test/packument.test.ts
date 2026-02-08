@@ -876,16 +876,18 @@ describe('packument-version validation', () => {
 			expect(parsed).toMatchObject({ [type]: null });
 		});
 
-		it('keys must not be empty', () => {
+		it('empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
-			version[type] = { '': '1.0.0' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			version[type] = { '': '1.0.0', foo: '2.0.0' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
 		});
 
-		it('keys must not be effectively empty', () => {
+		it('effectively empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
-			version[type] = { '  ': '1.0.0' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			version[type] = { '   ': '1.0.0', foo: '2.0.0' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
 		});
 
 		it('values can be empty', () => {

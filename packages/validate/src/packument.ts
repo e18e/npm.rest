@@ -139,7 +139,16 @@ export const KeywordsSchema = v.union([
 const AnyDependencyType = v.optional(
 	v.nullable(
 		v.union([
-			nullOnEmpty(v.record(StrictString, EmptyableString)),
+			nullOnEmpty(
+				v.pipe(
+					v.record(v.pipe(v.string(), v.trim()), EmptyableString),
+					v.transform((obj) =>
+						Object.fromEntries(
+							Object.entries(obj).filter(([key]) => key !== ''),
+						),
+					),
+				),
+			),
 			v.pipe(
 				v.string(),
 				v.transform(() => null),
