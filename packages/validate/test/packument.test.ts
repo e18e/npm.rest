@@ -254,17 +254,22 @@ describe('packument', () => {
 				expect(v.is(PackumentSchema, packument)).toBeTruthy();
 			});
 
-			it('is strict', () => {
+			it('strips extra properties', () => {
 				const packument = createPackument();
-
+				const date = new Date();
 				packument.time.unpublished = {
-					time: new Date().toISOString(),
+					time: date.toISOString(),
 					versions: ['2.0.0'],
 					// @ts-expect-error tests
 					foo: 'bar',
 				};
 
-				expect(v.is(PackumentSchema, packument)).toBeFalsy();
+				const parsed = v.parse(PackumentSchema, packument);
+				expect(parsed.time.unpublished).toStrictEqual({
+					// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+					time: expect.any(Date),
+					versions: ['2.0.0'],
+				});
 			});
 
 			it('can have no versions', () => {
@@ -1093,6 +1098,7 @@ const PACKUMENTS = [
 	'@aaamrh/first-package',
 	'@4399ywkf/cli',
 	'@porsche-data-layer/library',
+	'bento',
 ];
 
 describe('real world tests', () => {

@@ -217,7 +217,7 @@ export const PackumentSchema = v.looseObject({
 			created: Date,
 			modified: Date,
 			unpublished: v.optional(
-				v.strictObject({
+				v.object({
 					time: Date,
 					versions: v.array(StrictString),
 				}),
