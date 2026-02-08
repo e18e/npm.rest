@@ -6,7 +6,7 @@ import {
 	PackageNameSchema,
 	SpecifierSchema,
 	SemverSchema,
-} from '../src/package.ts';
+} from '../src/package';
 
 describe('packageNameSchema validation', () => {
 	it('accepts valid unscoped name', () => {
