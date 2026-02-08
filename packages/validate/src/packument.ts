@@ -117,6 +117,10 @@ export const LicenseSchema = v.union([
 		v.literal(false),
 		v.transform(() => 'UNLICENSED'),
 	),
+	v.pipe(
+		v.number(),
+		v.transform(() => null),
+	),
 	nullOnEmpty(LicenseObjectSchema),
 ]);
 

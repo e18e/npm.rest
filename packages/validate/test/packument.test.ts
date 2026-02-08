@@ -666,6 +666,14 @@ describe('packument-version validation', () => {
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed.license).toBeNull();
 		});
+
+		it('fallsback to null when given a number', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = 123;
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.license).toBeNull();
+		});
 	});
 
 	describe('homepage', () => {
