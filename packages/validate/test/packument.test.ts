@@ -355,6 +355,33 @@ describe('packument-version validation', () => {
 			version.description = '    ';
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
+
+		it('joins an array of strings', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = ['hello', 'world'];
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('trims array before joining', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = [' hello ', 'world '];
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.description).toBe('hello world');
+		});
+
+		it('turns empty array into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = [];
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.description).toBeNull();
+		});
+
+		it('turns array of empty/effectively empty strings into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.description = ['', ' ', '  '];
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.description).toBeNull();
+		});
 	});
 
 	describe('version', () => {
@@ -1223,6 +1250,7 @@ const PACKUMENTS = [
 	'drceglamoney',
 	'brixo-framework',
 	'ljon-r2-test-2',
+	'repeat',
 ];
 
 describe('real world tests', () => {
