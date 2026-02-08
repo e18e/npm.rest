@@ -145,7 +145,21 @@ export const PackumentVersionSchema = v.looseObject({
 			v.pipe(v.string(), v.regex(/^sha(256|384|512)-[A-Za-z0-9+/=]+$/)),
 		),
 	}),
-	deprecated: v.optional(v.union([EmptyableString, v.boolean()])),
+	deprecated: v.optional(
+		v.union([
+			EmptyableString,
+			v.boolean(),
+			v.pipe(
+				v.record(StrictString, StrictString),
+				v.minEntries(1),
+				v.transform((obj) =>
+					Object.entries(obj)
+						.map(([key, value]) => `${key}: ${value}`)
+						.join(', '),
+				),
+			),
+		]),
+	),
 	// funding: v.optional(Funding),
 	// repository: v.optional(RepositorySchema),
 	dependencies: v.optional(

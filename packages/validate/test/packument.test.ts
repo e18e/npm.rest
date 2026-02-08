@@ -665,6 +665,61 @@ describe('packument-version validation', () => {
 				deprecated: 'This version is deprecated',
 			});
 		});
+
+		it('can be an object', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { foo: 'This version is deprecated' };
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it("object can't be empty", () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = {};
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('object must have not have empty key', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { '': 'deprecated' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('object must not have effectively empty key', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { '   ': 'deprecated' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('object must have not have empty value', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { foo: '' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('object must not have effectively empty value', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { foo: '   ' };
+			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+		});
+
+		it('flattens object message to string', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = { foo: 'This version is deprecated' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe('foo: This version is deprecated');
+		});
+
+		it('flattens multi key object message to string', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = {
+				foo: 'This version is deprecated',
+				bar: 'This version is deprecated',
+			};
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe(
+				'foo: This version is deprecated, bar: This version is deprecated',
+			);
+		});
 	});
 
 	describe.for([
