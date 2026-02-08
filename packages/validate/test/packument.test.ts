@@ -138,6 +138,16 @@ describe('packument', () => {
 
 			expect(v.is(PackumentSchema, packument)).toBeTruthy();
 		});
+
+		it("doesn't trim keys", () => {
+			const packument = createPackument();
+			packument['dist-tags'] = { '  foo  ': '^1.2.0' };
+
+			const parsed = v.safeParse(PackumentSchema, packument);
+			expect(parsed.output).toMatchObject({
+				'dist-tags': { '  foo  ': '^1.2.0' },
+			});
+		});
 	});
 
 	describe('versions', () => {
