@@ -883,9 +883,23 @@ describe('packument-version validation', () => {
 			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
 		});
 
+		it('empty keys and values are stripped', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { '': '', foo: '2.0.0' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
+		});
+
 		it('effectively empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
 			version[type] = { '   ': '1.0.0', foo: '2.0.0' };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
+		});
+
+		it('effectively empty keys and values are stripped', () => {
+			const version = createPackumentVersion('1.0.0');
+			version[type] = { '   ': '    ', foo: '2.0.0' };
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed[type]).toStrictEqual({ foo: '2.0.0' });
 		});
@@ -966,11 +980,39 @@ describe('packument-version validation', () => {
 			});
 		});
 
+		it('empty keys and values are stripped', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				foo: { optional: true },
+				// @ts-expect-error tests
+				'': '',
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.peerDependenciesMeta).toStrictEqual({
+				foo: { optional: true },
+			});
+		});
+
 		it('effectively empty keys are stripped', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.peerDependenciesMeta = {
 				'  ': { optional: false },
 				foo: { optional: true },
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.peerDependenciesMeta).toStrictEqual({
+				foo: { optional: true },
+			});
+		});
+
+		it('effectively empty keys and values are stripped', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.peerDependenciesMeta = {
+				foo: { optional: true },
+				// @ts-expect-error tests
+				'    ': '    ',
 			};
 
 			const parsed = v.parse(PackumentVersionSchema, version);
