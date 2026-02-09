@@ -656,6 +656,14 @@ describe('packument-version validation', () => {
 			expect(result.license).toBe('UNLICENSED');
 		});
 
+		it('maps true to UNKNOWN', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = true;
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBe('UNKNOWN');
+		});
+
 		it('only supports license false top level', () => {
 			const parsed = v.parse(LicenseSchema, [false]);
 			expect(parsed).toBeNull();
