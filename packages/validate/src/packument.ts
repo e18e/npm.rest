@@ -172,7 +172,7 @@ function dependency<TInput, TOutput, TIssue extends v.BaseIssue<unknown>>(
 }
 
 export const PackumentVersionSchema = v.looseObject({
-	name: StrictString,
+	name: v.optional(EmptyableString, null),
 	description: v.optional(
 		v.union([
 			EmptyableString,

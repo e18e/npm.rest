@@ -312,28 +312,31 @@ describe('packument', () => {
 describe('packument-version validation', () => {
 	describe('name', () => {
 		it('parses', () => {
-			const packument = createPackument();
+			const packument = createPackumentVersion('1.0.0');
 			packument.name = 'hello-world';
-			expect(v.is(PackumentSchema, packument)).toBeTruthy();
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.name).toBe('hello-world');
 		});
 
-		it('is required', () => {
-			const packument = createPackument();
-			// @ts-expect-error tests
+		it('is not required', () => {
+			const packument = createPackumentVersion('1.0.0');
 			packument.name = null;
-			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.name).toBeNull();
 		});
 
-		it('fails with empty name', () => {
-			const packument = createPackument();
+		it('turns empty name to null', () => {
+			const packument = createPackumentVersion('1.0.0');
 			packument.name = '';
-			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.name).toBeNull();
 		});
 
-		it('fails with effectively empty name', () => {
-			const packument = createPackument();
+		it('turns effectively empty name to null', () => {
+			const packument = createPackumentVersion('1.0.0');
 			packument.name = '    ';
-			expect(v.is(PackumentSchema, packument)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.name).toBeNull();
 		});
 	});
 
@@ -381,33 +384,6 @@ describe('packument-version validation', () => {
 			version.description = ['', ' ', '  '];
 			const result = v.parse(PackumentVersionSchema, version);
 			expect(result.description).toBeNull();
-		});
-	});
-
-	describe('version', () => {
-		it('parses', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.name = 'hello-world';
-			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
-		});
-
-		it('is required', () => {
-			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
-			version.name = null;
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
-		});
-
-		it('fails when empty', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.name = '';
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
-		});
-
-		it('fails when effectively empty', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.name = '    ';
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
 		});
 	});
 
