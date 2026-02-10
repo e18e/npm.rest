@@ -31,6 +31,27 @@ describe('packument', () => {
 			packument._rev = 'invalid';
 			expect(v.is(PackumentSchema, packument)).toBeFalsy();
 		});
+
+		it('finds a valid revision', () => {
+			const packument = createPackument();
+			packument._rev = '354-e8064ff271d875ac7fe653ef1084e6ec';
+			const parsed = v.parse(PackumentSchema, packument);
+			expect(parsed._rev).toBe('354-e8064ff271d875ac7fe653ef1084e6ec');
+		});
+
+		it('fails on a revision without a number', () => {
+			const packument = createPackument();
+			packument._rev = 'hi-e8064ff271d875ac7fe653ef1084e6ec';
+			const parsed = v.safeParse(PackumentSchema, packument);
+			expect(parsed.success).toBeFalsy();
+		});
+
+		it('fails on a revision without a hash', () => {
+			const packument = createPackument();
+			packument._rev = '354-';
+			const parsed = v.safeParse(PackumentSchema, packument);
+			expect(parsed.success).toBeFalsy();
+		});
 	});
 
 	describe('name', () => {

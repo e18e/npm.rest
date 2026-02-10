@@ -17,14 +17,6 @@ export const EmptyString = v.pipe(
 	v.transform(() => null),
 );
 
-export const Rev = v.pipe(
-	StrictString,
-	v.check((value) => {
-		const [num, rest] = value.split('-');
-		return !Number.isNaN(Number.parseInt(num, 10)) && rest.length > 0;
-	}),
-);
-
 export const Date = v.pipe(TrimmedString, v.toDate());
 export const Email = v.pipe(TrimmedString, v.email());
 export const Link = v.pipe(TrimmedString, v.url());

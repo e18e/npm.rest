@@ -1,9 +1,19 @@
-import { StrictString, nullOnEmpty, Date, Rev } from '../shared';
 import { PackumentVersionSchema } from './packument-version';
+import { StrictString, nullOnEmpty, Date } from '../shared';
 import * as v from 'valibot';
 
 export const PackumentSchema = v.object({
-	_rev: v.optional(Rev),
+	_rev: v.optional(
+		v.pipe(
+			StrictString,
+			v.check((value) => {
+				const [num, rest] = value.split('-');
+				return (
+					!Number.isNaN(Number.parseInt(num, 10)) && rest.length > 0
+				);
+			}),
+		),
+	),
 	name: StrictString,
 	'dist-tags': v.optional(
 		nullOnEmpty(
