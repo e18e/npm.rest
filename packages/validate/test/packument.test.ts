@@ -916,6 +916,14 @@ describe('packument-version validation', () => {
 				'foo: This version is deprecated, bar: This version is deprecated',
 			);
 		});
+
+		it.skip('falls back to null when something unsupported is given', () => {
+			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
+			version.deprecated = { foo: { bar: 'baz' } };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBeNull();
+		});
 	});
 
 	describe('funding', () => {
