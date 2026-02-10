@@ -2,6 +2,7 @@ import { fetchPackumentRaw } from '@npm.rest/test/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
+	DOMAIN_FUNDING_TYPE_MAP,
 	PackumentVersionSchema,
 	RepositoryObjectSchema,
 	RepositorySchema,
@@ -1099,6 +1100,79 @@ describe('packument-version validation', () => {
 				{ type: 'github', url: 'https://example.com' },
 			]);
 		});
+
+		it("doesn't modify the url for random sites", () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { url: 'http://example.com?foo=bar' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ url: 'http://example.com?foo=bar' },
+			]);
+		});
+
+		it("doesn't modify the type for random sites", () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = {
+				type: 'github',
+				url: 'http://example.com?foo=bar',
+			};
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'github', url: 'http://example.com?foo=bar' },
+			]);
+		});
+
+		describe.for(DOMAIN_FUNDING_TYPE_MAP)(
+			'domain type handling for %s to %s',
+			// oxlint-disable-next-line jest/valid-describe-callback bug?
+			([domain, type]) => {
+				it('transforms when no type is given', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.funding = { url: `https://${domain}/example` };
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.funding).toStrictEqual([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+
+				it('transforms when conflicting type is given', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.funding = {
+						// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test) required here
+						type: type === 'github' ? 'patreon' : 'github',
+						url: `https://${domain}/example`,
+					};
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.funding).toStrictEqual([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+
+				it('transforms when funding is a string', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.funding = `https://${domain}/example`;
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.funding).toStrictEqual([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+
+				it('transforms http to https', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.funding = { url: `http://${domain}/example` };
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.funding).toStrictEqual([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+			},
+		);
 
 		it.for([
 			['github', 'github'],

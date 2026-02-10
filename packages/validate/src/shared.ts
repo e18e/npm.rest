@@ -71,7 +71,7 @@ export function nullOnEmpty<
 export function aliasedLiteralUnion<
 	const T extends string,
 	const A extends Record<string, T>,
->(input: T[], aliases?: A) {
+>(input: readonly T[], aliases?: A) {
 	const stars =
 		aliases &&
 		Object.entries(aliases)
