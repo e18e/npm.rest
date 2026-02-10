@@ -1048,16 +1048,6 @@ describe('packument-version validation', () => {
 			]);
 		});
 
-		it('supports known funding types', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.funding = { type: 'github', url: 'https://example.com' };
-
-			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed.funding).toStrictEqual([
-				{ type: 'github', url: 'https://example.com' },
-			]);
-		});
-
 		it('turns unknown funding type into unknown', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.funding = { type: 'foo', url: 'https://example.com' };
@@ -1098,6 +1088,40 @@ describe('packument-version validation', () => {
 			versionTrue.funding = true;
 			const parsedTrue = v.parse(PackumentVersionSchema, versionTrue);
 			expect(parsedTrue.funding).toBeNull();
+		});
+
+		it('supports known funding types', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { type: 'github', url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'github', url: 'https://example.com' },
+			]);
+		});
+
+		it.for([
+			['github', 'github'],
+			['buy_me_a_coffee', 'buy-me-a-coffee'],
+			['Buy Me a coffee', 'buy-me-a-coffee'],
+			['open_collective', 'open-collective'],
+			['open collective', 'open-collective'],
+			['GitHub Sponsors', 'github'],
+			['git hub sponsors', 'github'],
+			['GitHub - foo', 'github'],
+			['PayPal', 'paypal'],
+			['PayPal - foo', 'paypal'],
+			['Ko_fi', 'ko-fi'],
+		])('parses aliased type %s to %s', ([input, expected]) => {
+			const parsed = v.parse(FundingObject, {
+				type: input,
+				url: 'https://example.com',
+			});
+
+			expect(parsed).toStrictEqual({
+				type: expected,
+				url: 'https://example.com',
+			});
 		});
 	});
 

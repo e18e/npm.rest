@@ -88,15 +88,33 @@ export type Repository = v.InferOutput<typeof RepositorySchema>;
 export const FundingObject = v.object({
 	type: v.optional(
 		v.fallback(
-			aliasedLiteralUnion([
-				'patreon',
-				'individual',
-				'github',
-				'opencollective',
-				'paypal',
-				'ko_fi',
-				'unknown',
-			]),
+			aliasedLiteralUnion(
+				[
+					'patreon',
+					'individual',
+					'github',
+					'open-collective',
+					'paypal',
+					'ko-fi',
+					'cashapp',
+					'buy-me-a-coffee',
+					'liberapay',
+					'thanks.dev',
+					'unknown',
+				],
+				{
+					buy_me_a_coffee: 'buy-me-a-coffee',
+					buymeacoffee: 'buy-me-a-coffee',
+					open_collective: 'open-collective',
+					opencollective: 'open-collective',
+					thanks_dev: 'thanks.dev',
+					librepay: 'liberapay',
+					'github*': 'github',
+					'paypal*': 'paypal',
+					ko_fi: 'ko-fi',
+					kofi: 'ko-fi',
+				},
+			),
 			'unknown',
 		),
 	),
