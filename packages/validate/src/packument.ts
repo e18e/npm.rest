@@ -7,7 +7,6 @@ import {
 	TrimmedString,
 	StrictString,
 	nullOnEmpty,
-	EmptyString,
 	MaybeLink,
 	Date,
 	Link,
@@ -59,24 +58,19 @@ export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 export const RepositoryObjectSchema = v.object({
 	type: v.optional(
 		v.fallback(
-			v.nullable(
-				v.union([
-					EmptyString,
-					aliasedLiteralUnion(REPOSITORY_TYPES, {
-						'github*': 'git',
-						'bitbucket*': 'git',
-						'gitlab*': 'git',
-						'gitee*': 'git',
-					}),
-				]),
-			),
+			aliasedLiteralUnion(REPOSITORY_TYPES, {
+				'github*': 'git',
+				'bitbucket*': 'git',
+				'gitlab*': 'git',
+				'gitee*': 'git',
+			}),
 			'unknown',
 		),
-		null,
+		'unknown',
 	),
 	url: Link,
-	directory: v.optional(EmptyableString, null),
-	branch: v.optional(EmptyableString, null),
+	directory: v.optional(EmptyableString),
+	branch: v.optional(EmptyableString),
 });
 
 export const RepositorySchema = v.pipe(
@@ -99,8 +93,7 @@ export const RepositorySchema = v.pipe(
 
 				const item =
 					typeof raw === 'string'
-						? // prettier-ignore
-							{ type: null, url: raw, directory: null, branch: null }
+						? { type: 'unknown' as const, url: raw }
 						: raw;
 
 				const url = new URL(item.url);
@@ -109,13 +102,11 @@ export const RepositorySchema = v.pipe(
 					return null;
 				}
 
-				if (url.pathname.endsWith('.git')) {
-					item.type = 'git';
-					return item;
-				}
-
-				if (isGitProtocol(url.protocol)) {
-					item.type = 'git';
+				if (
+					url.pathname.endsWith('.git') ||
+					isGitProtocol(url.protocol)
+				) {
+					item.type = 'git' as const;
 					return item;
 				}
 

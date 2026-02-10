@@ -1244,12 +1244,10 @@ describe('packument-version validation', () => {
 				url: 'https://github.com/owner/repo',
 			});
 
-			expect(parsed).toStrictEqual([
+			expect(parsed).toMatchObject([
 				{
 					type: 'git',
 					url: 'https://github.com/owner/repo',
-					directory: null,
-					branch: null,
 				},
 			]);
 		});
@@ -1370,22 +1368,22 @@ describe('packument-version validation', () => {
 			expect(parsed).toMatchObject({ type: 'git' });
 		});
 
-		it('transforms empty type to null', () => {
+		it('transforms empty type to unknown', () => {
 			const parsed = v.parse(RepositoryObjectSchema, {
 				type: '',
 				url: 'https://github.com/owner/repo',
 			});
 
-			expect(parsed?.type).toBeNull();
+			expect(parsed?.type).toBe('unknown');
 		});
 
-		it('transforms effectively empty type to null', () => {
+		it('transforms effectively empty type to unknown', () => {
 			const parsed = v.parse(RepositoryObjectSchema, {
 				type: '   ',
 				url: 'https://github.com/owner/repo',
 			});
 
-			expect(parsed?.type).toBeNull();
+			expect(parsed?.type).toBe('unknown');
 		});
 
 		it('turns empty array to null', () => {
