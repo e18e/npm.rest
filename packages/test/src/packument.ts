@@ -1,8 +1,11 @@
-import { PackumentSchema } from '@npm.rest/validate/packument';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { existsSync } from 'node:fs';
 import * as v from 'valibot';
+import {
+	type PackumentVersionSchema,
+	PackumentSchema,
+} from '@npm.rest/validate/packument';
 
 const PACKUMENTS_PATH = join(import.meta.dirname, '../.packuments');
 
@@ -26,4 +29,38 @@ export async function fetchPackumentRaw(name: string): Promise<PackumentInput> {
 export async function fetchPackument(name: string) {
 	const packument = await fetchPackumentRaw(name);
 	return v.parse(PackumentSchema, packument);
+}
+
+type InputPackument = v.InferInput<typeof PackumentSchema>;
+type InputPackumentVersion = v.InferInput<typeof PackumentVersionSchema>;
+
+export function createPackumentVersion(version: string): InputPackumentVersion {
+	return {
+		name: 'my-package',
+		description: 'A test package',
+		version,
+		dist: {
+			tarball:
+				'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
+			integrity: 'sha256-1234567890abcdef',
+		},
+	};
+}
+
+export function createPackument(): InputPackument {
+	const version = '1.0.0';
+
+	return {
+		name: 'my-package',
+		description: 'A test package',
+		'dist-tags': { latest: version },
+		versions: {
+			[version]: createPackumentVersion(version),
+		},
+		time: {
+			created: new Date().toISOString(),
+			modified: new Date().toISOString(),
+			[version]: new Date().toISOString(),
+		},
+	};
 }
