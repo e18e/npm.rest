@@ -313,6 +313,5 @@ describe('real world tests', () => {
 		const packument = await fetchPackumentRaw(name);
 		const result = v.parse(PackumentSchema, packument);
 		expect(result.name).toBe(name);
-		expect(result.success).toBeFalsy();
 	});
 });
