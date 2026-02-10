@@ -1009,6 +1009,18 @@ describe('packument-version validation', () => {
 				{ type: 'github', url: 'https://example.com' },
 			]);
 		});
+
+		it('transforms false to null', () => {
+			const versionFalse = createPackumentVersion('1.0.0');
+			versionFalse.funding = false;
+			const parsedFalse = v.parse(PackumentVersionSchema, versionFalse);
+			expect(parsedFalse.funding).toBeNull();
+
+			const versionTrue = createPackumentVersion('1.0.0');
+			versionTrue.funding = true;
+			const parsedTrue = v.parse(PackumentVersionSchema, versionTrue);
+			expect(parsedTrue.funding).toBeNull();
+		});
 	});
 
 	describe.for([

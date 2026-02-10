@@ -93,8 +93,14 @@ export const Funding = v.pipe(
 		EmptyableString,
 		v.array(v.union([EmptyableString, FundingObject])),
 		nullOnEmpty(FundingObject),
+		v.pipe(
+			v.boolean(),
+			v.transform(() => null),
+		),
 	]),
 	v.transform((value) => {
+		if (value === null) return null;
+
 		const array = (Array.isArray(value) ? value : [value])
 			.map((item) => (typeof item === 'string' ? { url: item } : item))
 			.filter((item) => item !== null);
