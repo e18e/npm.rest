@@ -342,6 +342,36 @@ describe('packument-version validation', () => {
 		});
 	});
 
+	describe('version', () => {
+		it('parses', () => {
+			const packument = createPackumentVersion('1.0.0');
+			packument.version = '1.0.0';
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.version).toBe('1.0.0');
+		});
+
+		it('is not required', () => {
+			const packument = createPackumentVersion('1.0.0');
+			packument.version = null;
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.version).toBeNull();
+		});
+
+		it('turns empty version to null', () => {
+			const packument = createPackumentVersion('1.0.0');
+			packument.version = '';
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.version).toBeNull();
+		});
+
+		it('turns effectively empty version to null', () => {
+			const packument = createPackumentVersion('1.0.0');
+			packument.version = '    ';
+			const parsed = v.parse(PackumentVersionSchema, packument);
+			expect(parsed.version).toBeNull();
+		});
+	});
+
 	describe('description', () => {
 		it('is optional', () => {
 			const version = createPackumentVersion('1.0.0');
@@ -1414,6 +1444,7 @@ const PACKUMENTS = [
 	'brixo-framework',
 	'ljon-r2-test-2',
 	'repeat',
+	'zachtestproject3',
 ];
 
 describe('real world tests', () => {

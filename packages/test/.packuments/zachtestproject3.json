@@ -1,0 +1,43 @@
+{
+  "_id": "zachtestproject3",
+  "_rev": "1-74edcf66f517b0b3589e0a3ec060a891",
+  "name": "zachtestproject3",
+  "version": "1.0.1",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "zlrenner",
+      "email": "zlrenner@outlook.com"
+    }
+  ],
+  "versions": {
+    "1.0.1": {
+      "dist": {
+        "tarball": "https://registry.npmjs.org/zachtestproject3/-/test.tgz",
+        "_from": "http://zachrenner.com/test.tgz"
+      },
+      "maintainers": [
+        {
+          "name": "zlrenner",
+          "email": "zlrenner@outlook.com"
+        }
+      ],
+      "_npmUser": {
+        "name": "zlrenner",
+        "email": "zlrenner@outlook.com"
+      },
+      "directories": {}
+    }
+  },
+  "dist-tags": {
+    "latest": "1.0.1"
+  },
+  "time": {
+    "modified": "2015-05-19T21:55:59.372Z",
+    "created": "2015-05-19T21:55:59.372Z",
+    "1.0.1": "2015-05-19T21:55:59.372Z"
+  },
+  "readme": "",
+  "readmeFilename": "",
+  "_attachments": {}
+}

@@ -207,6 +207,7 @@ function dependency<TInput, TOutput, TIssue extends v.BaseIssue<unknown>>(
 
 export const PackumentVersionSchema = v.looseObject({
 	name: v.optional(EmptyableString, null),
+	version: v.optional(EmptyableString, null),
 	description: v.optional(
 		v.union([
 			EmptyableString,
@@ -218,7 +219,6 @@ export const PackumentVersionSchema = v.looseObject({
 		]),
 		null,
 	),
-	version: StrictString,
 	keywords: v.optional(v.fallback(KeywordsSchema, null), null),
 	license: v.optional(LicenseSchema, null),
 	homepage: v.optional(v.fallback(EmptyableLink, null)),
