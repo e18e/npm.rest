@@ -688,22 +688,18 @@ describe('packument-version validation', () => {
 			]);
 		});
 
-		it('maps false license to UNLICENSED', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.license = false;
-
-			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject([
-				{ type: 'UNLICENSED', file: null, name: null, url: null },
+		it('maps boolean license to UNKNOWN', () => {
+			const versionFalse = createPackumentVersion('1.0.0');
+			versionFalse.license = false;
+			const resultFalse = v.parse(PackumentVersionSchema, versionFalse);
+			expect(resultFalse.license).toMatchObject([
+				{ type: 'UNKNOWN', file: null, name: null, url: null },
 			]);
-		});
 
-		it('maps true to UNKNOWN', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.license = true;
-
-			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject([
+			const versionTrue = createPackumentVersion('1.0.0');
+			versionTrue.license = true;
+			const resultTrue = v.parse(PackumentVersionSchema, versionTrue);
+			expect(resultTrue.license).toMatchObject([
 				{ type: 'UNKNOWN', file: null, name: null, url: null },
 			]);
 		});

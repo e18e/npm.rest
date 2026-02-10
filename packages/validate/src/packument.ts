@@ -134,11 +134,7 @@ export const LicenseSchema = v.pipe(
 		EmptyableString,
 		v.array(v.union([EmptyableString, LicenseObjectSchema])),
 		v.pipe(
-			v.literal(false),
-			v.transform(() => 'UNLICENSED'),
-		),
-		v.pipe(
-			v.literal(true),
+			v.boolean(),
 			v.transform(() => 'UNKNOWN'),
 		),
 		v.pipe(
