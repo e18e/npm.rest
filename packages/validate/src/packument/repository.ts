@@ -23,7 +23,13 @@ function isGitProtocol(protocol: string): protocol is GitProtocol {
 }
 
 export const REPOSITORY_DOMAIN_MAP = Object.freeze({
-	git: ['github.com', 'bitbucket.org', 'gitlab.com', 'gitee.com'],
+	git: [
+		'github.com',
+		'bitbucket.org',
+		'gitlab.com',
+		'gitee.com',
+		'git.sr.ht',
+	],
 } satisfies Record<Exclude<RepositoryType, 'unknown'>, string[]>);
 
 export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
