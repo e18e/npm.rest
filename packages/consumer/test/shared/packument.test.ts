@@ -25,7 +25,7 @@ function createPackument(name: string): v.InferInput<typeof PackumentSchema> {
 	};
 }
 
-describe.skip('process packument', () => {
+describe('process packument', () => {
 	it('stores raw packument', async () => {
 		const random = crypto.randomUUID();
 		const packument = createPackument('foo');
@@ -42,6 +42,7 @@ describe.skip('process packument', () => {
 			repository: {
 				type: 'Git',
 				directory: random,
+				url: 'https://github.com/foo/bar',
 			},
 		};
 
@@ -53,10 +54,13 @@ describe.skip('process packument', () => {
 		const result = await processPackument('foo', '1-placeholder');
 		const processed = result.unwrap();
 
-		expect(processed.versions?.['1.0.0'].repository).toMatchObject({
-			type: 'git',
-			directory: random,
-		});
+		expect(processed.versions?.['1.0.0'].repository).toMatchObject([
+			{
+				type: 'git',
+				directory: random,
+				url: 'https://github.com/foo/bar',
+			},
+		]);
 
 		const [record] = await db
 			.select({ data: packumentTable.data })
