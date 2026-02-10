@@ -901,28 +901,32 @@ describe('packument-version validation', () => {
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
 
-		it('object must have not have empty key', () => {
+		it('handles object with empty key', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.deprecated = { '': 'deprecated' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe('deprecated');
 		});
 
-		it('object must not have effectively empty key', () => {
+		it('handles object with effectively empty key', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.deprecated = { '   ': 'deprecated' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe('deprecated');
 		});
 
-		it('object must have not have empty value', () => {
+		it('handles object with empty value', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.deprecated = { foo: '' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe('foo');
 		});
 
-		it('object must not have effectively empty value', () => {
+		it('handles object with effectively empty value', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.deprecated = { foo: '   ' };
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.deprecated).toBe('foo');
 		});
 
 		it('flattens object message to string', () => {

@@ -4,6 +4,7 @@ import {
 	EmptyableString,
 	PretendBoolean,
 	EmptyableLink,
+	TrimmedString,
 	StrictString,
 	nullOnEmpty,
 	EmptyString,
@@ -316,11 +317,13 @@ export const PackumentVersionSchema = v.looseObject({
 			EmptyableString,
 			v.boolean(),
 			v.pipe(
-				v.record(StrictString, StrictString),
+				v.record(TrimmedString, TrimmedString),
 				v.minEntries(1),
 				v.transform((obj) =>
 					Object.entries(obj)
-						.map(([key, value]) => `${key}: ${value}`)
+						.map(([key, value]) => {
+							return `${key}${key && value ? ': ' : ''}${value}`;
+						})
 						.join(', '),
 				),
 			),

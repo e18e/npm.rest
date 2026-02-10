@@ -1,19 +1,37 @@
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
+	aliasedLiteralUnion,
 	EmptyableString,
 	PretendBoolean,
+	TrimmedString,
 	EmptyableLink,
 	StrictString,
+	EmptyString,
 	nullOnEmpty,
 	MaybeLink,
 	Email,
 	Date,
 	Link,
 	Rev,
-	EmptyString,
-	aliasedLiteralUnion,
 } from '../src/shared';
+
+describe('trimmed string', () => {
+	it('trims a string', () => {
+		const result = v.parse(TrimmedString, ' hello ');
+		expect(result).toBe('hello');
+	});
+
+	it('works with an empty string', () => {
+		const result = v.parse(TrimmedString, '');
+		expect(result).toBe('');
+	});
+
+	it('works with an effectively empty string', () => {
+		const result = v.parse(TrimmedString, '   ');
+		expect(result).toBe('');
+	});
+});
 
 describe('rev', () => {
 	it('finds a valid revision', () => {

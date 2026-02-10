@@ -1,18 +1,18 @@
 import * as v from 'valibot';
 
+export const TrimmedString = v.pipe(v.string(), v.trim());
+
 export const EmptyableString = v.nullable(
 	v.pipe(
-		v.string(),
-		v.trim(),
+		TrimmedString,
 		v.transform((value) => (value === '' ? null : value)),
 	),
 );
 
-export const StrictString = v.pipe(v.string(), v.trim(), v.nonEmpty());
+export const StrictString = v.pipe(TrimmedString, v.nonEmpty());
 
 export const EmptyString = v.pipe(
-	v.string(),
-	v.trim(),
+	TrimmedString,
 	v.empty(),
 	v.transform(() => null),
 );
@@ -25,16 +25,15 @@ export const Rev = v.pipe(
 	}),
 );
 
-export const Date = v.pipe(v.string(), v.trim(), v.toDate());
-export const Email = v.pipe(v.string(), v.trim(), v.email());
-export const Link = v.pipe(v.string(), v.trim(), v.url());
+export const Date = v.pipe(TrimmedString, v.toDate());
+export const Email = v.pipe(TrimmedString, v.email());
+export const Link = v.pipe(TrimmedString, v.url());
 
 export const EmptyableLink = v.nullable(v.union([EmptyString, Link]));
 
 export const MaybeLink = v.nullable(
 	v.pipe(
-		v.string(),
-		v.trim(),
+		TrimmedString,
 		v.transform((str) => (URL.canParse(str) ? str : null)),
 	),
 );
