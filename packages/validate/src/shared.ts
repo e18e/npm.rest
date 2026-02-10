@@ -67,3 +67,29 @@ export function nullOnEmpty<
 		}),
 	);
 }
+
+export function aliasedLiteralUnion<
+	const T extends string,
+	const A extends Record<string, T>,
+>(input: T[], aliases?: A) {
+	const stars =
+		aliases &&
+		Object.entries(aliases)
+			.filter(([key]) => key.endsWith('*'))
+			.map(([key, value]): [string, T] => [key.slice(0, -1), value]);
+
+	return v.pipe(
+		v.string(),
+		v.transform((raw) => {
+			const input = raw.toLowerCase().replaceAll(/\s/g, '').trim();
+
+			if (aliases?.[input]) return aliases[input];
+
+			const match = stars?.find(([key]) => input.startsWith(key));
+			if (match) return match[1];
+
+			return input;
+		}),
+		v.union(input.map((value) => v.literal(value))),
+	);
+}

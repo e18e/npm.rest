@@ -1,5 +1,6 @@
 import * as v from 'valibot';
 import {
+	aliasedLiteralUnion,
 	EmptyableString,
 	PretendBoolean,
 	EmptyableLink,
@@ -29,19 +30,7 @@ export const RepositoryObjectSchema = v.object({
 			v.nullable(
 				v.union([
 					EmptyString,
-					v.pipe(
-						v.string(),
-						v.toLowerCase(),
-						v.trim(),
-						v.union([
-							v.literal('git'),
-							v.pipe(
-								v.literal('github'),
-								v.transform(() => 'git' as const),
-							),
-							v.literal('unknown'),
-						]),
-					),
+					aliasedLiteralUnion(['git', 'unknown'], { github: 'git' }),
 				]),
 			),
 			'unknown',
@@ -99,20 +88,15 @@ export type Repository = v.InferOutput<typeof RepositorySchema>;
 export const FundingObject = v.object({
 	type: v.optional(
 		v.fallback(
-			v.pipe(
-				v.string(),
-				v.toLowerCase(),
-				v.trim(),
-				v.union([
-					v.literal('patreon'),
-					v.literal('individual'),
-					v.literal('github'),
-					v.literal('opencollective'),
-					v.literal('paypal'),
-					v.literal('ko_fi'),
-					v.literal('unknown'),
-				]),
-			),
+			aliasedLiteralUnion([
+				'patreon',
+				'individual',
+				'github',
+				'opencollective',
+				'paypal',
+				'ko_fi',
+				'unknown',
+			]),
 			'unknown',
 		),
 	),

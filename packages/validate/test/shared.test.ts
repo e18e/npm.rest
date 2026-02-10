@@ -12,6 +12,7 @@ import {
 	Link,
 	Rev,
 	EmptyString,
+	aliasedLiteralUnion,
 } from '../src/shared';
 
 describe('rev', () => {
@@ -258,5 +259,71 @@ describe('pretend boolean', () => {
 		const result = v.parse(PretendBoolean, 'false');
 		// oxlint-disable-next-line vitest(prefer-to-be-falsy)
 		expect(result).toBe(false);
+	});
+});
+
+describe('aliased literal union', () => {
+	it('supports non-aliased value', () => {
+		const result = v.parse(aliasedLiteralUnion(['git']), 'git');
+		expect(result).toBe('git');
+	});
+
+	it('supports aliased value', () => {
+		const result = v.parse(
+			aliasedLiteralUnion(['git'], { foo: 'git', bar: 'git' }),
+			'foo',
+		);
+
+		expect(result).toBe('git');
+	});
+
+	it('trims value before parsing', () => {
+		const result = v.parse(
+			aliasedLiteralUnion(['git'], { foo: 'git', bar: 'git' }),
+			'  foo ',
+		);
+
+		expect(result).toBe('git');
+	});
+
+	it('turns value to lowercase before parsing', () => {
+		const result = v.parse(
+			aliasedLiteralUnion(['git'], { foo: 'git', bar: 'git' }),
+			'GIT',
+		);
+
+		expect(result).toBe('git');
+	});
+
+	it('removes spaces before parsing', () => {
+		const result = v.parse(
+			aliasedLiteralUnion(['buy-me-a-coffee'], {
+				buymeacoffee: 'buy-me-a-coffee',
+			}),
+			'buy me a coffee',
+		);
+
+		expect(result).toBe('buy-me-a-coffee');
+	});
+
+	it('uses startsWith when the alias ends with *', () => {
+		const result = v.parse(
+			v.array(aliasedLiteralUnion(['github'], { 'github*': 'github' })),
+			[
+				'github - foo',
+				'GitHub Sponsors ❤',
+				'Github sponsor',
+				'github-sponsors',
+				'githubsponsors',
+			],
+		);
+
+		expect(result).toStrictEqual([
+			'github',
+			'github',
+			'github',
+			'github',
+			'github',
+		]);
 	});
 });
