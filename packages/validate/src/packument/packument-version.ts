@@ -7,7 +7,7 @@ import { Deprecated } from './deprecated';
 import { Funding } from './funding';
 import * as v from 'valibot';
 
-export const PackumentVersionSchema = v.looseObject({
+export const PackumentVersionSchema = v.object({
 	name: v.optional(EmptyableString, null),
 	version: v.optional(EmptyableString, null),
 	description: v.optional(

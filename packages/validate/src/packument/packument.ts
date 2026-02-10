@@ -2,7 +2,7 @@ import { StrictString, nullOnEmpty, Date, Rev } from '../shared';
 import { PackumentVersionSchema } from './packument-version';
 import * as v from 'valibot';
 
-export const PackumentSchema = v.looseObject({
+export const PackumentSchema = v.object({
 	_rev: v.optional(Rev),
 	name: StrictString,
 	'dist-tags': v.optional(
