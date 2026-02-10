@@ -6,6 +6,8 @@ import {
 	PackumentSchema,
 	KeywordsSchema,
 	LicenseSchema,
+	FundingObject,
+	Funding,
 } from '../src/packument';
 
 type InputPackument = v.InferInput<typeof PackumentSchema>;
@@ -878,6 +880,137 @@ describe('packument-version validation', () => {
 		});
 	});
 
+	describe('funding', () => {
+		it('is nullable', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = null;
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('is optional', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.funding = undefined;
+			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+		});
+
+		it('supports url', () => {
+			const parsed = v.parse(FundingObject, {
+				url: 'https://example.com',
+			});
+
+			expect(parsed.url).toBe('https://example.com');
+		});
+
+		it('supports array of funding objects', () => {
+			const parsed = v.parse(Funding, [
+				{ url: 'https://example.com' },
+				{ url: 'https://foo.com' },
+			]);
+
+			expect(parsed).toMatchObject([
+				{ url: 'https://example.com' },
+				{ url: 'https://foo.com' },
+			]);
+		});
+
+		it('turns empty array into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = [];
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('turns array with only null into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = [null];
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('turns empty object to null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = {};
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('turns empty string into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = '';
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('turns effectively empty string into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = '    ';
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
+		it('transforms single object to array', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ url: 'https://example.com' },
+			]);
+		});
+
+		it('transforms single string to object array', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = 'https://example.com';
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ url: 'https://example.com' },
+			]);
+		});
+
+		it('supports known funding types', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { type: 'github', url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'github', url: 'https://example.com' },
+			]);
+		});
+
+		it('turns unknown funding type into unknown', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { type: 'foo', url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'unknown', url: 'https://example.com' },
+			]);
+		});
+
+		it('normalises funding type to lowercase before parsing', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { type: 'GitHub', url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'github', url: 'https://example.com' },
+			]);
+		});
+
+		it('trims funding type before parsing', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = { type: ' github ', url: 'https://example.com' };
+
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toStrictEqual([
+				{ type: 'github', url: 'https://example.com' },
+			]);
+		});
+	});
+
 	describe.for([
 		'dependencies' as const,
 		'devDependencies' as const,
@@ -1210,18 +1343,6 @@ describe('packument-version validation', () => {
 // 			{ type: 'git', url: 'https://example.com' },
 // 			{ type: 'git', url: 'https://github.com/example/repo' },
 // 		]);
-// 	});
-// });
-
-// describe('Funding validation', () => {
-// 	it('supports url', () => {
-// 		const parsed = v.parse(FundingObject, { url: 'https://example.com' });
-// 		expect(parsed.url).toBe('https://example.com');
-// 	});
-
-// 	it('supports array of funding objects', () => {
-// 		const parsed = v.parse(Funding, [{ url: 'https://example.com' }]);
-// 		expect(parsed).toMatchObject([{ url: 'https://example.com' }]);
 // 	});
 // });
 

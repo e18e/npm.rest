@@ -65,26 +65,43 @@ import {
 
 // export type Repository = v.InferOutput<typeof RepositorySchema>;
 
-// export const FundingObject = v.strictObject({
-// 	type: v.optional(
-// 		v.union([
-// 			v.literal('patreon'),
-// 			v.literal('individual'),
-// 			v.literal('github'),
-// 			v.literal('opencollective'),
-// 			v.literal('paypal'),
-// 			v.literal('ko_fi'),
-// 			v.literal('buymeacoffee'),
-// 		]),
-// 	),
-// 	url: v.optional(v.string()),
-// });
+export const FundingObject = v.object({
+	type: v.optional(
+		v.fallback(
+			v.pipe(
+				v.string(),
+				v.toLowerCase(),
+				v.trim(),
+				v.union([
+					v.literal('patreon'),
+					v.literal('individual'),
+					v.literal('github'),
+					v.literal('opencollective'),
+					v.literal('paypal'),
+					v.literal('ko_fi'),
+					v.literal('unknown'),
+				]),
+			),
+			'unknown',
+		),
+	),
+	url: v.optional(v.string()),
+});
 
-// export const Funding = v.union([
-// 	v.string(),
-// 	FundingObject,
-// 	v.array(v.union([v.string(), FundingObject])),
-// ]);
+export const Funding = v.pipe(
+	v.union([
+		EmptyableString,
+		v.array(v.union([EmptyableString, FundingObject])),
+		nullOnEmpty(FundingObject),
+	]),
+	v.transform((value) => {
+		const array = (Array.isArray(value) ? value : [value])
+			.map((item) => (typeof item === 'string' ? { url: item } : item))
+			.filter((item) => item !== null);
+
+		return array.length === 0 ? null : array;
+	}),
+);
 
 // export const BugsObjectSchema = v.object({
 // 	url: Link,
@@ -214,7 +231,7 @@ export const PackumentVersionSchema = v.looseObject({
 			),
 		]),
 	),
-	// funding: v.optional(Funding),
+	funding: v.optional(v.nullable(Funding, null)),
 	// repository: v.optional(RepositorySchema),
 	dependencies: dependency(EmptyableString),
 	devDependencies: dependency(EmptyableString),
