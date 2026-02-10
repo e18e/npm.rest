@@ -6,10 +6,12 @@ import {
 	EmptyableLink,
 	StrictString,
 	nullOnEmpty,
+	MaybeLink,
 	Email,
 	Date,
 	Link,
 	Rev,
+	EmptyString,
 } from '../src/shared';
 
 describe('rev', () => {
@@ -66,6 +68,23 @@ describe('emptyable string', () => {
 	});
 });
 
+describe('empty string', () => {
+	it('turns empty string to null', () => {
+		const parsed = v.parse(EmptyString, '');
+		expect(parsed).toBeNull();
+	});
+
+	it('turns effectively empty string to null', () => {
+		const result = v.parse(EmptyString, '   ');
+		expect(result).toBeNull();
+	});
+
+	it('fails to parse non-empty string', () => {
+		const result = v.safeParse(EmptyString, 'hello');
+		expect(result.success).toBeFalsy();
+	});
+});
+
 describe('link', () => {
 	it('finds a valid link', () => {
 		expect(v.is(Link, 'https://example.com')).toBeTruthy();
@@ -103,6 +122,37 @@ describe('emptyable link', () => {
 	it('turns an effectively empty link into null', () => {
 		const result = v.parse(EmptyableLink, ' ');
 		expect(result).toBeNull();
+	});
+});
+
+describe('maybe link', () => {
+	it('finds a valid link', () => {
+		expect(v.is(MaybeLink, 'https://example.com')).toBeTruthy();
+	});
+
+	it('trims a link before parsing', () => {
+		const result = v.parse(MaybeLink, ' https://example.com ');
+		expect(result).toBe('https://example.com');
+	});
+
+	it('turns an empty link into null', () => {
+		const result = v.parse(MaybeLink, '');
+		expect(result).toBeNull();
+	});
+
+	it('turns an effectively empty link into null', () => {
+		const result = v.parse(MaybeLink, ' ');
+		expect(result).toBeNull();
+	});
+
+	it('turns invalid link into null', () => {
+		const result = v.parse(MaybeLink, 'invalid');
+		expect(result).toBeNull();
+	});
+
+	it("doesn't turn non-strings to null", () => {
+		const result = v.safeParse(MaybeLink, 123);
+		expect(result.success).toBeFalsy();
 	});
 });
 

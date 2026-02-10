@@ -10,6 +10,13 @@ export const EmptyableString = v.nullable(
 
 export const StrictString = v.pipe(v.string(), v.trim(), v.nonEmpty());
 
+export const EmptyString = v.pipe(
+	v.string(),
+	v.trim(),
+	v.empty(),
+	v.transform(() => null),
+);
+
 export const Rev = v.pipe(
 	StrictString,
 	v.check((value) => {
@@ -22,16 +29,14 @@ export const Date = v.pipe(v.string(), v.trim(), v.toDate());
 export const Email = v.pipe(v.string(), v.trim(), v.email());
 export const Link = v.pipe(v.string(), v.trim(), v.url());
 
-export const EmptyableLink = v.nullable(
-	v.union([
-		v.pipe(
-			v.string(),
-			v.trim(),
-			v.empty(),
-			v.transform(() => null),
-		),
-		Link,
-	]),
+export const EmptyableLink = v.nullable(v.union([EmptyString, Link]));
+
+export const MaybeLink = v.nullable(
+	v.pipe(
+		v.string(),
+		v.trim(),
+		v.transform((str) => (URL.canParse(str) ? str : null)),
+	),
 );
 
 export const PretendBoolean = v.union([

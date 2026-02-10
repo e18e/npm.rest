@@ -5,6 +5,8 @@ import {
 	EmptyableLink,
 	StrictString,
 	nullOnEmpty,
+	EmptyString,
+	MaybeLink,
 	Date,
 	Link,
 	Rev,
@@ -21,49 +23,78 @@ import {
 // 	url: v.optional(Link),
 // });
 
-// export const RepositoryObjectSchema = v.pipe(
-// 	v.strictObject({
-// 		type: v.optional(
-// 			v.pipe(
-// 				v.string(),
-// 				v.toLowerCase(),
-// 				v.union([
-// 					v.literal('git'),
-// 					v.pipe(
-// 						v.literal('github'),
-// 						v.transform(() => 'git' as const),
-// 					),
-// 					v.literal('npm'),
-// 					v.literal('https'),
-// 				]),
-// 			),
-// 		),
-// 		directory: v.optional(v.string()),
-// 		url: v.optional(Link),
-// 		branch: v.optional(v.string()),
-// 	}),
-// 	v.transform((value) => {
-// 		return value.type === 'npm' ? null : value;
-// 	}),
-// );
+export const RepositoryObjectSchema = v.object({
+	type: v.optional(
+		v.fallback(
+			v.nullable(
+				v.union([
+					EmptyString,
+					v.pipe(
+						v.string(),
+						v.toLowerCase(),
+						v.trim(),
+						v.union([
+							v.literal('git'),
+							v.pipe(
+								v.literal('github'),
+								v.transform(() => 'git' as const),
+							),
+							v.literal('unknown'),
+						]),
+					),
+				]),
+			),
+			'unknown',
+		),
+		null,
+	),
+	url: Link,
+	directory: v.optional(EmptyableString, null),
+	branch: v.optional(EmptyableString, null),
+});
 
-// export type RepositoryObject = v.InferOutput<typeof RepositoryObjectSchema>;
+export type RepositoryObject = v.InferOutput<typeof RepositoryObjectSchema>;
 
-// export const RepositorySchema = v.union([
-// 	v.pipe(
-// 		v.string(),
-// 		v.transform((value): RepositoryObject | null => {
-// 			return URL.canParse(value) ? { url: value } : null;
-// 		}),
-// 	),
-// 	RepositoryObjectSchema,
-// 	v.pipe(
-// 		v.array(RepositoryObjectSchema),
-// 		v.filterItems((item) => item !== null),
-// 	), // todo remove null from this type
-// ]);
+export const RepositorySchema = v.pipe(
+	v.union([
+		MaybeLink,
+		v.array(
+			v.union([
+				MaybeLink,
+				v.fallback(nullOnEmpty(RepositoryObjectSchema), null),
+			]),
+		),
+		v.fallback(nullOnEmpty(RepositoryObjectSchema), null),
+	]),
+	v.transform((value) => {
+		if (value === null) {
+			return null;
+		}
 
-// export type Repository = v.InferOutput<typeof RepositorySchema>;
+		const array = (Array.isArray(value) ? value : [value])
+			.map((item) => {
+				if (typeof item === 'string') {
+					return {
+						type: null,
+						url: item,
+						directory: null,
+						branch: null,
+					};
+				}
+
+				return item;
+			})
+			.filter((item) => item !== null)
+			.filter((item) => {
+				const url = new URL(item.url);
+				return !url.hostname.endsWith('npmjs.com');
+			});
+
+		return array.length === 0 ? null : array;
+	}),
+);
+
+export type Repository = v.InferOutput<typeof RepositorySchema>;
 
 export const FundingObject = v.object({
 	type: v.optional(
@@ -245,7 +276,7 @@ export const PackumentVersionSchema = v.looseObject({
 		]),
 	),
 	funding: v.optional(v.nullable(Funding, null)),
-	// repository: v.optional(RepositorySchema),
+	repository: v.optional(RepositorySchema, null),
 	dependencies: dependency(EmptyableString),
 	devDependencies: dependency(EmptyableString),
 	optionalDependencies: dependency(EmptyableString),

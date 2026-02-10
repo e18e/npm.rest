@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
 	PackumentVersionSchema,
+	RepositoryObjectSchema,
+	RepositorySchema,
 	PackumentSchema,
 	KeywordsSchema,
 	LicenseSchema,
@@ -1099,6 +1101,256 @@ describe('packument-version validation', () => {
 		});
 	});
 
+	describe('repository', () => {
+		it('parses repository object to array', () => {
+			const parsed = v.parse(RepositorySchema, {
+				type: 'git',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed).toStrictEqual([
+				{
+					type: 'git',
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+			]);
+		});
+
+		it('parses repository string url to array', () => {
+			const parsed = v.parse(
+				RepositorySchema,
+				'https://github.com/owner/repo',
+			);
+
+			expect(parsed).toStrictEqual([
+				{
+					type: null,
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+			]);
+		});
+
+		it('parses array of string urls to array', () => {
+			const parsed = v.parse(RepositorySchema, [
+				'https://github.com/owner/repo',
+				'https://github.com/owner/repo2',
+			]);
+
+			expect(parsed).toStrictEqual([
+				{
+					type: null,
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+				{
+					type: null,
+					url: 'https://github.com/owner/repo2',
+					directory: null,
+					branch: null,
+				},
+			]);
+		});
+
+		it('parses array of repo objects to array', () => {
+			const parsed = v.parse(RepositorySchema, [
+				{
+					type: 'git',
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+				{
+					type: 'git',
+					url: 'https://github.com/owner/repo2',
+					directory: null,
+					branch: null,
+				},
+			]);
+
+			expect(parsed).toStrictEqual([
+				{
+					type: 'git',
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+				{
+					type: 'git',
+					url: 'https://github.com/owner/repo2',
+					directory: null,
+					branch: null,
+				},
+			]);
+		});
+
+		it('url is required', () => {
+			const parsed = v.safeParse(RepositoryObjectSchema, {
+				directory: './foo/bar',
+			});
+
+			expect(parsed.success).toBeFalsy();
+		});
+
+		it('valid url is required', () => {
+			const parsed = v.safeParse(RepositoryObjectSchema, {
+				url: 'foo',
+			});
+
+			expect(parsed.success).toBeFalsy();
+		});
+
+		it('trims url before parsing', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: 'git',
+				url: '   https://github.com/owner/repo   ',
+			});
+
+			expect(parsed?.url).toBe('https://github.com/owner/repo');
+		});
+
+		it('supports git type', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: 'git',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBe('git');
+		});
+
+		it('turns type to lowercase before parsing', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: 'Git',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBe('git');
+		});
+
+		it('trims type before parsing', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: '   git   ',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBe('git');
+		});
+
+		it('transforms github type to git', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: 'github',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed).toMatchObject({ type: 'git' });
+		});
+
+		it('transforms empty type to null', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: '',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBeNull();
+		});
+
+		it('transforms effectively empty type to null', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: '   ',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBeNull();
+		});
+
+		it('turns empty array to null', () => {
+			const parsed = v.parse(RepositorySchema, []);
+			expect(parsed).toBeNull();
+		});
+
+		it('turns unknown types to unknown', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				type: 'npm',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed?.type).toBe('unknown');
+		});
+
+		it('turns repo that is a non-url string to null', () => {
+			const parsed = v.parse(RepositorySchema, 'example/repo');
+			expect(parsed).toBeNull();
+		});
+
+		it('turns url of repository object that is non-url to null', () => {
+			const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
+			expect(parsed).toBeNull();
+		});
+
+		it('turns repository object that has non-url url to null', () => {
+			const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
+			expect(parsed).toBeNull();
+		});
+
+		it('turns empty repository object to null', () => {
+			const parsed = v.parse(RepositorySchema, {});
+			expect(parsed).toBeNull();
+		});
+
+		it('turns empty branch string to null', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				branch: '',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed).toMatchObject({ branch: null });
+		});
+
+		it('turns empty directory string to null', () => {
+			const parsed = v.parse(RepositoryObjectSchema, {
+				directory: '',
+				url: 'https://github.com/owner/repo',
+			});
+
+			expect(parsed).toMatchObject({ directory: null });
+		});
+
+		it('handles array mixed validities gracefully', () => {
+			const parsed = v.parse(RepositorySchema, [
+				'https://github.com/owner/repo',
+				{ url: 'foo' },
+				{ url: 'https://example.com' },
+			]);
+
+			expect(parsed).toStrictEqual([
+				{
+					type: null,
+					url: 'https://github.com/owner/repo',
+					directory: null,
+					branch: null,
+				},
+				{
+					type: null,
+					url: 'https://example.com',
+					directory: null,
+					branch: null,
+				},
+			]);
+		});
+
+		it('discards repository object with npm url', () => {
+			const parsed = v.parse(RepositorySchema, {
+				url: 'https://npmjs.com/foo',
+			});
+
+			expect(parsed).toBeNull();
+		});
+	});
+
 	describe.for([
 		'dependencies' as const,
 		'devDependencies' as const,
@@ -1373,66 +1625,6 @@ describe('packument-version validation', () => {
 		});
 	});
 });
-
-// describe('Repository validation', () => {
-// 	it('supports git type', () => {
-// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'git' });
-// 		expect(parsed?.type).toBe('git');
-// 	});
-
-// 	it.skip('parses version with repository string and transforms to object', () => {
-// 		const packument = createValidPackument();
-// 		// Add repository as a simple string "owner/repo"
-// 		packument.versions!['1.0.0'].repository = 'owner/repo';
-// 		const result = v.parse(PackumentSchema, packument);
-// 		const repo = result.versions?.['1.0.0'].repository;
-// 		expect(Array.isArray(repo)).toBeFalsy();
-// 		expect(repo).toMatchObject({
-// 			url: 'https://github.com/owner/repo',
-// 			directory: null,
-// 		});
-// 	});
-
-// 	it('supports weirdly cased git type', () => {
-// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'Git' });
-// 		expect(parsed?.type).toBe('git');
-// 	});
-
-// 	it('transforms GitHub type to git', () => {
-// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'github' });
-// 		expect(parsed?.type).toBe('git');
-// 	});
-
-// 	it('discards repository object with npm type', () => {
-// 		const parsed = v.parse(RepositoryObjectSchema, { type: 'npm' });
-// 		expect(parsed).toBeNull();
-// 	});
-
-// 	it.skip('does something with https type', () => {});
-
-// 	it('discards repository that is a non-url string', () => {
-// 		const parsed = v.parse(RepositorySchema, 'example/repo');
-// 		expect(parsed).toBeNull();
-// 	});
-
-// 	it.skip('discards repository object that has non-url url', () => {
-// 		const parsed = v.parse(RepositoryObjectSchema, { url: 'example/repo' });
-// 		expect(parsed).toBeNull();
-// 	});
-
-// 	it('discards null repository objects in array of repository objects', () => {
-// 		const parsed = v.parse(RepositorySchema, [
-// 			{ type: 'git', url: 'https://example.com' },
-// 			{ type: 'npm', url: 'https://foo.com' },
-// 			{ type: 'github', url: 'https://github.com/example/repo' },
-// 		]);
-
-// 		expect(parsed).toMatchObject([
-// 			{ type: 'git', url: 'https://example.com' },
-// 			{ type: 'git', url: 'https://github.com/example/repo' },
-// 		]);
-// 	});
-// });
 
 const PACKUMENTS = [
 	'g',
