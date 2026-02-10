@@ -1010,15 +1010,8 @@ describe('packument-version validation', () => {
 
 		it('turns empty object to null', () => {
 			const version = createPackumentVersion('1.0.0');
+			// @ts-expect-error tests
 			version.funding = {};
-			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed.funding).toBeNull();
-		});
-
-		it('turns effectively empty object into null', () => {
-			const version = createPackumentVersion('1.0.0');
-			// oxlint-disable-next-line eslint(no-undefined)
-			version.funding = { url: undefined };
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed.funding).toBeNull();
 		});
@@ -1055,6 +1048,23 @@ describe('packument-version validation', () => {
 			expect(parsed.funding).toMatchObject([
 				{ url: 'https://example.com' },
 			]);
+		});
+
+		it('returns null when invalid url is passed', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.funding = 'invalid';
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+
+			const version2 = createPackumentVersion('1.0.0');
+			version2.funding = { url: 'invalid' };
+			const parsed2 = v.parse(PackumentVersionSchema, version2);
+			expect(parsed2.funding).toBeNull();
+
+			const version3 = createPackumentVersion('1.0.0');
+			version3.funding = [{ url: 'invalid' }, 'invalid'];
+			const parsed3 = v.parse(PackumentVersionSchema, version3);
+			expect(parsed3.funding).toBeNull();
 		});
 
 		it('funding type is set to unknown when not provided', () => {

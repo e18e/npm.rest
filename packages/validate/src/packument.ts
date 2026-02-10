@@ -50,10 +50,10 @@ export const RepositorySchema = v.pipe(
 		v.array(
 			v.union([
 				MaybeLink,
-				v.fallback(nullOnEmpty(RepositoryObjectSchema), null),
+				v.fallback(v.nullable(RepositoryObjectSchema), null),
 			]),
 		),
-		v.fallback(nullOnEmpty(RepositoryObjectSchema), null),
+		v.fallback(v.nullable(RepositoryObjectSchema), null),
 	]),
 	v.transform((value) => {
 		if (value === null) {
@@ -142,14 +142,19 @@ export const FundingObject = v.object({
 		),
 		'unknown',
 	),
-	url: v.optional(v.string()),
+	url: Link,
 });
 
 export const Funding = v.pipe(
 	v.union([
-		EmptyableString,
-		v.array(v.union([EmptyableString, FundingObject])),
-		FundingObject,
+		EmptyableLink,
+		v.array(
+			v.union([
+				EmptyableLink,
+				v.fallback(v.nullable(FundingObject), null),
+			]),
+		),
+		v.fallback(v.nullable(FundingObject), null),
 		v.pipe(
 			v.boolean(),
 			v.transform(() => null),
@@ -160,20 +165,14 @@ export const Funding = v.pipe(
 
 		const array = (Array.isArray(value) ? value : [value])
 			.map((raw) => {
+				if (raw === null) return null;
+
 				const item =
 					typeof raw === 'string'
 						? { type: 'unknown' as const, url: raw }
 						: raw;
 
-				if (!item?.url) {
-					return null;
-				}
-
-				const url = item?.url ? URL.parse(item.url) : null;
-
-				if (!item || !url) {
-					return item;
-				}
+				const url = new URL(item.url);
 
 				for (const [domain, type] of DOMAIN_FUNDING_TYPE_MAP) {
 					if (url.hostname.endsWith(domain)) {
