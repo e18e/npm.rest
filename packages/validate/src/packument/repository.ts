@@ -6,7 +6,11 @@ import {
 	Link,
 } from '../shared';
 
-const REPOSITORY_TYPES = Object.freeze(['git', 'unknown'] as const);
+const REPOSITORY_TYPES = Object.freeze([
+	'git',
+	'mercurial',
+	'unknown',
+] as const);
 
 type RepositoryType = (typeof REPOSITORY_TYPES)[number];
 
@@ -30,6 +34,7 @@ export const REPOSITORY_DOMAIN_MAP = Object.freeze({
 		'gitee.com',
 		'git.sr.ht',
 	],
+	mercurial: ['hg.sr.ht'],
 } satisfies Record<Exclude<RepositoryType, 'unknown'>, string[]>);
 
 export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
@@ -51,6 +56,7 @@ export const RepositoryObjectSchema = v.object({
 				'bitbucket*': 'git',
 				'gitlab*': 'git',
 				'gitee*': 'git',
+				hg: 'mercurial',
 			}),
 			'unknown',
 		),
