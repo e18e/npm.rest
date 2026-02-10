@@ -129,27 +129,38 @@ export const LicenseObjectSchema = v.object({
 	file: v.optional(EmptyableString, null),
 });
 
-export const LicenseSchema = v.union([
-	EmptyableString,
-	v.pipe(
-		v.array(v.union([StrictString, LicenseObjectSchema])),
-		v.filterItems((item) => item !== null),
-		v.transform((licenses) => (licenses.length === 0 ? null : licenses)),
-	),
-	v.pipe(
-		v.literal(false),
-		v.transform(() => 'UNLICENSED'),
-	),
-	v.pipe(
-		v.literal(true),
-		v.transform(() => 'UNKNOWN'),
-	),
-	v.pipe(
-		v.number(),
-		v.transform(() => null),
-	),
-	nullOnEmpty(LicenseObjectSchema),
-]);
+export const LicenseSchema = v.pipe(
+	v.union([
+		EmptyableString,
+		v.array(v.union([EmptyableString, LicenseObjectSchema])),
+		v.pipe(
+			v.literal(false),
+			v.transform(() => 'UNLICENSED'),
+		),
+		v.pipe(
+			v.literal(true),
+			v.transform(() => 'UNKNOWN'),
+		),
+		v.pipe(
+			v.number(),
+			v.transform(() => null),
+		),
+		nullOnEmpty(LicenseObjectSchema),
+	]),
+	v.transform((value) => {
+		if (value === null) return null;
+
+		const array = (Array.isArray(value) ? value : [value])
+			.map((item) =>
+				typeof item === 'string'
+					? { type: item, name: null, url: null, file: null }
+					: item,
+			)
+			.filter((item) => item !== null);
+
+		return array.length === 0 ? null : array;
+	}),
+);
 
 export const KeywordsSchema = v.union([
 	v.pipe(

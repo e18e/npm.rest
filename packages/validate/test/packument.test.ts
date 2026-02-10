@@ -483,14 +483,16 @@ describe('packument-version validation', () => {
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
 
-		it('supports single license', () => {
+		it('turns single string license into array', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = 'MIT';
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toBe('MIT');
+			expect(result.license).toStrictEqual([
+				{ type: 'MIT', file: null, name: null, url: null },
+			]);
 		});
 
-		it('supports license object', () => {
+		it('turns single object license into array', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = {
 				type: 'MIT',
@@ -498,10 +500,22 @@ describe('packument-version validation', () => {
 			};
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject({
-				type: 'MIT',
-				url: 'https://opensource.org/licenses/MIT',
-			});
+			expect(result.license).toStrictEqual([
+				{
+					type: 'MIT',
+					url: 'https://opensource.org/licenses/MIT',
+					file: null,
+					name: null,
+				},
+			]);
+		});
+
+		it('returns null when array is empty', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.license = [];
+
+			const result = v.parse(PackumentVersionSchema, version);
+			expect(result.license).toBeNull();
 		});
 
 		it('maps to null when object is empty', () => {
@@ -531,9 +545,9 @@ describe('packument-version validation', () => {
 			};
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject({
-				type: 'MIT',
-			});
+			expect(result.license).toStrictEqual([
+				{ type: 'MIT', file: null, name: null, url: null },
+			]);
 		});
 
 		it('fallback to null when url fails to parse', () => {
@@ -545,11 +559,14 @@ describe('packument-version validation', () => {
 			};
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject({
-				type: 'MIT',
-				name: 'MIT License',
-				url: null,
-			});
+			expect(result.license).toStrictEqual([
+				{
+					type: 'MIT',
+					name: 'MIT License',
+					url: null,
+					file: null,
+				},
+			]);
 		});
 
 		it('supports file property', () => {
@@ -561,11 +578,14 @@ describe('packument-version validation', () => {
 			};
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject({
-				type: 'MIT',
-				name: 'MIT License',
-				file: 'LICENSE',
-			});
+			expect(result.license).toStrictEqual([
+				{
+					type: 'MIT',
+					name: 'MIT License',
+					file: 'LICENSE',
+					url: null,
+				},
+			]);
 		});
 
 		it('supports multiple license objects', () => {
@@ -579,11 +599,18 @@ describe('packument-version validation', () => {
 			];
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject([
-				{ type: 'MIT', url: 'https://opensource.org/licenses/MIT' },
+			expect(result.license).toStrictEqual([
+				{
+					type: 'MIT',
+					url: 'https://opensource.org/licenses/MIT',
+					file: null,
+					name: null,
+				},
 				{
 					type: 'Apache-2.0',
 					url: 'https://opensource.org/licenses/Apache-2.0',
+					file: null,
+					name: null,
 				},
 			]);
 		});
@@ -591,8 +618,12 @@ describe('packument-version validation', () => {
 		it('supports array of string licenses', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = ['MIT', 'Apache-2.0'];
+
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject(['MIT', 'Apache-2.0']);
+			expect(result.license).toStrictEqual([
+				{ type: 'MIT', file: null, name: null, url: null },
+				{ type: 'Apache-2.0', file: null, name: null, url: null },
+			]);
 		});
 
 		it('supports mixed array of string and object licenses', () => {
@@ -606,11 +637,13 @@ describe('packument-version validation', () => {
 			];
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toMatchObject([
-				'MIT',
+			expect(result.license).toStrictEqual([
+				{ type: 'MIT', file: null, name: null, url: null },
 				{
 					type: 'Apache-2.0',
 					url: 'https://opensource.org/licenses/Apache-2.0',
+					file: null,
+					name: null,
 				},
 			]);
 		});
@@ -618,7 +651,7 @@ describe('packument-version validation', () => {
 		it('strips empty strings from license array', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.license = [
-				'MIT',
+				'',
 				{
 					type: 'Apache-2.0',
 					url: 'https://opensource.org/licenses/Apache-2.0',
@@ -627,7 +660,6 @@ describe('packument-version validation', () => {
 
 			const result = v.parse(PackumentVersionSchema, version);
 			expect(result.license).toMatchObject([
-				'MIT',
 				{
 					type: 'Apache-2.0',
 					url: 'https://opensource.org/licenses/Apache-2.0',
@@ -635,19 +667,25 @@ describe('packument-version validation', () => {
 			]);
 		});
 
-		it('returns null when array is empty', () => {
+		it('strips effectively empty strings from license array', () => {
 			const version = createPackumentVersion('1.0.0');
-			version.license = [];
+			version.license = [
+				'    ',
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+				},
+			];
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toBeNull();
-		});
-
-		it('supports license of boolean false', () => {
-			const version = createPackumentVersion('1.0.0');
-			version.license = false;
-
-			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
+			expect(result.license).toStrictEqual([
+				{
+					type: 'Apache-2.0',
+					url: 'https://opensource.org/licenses/Apache-2.0',
+					file: null,
+					name: null,
+				},
+			]);
 		});
 
 		it('maps false license to UNLICENSED', () => {
@@ -655,7 +693,9 @@ describe('packument-version validation', () => {
 			version.license = false;
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toBe('UNLICENSED');
+			expect(result.license).toMatchObject([
+				{ type: 'UNLICENSED', file: null, name: null, url: null },
+			]);
 		});
 
 		it('maps true to UNKNOWN', () => {
@@ -663,7 +703,9 @@ describe('packument-version validation', () => {
 			version.license = true;
 
 			const result = v.parse(PackumentVersionSchema, version);
-			expect(result.license).toBe('UNKNOWN');
+			expect(result.license).toMatchObject([
+				{ type: 'UNKNOWN', file: null, name: null, url: null },
+			]);
 		});
 
 		it('only supports license false top level', () => {
