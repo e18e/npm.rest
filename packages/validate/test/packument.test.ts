@@ -1015,6 +1015,14 @@ describe('packument-version validation', () => {
 			expect(parsed.funding).toBeNull();
 		});
 
+		it('turns effectively empty object into null', () => {
+			const version = createPackumentVersion('1.0.0');
+			// oxlint-disable-next-line eslint(no-undefined)
+			version.funding = { url: undefined };
+			const parsed = v.parse(PackumentVersionSchema, version);
+			expect(parsed.funding).toBeNull();
+		});
+
 		it('turns empty string into null', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.funding = '';
@@ -1034,7 +1042,7 @@ describe('packument-version validation', () => {
 			version.funding = { url: 'https://example.com' };
 
 			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed.funding).toStrictEqual([
+			expect(parsed.funding).toMatchObject([
 				{ url: 'https://example.com' },
 			]);
 		});
@@ -1044,8 +1052,20 @@ describe('packument-version validation', () => {
 			version.funding = 'https://example.com';
 
 			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed.funding).toStrictEqual([
+			expect(parsed.funding).toMatchObject([
 				{ url: 'https://example.com' },
+			]);
+		});
+
+		it('funding type is set to unknown when not provided', () => {
+			const parsed = v.parse(Funding, [
+				{ url: 'https://example.com' },
+				'https://foo.com',
+			]);
+
+			expect(parsed).toMatchObject([
+				{ type: 'unknown', url: 'https://example.com' },
+				{ type: 'unknown', url: 'https://foo.com' },
 			]);
 		});
 
@@ -1107,7 +1127,7 @@ describe('packument-version validation', () => {
 
 			const parsed = v.parse(PackumentVersionSchema, version);
 			expect(parsed.funding).toStrictEqual([
-				{ url: 'http://example.com?foo=bar' },
+				{ type: 'unknown', url: 'http://example.com?foo=bar' },
 			]);
 		});
 

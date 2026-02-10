@@ -140,6 +140,7 @@ export const FundingObject = v.object({
 			}),
 			'unknown',
 		),
+		'unknown',
 	),
 	url: v.optional(v.string()),
 });
@@ -148,7 +149,7 @@ export const Funding = v.pipe(
 	v.union([
 		EmptyableString,
 		v.array(v.union([EmptyableString, FundingObject])),
-		nullOnEmpty(FundingObject),
+		FundingObject,
 		v.pipe(
 			v.boolean(),
 			v.transform(() => null),
@@ -159,10 +160,20 @@ export const Funding = v.pipe(
 
 		const array = (Array.isArray(value) ? value : [value])
 			.map((raw) => {
-				const item = typeof raw === 'string' ? { url: raw } : raw;
-				if (!item?.url) return item;
+				const item =
+					typeof raw === 'string'
+						? { type: 'unknown' as const, url: raw }
+						: raw;
 
-				const url = new URL(item.url);
+				if (!item?.url) {
+					return null;
+				}
+
+				const url = item?.url ? URL.parse(item.url) : null;
+
+				if (!item || !url) {
+					return item;
+				}
 
 				for (const [domain, type] of DOMAIN_FUNDING_TYPE_MAP) {
 					if (url.hostname.endsWith(domain)) {
