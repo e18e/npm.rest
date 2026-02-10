@@ -91,7 +91,6 @@ export const FundingObject = v.object({
 			aliasedLiteralUnion(
 				[
 					'patreon',
-					'individual',
 					'github',
 					'open-collective',
 					'paypal',
