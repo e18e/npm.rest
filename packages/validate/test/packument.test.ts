@@ -2,6 +2,7 @@ import { fetchPackumentRaw } from '@npm.rest/test/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
+	DOMAIN_REPOSITORY_TYPE_MAP,
 	DOMAIN_FUNDING_TYPE_MAP,
 	PackumentVersionSchema,
 	RepositoryObjectSchema,
@@ -10,6 +11,7 @@ import {
 	KeywordsSchema,
 	LicenseSchema,
 	FundingObject,
+	GIT_PROTOCOLS,
 	Funding,
 } from '../src/packument';
 
@@ -1258,13 +1260,8 @@ describe('packument-version validation', () => {
 				'https://github.com/owner/repo',
 			);
 
-			expect(parsed).toStrictEqual([
-				{
-					type: null,
-					url: 'https://github.com/owner/repo',
-					directory: null,
-					branch: null,
-				},
+			expect(parsed).toMatchObject([
+				{ url: 'https://github.com/owner/repo' },
 			]);
 		});
 
@@ -1274,19 +1271,9 @@ describe('packument-version validation', () => {
 				'https://github.com/owner/repo2',
 			]);
 
-			expect(parsed).toStrictEqual([
-				{
-					type: null,
-					url: 'https://github.com/owner/repo',
-					directory: null,
-					branch: null,
-				},
-				{
-					type: null,
-					url: 'https://github.com/owner/repo2',
-					directory: null,
-					branch: null,
-				},
+			expect(parsed).toMatchObject([
+				{ url: 'https://github.com/owner/repo' },
+				{ url: 'https://github.com/owner/repo2' },
 			]);
 		});
 
@@ -1460,19 +1447,9 @@ describe('packument-version validation', () => {
 				{ url: 'https://example.com' },
 			]);
 
-			expect(parsed).toStrictEqual([
-				{
-					type: null,
-					url: 'https://github.com/owner/repo',
-					directory: null,
-					branch: null,
-				},
-				{
-					type: null,
-					url: 'https://example.com',
-					directory: null,
-					branch: null,
-				},
+			expect(parsed).toMatchObject([
+				{ url: 'https://github.com/owner/repo' },
+				{ url: 'https://example.com' },
 			]);
 		});
 
@@ -1483,6 +1460,96 @@ describe('packument-version validation', () => {
 
 			expect(parsed).toBeNull();
 		});
+
+		it('sets type to git when url pathname ends with .git', () => {
+			const parsed = v.parse(RepositorySchema, {
+				url: 'https://example.com/repo.git',
+			});
+
+			expect(parsed).toMatchObject([
+				{
+					type: 'git',
+					url: 'https://example.com/repo.git',
+				},
+			]);
+		});
+
+		describe.for(DOMAIN_REPOSITORY_TYPE_MAP)(
+			'domain type handling for %s to %s',
+			// oxlint-disable-next-line jest/valid-describe-callback bug?
+			([domain, type]) => {
+				it('transforms when no type is given', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.repository = { url: `https://${domain}/example` };
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.repository).toMatchObject([
+						{
+							type: type,
+							url: `https://${domain}/example`,
+						},
+					]);
+				});
+
+				it('transforms when conflicting type is given', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.repository = {
+						type: 'unknown',
+						url: `https://${domain}/example`,
+					};
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.repository).toMatchObject([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+
+				it('transforms when repository is a string', () => {
+					const version = createPackumentVersion('1.0.0');
+					version.repository = `https://${domain}/example`;
+
+					const parsed = v.parse(PackumentVersionSchema, version);
+					expect(parsed.repository).toMatchObject([
+						{ type: type, url: `https://${domain}/example` },
+					]);
+				});
+			},
+		);
+
+		it.for([
+			['github - foo', 'git'],
+			['gitlab.com', 'git'],
+			['bitbucket.com', 'git'],
+			['gitee.com', 'git'],
+		])('parses aliased type %s to %s', ([input, expected]) => {
+			const parsed = v.parse(RepositorySchema, {
+				type: input,
+				url: 'https://example.com',
+			});
+
+			expect(parsed).toMatchObject([
+				{
+					type: expected,
+					url: 'https://example.com',
+				},
+			]);
+		});
+
+		it.for(GIT_PROTOCOLS)(
+			'set type to git when the url protocol is %s',
+			(protocol) => {
+				const parsed = v.parse(RepositorySchema, {
+					url: `${protocol}//example.com`,
+				});
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						url: `${protocol}//example.com`,
+					},
+				]);
+			},
+		);
 	});
 
 	describe.for([
