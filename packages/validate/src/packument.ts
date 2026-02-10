@@ -324,6 +324,7 @@ export const PackumentVersionSchema = v.looseObject({
 						.join(', '),
 				),
 			),
+			v.pipe(v.unknown(), v.transform(Boolean)),
 		]),
 	),
 	funding: v.optional(v.nullable(Funding, null)),

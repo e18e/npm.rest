@@ -901,12 +901,6 @@ describe('packument-version validation', () => {
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
 
-		it("object can't be empty", () => {
-			const version = createPackumentVersion('1.0.0');
-			version.deprecated = {};
-			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
-		});
-
 		it('object must have not have empty key', () => {
 			const version = createPackumentVersion('1.0.0');
 			version.deprecated = { '': 'deprecated' };
@@ -950,12 +944,20 @@ describe('packument-version validation', () => {
 			);
 		});
 
-		it.skip('falls back to null when something unsupported is given', () => {
+		it('is true when unknown truthy value is given', () => {
 			const version = createPackumentVersion('1.0.0');
-			// @ts-expect-error tests
 			version.deprecated = { foo: { bar: 'baz' } };
 			const parsed = v.parse(PackumentVersionSchema, version);
-			expect(parsed.deprecated).toBeNull();
+			// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+			expect(parsed.deprecated).toBe(true);
+		});
+
+		it('is false when unknown falsy value is given', () => {
+			const version = createPackumentVersion('1.0.0');
+			version.deprecated = 0;
+			const parsed = v.parse(PackumentVersionSchema, version);
+			// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-falsy)
+			expect(parsed.deprecated).toBe(false);
 		});
 	});
 
