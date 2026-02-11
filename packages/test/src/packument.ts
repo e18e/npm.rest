@@ -52,7 +52,6 @@ export function createPackument(): InputPackument {
 
 	return {
 		name: 'my-package',
-		description: 'A test package',
 		'dist-tags': { latest: version },
 		versions: {
 			[version]: createPackumentVersion(version),

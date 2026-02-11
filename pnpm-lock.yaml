@@ -44,6 +44,9 @@ catalogs:
       version: 4.63.0
 
 patchedDependencies:
+  hosted-git-info:
+    hash: 369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e
+    path: patches/hosted-git-info.patch
   validate-npm-package-name:
     hash: 738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa
     path: patches/validate-npm-package-name.patch
@@ -189,7 +192,7 @@ importers:
         version: 0.45.1(@electric-sql/pglite@0.3.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(postgres@3.4.8)
       hosted-git-info:
         specifier: ^9.0.2
-        version: 9.0.2
+        version: 9.0.2(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e)
       lru-cache:
         specifier: ^11.0.2
         version: 11.2.4
@@ -308,7 +311,7 @@ importers:
     dependencies:
       hosted-git-info:
         specifier: ^9.0.2
-        version: 9.0.2
+        version: 9.0.2(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e)
       npm-package-arg:
         specifier: ^13.0.2
         version: 13.0.2
@@ -5400,7 +5403,7 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  hosted-git-info@9.0.2:
+  hosted-git-info@9.0.2(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e):
     dependencies:
       lru-cache: 11.2.4
 
@@ -5638,7 +5641,7 @@ snapshots:
 
   npm-package-arg@13.0.2:
     dependencies:
-      hosted-git-info: 9.0.2
+      hosted-git-info: 9.0.2(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e)
       proc-log: 6.1.0
       semver: 7.7.3
       validate-npm-package-name: 7.0.2(patch_hash=738f386c13a9250d53fb0280aeb0bcc5cd83b5933902f78c0ea6f6d5add377fa)

@@ -1,4 +1,4 @@
-import hostedGitInfo from 'hosted-git-info';
+import GitHost from 'hosted-git-info';
 import * as v from 'valibot';
 import {
 	aliasedLiteralUnion,
@@ -35,7 +35,6 @@ export const REPOSITORY_DOMAIN_MAP = Object.freeze({
 		'gitlab.com',
 		'gitee.com',
 		'git.sr.ht',
-		'tangled.sh',
 		'tangled.org',
 		'codeberg.org',
 	],
@@ -56,7 +55,7 @@ export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 const RepoURL = v.pipe(
 	TrimmedString,
 	v.rawTransform(({ dataset, addIssue, NEVER }) => {
-		const gitInfo = hostedGitInfo.fromUrl(dataset.value);
+		const gitInfo = GitHost.fromUrl(dataset.value);
 		if (!gitInfo) addIssue({ message: 'failed to parse git url' });
 		return gitInfo?.https() ?? NEVER;
 	}),
@@ -106,15 +105,28 @@ export const RepositorySchema = v.pipe(
 						? { type: 'unknown' as const, url: raw }
 						: raw;
 
-				const gitInfo = hostedGitInfo.fromUrl(item.url);
+				const url = new URL(item.url);
+
+				if (['git+http:', 'http:'].includes(url.protocol)) {
+					url.protocol = 'https:';
+				}
+
+				if (url.hostname === 'tangled.sh') {
+					url.hostname = 'tangled.org';
+				}
+
+				const gitInfo = GitHost.fromUrl(url.toString());
 
 				if (gitInfo) {
 					item.type = 'git';
-					item.url = gitInfo.https();
+
+					const gitURL = gitInfo.https();
+					item.url = gitURL.startsWith('git+')
+						? gitURL
+						: `git+${gitURL}`;
+
 					return item;
 				}
-
-				const url = new URL(item.url);
 
 				if (url.hostname.endsWith('npmjs.com')) {
 					return null;

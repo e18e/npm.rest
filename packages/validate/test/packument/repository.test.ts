@@ -7,6 +7,7 @@ import {
 	RepositoryObjectSchema,
 	RepositorySchema,
 	GIT_PROTOCOLS,
+	REPOSITORY_DOMAIN_MAP,
 } from '../../src/packument/repository';
 
 describe('repository', () => {
@@ -208,6 +209,11 @@ describe('repository', () => {
 		]);
 	});
 
+	it('leaves random http url as is', () => {
+		const parsed = v.parse(RepositorySchema, ['http://example.com/foo']);
+		expect(parsed).toMatchObject([{ url: 'http://example.com/foo' }]);
+	});
+
 	it('discards repository object with npm url', () => {
 		const parsed = v.parse(RepositorySchema, {
 			url: 'https://npmjs.com/foo',
@@ -241,57 +247,122 @@ describe('repository', () => {
 		]);
 	});
 
-	it('normalises https github url into git+https', () => {
+	it('normalises tangled.sh into tangled.org with git type', () => {
 		const parsed = v.parse(RepositorySchema, {
-			url: 'https://github.com/owner/repo',
+			type: 'foo',
+			url: 'https://tangled.sh/owner/repo',
 		});
 
 		expect(parsed).toMatchObject([
 			{
 				type: 'git',
-				url: 'git+https://github.com/owner/repo.git',
+				url: 'git+https://tangled.org/owner/repo',
 			},
 		]);
 	});
 
-	it('normalises http github url into git+https', () => {
+	it.skip('normalises random url that seems to be git', () => {
 		const parsed = v.parse(RepositorySchema, {
-			url: 'http://github.com/owner/repo.git',
+			type: 'unknown',
+			url: 'https://example.com/owner/repo.git',
 		});
 
 		expect(parsed).toMatchObject([
 			{
 				type: 'git',
-				url: 'git+https://github.com/owner/repo.git',
+				url: 'git+https://example.com/owner/repo.git',
 			},
 		]);
 	});
 
-	it('normalises ssh github url into git+https', () => {
+	it.skip('supports random ssh url, but currently leaves as is', () => {
 		const parsed = v.parse(RepositorySchema, {
-			url: 'git@github.com:owner/repo.git',
+			url: 'git@example:owner/repo.git',
 		});
 
 		expect(parsed).toMatchObject([
 			{
-				type: 'git',
-				url: 'git+https://github.com/owner/repo.git',
+				type: 'unknown',
+				url: 'git@example:owner/repo.git',
 			},
 		]);
 	});
 
-	it('handles github repository spec', () => {
-		const parsed = v.parse(RepositorySchema, {
-			url: 'github:owner/repo',
-		});
+	describe.for(REPOSITORY_DOMAIN_MAP.git)(
+		'%s git normalisation',
+		// oxlint-disable-next-line jest/valid-describe-callback bug?
+		(domain) => {
+			it('normalises https to git+https', () => {
+				const parsed = v.parse(RepositorySchema, {
+					url: `https://${domain}/owner/repo`,
+				});
 
-		expect(parsed).toMatchObject([
-			{
-				type: 'git',
-				url: 'git+https://github.com/owner/repo.git',
-			},
-		]);
-	});
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+
+			it('normalises http into git+https', () => {
+				const parsed = v.parse(RepositorySchema, {
+					url: `http://${domain}/owner/repo`,
+				});
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+
+			it('normalises ssh into git+https', () => {
+				const parsed = v.parse(RepositorySchema, {
+					url: `git@${domain}:owner/repo.git`,
+				});
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+
+			it('handles repository spec', () => {
+				const alias =
+					// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+					domain === 'git.sr.ht'
+						? 'sourcehut'
+						: domain.slice(0, domain.indexOf('.'));
+
+				const parsed = v.parse(RepositorySchema, {
+					url: `${alias}:owner/repo`,
+				});
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+		},
+	);
 
 	describe.for(DOMAIN_REPOSITORY_TYPE_MAP)(
 		'domain type handling for %s to %s',

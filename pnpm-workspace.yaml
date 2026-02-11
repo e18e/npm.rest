@@ -24,4 +24,5 @@ onlyBuiltDependencies:
     - sharp
 
 patchedDependencies:
+    hosted-git-info: patches/hosted-git-info.patch
     validate-npm-package-name: patches/validate-npm-package-name.patch
