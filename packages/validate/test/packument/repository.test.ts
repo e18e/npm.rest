@@ -235,7 +235,7 @@ describe('repository', () => {
 		]);
 	});
 
-	it.skip('turns repo that is a wrong url string to null', () => {
+	it('turns repo that is a wrong url string to null', () => {
 		const parsed = v.parse(RepositorySchema, 'data:foo');
 		expect(parsed).toBeNull();
 	});

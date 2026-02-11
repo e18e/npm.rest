@@ -147,6 +147,13 @@ export const RepositorySchema = v.pipe(
 					}
 				}
 
+				if (
+					!url.hostname ||
+					!['https:', 'http:'].includes(url.protocol)
+				) {
+					return null;
+				}
+
 				return item;
 			})
 			.filter((item) => item !== null);
