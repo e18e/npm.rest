@@ -2,6 +2,7 @@ import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { PackumentSchema } from '@npm.rest/validate/packument';
 import { packumentTable } from '@npm.rest/db/schema';
 import { db } from '@npm.rest/db/server';
+import { uniqueDeep } from './unique';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import * as v from 'valibot';
@@ -52,33 +53,41 @@ const CHECKPOINT_FILE = join(OUTPUT_DIR, './checkpoint.json');
 
 async function getCheckpoint() {
 	if (!existsSync(CHECKPOINT_FILE)) {
-		return { offset: 0, unknownFunding: new Set<string>() };
+		return { offset: 0 };
 	}
 
 	const raw = await readFile(CHECKPOINT_FILE, 'utf-8');
-	const parsed = JSON.parse(raw) as {
-		offset: number;
-		unknownFunding?: string[];
-	};
-
-	return {
-		offset: parsed.offset,
-		unknownFunding: new Set(parsed.unknownFunding),
-	};
+	return JSON.parse(raw) as { offset: number };
 }
 
-async function saveCheckpoint(offset: number, unknownFunding: Set<string>) {
-	await writeFile(
-		CHECKPOINT_FILE,
-		JSON.stringify({
-			offset,
-			unknownFunding: unknownFunding.values().toArray(),
-		}),
-	);
+async function saveCheckpoint(offset: number) {
+	await writeFile(CHECKPOINT_FILE, JSON.stringify({ offset }));
 }
 
-// oxlint-disable-next-line eslint(prefer-const)
-let { offset, unknownFunding } = await getCheckpoint();
+const ALL_REPO_TYPES_FILE = join(OUTPUT_DIR, './all-repository-types.json');
+const ALL_FUNDING_TYPES_FILE = join(OUTPUT_DIR, './all-funding-types.json');
+
+async function getThingy(path: string) {
+	if (!existsSync(path)) {
+		return {} as Record<string, unknown[]>;
+	}
+
+	const raw = await readFile(path, 'utf-8');
+	return JSON.parse(raw) as Record<string, unknown[]>;
+}
+
+async function saveThingy(path: string, data: Record<string, unknown[]>) {
+	for (const value of Object.values(data)) {
+		uniqueDeep(value);
+	}
+
+	await writeFile(path, JSON.stringify(data, null, 2));
+}
+
+const allFundingTypes = await getThingy(ALL_FUNDING_TYPES_FILE);
+const allRepoTypes = await getThingy(ALL_REPO_TYPES_FILE);
+
+let { offset } = await getCheckpoint();
 let processed = 0;
 let issues = 0;
 
@@ -89,6 +98,20 @@ function msg() {
 }
 
 s.start(msg());
+
+// function tryExtractType(rawPkg: unknown, version: string, key: string) {
+// 	// @ts-expect-error necessary evil
+// 	// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment), typescript-eslint(no-unsafe-member-access)
+// 	const f = rawPkg?.versions?.[version]?.[key];
+// 	const a = Array.isArray(f) ? f : [f];
+// 	const t = a
+// 		// oxlint-disable-next-line typescript-eslint(no-unsafe-return), typescript-eslint(no-unsafe-member-access)
+// 		.map((f) => (f && typeof f === 'object' && 'type' in f ? f : null))
+// 		.filter((t) => t !== null);
+
+// 	// oxlint-disable-next-line typescript-eslint(no-unsafe-return)
+// 	return t;
+// }
 
 while (true) {
 	const packuments = await db
@@ -110,11 +133,58 @@ while (true) {
 			const result = await v.safeParseAsync(PackumentSchema, pkg.data);
 
 			if (result.success) {
-				if (result.output.versions) {
-					for (const pkv of Object.values(result.output.versions)) {
-						if (pkv.funding?.some((f) => f.type === 'unknown')) {
-							unknownFunding.add(result.output.name);
-							break;
+				const { name, versions } = result.output;
+
+				if (versions) {
+					for (const [version, pkv] of Object.entries(versions)) {
+						// if (pkv.funding?.some((f) => f.type === 'unknown')) {
+						// 	const types = tryExtractType(
+						// 		pkg.data,
+						// 		version,
+						// 		'funding',
+						// 	);
+
+						// 	if (types.length === 0) {
+						// 		unknownFundingType.unknown ??= [];
+						// 		unknownFundingType.unknown.push(`pkg:${name}`);
+						// 	} else {
+						// 		for (const item of types) {
+						// 			// oxlint-disable-next-linetypescript-eslint(no-unsafe-member-access)
+						// 			(unknownFundingType[item.type] ??= []).push(
+						// 				item,
+						// 			);
+						// 		}
+						// 	}
+						// }
+
+						// if (pkv.repository?.some((r) => r.type === 'unknown')) {
+						// 	const types = tryExtractType(
+						// 		pkg.data,
+						// 		version,
+						// 		'repository',
+						// 	);
+
+						// 	if (types.length === 0) {
+						// 		unknownRepoType.unknown ??= [];
+						// 		unknownRepoType.unknown.push(`pkg:${name}`);
+						// 	} else {
+						// 		for (const item of types) {
+						// 			// oxlint-disable-next-linetypescript-eslint(no-unsafe-member-access)
+						// 			(unknownRepoType[item.type] ??= []).push(
+						// 				item,
+						// 			);
+						// 		}
+						// 	}
+						// }
+
+						for (const f of pkv.funding ?? []) {
+							allFundingTypes[f.type] ??= [];
+							allFundingTypes[f.type].push(f.url);
+						}
+
+						for (const r of pkv.repository ?? []) {
+							allRepoTypes[r.type] ??= [];
+							allRepoTypes[r.type].push(r.url);
 						}
 					}
 				}
@@ -139,7 +209,9 @@ while (true) {
 	);
 
 	s.message(msg());
-	await saveCheckpoint(offset, unknownFunding);
+	await saveCheckpoint(offset);
+	await saveThingy(ALL_FUNDING_TYPES_FILE, allFundingTypes);
+	await saveThingy(ALL_REPO_TYPES_FILE, allRepoTypes);
 
 	if (issues >= 10) {
 		s.error('too many issues, stopping');
