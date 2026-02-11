@@ -58,7 +58,7 @@ describe('process packument', () => {
 			{
 				type: 'git',
 				directory: random,
-				url: 'https://github.com/foo/bar',
+				url: 'git+https://github.com/foo/bar.git',
 			},
 		]);
 

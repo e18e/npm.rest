@@ -10,6 +10,7 @@
 		"./package": "./src/package.ts"
 	},
 	"dependencies": {
+		"hosted-git-info": "^9.0.2",
 		"npm-package-arg": "^13.0.2",
 		"semver": "^7.7.3",
 		"valibot": "catalog:",
@@ -17,6 +18,7 @@
 	},
 	"devDependencies": {
 		"@npm.rest/test": "workspace:^",
+		"@types/hosted-git-info": "^3.0.5",
 		"@types/npm-package-arg": "^6.1.4",
 		"@types/semver": "^7.7.1",
 		"@types/validate-npm-package-name": "^4.0.2"

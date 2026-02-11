@@ -1,7 +1,9 @@
+import hostedGitInfo from 'hosted-git-info';
 import * as v from 'valibot';
 import {
 	aliasedLiteralUnion,
 	EmptyableString,
+	TrimmedString,
 	MaybeLink,
 	Link,
 } from '../shared';
@@ -51,6 +53,15 @@ export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 	}),
 );
 
+const RepoURL = v.pipe(
+	TrimmedString,
+	v.rawTransform(({ dataset, addIssue, NEVER }) => {
+		const gitInfo = hostedGitInfo.fromUrl(dataset.value);
+		if (!gitInfo) addIssue({ message: 'failed to parse git url' });
+		return gitInfo?.https() ?? NEVER;
+	}),
+);
+
 export const RepositoryObjectSchema = v.object({
 	type: v.optional(
 		v.fallback(
@@ -65,16 +76,18 @@ export const RepositoryObjectSchema = v.object({
 		),
 		'unknown',
 	),
-	url: Link,
+	url: v.union([RepoURL, Link]),
 	directory: v.optional(EmptyableString),
 	branch: v.optional(EmptyableString),
 });
 
 export const RepositorySchema = v.pipe(
 	v.union([
+		RepoURL,
 		MaybeLink,
 		v.array(
 			v.union([
+				RepoURL,
 				MaybeLink,
 				v.fallback(v.nullable(RepositoryObjectSchema), null),
 			]),
@@ -92,6 +105,14 @@ export const RepositorySchema = v.pipe(
 					typeof raw === 'string'
 						? { type: 'unknown' as const, url: raw }
 						: raw;
+
+				const gitInfo = hostedGitInfo.fromUrl(item.url);
+
+				if (gitInfo) {
+					item.type = 'git';
+					item.url = gitInfo.https();
+					return item;
+				}
 
 				const url = new URL(item.url);
 

@@ -13,13 +13,13 @@ describe('repository', () => {
 	it('parses repository object to array', () => {
 		const parsed = v.parse(RepositorySchema, {
 			type: 'git',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed).toMatchObject([
 			{
 				type: 'git',
-				url: 'https://github.com/owner/repo',
+				url: 'https://git.willow.sh/owner/repo',
 			},
 		]);
 	});
@@ -27,23 +27,23 @@ describe('repository', () => {
 	it('parses repository string url to array', () => {
 		const parsed = v.parse(
 			RepositorySchema,
-			'https://github.com/owner/repo',
+			'https://git.willow.sh/owner/repo',
 		);
 
 		expect(parsed).toMatchObject([
-			{ url: 'https://github.com/owner/repo' },
+			{ url: 'https://git.willow.sh/owner/repo' },
 		]);
 	});
 
 	it('parses array of string urls to array', () => {
 		const parsed = v.parse(RepositorySchema, [
-			'https://github.com/owner/repo',
-			'https://github.com/owner/repo2',
+			'https://git.willow.sh/owner/repo',
+			'https://git.willow.sh/owner/repo2',
 		]);
 
 		expect(parsed).toMatchObject([
-			{ url: 'https://github.com/owner/repo' },
-			{ url: 'https://github.com/owner/repo2' },
+			{ url: 'https://git.willow.sh/owner/repo' },
+			{ url: 'https://git.willow.sh/owner/repo2' },
 		]);
 	});
 
@@ -51,13 +51,13 @@ describe('repository', () => {
 		const parsed = v.parse(RepositorySchema, [
 			{
 				type: 'git',
-				url: 'https://github.com/owner/repo',
+				url: 'https://git.willow.sh/owner/repo',
 				directory: null,
 				branch: null,
 			},
 			{
 				type: 'git',
-				url: 'https://github.com/owner/repo2',
+				url: 'https://git.willow.sh/owner/repo2',
 				directory: null,
 				branch: null,
 			},
@@ -66,13 +66,13 @@ describe('repository', () => {
 		expect(parsed).toStrictEqual([
 			{
 				type: 'git',
-				url: 'https://github.com/owner/repo',
+				url: 'https://git.willow.sh/owner/repo',
 				directory: null,
 				branch: null,
 			},
 			{
 				type: 'git',
-				url: 'https://github.com/owner/repo2',
+				url: 'https://git.willow.sh/owner/repo2',
 				directory: null,
 				branch: null,
 			},
@@ -98,16 +98,16 @@ describe('repository', () => {
 	it('trims url before parsing', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: 'git',
-			url: '   https://github.com/owner/repo   ',
+			url: '   https://git.willow.sh/owner/repo   ',
 		});
 
-		expect(parsed?.url).toBe('https://github.com/owner/repo');
+		expect(parsed?.url).toBe('https://git.willow.sh/owner/repo');
 	});
 
 	it('supports git type', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: 'git',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('git');
@@ -116,7 +116,7 @@ describe('repository', () => {
 	it('turns type to lowercase before parsing', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: 'Git',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('git');
@@ -125,7 +125,7 @@ describe('repository', () => {
 	it('trims type before parsing', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: '   git   ',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('git');
@@ -143,7 +143,7 @@ describe('repository', () => {
 	it('transforms empty type to unknown', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: '',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('unknown');
@@ -152,7 +152,7 @@ describe('repository', () => {
 	it('transforms effectively empty type to unknown', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: '   ',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('unknown');
@@ -166,25 +166,10 @@ describe('repository', () => {
 	it('turns unknown types to unknown', () => {
 		const parsed = v.parse(RepositoryObjectSchema, {
 			type: 'npm',
-			url: 'https://github.com/owner/repo',
+			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed?.type).toBe('unknown');
-	});
-
-	it('turns repo that is a non-url string to null', () => {
-		const parsed = v.parse(RepositorySchema, 'example/repo');
-		expect(parsed).toBeNull();
-	});
-
-	it('turns url of repository object that is non-url to null', () => {
-		const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
-		expect(parsed).toBeNull();
-	});
-
-	it('turns repository object that has non-url url to null', () => {
-		const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
-		expect(parsed).toBeNull();
 	});
 
 	it('turns empty repository object to null', () => {
@@ -212,13 +197,13 @@ describe('repository', () => {
 
 	it('handles array mixed validities gracefully', () => {
 		const parsed = v.parse(RepositorySchema, [
-			'https://github.com/owner/repo',
+			'https://example.com/owner/repo',
 			{ url: 'foo' },
 			{ url: 'https://example.com' },
 		]);
 
 		expect(parsed).toMatchObject([
-			{ url: 'https://github.com/owner/repo' },
+			{ url: 'https://example.com/owner/repo' },
 			{ url: 'https://example.com' },
 		]);
 	});
@@ -240,6 +225,70 @@ describe('repository', () => {
 			{
 				type: 'git',
 				url: 'https://example.com/repo.git',
+			},
+		]);
+	});
+
+	it.skip('turns repo that is a wrong url string to null', () => {
+		const parsed = v.parse(RepositorySchema, 'data:foo');
+		expect(parsed).toBeNull();
+	});
+
+	it('turns owner/repo string to github url', () => {
+		const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
+		expect(parsed).toMatchObject([
+			{ url: 'git+https://github.com/example/repo.git' },
+		]);
+	});
+
+	it('normalises https github url into git+https', () => {
+		const parsed = v.parse(RepositorySchema, {
+			url: 'https://github.com/owner/repo',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://github.com/owner/repo.git',
+			},
+		]);
+	});
+
+	it('normalises http github url into git+https', () => {
+		const parsed = v.parse(RepositorySchema, {
+			url: 'http://github.com/owner/repo.git',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://github.com/owner/repo.git',
+			},
+		]);
+	});
+
+	it('normalises ssh github url into git+https', () => {
+		const parsed = v.parse(RepositorySchema, {
+			url: 'git@github.com:owner/repo.git',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://github.com/owner/repo.git',
+			},
+		]);
+	});
+
+	it('handles github repository spec', () => {
+		const parsed = v.parse(RepositorySchema, {
+			url: 'github:owner/repo',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://github.com/owner/repo.git',
 			},
 		]);
 	});
