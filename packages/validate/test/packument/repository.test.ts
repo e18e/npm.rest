@@ -5,9 +5,10 @@ import * as v from 'valibot';
 import {
 	DOMAIN_REPOSITORY_TYPE_MAP,
 	RepositoryObjectSchema,
+	REPOSITORY_DOMAIN_MAP,
+	JUNK_REPO_DOMAINS,
 	RepositorySchema,
 	GIT_PROTOCOLS,
-	REPOSITORY_DOMAIN_MAP,
 } from '../../src/packument/repository';
 
 describe('repository', () => {
@@ -212,14 +213,6 @@ describe('repository', () => {
 	it('leaves random http url as is', () => {
 		const parsed = v.parse(RepositorySchema, ['http://example.com/foo']);
 		expect(parsed).toMatchObject([{ url: 'http://example.com/foo' }]);
-	});
-
-	it('discards repository object with npm url', () => {
-		const parsed = v.parse(RepositorySchema, {
-			url: 'https://npmjs.com/foo',
-		});
-
-		expect(parsed).toBeNull();
 	});
 
 	it('sets type to git when url pathname ends with .git', () => {
@@ -440,4 +433,13 @@ describe('repository', () => {
 			]);
 		},
 	);
+
+	it.for(JUNK_REPO_DOMAINS)('catches junk repo domain %s', (domain) => {
+		const parsed = v.parse(RepositorySchema, {
+			type: 'git',
+			url: `https://${domain}/example`,
+		});
+
+		expect(parsed).toBeNull();
+	});
 });

@@ -52,6 +52,15 @@ export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 	}),
 );
 
+export const JUNK_REPO_DOMAINS = Object.freeze([
+	'npmjs.com',
+	'google.com',
+] as const);
+
+function isJunkRepoDomain(url: URL): boolean {
+	return JUNK_REPO_DOMAINS.some((domain) => url.hostname.endsWith(domain));
+}
+
 const RepoURL = v.pipe(
 	TrimmedString,
 	v.rawTransform(({ dataset, addIssue, NEVER }) => {
@@ -107,6 +116,10 @@ export const RepositorySchema = v.pipe(
 
 				const url = new URL(item.url);
 
+				if (isJunkRepoDomain(url)) {
+					return null;
+				}
+
 				if (['git+http:', 'http:'].includes(url.protocol)) {
 					url.protocol = 'https:';
 				}
@@ -126,10 +139,6 @@ export const RepositorySchema = v.pipe(
 						: `git+${gitURL}`;
 
 					return item;
-				}
-
-				if (url.hostname.endsWith('npmjs.com')) {
-					return null;
 				}
 
 				if (
