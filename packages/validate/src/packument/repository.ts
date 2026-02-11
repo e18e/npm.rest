@@ -33,6 +33,9 @@ export const REPOSITORY_DOMAIN_MAP = Object.freeze({
 		'gitlab.com',
 		'gitee.com',
 		'git.sr.ht',
+		'tangled.sh',
+		'tangled.org',
+		'codeberg.org',
 	],
 	mercurial: ['hg.sr.ht'],
 } satisfies Record<Exclude<RepositoryType, 'unknown'>, string[]>);
