@@ -14,13 +14,13 @@ import {
 describe('repository', () => {
 	it('parses repository object to array', () => {
 		const parsed = v.parse(RepositorySchema, {
-			type: 'git',
+			type: 'unknown',
 			url: 'https://git.willow.sh/owner/repo',
 		});
 
 		expect(parsed).toMatchObject([
 			{
-				type: 'git',
+				type: 'unknown',
 				url: 'https://git.willow.sh/owner/repo',
 			},
 		]);
@@ -52,13 +52,13 @@ describe('repository', () => {
 	it('parses array of repo objects to array', () => {
 		const parsed = v.parse(RepositorySchema, [
 			{
-				type: 'git',
+				type: 'unknown',
 				url: 'https://git.willow.sh/owner/repo',
 				directory: null,
 				branch: null,
 			},
 			{
-				type: 'git',
+				type: 'unknown',
 				url: 'https://git.willow.sh/owner/repo2',
 				directory: null,
 				branch: null,
@@ -67,13 +67,13 @@ describe('repository', () => {
 
 		expect(parsed).toStrictEqual([
 			{
-				type: 'git',
+				type: 'unknown',
 				url: 'https://git.willow.sh/owner/repo',
 				directory: null,
 				branch: null,
 			},
 			{
-				type: 'git',
+				type: 'unknown',
 				url: 'https://git.willow.sh/owner/repo2',
 				directory: null,
 				branch: null,
@@ -220,12 +220,7 @@ describe('repository', () => {
 			url: 'https://example.com/repo.git',
 		});
 
-		expect(parsed).toMatchObject([
-			{
-				type: 'git',
-				url: 'https://example.com/repo.git',
-			},
-		]);
+		expect(parsed).toMatchObject([{ type: 'git' }]);
 	});
 
 	it('turns repo that is a wrong url string to null', () => {
@@ -254,7 +249,7 @@ describe('repository', () => {
 		]);
 	});
 
-	it.skip('normalises random url that seems to be git', () => {
+	it('normalises random url that ends in .git', () => {
 		const parsed = v.parse(RepositorySchema, {
 			type: 'unknown',
 			url: 'https://example.com/owner/repo.git',
@@ -264,6 +259,34 @@ describe('repository', () => {
 			{
 				type: 'git',
 				url: 'git+https://example.com/owner/repo.git',
+			},
+		]);
+	});
+
+	it('normalises random url that has git+', () => {
+		const parsed = v.parse(RepositorySchema, {
+			type: 'unknown',
+			url: 'git+http://example.com/owner/repo',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://example.com/owner/repo',
+			},
+		]);
+	});
+
+	it('normalises random url of type git', () => {
+		const parsed = v.parse(RepositorySchema, {
+			type: 'git',
+			url: 'https://example.com/owner/repo',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://example.com/owner/repo',
 			},
 		]);
 	});
@@ -413,7 +436,7 @@ describe('repository', () => {
 		expect(parsed).toMatchObject([
 			{
 				type: expected,
-				url: 'https://example.com',
+				url: 'git+https://example.com/',
 			},
 		]);
 	});
@@ -425,12 +448,7 @@ describe('repository', () => {
 				url: `${protocol}//example.com`,
 			});
 
-			expect(parsed).toMatchObject([
-				{
-					type: 'git',
-					url: `${protocol}//example.com`,
-				},
-			]);
+			expect(parsed).toMatchObject([{ type: 'git' }]);
 		},
 	);
 

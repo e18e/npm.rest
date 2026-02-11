@@ -61,6 +61,10 @@ function isJunkRepoDomain(url: URL): boolean {
 	return JUNK_REPO_DOMAINS.some((domain) => url.hostname.endsWith(domain));
 }
 
+function addGitPlus(url: string) {
+	return url.startsWith('git+') ? url : `git+${url}`;
+}
+
 const RepoURL = v.pipe(
 	TrimmedString,
 	v.rawTransform(({ dataset, addIssue, NEVER }) => {
@@ -120,8 +124,12 @@ export const RepositorySchema = v.pipe(
 					return null;
 				}
 
-				if (['git+http:', 'http:'].includes(url.protocol)) {
+				if (url.protocol === 'http:') {
 					url.protocol = 'https:';
+				}
+
+				if (url.protocol === 'git+http:') {
+					url.protocol = 'git+https:';
 				}
 
 				if (url.hostname === 'tangled.sh') {
@@ -132,20 +140,17 @@ export const RepositorySchema = v.pipe(
 
 				if (gitInfo) {
 					item.type = 'git';
-
-					const gitURL = gitInfo.https();
-					item.url = gitURL.startsWith('git+')
-						? gitURL
-						: `git+${gitURL}`;
-
+					item.url = addGitPlus(gitInfo.https());
 					return item;
 				}
 
 				if (
+					item.type === 'git' ||
 					url.pathname.endsWith('.git') ||
 					isGitProtocol(url.protocol)
 				) {
 					item.type = 'git' as const;
+					item.url = addGitPlus(url.toString());
 					return item;
 				}
 
