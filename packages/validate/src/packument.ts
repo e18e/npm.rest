@@ -1,3 +1,5 @@
+// oxlint-disable eslint(no-duplicate-imports) bug?
+
 export {
 	type PackumentVersion,
 	PackumentVersionSchema,
