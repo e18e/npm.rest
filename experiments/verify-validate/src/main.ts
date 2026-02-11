@@ -66,6 +66,12 @@ async function saveCheckpoint(offset: number) {
 
 const ALL_REPO_TYPES_FILE = join(OUTPUT_DIR, './all-repository-types.json');
 const ALL_FUNDING_TYPES_FILE = join(OUTPUT_DIR, './all-funding-types.json');
+const REPO_TYPE_COUNTS_FILE = join(OUTPUT_DIR, './repo-type-counts.json');
+const REPO_GIT_HOSTNAME_COUNTS_FILE = join(
+	OUTPUT_DIR,
+	'./repo-git-hostname-counts.json',
+);
+const FUNDING_TYPE_COUNTS_FILE = join(OUTPUT_DIR, './funding-type-counts.json');
 
 async function getThingy(path: string) {
 	if (!existsSync(path)) {
@@ -84,8 +90,15 @@ async function saveThingy(path: string, data: Record<string, unknown[]>) {
 	await writeFile(path, JSON.stringify(data, null, 2));
 }
 
-const allFundingTypes = await getThingy(ALL_FUNDING_TYPES_FILE);
-const allRepoTypes = await getThingy(ALL_REPO_TYPES_FILE);
+let allFundingTypes = await getThingy(ALL_FUNDING_TYPES_FILE);
+let allRepoTypes = await getThingy(ALL_REPO_TYPES_FILE);
+
+// Keep only 'unknown' types for the saved unknown lists
+allFundingTypes = { unknown: allFundingTypes.unknown ?? [] };
+allRepoTypes = { unknown: allRepoTypes.unknown ?? [] };
+
+// Prepare map for git repo hostname counts
+const gitHostnameCounts: Record<string, number> = {};
 
 let { offset } = await getCheckpoint();
 let processed = 0;
@@ -133,10 +146,10 @@ while (true) {
 			const result = await v.safeParseAsync(PackumentSchema, pkg.data);
 
 			if (result.success) {
-				const { name, versions } = result.output;
+				const { versions } = result.output;
 
 				if (versions) {
-					for (const [version, pkv] of Object.entries(versions)) {
+					for (const [_version, pkv] of Object.entries(versions)) {
 						// if (pkv.funding?.some((f) => f.type === 'unknown')) {
 						// 	const types = tryExtractType(
 						// 		pkg.data,
@@ -178,13 +191,23 @@ while (true) {
 						// }
 
 						for (const f of pkv.funding ?? []) {
-							allFundingTypes[f.type] ??= [];
-							allFundingTypes[f.type].push(f.url);
+							if (f.type === 'unknown') {
+								allFundingTypes[f.type] ??= [];
+								allFundingTypes[f.type].push(f.url);
+							}
 						}
 
 						for (const r of pkv.repository ?? []) {
-							allRepoTypes[r.type] ??= [];
-							allRepoTypes[r.type].push(r.url);
+							if (r.type === 'unknown') {
+								allRepoTypes[r.type] ??= [];
+								allRepoTypes[r.type].push(r.url);
+							}
+
+							if (r.type === 'git' && r.url) {
+								const hostname = new URL(r.url).hostname;
+								gitHostnameCounts[hostname] =
+									(gitHostnameCounts[hostname] ?? 0) + 1;
+							}
 						}
 					}
 				}
@@ -212,6 +235,29 @@ while (true) {
 	await saveCheckpoint(offset);
 	await saveThingy(ALL_FUNDING_TYPES_FILE, allFundingTypes);
 	await saveThingy(ALL_REPO_TYPES_FILE, allRepoTypes);
+
+	// Save counts of each unknown type
+	const fundingCounts = Object.fromEntries(
+		Object.entries(allFundingTypes).map(([type, arr]) => [
+			type,
+			arr.length,
+		]),
+	);
+	await writeFile(
+		FUNDING_TYPE_COUNTS_FILE,
+		JSON.stringify(fundingCounts, null, 2),
+	);
+
+	const repoCounts = Object.fromEntries(
+		Object.entries(allRepoTypes).map(([type, arr]) => [type, arr.length]),
+	);
+	await writeFile(REPO_TYPE_COUNTS_FILE, JSON.stringify(repoCounts, null, 2));
+
+	// Save git hostname counts
+	await writeFile(
+		REPO_GIT_HOSTNAME_COUNTS_FILE,
+		JSON.stringify(gitHostnameCounts, null, 2),
+	);
 
 	if (issues >= 10) {
 		s.error('too many issues, stopping');
