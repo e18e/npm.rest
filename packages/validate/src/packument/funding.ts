@@ -1,4 +1,10 @@
-import { aliasedLiteralUnion, EmptyableLink, Link } from '../shared';
+import {
+	aliasedLiteralUnion,
+	cleanAndCollapseArray,
+	EmptyableLink,
+	Link,
+	toArray,
+} from '../shared';
 import * as v from 'valibot';
 
 export const FUNDING_TYPES = Object.freeze([
@@ -76,33 +82,27 @@ export const Funding = v.pipe(
 			v.transform(() => null),
 		),
 	]),
-	v.transform((value) => {
-		if (value === null) return null;
+	toArray(),
+	v.mapItems((raw) => {
+		if (raw === null) return null;
 
-		const array = (Array.isArray(value) ? value : [value])
-			.map((raw) => {
-				if (raw === null) return null;
+		const item =
+			typeof raw === 'string'
+				? { type: 'unknown' as const, url: raw }
+				: raw;
 
-				const item =
-					typeof raw === 'string'
-						? { type: 'unknown' as const, url: raw }
-						: raw;
+		const url = new URL(item.url);
 
-				const url = new URL(item.url);
+		for (const [domain, type] of DOMAIN_FUNDING_TYPE_MAP) {
+			if (url.hostname.endsWith(domain)) {
+				item.type = type;
+				url.protocol = 'https:';
+				item.url = url.toString();
+				break;
+			}
+		}
 
-				for (const [domain, type] of DOMAIN_FUNDING_TYPE_MAP) {
-					if (url.hostname.endsWith(domain)) {
-						item.type = type;
-						url.protocol = 'https:';
-						item.url = url.toString();
-						break;
-					}
-				}
-
-				return item;
-			})
-			.filter((item) => item !== null);
-
-		return array.length === 0 ? null : array;
+		return item;
 	}),
+	cleanAndCollapseArray(),
 );

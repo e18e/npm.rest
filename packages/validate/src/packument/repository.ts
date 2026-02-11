@@ -6,6 +6,8 @@ import {
 	TrimmedString,
 	MaybeLink,
 	Link,
+	toArray,
+	cleanAndCollapseArray,
 } from '../shared';
 
 const REPOSITORY_TYPES = Object.freeze([
@@ -106,72 +108,63 @@ export const RepositorySchema = v.pipe(
 		),
 		v.fallback(v.nullable(RepositoryObjectSchema), null),
 	]),
-	v.transform((value) => {
-		if (value === null) return null;
+	toArray(),
+	v.mapItems((raw) => {
+		if (raw === null) return null;
 
-		const array = (Array.isArray(value) ? value : [value])
-			.map((raw) => {
-				if (raw === null) return null;
+		const item =
+			typeof raw === 'string'
+				? { type: 'unknown' as const, url: raw }
+				: raw;
 
-				const item =
-					typeof raw === 'string'
-						? { type: 'unknown' as const, url: raw }
-						: raw;
+		const url = new URL(item.url);
 
-				const url = new URL(item.url);
+		if (isJunkRepoDomain(url)) {
+			return null;
+		}
 
-				if (isJunkRepoDomain(url)) {
-					return null;
-				}
+		if (url.protocol === 'http:') {
+			url.protocol = 'https:';
+		}
 
-				if (url.protocol === 'http:') {
-					url.protocol = 'https:';
-				}
+		if (url.protocol === 'git+http:') {
+			url.protocol = 'git+https:';
+		}
 
-				if (url.protocol === 'git+http:') {
-					url.protocol = 'git+https:';
-				}
+		if (url.hostname === 'tangled.sh') {
+			url.hostname = 'tangled.org';
+		}
 
-				if (url.hostname === 'tangled.sh') {
-					url.hostname = 'tangled.org';
-				}
+		const gitInfo = GitHost.fromUrl(url.toString());
 
-				const gitInfo = GitHost.fromUrl(url.toString());
+		if (gitInfo) {
+			item.type = 'git';
+			item.url = addGitPlus(gitInfo.https());
+			return item;
+		}
 
-				if (gitInfo) {
-					item.type = 'git';
-					item.url = addGitPlus(gitInfo.https());
-					return item;
-				}
+		if (
+			item.type === 'git' ||
+			url.pathname.endsWith('.git') ||
+			isGitProtocol(url.protocol)
+		) {
+			item.type = 'git' as const;
+			item.url = addGitPlus(url.toString());
+			return item;
+		}
 
-				if (
-					item.type === 'git' ||
-					url.pathname.endsWith('.git') ||
-					isGitProtocol(url.protocol)
-				) {
-					item.type = 'git' as const;
-					item.url = addGitPlus(url.toString());
-					return item;
-				}
+		for (const [domain, type] of DOMAIN_REPOSITORY_TYPE_MAP) {
+			if (url.hostname.endsWith(domain)) {
+				item.type = type;
+				break;
+			}
+		}
 
-				for (const [domain, type] of DOMAIN_REPOSITORY_TYPE_MAP) {
-					if (url.hostname.endsWith(domain)) {
-						item.type = type;
-						break;
-					}
-				}
+		if (!url.hostname || !['https:', 'http:'].includes(url.protocol)) {
+			return null;
+		}
 
-				if (
-					!url.hostname ||
-					!['https:', 'http:'].includes(url.protocol)
-				) {
-					return null;
-				}
-
-				return item;
-			})
-			.filter((item) => item !== null);
-
-		return array.length === 0 ? null : array;
+		return item;
 	}),
+	cleanAndCollapseArray(),
 );

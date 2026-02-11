@@ -84,3 +84,23 @@ export function aliasedLiteralUnion<
 		v.union(input.map((value) => v.literal(value))),
 	);
 }
+
+type ToArray<T> = (T extends (infer U)[] ? U : T)[];
+
+export function toArray<T>(): v.TransformAction<T, ToArray<T>> {
+	return v.transform(
+		(input) => (Array.isArray(input) ? input : [input]) as ToArray<T>,
+	);
+}
+
+type CleanArray<Item> = Exclude<Item, null>[] | null;
+
+export function cleanAndCollapseArray<
+	Item,
+	Input extends Item[],
+>(): v.TransformAction<Input, CleanArray<Item>> {
+	return v.transform((value) => {
+		const filtered = value.filter((item) => item !== null);
+		return (filtered.length === 0 ? null : filtered) as CleanArray<Item>;
+	});
+}

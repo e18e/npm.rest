@@ -13,6 +13,8 @@ import {
 	Email,
 	Date,
 	Link,
+	toArray,
+	cleanAndCollapseArray,
 } from '../src/shared';
 
 describe('trimmed string', () => {
@@ -324,5 +326,44 @@ describe('aliased literal union', () => {
 			'github',
 			'github',
 		]);
+	});
+});
+
+describe('to array', () => {
+	const schema = v.pipe(
+		v.union([v.string(), v.array(v.string())]),
+		toArray(),
+	);
+
+	it('converts single value to array', () => {
+		const result = v.parse(schema, 'foo');
+		expect(result).toStrictEqual(['foo']);
+	});
+
+	it('converts array to array', () => {
+		const result = v.parse(schema, ['foo', 'bar']);
+		expect(result).toStrictEqual(['foo', 'bar']);
+	});
+});
+
+describe('clean and collapse array', () => {
+	const schema = v.pipe(
+		v.array(v.nullable(v.string())),
+		cleanAndCollapseArray(),
+	);
+
+	it('removes null values', () => {
+		const result = v.parse(schema, ['foo', null, 'bar', null]);
+		expect(result).toStrictEqual(['foo', 'bar']);
+	});
+
+	it('replaces array with null when empty', () => {
+		const result = v.parse(schema, []);
+		expect(result).toBeNull();
+	});
+
+	it('replaces array with null when effectively empty', () => {
+		const result = v.parse(schema, [null, null]);
+		expect(result).toBeNull();
 	});
 });

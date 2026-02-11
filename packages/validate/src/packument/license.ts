@@ -1,4 +1,10 @@
-import { EmptyableString, EmptyableLink, nullOnEmpty } from '../shared';
+import {
+	EmptyableString,
+	EmptyableLink,
+	nullOnEmpty,
+	toArray,
+	cleanAndCollapseArray,
+} from '../shared';
 import * as v from 'valibot';
 
 export const LicenseObjectSchema = v.object({
@@ -22,17 +28,11 @@ export const LicenseSchema = v.pipe(
 		),
 		nullOnEmpty(LicenseObjectSchema),
 	]),
-	v.transform((value) => {
-		if (value === null) return null;
-
-		const array = (Array.isArray(value) ? value : [value])
-			.map((item) =>
-				typeof item === 'string'
-					? { type: item, name: null, url: null, file: null }
-					: item,
-			)
-			.filter((item) => item !== null);
-
-		return array.length === 0 ? null : array;
+	toArray(),
+	v.mapItems((item) => {
+		return typeof item === 'string'
+			? { type: item, name: null, url: null, file: null }
+			: item;
 	}),
+	cleanAndCollapseArray(),
 );
