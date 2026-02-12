@@ -46,13 +46,18 @@ export async function processVersion(
 			),
 		);
 
+	const deprecated =
+		typeof pkv.deprecated === 'string'
+			? pkv.deprecated
+			: pkv.deprecated === true
+				? '__no_reason__' // todo is this really best way
+				: null;
+
 	if (exists) {
-		// todo confirm what is actually immutable
-		// todo unpublish
 		await db
 			.update(versionTable)
 			.set({
-				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
+				deprecated,
 				updatedAt: new Date(),
 			})
 			.where(eq(versionTable.id, exists.id));
@@ -91,7 +96,7 @@ export async function processVersion(
 				version: version,
 				description: pkv.description,
 				homepage: pkv.homepage,
-				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
+				deprecated,
 				license:
 					typeof pkv.license === 'string'
 						? pkv.license
