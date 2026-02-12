@@ -1,5 +1,5 @@
+import { PackumentSchema, type License } from '@npm.rest/validate/packument';
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { PackumentSchema } from '@npm.rest/validate/packument';
 import { packumentTable } from '@npm.rest/db/schema';
 import { db } from '@npm.rest/db/server';
 import { uniqueDeep } from './unique';
@@ -72,6 +72,7 @@ const REPO_GIT_HOSTNAME_COUNTS_FILE = join(
 	'./repo-git-hostname-counts.json',
 );
 const FUNDING_TYPE_COUNTS_FILE = join(OUTPUT_DIR, './funding-type-counts.json');
+const LICENSES_FILE = join(OUTPUT_DIR, './licenses.json');
 
 async function getThingy(path: string) {
 	if (!existsSync(path)) {
@@ -99,6 +100,10 @@ allRepoTypes = { unknown: allRepoTypes.unknown ?? [] };
 
 // Prepare map for git repo hostname counts
 const gitHostnameCounts: Record<string, number> = {};
+
+const licenses = (await getThingy(LICENSES_FILE)) as {
+	l?: (string | License)[];
+};
 
 let { offset } = await getCheckpoint();
 let processed = 0;
@@ -209,6 +214,20 @@ while (true) {
 									(gitHostnameCounts[hostname] ?? 0) + 1;
 							}
 						}
+
+						for (const l of pkv.license ?? []) {
+							licenses.l ??= [];
+
+							if (
+								!l.type ||
+								Object.entries(l).filter(([, v]) => v !== null)
+									.length > 1
+							) {
+								licenses.l.push(l);
+							} else {
+								licenses.l.push(l.type);
+							}
+						}
 					}
 				}
 
@@ -235,6 +254,7 @@ while (true) {
 	await saveCheckpoint(offset);
 	await saveThingy(ALL_FUNDING_TYPES_FILE, allFundingTypes);
 	await saveThingy(ALL_REPO_TYPES_FILE, allRepoTypes);
+	await saveThingy(LICENSES_FILE, licenses);
 
 	// Save counts of each unknown type
 	const fundingCounts = Object.fromEntries(

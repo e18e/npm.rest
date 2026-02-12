@@ -36,3 +36,5 @@ export const LicenseSchema = v.pipe(
 	}),
 	cleanAndCollapseArray(),
 );
+
+export type License = v.InferOutput<typeof LicenseObjectSchema>;
