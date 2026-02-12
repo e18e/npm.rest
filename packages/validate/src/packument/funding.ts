@@ -45,7 +45,7 @@ export const DOMAIN_FUNDING_TYPE_MAP = Object.freeze(
 	}),
 );
 
-export const FundingObject = v.object({
+export const FundingObjectSchema = v.object({
 	type: v.optional(
 		v.fallback(
 			aliasedLiteralUnion(FUNDING_TYPES, {
@@ -67,16 +67,16 @@ export const FundingObject = v.object({
 	url: Link,
 });
 
-export const Funding = v.pipe(
+export const FundingSchema = v.pipe(
 	v.union([
 		EmptyableLink,
 		v.array(
 			v.union([
 				EmptyableLink,
-				v.fallback(v.nullable(FundingObject), null),
+				v.fallback(v.nullable(FundingObjectSchema), null),
 			]),
 		),
-		v.fallback(v.nullable(FundingObject), null),
+		v.fallback(v.nullable(FundingObjectSchema), null),
 		v.pipe(
 			v.boolean(),
 			v.transform(() => null),

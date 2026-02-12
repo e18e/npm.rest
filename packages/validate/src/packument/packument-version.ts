@@ -4,7 +4,7 @@ import { RepositorySchema } from './repository';
 import { KeywordsSchema } from './keywords';
 import { LicenseSchema } from './license';
 import { Deprecated } from './deprecated';
-import { Funding } from './funding';
+import { FundingSchema } from './funding';
 import * as v from 'valibot';
 
 export const PackumentVersionSchema = v.object({
@@ -31,7 +31,7 @@ export const PackumentVersionSchema = v.object({
 		),
 	}),
 	deprecated: Deprecated,
-	funding: v.optional(v.nullable(Funding, null)),
+	funding: v.optional(v.nullable(FundingSchema, null)),
 	repository: v.optional(RepositorySchema, null),
 	dependencies: Dependency,
 	devDependencies: Dependency,

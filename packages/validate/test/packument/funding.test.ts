@@ -4,8 +4,8 @@ import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
 	DOMAIN_FUNDING_TYPE_MAP,
-	FundingObject,
-	Funding,
+	FundingObjectSchema,
+	FundingSchema,
 } from '../../src/packument/funding';
 
 describe('funding', () => {
@@ -24,7 +24,7 @@ describe('funding', () => {
 	});
 
 	it('supports url', () => {
-		const parsed = v.parse(FundingObject, {
+		const parsed = v.parse(FundingObjectSchema, {
 			url: 'https://example.com',
 		});
 
@@ -32,7 +32,7 @@ describe('funding', () => {
 	});
 
 	it('supports array of funding objects', () => {
-		const parsed = v.parse(Funding, [
+		const parsed = v.parse(FundingSchema, [
 			{ url: 'https://example.com' },
 			{ url: 'https://foo.com' },
 		]);
@@ -113,7 +113,7 @@ describe('funding', () => {
 	});
 
 	it('funding type is set to unknown when not provided', () => {
-		const parsed = v.parse(Funding, [
+		const parsed = v.parse(FundingSchema, [
 			{ url: 'https://example.com' },
 			'https://foo.com',
 		]);
@@ -262,7 +262,7 @@ describe('funding', () => {
 		['PayPal - foo', 'paypal'],
 		['Ko_fi', 'ko-fi'],
 	])('parses aliased type %s to %s', ([input, expected]) => {
-		const parsed = v.parse(FundingObject, {
+		const parsed = v.parse(FundingObjectSchema, {
 			type: input,
 			url: 'https://example.com',
 		});
