@@ -10,7 +10,7 @@ import {
 	cleanAndCollapseArray,
 } from '../shared';
 
-const REPOSITORY_TYPES = Object.freeze([
+export const REPOSITORY_TYPES = Object.freeze([
 	'git',
 	'mercurial',
 	'unknown',
@@ -168,3 +168,5 @@ export const RepositorySchema = v.pipe(
 	}),
 	cleanAndCollapseArray(),
 );
+
+export type Repository = v.InferOutput<typeof RepositoryObjectSchema>;

@@ -6,17 +6,17 @@ import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
 import { getDependencies } from './dependencies';
 import { downloadTarball } from './tarball';
-import hostedGitInfo from 'hosted-git-info';
+import { getRepository } from './repo';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { runPublint } from './publint';
-import { getRepository } from './repo';
 import { hasTypes } from './types';
 import {
 	specifierTable,
 	dependencyTable,
 	publintTable,
 	versionTable,
+	versionRepositoryTable,
 } from '@npm.rest/db/schema';
 
 type ProcessVersionResult = Result<
@@ -63,12 +63,15 @@ export async function processVersion(
 	const types = await hasTypes(pkg.name, tarball.value, rev);
 	if (types.isErr()) return types;
 
-	const repoInfo = pkv.repository?.url
-		? hostedGitInfo.fromUrl(pkv.repository.url)
-		: null;
+	const repoIds: ResourceId<'repo'>[] = [];
 
-	const repo = repoInfo ? await getRepository(repoInfo) : null;
-	if (repo?.isErr()) return repo;
+	if (pkv.repository) {
+		for (const repo of pkv.repository) {
+			const result = await getRepository(repo);
+			if (result.isErr()) return result;
+			repoIds.push(result.value.id);
+		}
+	}
 
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
@@ -93,9 +96,6 @@ export async function processVersion(
 				types: types.value,
 				moduleType: analyzePackageModuleType(publintResult.value.pkg),
 				keywords: pkv.keywords,
-				repo: repo?.unwrapOr(null)?.id,
-				repoDirectory: pkv.repository?.directory,
-				repoBranch: repoInfo?.treepath,
 			})
 			.returning({ id: versionTable.id });
 
@@ -106,6 +106,17 @@ export async function processVersion(
 				messages: publintResult.value.messages,
 				publintVersion: PUBLINT_VERSION,
 			});
+		}
+
+		if (repoIds.length) {
+			await tx.insert(versionRepositoryTable).values(
+				repoIds.map(
+					(id): typeof versionRepositoryTable.$inferInsert => ({
+						versionId: record.id,
+						repositoryId: id,
+					}),
+				),
+			);
 		}
 
 		if (deps.value.length > 0) {

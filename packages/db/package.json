@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@logtape/drizzle-orm": "^2.0.2",
 		"@logtape/logtape": "catalog:",
+		"@npm.rest/validate": "workspace:^",
 		"dotenv": "^17.2.3",
 		"drizzle-orm": "catalog:",
 		"postgres": "catalog:"

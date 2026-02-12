@@ -48,6 +48,7 @@ afterEach(async () => {
 	isMockDB(db);
 	await db.delete(s.stateTable);
 	await db.delete(s.packumentTable);
+	await db.delete(s.versionRepositoryTable);
 	await db.delete(s.repositoryTable);
 	await db.delete(s.changeTable);
 	await db.delete(s.packageTable);

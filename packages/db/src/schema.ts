@@ -1,4 +1,5 @@
 import { isIdPrefix, type IdPrefix, type ResourceId } from './id';
+import { REPOSITORY_TYPES } from '@npm.rest/validate/packument';
 import type { Message as PublintMessage } from 'publint';
 import { sql } from 'drizzle-orm';
 import {
@@ -7,13 +8,13 @@ import {
 	primaryKey,
 	customType,
 	timestamp,
+	pgSchema,
 	integer,
 	boolean,
 	index,
 	jsonb,
 	text,
 	check,
-	pgSchema,
 } from 'drizzle-orm/pg-core';
 
 /**
@@ -136,9 +137,6 @@ export const versionTable = coreSchema.table(
 		types: typesState().notNull(),
 		moduleType: moduleType().notNull(),
 		keywords: text().array(),
-		repo: resourceId('repo').references(() => repositoryTable.id),
-		repoDirectory: text(),
-		repoBranch: text(),
 		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
@@ -170,10 +168,16 @@ export const publintTable = coreSchema.table(
 	],
 );
 
+export const repositoryType = coreSchema.enum(
+	'repository_type',
+	REPOSITORY_TYPES,
+);
+
 export const repositoryTable = coreSchema.table(
 	'repository',
 	{
 		id: resourceId('repo').primaryKey(),
+		type: repositoryType().notNull(),
 		url: text().notNull(),
 		stars: integer(),
 		forks: integer(),
@@ -187,6 +191,21 @@ export const repositoryTable = coreSchema.table(
 		resourceIdCheck('repository_resource_id', table.id),
 		uniqueIndex('repository_url_unique_idx').on(table.url),
 	],
+);
+
+export const versionRepositoryTable = coreSchema.table(
+	'version_repository',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		repositoryId: resourceId('repo')
+			.notNull()
+			.references(() => repositoryTable.id, { onDelete: 'cascade' }),
+		directory: text(),
+		branch: text(),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.repositoryId] })],
 );
 
 export const dependencyType = coreSchema.enum('dependency_type', [

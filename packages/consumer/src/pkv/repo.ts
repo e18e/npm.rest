@@ -1,12 +1,13 @@
+import type { Repository } from '@npm.rest/validate/packument';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { repositoryTable } from '@npm.rest/db/schema';
-import type HostedGitInfo from 'hosted-git-info';
 import { db } from '@npm.rest/db/server';
-import { LRUCache } from 'lru-cache';
 import { Result } from 'better-result';
+import GitHost from 'hosted-git-info';
+import { LRUCache } from 'lru-cache';
+import { FetchError } from 'ofetch';
 import { ghFetch } from './github';
 import { eq } from 'drizzle-orm';
-import { FetchError } from 'ofetch';
 
 interface RepoData {
 	stargazers_count: number;
@@ -18,58 +19,50 @@ interface RepoData {
 
 type LanguageData = Record<string, number>;
 
-// LRU cache to prevent unbounded memory growth
-const repoCache = new LRUCache<string, ResourceId<'repo'>>({ max: 100 });
+const repoCache = new LRUCache<string, ResourceId<'repo'>>({ max: 200 });
 
-async function getRepoRecord(url: string) {
-	const hit = repoCache.get(url);
+async function getRepoRecord(repo: Repository) {
+	const hit = repoCache.get(repo.url);
 	if (hit) return Result.ok({ id: hit, created: false });
 
-	const [newRecord] = await db
+	const [record] = await db
 		.insert(repositoryTable)
 		.values({
 			id: generateId('repo'),
-			url: url,
+			type: repo.type,
+			url: repo.url,
 		})
-		.onConflictDoNothing()
+		.onConflictDoUpdate({
+			target: [repositoryTable.url],
+			set: { type: repo.type },
+		})
 		.returning({
 			id: repositoryTable.id,
 			lastFetched: repositoryTable.lastFetched,
 		});
 
-	if (newRecord?.id) {
-		repoCache.set(url, newRecord.id);
-		return Result.ok({ id: newRecord.id, created: true });
-	}
-
-	const [record] = await db
-		.select({ id: repositoryTable.id })
-		.from(repositoryTable)
-		.where(eq(repositoryTable.url, url));
-
 	if (!record) {
-		return Result.err(new Error('Failed to fetch/store repository'));
+		return Result.err(new Error('failed to create/retrieve repo record'));
 	}
 
-	repoCache.set(url, record.id);
-	return Result.ok({ id: record.id, created: false });
+	repoCache.set(repo.url, record.id);
+	return Result.ok({ id: record.id, created: true });
 }
 
-export async function getRepository(info: HostedGitInfo) {
-	const url = URL.parse(info.https({ noGitPlus: true }));
-	if (!url) return Result.err(new Error('failed to parse repo url'));
-
-	url.hash = '';
-
-	for (const key of url.searchParams.keys()) {
-		url.searchParams.delete(key);
-	}
-
-	const record = await getRepoRecord(url.toString());
+export async function getRepository(repo: Repository) {
+	const record = await getRepoRecord(repo);
 	if (record.isErr()) return record;
 
-	if (url.hostname !== 'github.com' || !record.value.created) {
+	if (!record.value.created || new URL(repo.url).hostname !== 'github.com') {
 		return record;
+	}
+
+	const info = GitHost.fromUrl(repo.url);
+
+	if (!info) {
+		return Result.err(
+			new Error('failed to parse GitHost info from github url'),
+		);
 	}
 
 	// If the repo is from GitHub and we just created we can process the metadata
