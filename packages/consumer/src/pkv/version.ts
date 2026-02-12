@@ -26,17 +26,23 @@ type ProcessVersionResult = Result<
 
 export async function processVersion(
 	packageId: ResourceId<'pkg'>,
+	version: string,
 	pkg: Packument,
 	pkv: PackumentVersion,
 	rev: string,
 ): Promise<ProcessVersionResult> {
+	// sanity check, shouldn't happen
+	if (pkv.version && pkv.version !== version) {
+		return Result.err(new Error('Version mismatch'));
+	}
+
 	const [exists] = await db
 		.select({ id: versionTable.id })
 		.from(versionTable)
 		.where(
 			and(
 				eq(versionTable.packageId, packageId),
-				eq(versionTable.version, pkv.version),
+				eq(versionTable.version, version),
 			),
 		);
 
@@ -82,7 +88,7 @@ export async function processVersion(
 			.values({
 				id: generateId('pkv'),
 				packageId,
-				version: pkv.version,
+				version: version,
 				description: pkv.description,
 				homepage: pkv.homepage,
 				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
@@ -92,7 +98,7 @@ export async function processVersion(
 						: pkv.license?.type,
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
-				publishedAt: pkg.time[pkv.version],
+				publishedAt: pkg.time[version],
 				types: types.value,
 				moduleType: analyzePackageModuleType(publintResult.value.pkg),
 				keywords: pkv.keywords,
