@@ -304,6 +304,20 @@ describe('repository', () => {
 		]);
 	});
 
+	it.skip('preserves branch if present in url', () => {
+		const parsed = v.parse(RepositorySchema, {
+			url: 'git+https://github.com/owner/repo#foo',
+		});
+
+		expect(parsed).toMatchObject([
+			{
+				type: 'git',
+				url: 'git+https://github.com/owner/repo.git',
+				branch: 'foo',
+			},
+		]);
+	});
+
 	describe.for(REPOSITORY_DOMAIN_MAP.git)(
 		'%s git normalisation',
 		// oxlint-disable-next-line jest/valid-describe-callback bug?
