@@ -77,7 +77,6 @@ describe('license', () => {
 		const version = createPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
-			name: 'MIT License',
 			url: '../../LICENSE',
 		};
 
@@ -85,7 +84,6 @@ describe('license', () => {
 		expect(result.license).toStrictEqual([
 			{
 				type: 'MIT',
-				name: 'MIT License',
 				url: null,
 			},
 		]);
@@ -95,7 +93,6 @@ describe('license', () => {
 		const version = createPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
-			name: 'MIT License',
 			file: 'LICENSE',
 		};
 
@@ -103,7 +100,6 @@ describe('license', () => {
 		expect(result.license).toStrictEqual([
 			{
 				type: 'MIT',
-				name: 'MIT License',
 				file: 'LICENSE',
 			},
 		]);
@@ -233,5 +229,12 @@ describe('license', () => {
 
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toBeNull();
+	});
+
+	it('maps name to type when type is missing', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { name: 'MIT' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 });
