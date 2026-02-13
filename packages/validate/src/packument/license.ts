@@ -1,3 +1,4 @@
+import * as v from 'valibot';
 import {
 	EmptyableString,
 	EmptyableLink,
@@ -5,7 +6,6 @@ import {
 	toArray,
 	cleanAndCollapseArray,
 } from '../shared';
-import * as v from 'valibot';
 
 export const LicenseObjectSchema = v.pipe(
 	v.object({
@@ -14,10 +14,20 @@ export const LicenseObjectSchema = v.pipe(
 		url: v.optional(v.fallback(EmptyableLink, null)),
 		file: v.optional(EmptyableString),
 	}),
-	v.transform(({ type, name, ...value }) => ({
-		type: type ?? name,
-		...value,
-	})),
+	v.transform(({ type, name, ...value }) => {
+		if (value.url) {
+			const url = new URL(value.url);
+
+			if (!url.hostname || !['https:', 'http:'].includes(url.protocol)) {
+				value.url = null;
+			}
+		}
+
+		return {
+			type: type ?? name,
+			...value,
+		};
+	}),
 );
 
 export type License = v.InferOutput<typeof LicenseObjectSchema>;

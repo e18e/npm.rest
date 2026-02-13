@@ -237,4 +237,12 @@ describe('license', () => {
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'MIT' }]);
 	});
+
+	it('url should be null when given improper url', () => {
+		const version = createPackumentVersion('1.0.0');
+		// oxlint-disable-next-line eslint(no-script-url)
+		version.license = { name: 'MIT', url: 'javascript:alert(1)' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: 'MIT', url: null }]);
+	});
 });
