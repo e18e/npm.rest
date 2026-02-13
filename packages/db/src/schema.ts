@@ -1,5 +1,5 @@
+import { FUNDING_TYPES, REPOSITORY_TYPES } from '@npm.rest/validate/packument';
 import { isIdPrefix, type IdPrefix, type ResourceId } from './id';
-import { REPOSITORY_TYPES } from '@npm.rest/validate/packument';
 import type { Message as PublintMessage } from 'publint';
 import { sql } from 'drizzle-orm';
 import {
@@ -206,6 +206,34 @@ export const versionRepositoryTable = coreSchema.table(
 		branch: text(),
 	},
 	(table) => [primaryKey({ columns: [table.versionId, table.repositoryId] })],
+);
+
+export const fundingType = coreSchema.enum('funding_type', FUNDING_TYPES);
+
+export const fundingTable = coreSchema.table(
+	'funding',
+	{
+		id: resourceId('fnd').primaryKey(),
+		type: fundingType().notNull(),
+		url: text().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('funding_resource_id', table.id),
+		uniqueIndex('funding_type_url_unique_idx').on(table.type, table.url),
+	],
+);
+
+export const versionFundingTable = coreSchema.table(
+	'version_funding',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		fundingId: resourceId('fnd')
+			.notNull()
+			.references(() => fundingTable.id, { onDelete: 'cascade' }),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.fundingId] })],
 );
 
 export const dependencyType = coreSchema.enum('dependency_type', [

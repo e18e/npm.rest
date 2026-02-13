@@ -106,3 +106,5 @@ export const FundingSchema = v.pipe(
 	}),
 	cleanAndCollapseArray(),
 );
+
+export type Funding = v.InferOutput<typeof FundingObjectSchema>;

@@ -57,6 +57,13 @@
       "when": 1770859367581,
       "tag": "0007_tranquil_xorn",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1770868927664,
+      "tag": "0008_known_the_stranger",
+      "breakpoints": true
     }
   ]
 }

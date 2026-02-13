@@ -6,17 +6,19 @@ import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
 import { getDependencies } from './dependencies';
 import { downloadTarball } from './tarball';
-import { getRepository } from './repo';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
+import { getRepository } from './repo';
+import { getFunding } from './funding';
 import { runPublint } from './publint';
 import { hasTypes } from './types';
 import {
-	specifierTable,
+	versionRepositoryTable,
+	versionFundingTable,
 	dependencyTable,
+	specifierTable,
 	publintTable,
 	versionTable,
-	versionRepositoryTable,
 } from '@npm.rest/db/schema';
 
 type ProcessVersionResult = Result<
@@ -84,6 +86,16 @@ export async function processVersion(
 		}
 	}
 
+	const fundingIds: ResourceId<'fnd'>[] = [];
+
+	if (pkv.funding) {
+		for (const funding of pkv.funding) {
+			const result = await getFunding(funding);
+			if (result.isErr()) return result;
+			fundingIds.push(result.value);
+		}
+	}
+
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
 
@@ -125,6 +137,17 @@ export async function processVersion(
 					(id): typeof versionRepositoryTable.$inferInsert => ({
 						versionId: record.id,
 						repositoryId: id,
+					}),
+				),
+			);
+		}
+
+		if (fundingIds.length) {
+			await tx.insert(versionFundingTable).values(
+				fundingIds.map(
+					(id): typeof versionFundingTable.$inferInsert => ({
+						versionId: record.id,
+						fundingId: id,
 					}),
 				),
 			);
