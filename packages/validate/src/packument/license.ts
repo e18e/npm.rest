@@ -8,10 +8,10 @@ import {
 import * as v from 'valibot';
 
 export const LicenseObjectSchema = v.object({
-	type: v.optional(EmptyableString, null),
-	name: v.optional(v.fallback(EmptyableString, null), null),
-	url: v.optional(v.fallback(EmptyableLink, null), null),
-	file: v.optional(EmptyableString, null),
+	type: v.optional(EmptyableString),
+	name: v.optional(v.fallback(EmptyableString, null)),
+	url: v.optional(v.fallback(EmptyableLink, null)),
+	file: v.optional(EmptyableString),
 });
 
 export const LicenseSchema = v.pipe(
@@ -29,11 +29,7 @@ export const LicenseSchema = v.pipe(
 		nullOnEmpty(LicenseObjectSchema),
 	]),
 	toArray(),
-	v.mapItems((item) => {
-		return typeof item === 'string'
-			? { type: item, name: null, url: null, file: null }
-			: item;
-	}),
+	v.mapItems((item) => (typeof item === 'string' ? { type: item } : item)),
 	cleanAndCollapseArray(),
 );
 

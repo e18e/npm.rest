@@ -16,9 +16,7 @@ describe('license', () => {
 		const version = createPackumentVersion('1.0.0');
 		version.license = 'MIT';
 		const result = v.parse(PackumentVersionSchema, version);
-		expect(result.license).toStrictEqual([
-			{ type: 'MIT', file: null, name: null, url: null },
-		]);
+		expect(result.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 
 	it('turns single object license into array', () => {
@@ -33,8 +31,6 @@ describe('license', () => {
 			{
 				type: 'MIT',
 				url: 'https://opensource.org/licenses/MIT',
-				file: null,
-				name: null,
 			},
 		]);
 	});
@@ -74,9 +70,7 @@ describe('license', () => {
 		};
 
 		const result = v.parse(PackumentVersionSchema, version);
-		expect(result.license).toStrictEqual([
-			{ type: 'MIT', file: null, name: null, url: null },
-		]);
+		expect(result.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 
 	it('fallback to null when url fails to parse', () => {
@@ -93,7 +87,6 @@ describe('license', () => {
 				type: 'MIT',
 				name: 'MIT License',
 				url: null,
-				file: null,
 			},
 		]);
 	});
@@ -112,7 +105,6 @@ describe('license', () => {
 				type: 'MIT',
 				name: 'MIT License',
 				file: 'LICENSE',
-				url: null,
 			},
 		]);
 	});
@@ -132,14 +124,10 @@ describe('license', () => {
 			{
 				type: 'MIT',
 				url: 'https://opensource.org/licenses/MIT',
-				file: null,
-				name: null,
 			},
 			{
 				type: 'Apache-2.0',
 				url: 'https://opensource.org/licenses/Apache-2.0',
-				file: null,
-				name: null,
 			},
 		]);
 	});
@@ -150,8 +138,8 @@ describe('license', () => {
 
 		const result = v.parse(PackumentVersionSchema, version);
 		expect(result.license).toStrictEqual([
-			{ type: 'MIT', file: null, name: null, url: null },
-			{ type: 'Apache-2.0', file: null, name: null, url: null },
+			{ type: 'MIT' },
+			{ type: 'Apache-2.0' },
 		]);
 	});
 
@@ -167,12 +155,10 @@ describe('license', () => {
 
 		const result = v.parse(PackumentVersionSchema, version);
 		expect(result.license).toStrictEqual([
-			{ type: 'MIT', file: null, name: null, url: null },
+			{ type: 'MIT' },
 			{
 				type: 'Apache-2.0',
 				url: 'https://opensource.org/licenses/Apache-2.0',
-				file: null,
-				name: null,
 			},
 		]);
 	});
@@ -211,8 +197,6 @@ describe('license', () => {
 			{
 				type: 'Apache-2.0',
 				url: 'https://opensource.org/licenses/Apache-2.0',
-				file: null,
-				name: null,
 			},
 		]);
 	});
@@ -221,16 +205,12 @@ describe('license', () => {
 		const versionFalse = createPackumentVersion('1.0.0');
 		versionFalse.license = false;
 		const resultFalse = v.parse(PackumentVersionSchema, versionFalse);
-		expect(resultFalse.license).toMatchObject([
-			{ type: 'UNKNOWN', file: null, name: null, url: null },
-		]);
+		expect(resultFalse.license).toMatchObject([{ type: 'UNKNOWN' }]);
 
 		const versionTrue = createPackumentVersion('1.0.0');
 		versionTrue.license = true;
 		const resultTrue = v.parse(PackumentVersionSchema, versionTrue);
-		expect(resultTrue.license).toMatchObject([
-			{ type: 'UNKNOWN', file: null, name: null, url: null },
-		]);
+		expect(resultTrue.license).toMatchObject([{ type: 'UNKNOWN' }]);
 	});
 
 	it('only supports license false top level', () => {
