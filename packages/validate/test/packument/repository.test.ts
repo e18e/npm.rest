@@ -228,6 +228,30 @@ describe('repository', () => {
 		expect(parsed).toBeNull();
 	});
 
+	it('turns url that is missing a hostname to null', () => {
+		const url = new URL('bar:bar/baz');
+		expect(url.hostname).toBe('');
+
+		const parsed = v.parse(RepositorySchema, url.toString());
+		expect(parsed).toBeNull();
+	});
+
+	it('turns invalid url to null even when ending in .git', () => {
+		const url = new URL('bar:bar/baz/repo.git');
+		expect(url.hostname).toBe('');
+
+		const parsed = v.parse(RepositorySchema, url.toString());
+		expect(parsed).toBeNull();
+	});
+
+	it('turns invalid url to null even when starting in git+', () => {
+		const url = new URL('git+bar:bar/baz/repo');
+		expect(url.hostname).toBe('');
+
+		const parsed = v.parse(RepositorySchema, url.toString());
+		expect(parsed).toBeNull();
+	});
+
 	it('turns owner/repo string to github url', () => {
 		const parsed = v.parse(RepositorySchema, { url: 'example/repo' });
 		expect(parsed).toMatchObject([

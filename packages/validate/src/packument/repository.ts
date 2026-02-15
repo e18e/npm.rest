@@ -67,6 +67,14 @@ function addGitPlus(url: string) {
 	return url.startsWith('git+') ? url : `git+${url}`;
 }
 
+function urlLooksOk(url: URL): boolean {
+	return (
+		!!url.hostname &&
+		(isGitProtocol(url.protocol) ||
+			['https:', 'http:'].includes(url.protocol))
+	);
+}
+
 const RepoURL = v.pipe(
 	TrimmedString,
 	v.rawTransform(({ dataset, addIssue, NEVER }) => {
@@ -148,6 +156,10 @@ export const RepositorySchema = v.pipe(
 			url.pathname.endsWith('.git') ||
 			isGitProtocol(url.protocol)
 		) {
+			if (!urlLooksOk(url)) {
+				return null;
+			}
+
 			item.type = 'git' as const;
 			item.url = addGitPlus(url.toString());
 			return item;
@@ -160,7 +172,7 @@ export const RepositorySchema = v.pipe(
 			}
 		}
 
-		if (!url.hostname || !['https:', 'http:'].includes(url.protocol)) {
+		if (!urlLooksOk(url)) {
 			return null;
 		}
 
