@@ -41,7 +41,15 @@ export const REPOSITORY_DOMAIN_MAP = Object.freeze({
 		'codeberg.org',
 	],
 	mercurial: ['hg.sr.ht'],
-} satisfies Record<Exclude<RepositoryType, 'unknown'>, string[]>);
+} as const satisfies Record<Exclude<RepositoryType, 'unknown'>, string[]>);
+
+export function getRepositoryProtocolForDomain(
+	domain: (typeof REPOSITORY_DOMAIN_MAP)['git'][number],
+) {
+	return domain === 'git.sr.ht'
+		? 'sourcehut:'
+		: `${domain.slice(0, domain.indexOf('.'))}:`;
+}
 
 export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 	Object.entries(REPOSITORY_DOMAIN_MAP).flatMap(([type, domains]) => {
@@ -51,6 +59,13 @@ export const DOMAIN_REPOSITORY_TYPE_MAP = Object.freeze(
 				type as RepositoryType,
 			],
 		);
+	}),
+);
+
+const MALFORMED_GIT_REPOSITORY_SPECS = REPOSITORY_DOMAIN_MAP.git.map(
+	(domain) => ({
+		spec: getRepositoryProtocolForDomain(domain),
+		protocols: [`${domain}:`, `git+${domain}:`],
 	}),
 );
 
@@ -141,6 +156,12 @@ export const RepositorySchema = v.pipe(
 
 		if (url.hostname === 'tangled.sh') {
 			url.hostname = 'tangled.org';
+		}
+
+		for (const { spec, protocols } of MALFORMED_GIT_REPOSITORY_SPECS) {
+			if (protocols.includes(url.protocol)) {
+				url.protocol = spec;
+			}
 		}
 
 		const gitInfo = GitHost.fromUrl(url.toString());

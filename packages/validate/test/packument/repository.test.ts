@@ -3,6 +3,7 @@ import { PackumentVersionSchema } from '../../src/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
 import {
+	getRepositoryProtocolForDomain,
 	DOMAIN_REPOSITORY_TYPE_MAP,
 	RepositoryObjectSchema,
 	REPOSITORY_DOMAIN_MAP,
@@ -395,20 +396,46 @@ describe('repository', () => {
 			});
 
 			it('handles repository spec', () => {
-				const alias =
-					// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
-					domain === 'git.sr.ht'
-						? 'sourcehut'
-						: domain.slice(0, domain.indexOf('.'));
-
 				const parsed = v.parse(RepositorySchema, {
-					url: `${alias}:owner/repo`,
+					url: `${getRepositoryProtocolForDomain(domain)}owner/repo`,
 				});
 
 				expect(parsed).toMatchObject([
 					{
 						type: 'git',
 						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+
+			it('handles repository when full domain is incorrectly used', () => {
+				const parsed = v.parse(RepositorySchema, [
+					{ url: `${domain}:owner/repo` },
+				]);
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
+						url: expect.stringContaining(
+							`git+https://${domain}/owner/repo`,
+						),
+					},
+				]);
+			});
+
+			it('handles repository when git+domain is incorrectly used', () => {
+				const parsed = v.parse(RepositorySchema, [
+					{ url: `git+${domain}:owner/repo` },
+				]);
+
+				expect(parsed).toMatchObject([
+					{
+						type: 'git',
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 						url: expect.stringContaining(
 							`git+https://${domain}/owner/repo`,
 						),
