@@ -1,40 +1,11 @@
+import '../setup';
 import '@npm.rest/test/mock-db';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { getFunding } from '../../src/pkv/funding';
 import { fundingTable } from '@npm.rest/db/schema';
+import { describe, expect, it } from 'vitest';
 import { generateId } from '@npm.rest/db/id';
 import { db } from '@npm.rest/db/server';
 import { eq } from 'drizzle-orm';
-
-vi.mock(import('../../src/shared/logger'), async () => {
-	const { getLogger } = await import('@logtape/logtape');
-
-	return {
-		logger: getLogger('test'),
-	};
-});
-
-vi.mock(import('lru-cache'), async (importOriginal) => {
-	const mod = await importOriginal();
-
-	// @ts-expect-error shhh tests
-	class Patched extends mod.LRUCache {
-		constructor(...args: unknown[]) {
-			// oxlint-disable-next-line typescript-eslint(no-unsafe-call)
-			super(...args);
-
-			beforeEach(() => {
-				// @ts-expect-error shhh tests
-				// oxlint-disable-next-line typescript-eslint(no-unsafe-call)
-				this.clear();
-			});
-		}
-	}
-
-	return {
-		LRUCache: Patched as typeof mod.LRUCache,
-	};
-});
 
 describe('get funding', () => {
 	it('gets when none exists', async () => {
