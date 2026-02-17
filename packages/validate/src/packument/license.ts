@@ -7,30 +7,18 @@ import {
 	cleanAndCollapseArray,
 } from '../shared';
 
-export const LicenseObjectSchema = v.pipe(
-	v.object({
-		type: v.optional(EmptyableString),
-		name: v.optional(v.fallback(EmptyableString, null)),
-		url: v.optional(v.fallback(EmptyableLink, null)),
-		file: v.optional(EmptyableString),
-	}),
-	v.transform(({ type, name, ...value }) => {
-		if (value.url) {
-			const url = new URL(value.url);
+export const LicenseObjectSchema = v.object({
+	type: v.optional(EmptyableString),
+	name: v.optional(v.fallback(EmptyableString, null)),
+	url: v.optional(v.fallback(EmptyableLink, null)),
+	file: v.optional(EmptyableString),
+});
 
-			if (!url.hostname || !['https:', 'http:'].includes(url.protocol)) {
-				value.url = null;
-			}
-		}
-
-		return {
-			type: type ?? name,
-			...value,
-		};
-	}),
-);
-
-export type License = v.InferOutput<typeof LicenseObjectSchema>;
+export interface License {
+	type: string;
+	url?: string;
+	file?: string;
+}
 
 export const LicenseSchema = v.pipe(
 	v.union([
@@ -47,6 +35,21 @@ export const LicenseSchema = v.pipe(
 		nullOnEmpty(LicenseObjectSchema),
 	]),
 	toArray(),
-	v.mapItems((item) => (typeof item === 'string' ? { type: item } : item)),
+	v.mapItems((raw): License | null => {
+		if (raw === null) return null;
+
+		const { name, ...item } = typeof raw === 'string' ? { type: raw } : raw;
+
+		if (item.url) {
+			const url = new URL(item.url);
+
+			if (!url.hostname || !['https:', 'http:'].includes(url.protocol)) {
+				item.url = null;
+			}
+		}
+
+		item.type ??= name;
+		return typeof item.type === 'string' ? (item as License) : null;
+	}),
 	cleanAndCollapseArray(),
 );

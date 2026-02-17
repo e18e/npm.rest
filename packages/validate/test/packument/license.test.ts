@@ -245,4 +245,11 @@ describe('license', () => {
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'MIT', url: null }]);
 	});
+
+	it('effectively empty type or name results in null', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: '  ', name: '' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toBeNull();
+	});
 });
