@@ -11,9 +11,11 @@ import { db } from '@npm.rest/db/server';
 import { getRepository } from './repo';
 import { getFunding } from './funding';
 import { runPublint } from './publint';
+import { getLicense } from './license';
 import { hasTypes } from './types';
 import {
 	versionRepositoryTable,
+	versionLicenseTable,
 	versionFundingTable,
 	dependencyTable,
 	specifierTable,
@@ -96,6 +98,16 @@ export async function processVersion(
 		}
 	}
 
+	const licenseIds: ResourceId<'lcs'>[] = [];
+
+	if (pkv.license) {
+		for (const license of pkv.license) {
+			const result = await getLicense(license);
+			if (result.isErr()) return result;
+			licenseIds.push(result.value);
+		}
+	}
+
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
 
@@ -109,10 +121,6 @@ export async function processVersion(
 				description: pkv.description,
 				homepage: pkv.homepage,
 				deprecated,
-				license:
-					typeof pkv.license === 'string'
-						? pkv.license
-						: pkv.license?.type,
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
 				publishedAt: pkg.time[version],
@@ -148,6 +156,17 @@ export async function processVersion(
 					(id): typeof versionFundingTable.$inferInsert => ({
 						versionId: record.id,
 						fundingId: id,
+					}),
+				),
+			);
+		}
+
+		if (licenseIds.length) {
+			await tx.insert(versionLicenseTable).values(
+				licenseIds.map(
+					(id): typeof versionLicenseTable.$inferInsert => ({
+						versionId: record.id,
+						licenseId: id,
 					}),
 				),
 			);

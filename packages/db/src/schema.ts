@@ -131,13 +131,11 @@ export const versionTable = coreSchema.table(
 		description: text(),
 		homepage: text(),
 		deprecated: text(),
-		license: text(),
 		unpackedSize: integer().notNull(),
 		packedSize: integer().notNull(),
 		types: typesState().notNull(),
 		moduleType: moduleType().notNull(),
 		keywords: text().array(),
-		// funding:
 		publishedAt: timestamp().notNull(),
 		updatedAt: timestamp().defaultNow().notNull(),
 	},
@@ -289,4 +287,29 @@ export const dependencyTable = coreSchema.table(
 		}),
 		index('dependency_specifier_idx').on(table.specifierId),
 	],
+);
+
+export const licenseTable = coreSchema.table(
+	'license',
+	{
+		id: resourceId('lcs').primaryKey(),
+		type: text().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('license_resource_id', table.id),
+		uniqueIndex('license_type_idx').on(table.type),
+	],
+);
+
+export const versionLicenseTable = coreSchema.table(
+	'version_license',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		licenseId: resourceId('lcs')
+			.notNull()
+			.references(() => licenseTable.id),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.licenseId] })],
 );

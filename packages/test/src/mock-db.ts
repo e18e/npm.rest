@@ -52,6 +52,8 @@ afterEach(async () => {
 	await db.delete(s.repositoryTable);
 	await db.delete(s.fundingTable);
 	await db.delete(s.versionFundingTable);
+	await db.delete(s.licenseTable);
+	await db.delete(s.versionLicenseTable);
 	await db.delete(s.changeTable);
 	await db.delete(s.packageTable);
 	await db.delete(s.versionTable);

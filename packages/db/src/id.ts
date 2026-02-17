@@ -7,6 +7,7 @@ export const ID_PREFIXES = [
 	'repo',
 	'spc',
 	'fnd',
+	'lcs',
 ] as const;
 
 /**
