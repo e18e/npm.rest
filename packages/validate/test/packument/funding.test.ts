@@ -1,4 +1,4 @@
-import { createPackumentVersion } from '@npm.rest/test/packument';
+import { createInputPackumentVersion } from '@npm.rest/test/packument';
 import { PackumentVersionSchema } from '../../src/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
@@ -10,14 +10,14 @@ import {
 
 describe('funding', () => {
 	it('is nullable', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = null;
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 	});
 
 	it('is optional', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// oxlint-disable-next-line eslint(no-undefined)
 		version.funding = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
@@ -44,21 +44,21 @@ describe('funding', () => {
 	});
 
 	it('turns empty array into null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = [];
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 	});
 
 	it('turns array with only null into null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = [null];
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 	});
 
 	it('turns empty object to null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// @ts-expect-error tests
 		version.funding = {};
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -66,21 +66,21 @@ describe('funding', () => {
 	});
 
 	it('turns empty string into null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = '';
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 	});
 
 	it('turns effectively empty string into null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = '    ';
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 	});
 
 	it('transforms single object to array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { url: 'https://example.com' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -88,7 +88,7 @@ describe('funding', () => {
 	});
 
 	it('transforms single string to object array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = 'https://example.com';
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -96,17 +96,17 @@ describe('funding', () => {
 	});
 
 	it('returns null when invalid url is passed', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = 'invalid';
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.funding).toBeNull();
 
-		const version2 = createPackumentVersion('1.0.0');
+		const version2 = createInputPackumentVersion('1.0.0');
 		version2.funding = { url: 'invalid' };
 		const parsed2 = v.parse(PackumentVersionSchema, version2);
 		expect(parsed2.funding).toBeNull();
 
-		const version3 = createPackumentVersion('1.0.0');
+		const version3 = createInputPackumentVersion('1.0.0');
 		version3.funding = [{ url: 'invalid' }, 'invalid'];
 		const parsed3 = v.parse(PackumentVersionSchema, version3);
 		expect(parsed3.funding).toBeNull();
@@ -125,7 +125,7 @@ describe('funding', () => {
 	});
 
 	it('turns unknown funding type into unknown', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { type: 'foo', url: 'https://example.com' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -135,7 +135,7 @@ describe('funding', () => {
 	});
 
 	it('normalises funding type to lowercase before parsing', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { type: 'GitHub', url: 'https://example.com' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -145,7 +145,7 @@ describe('funding', () => {
 	});
 
 	it('trims funding type before parsing', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { type: ' github ', url: 'https://example.com' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -155,19 +155,19 @@ describe('funding', () => {
 	});
 
 	it('transforms false to null', () => {
-		const versionFalse = createPackumentVersion('1.0.0');
+		const versionFalse = createInputPackumentVersion('1.0.0');
 		versionFalse.funding = false;
 		const parsedFalse = v.parse(PackumentVersionSchema, versionFalse);
 		expect(parsedFalse.funding).toBeNull();
 
-		const versionTrue = createPackumentVersion('1.0.0');
+		const versionTrue = createInputPackumentVersion('1.0.0');
 		versionTrue.funding = true;
 		const parsedTrue = v.parse(PackumentVersionSchema, versionTrue);
 		expect(parsedTrue.funding).toBeNull();
 	});
 
 	it('supports known funding types', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { type: 'github', url: 'https://example.com' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -177,7 +177,7 @@ describe('funding', () => {
 	});
 
 	it("doesn't modify the url for random sites", () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = { url: 'http://example.com?foo=bar' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -187,7 +187,7 @@ describe('funding', () => {
 	});
 
 	it("doesn't modify the type for random sites", () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.funding = {
 			type: 'github',
 			url: 'http://example.com?foo=bar',
@@ -204,7 +204,7 @@ describe('funding', () => {
 		// oxlint-disable-next-line jest/valid-describe-callback bug?
 		([domain, type]) => {
 			it('transforms when no type is given', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.funding = { url: `https://${domain}/example` };
 
 				const parsed = v.parse(PackumentVersionSchema, version);
@@ -214,7 +214,7 @@ describe('funding', () => {
 			});
 
 			it('transforms when conflicting type is given', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.funding = {
 					// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test) required here
 					type: type === 'github' ? 'patreon' : 'github',
@@ -228,7 +228,7 @@ describe('funding', () => {
 			});
 
 			it('transforms when funding is a string', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.funding = `https://${domain}/example`;
 
 				const parsed = v.parse(PackumentVersionSchema, version);
@@ -238,7 +238,7 @@ describe('funding', () => {
 			});
 
 			it('transforms http to https', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.funding = { url: `http://${domain}/example` };
 
 				const parsed = v.parse(PackumentVersionSchema, version);

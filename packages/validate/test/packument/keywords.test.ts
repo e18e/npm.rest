@@ -1,4 +1,4 @@
-import { createPackumentVersion } from '@npm.rest/test/packument';
+import { createInputPackumentVersion } from '@npm.rest/test/packument';
 import { KeywordsSchema } from '../../src/packument/keywords';
 import { PackumentVersionSchema } from '../../src/packument';
 import { describe, expect, it } from 'vitest';
@@ -6,7 +6,7 @@ import * as v from 'valibot';
 
 describe('keywords', () => {
 	it('is optional', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// oxlint-disable-next-line eslint(no-undefined)
 		version.keywords = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
@@ -71,13 +71,13 @@ describe('keywords', () => {
 	});
 
 	it('discard all keywords if junk is present', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// @ts-expect-error tests
 		version.keywords = {};
 		const result = v.parse(PackumentVersionSchema, version);
 		expect(result.keywords).toBeNull();
 
-		const version2 = createPackumentVersion('1.0.0');
+		const version2 = createInputPackumentVersion('1.0.0');
 		// @ts-expect-error tests
 		version.keywords = [1, {}, [3]];
 		const result2 = v.parse(PackumentVersionSchema, version2);

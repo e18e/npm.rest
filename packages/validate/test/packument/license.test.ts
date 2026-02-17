@@ -1,4 +1,4 @@
-import { createPackumentVersion } from '@npm.rest/test/packument';
+import { createInputPackumentVersion } from '@npm.rest/test/packument';
 import { PackumentVersionSchema } from '../../src/packument';
 import { LicenseSchema } from '../../src/packument/license';
 import { describe, expect, it } from 'vitest';
@@ -6,21 +6,21 @@ import * as v from 'valibot';
 
 describe('license', () => {
 	it('is optional', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// oxlint-disable-next-line eslint(no-undefined)
 		version.license = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 	});
 
 	it('turns single string license into array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = 'MIT';
 		const result = v.parse(PackumentVersionSchema, version);
 		expect(result.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 
 	it('turns single object license into array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
 			url: 'https://opensource.org/licenses/MIT',
@@ -36,7 +36,7 @@ describe('license', () => {
 	});
 
 	it('returns null when array is empty', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = [];
 
 		const result = v.parse(PackumentVersionSchema, version);
@@ -44,7 +44,7 @@ describe('license', () => {
 	});
 
 	it('maps to null when object is empty', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {};
 
 		const result = v.parse(PackumentVersionSchema, version);
@@ -52,7 +52,7 @@ describe('license', () => {
 	});
 
 	it('maps to null when all object values are null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {
 			type: null,
 			url: null,
@@ -64,7 +64,7 @@ describe('license', () => {
 	});
 
 	it('url is optional', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
 		};
@@ -74,7 +74,7 @@ describe('license', () => {
 	});
 
 	it('fallback to null when url fails to parse', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
 			url: '../../LICENSE',
@@ -90,7 +90,7 @@ describe('license', () => {
 	});
 
 	it('supports file property', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = {
 			type: 'MIT',
 			file: 'LICENSE',
@@ -106,7 +106,7 @@ describe('license', () => {
 	});
 
 	it('supports multiple license objects', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = [
 			{ type: 'MIT', url: 'https://opensource.org/licenses/MIT' },
 			{
@@ -129,7 +129,7 @@ describe('license', () => {
 	});
 
 	it('supports array of string licenses', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = ['MIT', 'Apache-2.0'];
 
 		const result = v.parse(PackumentVersionSchema, version);
@@ -140,7 +140,7 @@ describe('license', () => {
 	});
 
 	it('supports mixed array of string and object licenses', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = [
 			'MIT',
 			{
@@ -160,7 +160,7 @@ describe('license', () => {
 	});
 
 	it('strips empty strings from license array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = [
 			'',
 			{
@@ -179,7 +179,7 @@ describe('license', () => {
 	});
 
 	it('strips effectively empty strings from license array', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = [
 			'    ',
 			{
@@ -198,12 +198,12 @@ describe('license', () => {
 	});
 
 	it('maps boolean license to UNKNOWN', () => {
-		const versionFalse = createPackumentVersion('1.0.0');
+		const versionFalse = createInputPackumentVersion('1.0.0');
 		versionFalse.license = false;
 		const resultFalse = v.parse(PackumentVersionSchema, versionFalse);
 		expect(resultFalse.license).toMatchObject([{ type: 'UNKNOWN' }]);
 
-		const versionTrue = createPackumentVersion('1.0.0');
+		const versionTrue = createInputPackumentVersion('1.0.0');
 		versionTrue.license = true;
 		const resultTrue = v.parse(PackumentVersionSchema, versionTrue);
 		expect(resultTrue.license).toMatchObject([{ type: 'UNKNOWN' }]);
@@ -215,7 +215,7 @@ describe('license', () => {
 	});
 
 	it('fallsback to null when failing to parse name', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// @ts-expect-error tests
 		version.license = { name: { foo: 'bar' } };
 
@@ -224,7 +224,7 @@ describe('license', () => {
 	});
 
 	it('fallsback to null when given a number', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = 123;
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -232,14 +232,14 @@ describe('license', () => {
 	});
 
 	it('maps name to type when type is missing', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { name: 'MIT' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 
 	it('url should be null when given improper url', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		// oxlint-disable-next-line eslint(no-script-url)
 		version.license = { name: 'MIT', url: 'javascript:alert(1)' };
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -247,28 +247,28 @@ describe('license', () => {
 	});
 
 	it('effectively empty type or name results in null', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: '  ', name: '' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toBeNull();
 	});
 
 	it.todo('normalises simple spdx mistake', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: 'Apache 2.0' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'Apache-2.0' }]);
 	});
 
 	it.todo('normalises weird casing on otherwise valid spdx', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: 'Mit' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'MIT' }]);
 	});
 
 	it.todo('parses spdx or to two entries', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: '(MIT or GPL-2.0-only)' };
 
 		const parsed = v.parse(PackumentVersionSchema, version);
@@ -279,14 +279,14 @@ describe('license', () => {
 	});
 
 	it.todo('leaves spdx and/with as is', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: '(MIT AND ISC)' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: '(MIT AND ISC)' }]);
 	});
 
 	it.todo('handles older spdx + syntax', () => {
-		const version = createPackumentVersion('1.0.0');
+		const version = createInputPackumentVersion('1.0.0');
 		version.license = { type: '(MIT AND ISC)' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: '(MIT AND ISC)' }]);

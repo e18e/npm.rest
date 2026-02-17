@@ -1,4 +1,4 @@
-import { createPackumentVersion } from '@npm.rest/test/packument';
+import { createInputPackumentVersion } from '@npm.rest/test/packument';
 import { PackumentVersionSchema } from '../../src/packument';
 import { describe, expect, it } from 'vitest';
 import * as v from 'valibot';
@@ -450,7 +450,7 @@ describe('repository', () => {
 		// oxlint-disable-next-line jest/valid-describe-callback bug?
 		([domain, type]) => {
 			it('transforms when no type is given', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.repository = { url: `https://${domain}/example` };
 
 				const parsed = v.parse(PackumentVersionSchema, version);
@@ -463,7 +463,7 @@ describe('repository', () => {
 			});
 
 			it('transforms when conflicting type is given', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.repository = {
 					type: 'unknown',
 					url: `https://${domain}/example`,
@@ -476,7 +476,7 @@ describe('repository', () => {
 			});
 
 			it('transforms when repository is a string', () => {
-				const version = createPackumentVersion('1.0.0');
+				const version = createInputPackumentVersion('1.0.0');
 				version.repository = `https://${domain}/example`;
 
 				const parsed = v.parse(PackumentVersionSchema, version);

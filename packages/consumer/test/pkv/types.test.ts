@@ -1,7 +1,7 @@
 import '../setup';
 import '@npm.rest/test/mock-db';
 import { packageTable, packumentTable } from '@npm.rest/db/schema';
-import { createPackument } from '@npm.rest/test/packument';
+import { createInputPackument } from '@npm.rest/test/packument';
 import { describe, expect, it, vi } from 'vitest';
 import type { UnpackResult } from '@publint/pack';
 import { hasTypes } from '../../src/pkv/types';
@@ -51,7 +51,7 @@ describe('hasTypes()', () => {
 
 	it('returns definitely-typed when a types package exists as a packument', async () => {
 		const name = `:${crypto.randomUUID()}`;
-		const packument = createPackument();
+		const packument = createInputPackument();
 		packument.name = `@types/${name}`;
 
 		await db.insert(packumentTable).values({
@@ -108,7 +108,7 @@ describe('hasTypes()', () => {
 
 	it('returns definitely-typed when package is found via packument fetch', async () => {
 		const name = `:${crypto.randomUUID()}`;
-		const packument = createPackument();
+		const packument = createInputPackument();
 		packument.name = name;
 
 		vi.stubGlobal(
@@ -130,7 +130,7 @@ describe('hasTypes()', () => {
 
 	it('hits typesPackageCache', async () => {
 		const name = `:${crypto.randomUUID()}`;
-		const packument = createPackument();
+		const packument = createInputPackument();
 		packument.name = `@types/${name}`;
 
 		await db.insert(packumentTable).values({

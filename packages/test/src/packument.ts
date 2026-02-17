@@ -34,7 +34,9 @@ export async function fetchPackument(name: string) {
 type InputPackument = v.InferInput<typeof PackumentSchema>;
 type InputPackumentVersion = v.InferInput<typeof PackumentVersionSchema>;
 
-export function createPackumentVersion(version: string): InputPackumentVersion {
+export function createInputPackumentVersion(
+	version: string,
+): InputPackumentVersion {
 	return {
 		name: 'my-package',
 		description: 'A test package',
@@ -47,14 +49,14 @@ export function createPackumentVersion(version: string): InputPackumentVersion {
 	};
 }
 
-export function createPackument(): InputPackument {
+export function createInputPackument(): InputPackument {
 	const version = '1.0.0';
 
 	return {
 		name: 'my-package',
 		'dist-tags': { latest: version },
 		versions: {
-			[version]: createPackumentVersion(version),
+			[version]: createInputPackumentVersion(version),
 		},
 		time: {
 			created: new Date().toISOString(),
