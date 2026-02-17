@@ -11,7 +11,7 @@ export async function processPackage(packument: Packument, revId: string) {
 			id: generateId('pkg'),
 			revId: packument._rev ?? revId,
 			name: packument.name,
-			distTags: packument['dist-tags'],
+			distTags: packument['dist-tags'] ?? {},
 			createdAt: packument.time.created,
 			npmUpdatedAt: packument.time.modified,
 		})
@@ -19,7 +19,7 @@ export async function processPackage(packument: Packument, revId: string) {
 			target: [packageTable.name],
 			set: {
 				revId: packument._rev ?? revId,
-				distTags: packument['dist-tags'],
+				distTags: packument['dist-tags'] ?? {},
 				npmUpdatedAt: packument.time.modified,
 				updatedAt: new Date(),
 			},
