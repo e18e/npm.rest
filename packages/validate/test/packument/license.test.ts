@@ -252,4 +252,43 @@ describe('license', () => {
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toBeNull();
 	});
+
+	it.todo('normalises simple spdx mistake', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: 'Apache 2.0' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: 'Apache-2.0' }]);
+	});
+
+	it.todo('normalises weird casing on otherwise valid spdx', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: 'Mit' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: 'MIT' }]);
+	});
+
+	it.todo('parses spdx or to two entries', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: '(MIT or GPL-2.0-only)' };
+
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([
+			{ type: 'MIT' },
+			{ type: 'GPL-2.0-only' },
+		]);
+	});
+
+	it.todo('leaves spdx and/with as is', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: '(MIT AND ISC)' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: '(MIT AND ISC)' }]);
+	});
+
+	it.todo('handles older spdx + syntax', () => {
+		const version = createPackumentVersion('1.0.0');
+		version.license = { type: '(MIT AND ISC)' };
+		const parsed = v.parse(PackumentVersionSchema, version);
+		expect(parsed.license).toStrictEqual([{ type: '(MIT AND ISC)' }]);
+	});
 });

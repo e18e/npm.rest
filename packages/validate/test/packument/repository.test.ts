@@ -316,7 +316,7 @@ describe('repository', () => {
 		]);
 	});
 
-	it.skip('supports random ssh url, but currently leaves as is', () => {
+	it.todo('supports random ssh url, but currently leaves as is', () => {
 		const parsed = v.parse(RepositorySchema, {
 			url: 'git@example:owner/repo.git',
 		});
@@ -329,7 +329,7 @@ describe('repository', () => {
 		]);
 	});
 
-	it.skip('preserves branch if present in url', () => {
+	it.todo('preserves branch if present in url', () => {
 		const parsed = v.parse(RepositorySchema, {
 			url: 'git+https://github.com/owner/repo#foo',
 		});
