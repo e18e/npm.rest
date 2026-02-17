@@ -39,7 +39,7 @@ function resolve(name: string, spec: string) {
 
 // Helper to collect dependencies from the manifest.
 function collect(
-	deps: Record<string, string> | undefined,
+	deps: Record<string, string | null> | null,
 	depType: DependencyType,
 	optional: boolean | ((name: string) => boolean),
 	skip?: (name: string) => boolean,
@@ -48,7 +48,7 @@ function collect(
 
 	return Object.entries(deps)
 		.map(([name, specifier]): VersionDependency | null => {
-			if (skip?.(name)) {
+			if (!specifier || skip?.(name)) {
 				return null;
 			}
 
