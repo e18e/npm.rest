@@ -24,7 +24,7 @@ import {
 } from '@npm.rest/db/schema';
 
 type ProcessVersionResult = Result<
-	void,
+	ResourceId<'pkv'>,
 	UnhandledException | InferErr<PackumentResult>
 >;
 
@@ -66,7 +66,7 @@ export async function processVersion(
 			})
 			.where(eq(versionTable.id, exists.id));
 
-		return Result.ok();
+		return Result.ok(exists.id);
 	}
 
 	const tarball = await downloadTarball(pkv.dist.tarball, pkv.dist.integrity);
@@ -111,7 +111,7 @@ export async function processVersion(
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
 
-	await db.transaction(async (tx) => {
+	const pkvId = await db.transaction(async (tx) => {
 		const [record] = await tx
 			.insert(versionTable)
 			.values({
@@ -239,7 +239,9 @@ export async function processVersion(
 				})),
 			);
 		}
+
+		return record.id;
 	});
 
-	return Result.ok();
+	return Result.ok(pkvId);
 }
