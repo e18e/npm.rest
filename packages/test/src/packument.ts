@@ -4,7 +4,9 @@ import { existsSync } from 'node:fs';
 import * as v from 'valibot';
 import {
 	type PackumentVersionSchema,
+	type Packument,
 	PackumentSchema,
+	type PackumentVersion,
 } from '@npm.rest/validate/packument';
 
 const PACKUMENTS_PATH = join(import.meta.dirname, '../.packuments');
@@ -64,4 +66,46 @@ export function createInputPackument(): InputPackument {
 			[version]: new Date().toISOString(),
 		},
 	};
+}
+
+export function createPackumentVersion(version: string): PackumentVersion {
+	return {
+		name: 'my-package',
+		description: null,
+		version,
+		dist: {
+			tarball: `https://registry.npmjs.org/my-package/-/my-package-${version}.tgz`,
+			integrity: 'sha256-1234567890abcdef',
+		},
+		repository: null,
+		keywords: null,
+		license: null,
+		dependencies: null,
+		devDependencies: null,
+		optionalDependencies: null,
+		peerDependencies: null,
+		peerDependenciesMeta: null,
+	};
+}
+
+export function createPackument(versions?: PackumentVersion[]): Packument {
+	const packument: Packument = {
+		name: 'my-package',
+		time: {
+			created: new Date('2026-02-17'),
+			modified: new Date('2026-02-17'),
+		},
+	};
+
+	if (versions?.length) {
+		packument['dist-tags'] = { latest: versions[0].version! };
+		packument['versions'] = {};
+
+		for (const pkv of versions) {
+			packument.versions[pkv.version!] = pkv;
+			packument.time[pkv.version!] = new Date('2026-02-18');
+		}
+	}
+
+	return packument;
 }

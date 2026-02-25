@@ -1,4 +1,5 @@
 import { beforeEach, vi } from 'vitest';
+import { Result } from 'better-result';
 
 vi.mock(import('../src/shared/logger'), async () => {
 	const { getLogger } = await import('@logtape/logtape');
@@ -29,3 +30,22 @@ vi.mock(import('lru-cache'), async (importOriginal) => {
 		LRUCache: Patched as typeof mod.LRUCache,
 	};
 });
+
+vi.mock(import('../src/pkv/tarball'), () => ({
+	// oxlint-disable-next-line eslint(require-await))
+	async downloadTarball() {
+		return Result.ok({
+			unpackedSize: 128,
+			packedSize: 8,
+			rootDir: 'package',
+			files: [],
+		});
+	},
+}));
+
+vi.mock(import('../src/pkv/publint'), () => ({
+	// oxlint-disable-next-line eslint(require-await))
+	async runPublint() {
+		return Result.ok({ pkg: {}, messages: [] });
+	},
+}));
