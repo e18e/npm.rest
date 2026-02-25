@@ -1,5 +1,6 @@
 import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.json' with { type: 'json' };
 import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
+import { getLicenses, updateLicenses, type DatabaseLicenses } from './license';
 import { Result, type UnhandledException, type InferErr } from 'better-result';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from 'node-modules-tools';
@@ -11,7 +12,6 @@ import { db } from '@npm.rest/db/server';
 import { getRepository } from './repo';
 import { getFunding } from './funding';
 import { runPublint } from './publint';
-import { getLicense } from './license';
 import { hasTypes } from './types';
 import {
 	versionRepositoryTable,
@@ -21,7 +21,57 @@ import {
 	specifierTable,
 	publintTable,
 	versionTable,
+	licenseTable,
 } from '@npm.rest/db/schema';
+
+export interface ExistingVersion {
+	id: ResourceId<'pkv'>;
+	licenses: DatabaseLicenses;
+}
+
+async function getExistingVersion(
+	packageId: ResourceId<'pkg'>,
+	version: string,
+) {
+	const exists = await db
+		.select({
+			id: versionTable.id,
+			licenseId: licenseTable.id,
+			licenseType: licenseTable.type,
+		})
+		.from(versionTable)
+		.where(
+			and(
+				eq(versionTable.packageId, packageId),
+				eq(versionTable.version, version),
+			),
+		)
+		.leftJoin(
+			versionLicenseTable,
+			eq(versionLicenseTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			licenseTable,
+			eq(licenseTable.id, versionLicenseTable.licenseId),
+		);
+
+	if (exists.length === 0) {
+		return null;
+	}
+
+	const result: ExistingVersion = { id: exists[0].id, licenses: [] };
+
+	for (const row of exists) {
+		if (row.licenseId && row.licenseType) {
+			result.licenses.push({
+				id: row.licenseId,
+				type: row.licenseType,
+			});
+		}
+	}
+
+	return result;
+}
 
 type ProcessVersionResult = Result<
 	ResourceId<'pkv'>,
@@ -40,15 +90,7 @@ export async function processVersion(
 		return Result.err(new Error('Version mismatch'));
 	}
 
-	const [exists] = await db
-		.select({ id: versionTable.id })
-		.from(versionTable)
-		.where(
-			and(
-				eq(versionTable.packageId, packageId),
-				eq(versionTable.version, version),
-			),
-		);
+	const exists = await getExistingVersion(packageId, version);
 
 	const deprecated =
 		typeof pkv.deprecated === 'string'
@@ -57,14 +99,28 @@ export async function processVersion(
 				? '__no_reason__' // todo is this really best way
 				: null;
 
+	const licenses = await getLicenses(pkv.license);
+	if (licenses.isErr()) return licenses;
+
 	if (exists) {
-		await db
-			.update(versionTable)
-			.set({
-				deprecated,
-				updatedAt: new Date(),
-			})
-			.where(eq(versionTable.id, exists.id));
+		await db.transaction(async (tx) => {
+			await tx
+				.update(versionTable)
+				.set({
+					deprecated,
+					updatedAt: new Date(),
+				})
+				.where(eq(versionTable.id, exists.id));
+
+			if (licenses.value) {
+				await updateLicenses(
+					tx,
+					exists.id,
+					licenses.value,
+					exists.licenses,
+				);
+			}
+		});
 
 		return Result.ok(exists.id);
 	}
@@ -95,16 +151,6 @@ export async function processVersion(
 			const result = await getFunding(funding);
 			if (result.isErr()) return result;
 			fundingIds.push(result.value);
-		}
-	}
-
-	const licenseIds: ResourceId<'lcs'>[] = [];
-
-	if (pkv.license) {
-		for (const license of pkv.license) {
-			const result = await getLicense(license);
-			if (result.isErr()) return result;
-			licenseIds.push(result.value);
 		}
 	}
 
@@ -161,15 +207,8 @@ export async function processVersion(
 			);
 		}
 
-		if (licenseIds.length) {
-			await tx.insert(versionLicenseTable).values(
-				licenseIds.map(
-					(id): typeof versionLicenseTable.$inferInsert => ({
-						versionId: record.id,
-						licenseId: id,
-					}),
-				),
-			);
+		if (licenses.value) {
+			await updateLicenses(tx, record.id, licenses.value);
 		}
 
 		if (deps.value.length > 0) {

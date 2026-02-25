@@ -1,26 +1,26 @@
 import '../setup';
 import '@npm.rest/test/mock-db';
-import { getLicense } from '../../src/pkv/license';
+import { getLicenses } from '../../src/pkv/license';
 import { licenseTable } from '@npm.rest/db/schema';
 import { describe, expect, it } from 'vitest';
 import { generateId } from '@npm.rest/db/id';
 import { db } from '@npm.rest/db/server';
-import { eq } from 'drizzle-orm';
+import { inArray } from 'drizzle-orm';
 
-describe('get license', () => {
+describe('get licenses', () => {
 	it('gets when none exists', async () => {
-		const result = await getLicense({ type: 'MIT' });
-		const id = result.unwrap();
+		const result = await getLicenses([{ type: 'MIT' }]);
+		const licenses = result.unwrap();
 
-		const [record] = await db
+		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		const ids = licenses?.map((license) => license.id) ?? [];
+
+		const records = await db
 			.select()
 			.from(licenseTable)
-			.where(eq(licenseTable.id, id));
+			.where(inArray(licenseTable.id, ids));
 
-		expect(record).toMatchObject({
-			id,
-			type: 'MIT',
-		});
+		expect(records).toMatchObject([{ id: ids[0], type: 'MIT' }]);
 	});
 
 	it('returns id when exists', async () => {
@@ -36,7 +36,7 @@ describe('get license', () => {
 
 		expect(record).toMatchObject({ id });
 
-		const result = await getLicense({ type: 'MIT' });
-		expect(result.unwrap()).toBe(id);
+		const result = await getLicenses([{ type: 'MIT' }]);
+		expect(result.unwrap()).toMatchObject([{ id, type: 'MIT' }]);
 	});
 });
