@@ -7,6 +7,7 @@ import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
 import { getDependencies } from './dependencies';
+import { formatDeprecated } from './deprecated';
 import { downloadTarball } from './tarball';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
@@ -115,13 +116,6 @@ export async function processVersion(
 
 	const exists = await getExistingVersion(packageId, version);
 
-	const deprecated =
-		typeof pkv.deprecated === 'string'
-			? pkv.deprecated
-			: pkv.deprecated === true
-				? '__no_reason__' // todo is this really best way
-				: null;
-
 	const licenses = await getLicenses(pkv.license);
 	if (licenses.isErr()) return licenses;
 
@@ -133,7 +127,7 @@ export async function processVersion(
 			await tx
 				.update(versionTable)
 				.set({
-					deprecated,
+					deprecated: formatDeprecated(pkv),
 					updatedAt: new Date(),
 				})
 				.where(eq(versionTable.id, exists.id));
@@ -191,7 +185,7 @@ export async function processVersion(
 				version: version,
 				description: pkv.description,
 				homepage: pkv.homepage,
-				deprecated,
+				deprecated: formatDeprecated(pkv),
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
 				publishedAt: pkg.time[version],
