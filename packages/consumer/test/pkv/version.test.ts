@@ -58,5 +58,4 @@ describe('process version', () => {
 	});
 
 	it.todo('updates repositories that change');
-	it.todo('updates funding that changes');
 });

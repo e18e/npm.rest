@@ -2,6 +2,7 @@ import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.j
 import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
 import { getLicenses, updateLicenses, type DatabaseLicenses } from './license';
 import { Result, type UnhandledException, type InferErr } from 'better-result';
+import { getFunding, updateFunding, type DatabaseFunding } from './funding';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
@@ -10,7 +11,6 @@ import { downloadTarball } from './tarball';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { getRepository } from './repo';
-import { getFunding } from './funding';
 import { runPublint } from './publint';
 import { hasTypes } from './types';
 import {
@@ -22,11 +22,13 @@ import {
 	publintTable,
 	versionTable,
 	licenseTable,
+	fundingTable,
 } from '@npm.rest/db/schema';
 
 export interface ExistingVersion {
 	id: ResourceId<'pkv'>;
 	licenses: DatabaseLicenses;
+	funding: DatabaseFunding;
 }
 
 async function getExistingVersion(
@@ -38,6 +40,8 @@ async function getExistingVersion(
 			id: versionTable.id,
 			licenseId: licenseTable.id,
 			licenseType: licenseTable.type,
+			fundingId: fundingTable.id,
+			fundingUrl: fundingTable.url,
 		})
 		.from(versionTable)
 		.where(
@@ -53,19 +57,38 @@ async function getExistingVersion(
 		.leftJoin(
 			licenseTable,
 			eq(licenseTable.id, versionLicenseTable.licenseId),
+		)
+		.leftJoin(
+			versionFundingTable,
+			eq(versionFundingTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			fundingTable,
+			eq(fundingTable.id, versionFundingTable.fundingId),
 		);
 
 	if (exists.length === 0) {
 		return null;
 	}
 
-	const result: ExistingVersion = { id: exists[0].id, licenses: [] };
+	const result: ExistingVersion = {
+		id: exists[0].id,
+		licenses: [],
+		funding: [],
+	};
 
 	for (const row of exists) {
 		if (row.licenseId && row.licenseType) {
 			result.licenses.push({
 				id: row.licenseId,
 				type: row.licenseType,
+			});
+		}
+
+		if (row.fundingId && row.fundingUrl) {
+			result.funding.push({
+				id: row.fundingId,
+				url: row.fundingUrl,
 			});
 		}
 	}
@@ -102,6 +125,9 @@ export async function processVersion(
 	const licenses = await getLicenses(pkv.license);
 	if (licenses.isErr()) return licenses;
 
+	const funding = await getFunding(pkv.funding);
+	if (funding.isErr()) return funding;
+
 	if (exists) {
 		await db.transaction(async (tx) => {
 			await tx
@@ -118,6 +144,15 @@ export async function processVersion(
 					exists.id,
 					licenses.value,
 					exists.licenses,
+				);
+			}
+
+			if (funding.value) {
+				await updateFunding(
+					tx,
+					exists.id,
+					funding.value,
+					exists.funding,
 				);
 			}
 		});
@@ -141,16 +176,6 @@ export async function processVersion(
 			const result = await getRepository(repo);
 			if (result.isErr()) return result;
 			repoIds.push(result.value.id);
-		}
-	}
-
-	const fundingIds: ResourceId<'fnd'>[] = [];
-
-	if (pkv.funding) {
-		for (const funding of pkv.funding) {
-			const result = await getFunding(funding);
-			if (result.isErr()) return result;
-			fundingIds.push(result.value);
 		}
 	}
 
@@ -196,15 +221,8 @@ export async function processVersion(
 			);
 		}
 
-		if (fundingIds.length) {
-			await tx.insert(versionFundingTable).values(
-				fundingIds.map(
-					(id): typeof versionFundingTable.$inferInsert => ({
-						versionId: record.id,
-						fundingId: id,
-					}),
-				),
-			);
+		if (funding.value) {
+			await updateFunding(tx, record.id, funding.value);
 		}
 
 		if (licenses.value) {
