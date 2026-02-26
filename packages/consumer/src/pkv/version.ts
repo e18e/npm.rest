@@ -11,7 +11,11 @@ import { formatDeprecated } from './deprecated';
 import { downloadTarball } from './tarball';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
-import { getRepository } from './repo';
+import {
+	getRepositories,
+	updateRepositories,
+	type DatabaseRepository,
+} from './repo';
 import { runPublint } from './publint';
 import { hasTypes } from './types';
 import {
@@ -24,12 +28,14 @@ import {
 	versionTable,
 	licenseTable,
 	fundingTable,
+	repositoryTable,
 } from '@npm.rest/db/schema';
 
 export interface ExistingVersion {
 	id: ResourceId<'pkv'>;
 	licenses: DatabaseLicenses;
 	funding: DatabaseFunding;
+	repository: DatabaseRepository;
 }
 
 async function getExistingVersion(
@@ -43,6 +49,8 @@ async function getExistingVersion(
 			licenseType: licenseTable.type,
 			fundingId: fundingTable.id,
 			fundingUrl: fundingTable.url,
+			repoId: repositoryTable.id,
+			repoUrl: repositoryTable.url,
 		})
 		.from(versionTable)
 		.where(
@@ -66,6 +74,14 @@ async function getExistingVersion(
 		.leftJoin(
 			fundingTable,
 			eq(fundingTable.id, versionFundingTable.fundingId),
+		)
+		.leftJoin(
+			versionRepositoryTable,
+			eq(versionRepositoryTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			repositoryTable,
+			eq(repositoryTable.id, versionRepositoryTable.repositoryId),
 		);
 
 	if (exists.length === 0) {
@@ -76,6 +92,7 @@ async function getExistingVersion(
 		id: exists[0].id,
 		licenses: [],
 		funding: [],
+		repository: [],
 	};
 
 	for (const row of exists) {
@@ -90,6 +107,13 @@ async function getExistingVersion(
 			result.funding.push({
 				id: row.fundingId,
 				url: row.fundingUrl,
+			});
+		}
+
+		if (row.repoId && row.repoUrl) {
+			result.repository.push({
+				id: row.repoId,
+				url: row.repoUrl,
 			});
 		}
 	}
@@ -122,6 +146,9 @@ export async function processVersion(
 	const funding = await getFunding(pkv.funding);
 	if (funding.isErr()) return funding;
 
+	const repo = await getRepositories(pkv.repository);
+	if (repo.isErr()) return repo;
+
 	if (exists) {
 		await db.transaction(async (tx) => {
 			await tx
@@ -149,6 +176,15 @@ export async function processVersion(
 					exists.funding,
 				);
 			}
+
+			if (repo.value) {
+				await updateRepositories(
+					tx,
+					exists.id,
+					repo.value,
+					exists.repository,
+				);
+			}
 		});
 
 		return Result.ok(exists.id);
@@ -162,16 +198,6 @@ export async function processVersion(
 
 	const types = await hasTypes(pkg.name, tarball.value, rev);
 	if (types.isErr()) return types;
-
-	const repoIds: ResourceId<'repo'>[] = [];
-
-	if (pkv.repository) {
-		for (const repo of pkv.repository) {
-			const result = await getRepository(repo);
-			if (result.isErr()) return result;
-			repoIds.push(result.value.id);
-		}
-	}
 
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
@@ -204,15 +230,8 @@ export async function processVersion(
 			});
 		}
 
-		if (repoIds.length) {
-			await tx.insert(versionRepositoryTable).values(
-				repoIds.map(
-					(id): typeof versionRepositoryTable.$inferInsert => ({
-						versionId: record.id,
-						repositoryId: id,
-					}),
-				),
-			);
+		if (repo.value) {
+			await updateRepositories(tx, record.id, repo.value);
 		}
 
 		if (funding.value) {

@@ -1,13 +1,13 @@
+import { repositoryTable, versionRepositoryTable } from '@npm.rest/db/schema';
 import type { Repository } from '@npm.rest/validate/packument';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
-import { repositoryTable } from '@npm.rest/db/schema';
+import { and, eq, inArray, notExists } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
 import { Result } from 'better-result';
 import GitHost from 'hosted-git-info';
 import { LRUCache } from 'lru-cache';
 import { FetchError } from 'ofetch';
 import { ghFetch } from './github';
-import { eq } from 'drizzle-orm';
 
 interface RepoData {
 	stargazers_count: number;
@@ -19,9 +19,14 @@ interface RepoData {
 
 type LanguageData = Record<string, number>;
 
+export type DatabaseRepository = Pick<
+	typeof repositoryTable.$inferSelect,
+	'id' | 'url'
+>[];
+
 const repoCache = new LRUCache<string, ResourceId<'repo'>>({ max: 200 });
 
-async function getRepoRecord(repo: Repository) {
+async function getRepository(repo: Repository) {
 	const hit = repoCache.get(repo.url);
 	if (hit) return Result.ok({ id: hit, created: false });
 
@@ -45,59 +50,128 @@ async function getRepoRecord(repo: Repository) {
 		return Result.err(new Error('failed to create/retrieve repo record'));
 	}
 
+	const info = GitHost.fromUrl(repo.url);
+
+	if (info?.type === 'github') {
+		const result = await Result.tryPromise(async () => {
+			const base = `/repos/${info.user}/${info.project}`;
+
+			const [repoData, languageData] = await Promise.all([
+				ghFetch<RepoData>(base),
+				ghFetch<LanguageData>(`${base}/languages`),
+			]);
+
+			await db
+				.update(repositoryTable)
+				.set({
+					stars: repoData.stargazers_count,
+					forks: repoData.forks,
+					archived: repoData.archived,
+					languages: languageData,
+					createdAt: new Date(repoData.created_at),
+					updatedAt: new Date(repoData.updated_at),
+					lastFetched: new Date(),
+				})
+				.where(eq(repositoryTable.id, record.id));
+		});
+
+		if (
+			result.isErr() &&
+			(!(result.error.cause instanceof FetchError) ||
+				result.error.cause.status === 404)
+		) {
+			// Return error if it's not a 404
+			return result;
+		}
+	}
+
 	repoCache.set(repo.url, record.id);
 	return Result.ok({ id: record.id, created: true });
 }
 
-export async function getRepository(repo: Repository) {
-	const record = await getRepoRecord(repo);
-	if (record.isErr()) return record;
+export async function getRepositories(pkvRepository?: Repository[] | null) {
+	if (!pkvRepository?.length) return Result.ok(null);
 
-	if (!record.value.created || new URL(repo.url).hostname !== 'github.com') {
-		return record;
+	const repositories: DatabaseRepository = [];
+
+	for (const repo of pkvRepository) {
+		const result = await getRepository(repo);
+		if (result.isErr()) return Result.err(result.error);
+		repositories.push({ id: result.value.id, url: repo.url });
 	}
 
-	const info = GitHost.fromUrl(repo.url);
+	return Result.ok(repositories);
+}
 
-	if (!info) {
-		return Result.err(
-			new Error('failed to parse GitHost info from github url'),
+export async function updateRepositories(
+	tx: Omit<typeof db, '$client'>,
+	versionId: ResourceId<'pkv'>,
+	next: DatabaseRepository,
+	current?: DatabaseRepository,
+) {
+	// Get the ids of the new (next) group of repositories
+	const nextIds = new Set(next.map((repo) => repo.id));
+
+	// Get the ids of any currently stored repositories for this version (if any)
+	const currentIds = new Set(current?.map((repo) => repo.id));
+
+	// Work out what is missing from the current set
+	const newRepos = nextIds.difference(currentIds);
+
+	if (newRepos.size) {
+		await tx.insert(versionRepositoryTable).values(
+			newRepos
+				.values()
+				.map((repoId) => ({
+					versionId,
+					repositoryId: repoId,
+				}))
+				.toArray(),
 		);
 	}
 
-	// If the repo is from GitHub and we just created we can process the metadata
-	const result = await Result.tryPromise(async () => {
-		const base = `/repos/${info.user}/${info.project}`;
+	// Work out what, if any, repositories are no longer present
+	// Ordinarily this shouldn't happen, since a packument version is
+	// fixed. However, if the way that we parse repositories changes, say a
+	// new normalisation it could cause stale repositories to be present.
+	const removedRepos = currentIds.difference(nextIds);
 
-		// Fetch repo data and languages in parallel
-		const [repo, languageData] = await Promise.all([
-			ghFetch<RepoData>(base),
-			ghFetch<LanguageData>(`${base}/languages`),
-		]);
+	if (removedRepos.size) {
+		// Remove the old link between the version and repository
+		await tx
+			.delete(versionRepositoryTable)
+			.where(
+				and(
+					eq(versionRepositoryTable.versionId, versionId),
+					inArray(
+						versionRepositoryTable.repositoryId,
+						removedRepos.values().toArray(),
+					),
+				),
+			);
 
-		await db
-			.update(repositoryTable)
-			.set({
-				stars: repo.stargazers_count,
-				forks: repo.forks,
-				archived: repo.archived,
-				languages: languageData,
-				createdAt: new Date(repo.created_at),
-				updatedAt: new Date(repo.updated_at),
-				lastFetched: new Date(),
-			})
-			.where(eq(repositoryTable.id, record.value.id));
-	});
-
-	if (
-		result.isOk() ||
-		// oxlint-disable-next-line typescript-eslint(prefer-optional-chain): ??
-		(result.isErr() &&
-			result.error.cause instanceof FetchError &&
-			result.error.cause.status === 404)
-	) {
-		return record;
+		// Cleanup any repositories that are no longer linked to by any
+		// versions. Only look for links on the repositories we just removed.
+		await tx
+			.delete(repositoryTable)
+			.where(
+				and(
+					inArray(
+						repositoryTable.id,
+						removedRepos.values().toArray(),
+					),
+					notExists(
+						tx
+							.select({})
+							.from(versionRepositoryTable)
+							.where(
+								eq(
+									versionRepositoryTable.repositoryId,
+									repositoryTable.id,
+								),
+							),
+					),
+				),
+			);
 	}
-
-	return result;
 }

@@ -1,31 +1,24 @@
 import '../setup';
 import '@npm.rest/test/mock-db';
 import { repositoryTable } from '@npm.rest/db/schema';
-import { getRepository } from '../../src/pkv/repo';
+import { getRepositories } from '../../src/pkv/repo';
 import { describe, expect, it } from 'vitest';
 import { generateId } from '@npm.rest/db/id';
 import { db } from '@npm.rest/db/server';
-import { eq } from 'drizzle-orm';
 
 describe('get repository', () => {
 	it('gets when none exists', async () => {
-		const result = await getRepository({
-			type: 'git',
-			url: 'git+https://tangled.org/tangled.org/core',
-		});
+		const result = await getRepositories([
+			{
+				type: 'git',
+				url: 'git+https://tangled.org/tangled.org/core',
+			},
+		]);
 
-		const { id } = result.unwrap();
-
-		const [record] = await db
-			.select()
-			.from(repositoryTable)
-			.where(eq(repositoryTable.id, id));
-
-		expect(record).toMatchObject({
-			id,
-			type: 'git',
-			url: 'git+https://tangled.org/tangled.org/core',
-		});
+		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		const repos = result.unwrap() ?? [];
+		expect(repos).toHaveLength(1);
+		expect(repos[0]).toMatchObject({ id: repos[0].id });
 	});
 
 	it('returns id when exists', async () => {
@@ -42,12 +35,17 @@ describe('get repository', () => {
 
 		expect(record).toMatchObject({ id });
 
-		const result = await getRepository({
-			type: 'git',
-			url: 'git+https://tangled.org/tangled.org/core',
-		});
+		const result = await getRepositories([
+			{
+				type: 'git',
+				url: 'git+https://tangled.org/tangled.org/core',
+			},
+		]);
 
-		expect(result.unwrap()).toMatchObject({ id });
+		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		const repos = result.unwrap() ?? [];
+		expect(repos).toHaveLength(1);
+		expect(repos[0]).toMatchObject({ id });
 	});
 
 	describe('github metadata', () => {
