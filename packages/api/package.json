@@ -10,7 +10,7 @@
 		"prepare": "pnpm types"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.23.0",
+		"@cloudflare/vite-plugin": "^1.25.6",
 		"@npm.rest/db": "workspace:^",
 		"drizzle-orm": "catalog:",
 		"esm-env": "^1.2.2",
