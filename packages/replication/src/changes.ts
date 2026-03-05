@@ -38,9 +38,10 @@ export async function watchChanges() {
 
 		for (const change of response.results) {
 			if (change.deleted) {
-				await db
-					.delete(packumentTable)
-					.where(eq(packumentTable.id, change.id));
+				throw new Error('todo deletion handling');
+				// await db
+				// 	.delete(packumentTable)
+				// 	.where(eq(packumentTable.id, change.id));
 			} else {
 				changes.push({
 					name: change.id,
