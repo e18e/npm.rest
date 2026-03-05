@@ -1,125 +1,26 @@
 import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.json' with { type: 'json' };
 import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
-import { getLicenses, updateLicenses, type DatabaseLicenses } from './license';
 import { Result, type UnhandledException, type InferErr } from 'better-result';
-import { getFunding, updateFunding, type DatabaseFunding } from './funding';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from 'node-modules-tools';
+import { getRepositories, updateRepositories } from './repo';
 import type { PackumentResult } from '../shared/packument';
+import { getLicenses, updateLicenses } from './license';
+import { getExistingVersion } from './existing-version';
+import { getFunding, updateFunding } from './funding';
 import { getDependencies } from './dependencies';
 import { formatDeprecated } from './deprecated';
 import { downloadTarball } from './tarball';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
-import {
-	getRepositories,
-	updateRepositories,
-	type DatabaseRepository,
-} from './repo';
 import { runPublint } from './publint';
 import { hasTypes } from './types';
 import {
-	versionRepositoryTable,
-	versionLicenseTable,
-	versionFundingTable,
 	dependencyTable,
 	specifierTable,
 	publintTable,
 	versionTable,
-	licenseTable,
-	fundingTable,
-	repositoryTable,
 } from '@npm.rest/db/schema';
-
-export interface ExistingVersion {
-	id: ResourceId<'pkv'>;
-	licenses: DatabaseLicenses;
-	funding: DatabaseFunding;
-	repository: DatabaseRepository;
-}
-
-async function getExistingVersion(
-	packageId: ResourceId<'pkg'>,
-	version: string,
-) {
-	const exists = await db
-		.select({
-			id: versionTable.id,
-			licenseId: licenseTable.id,
-			licenseType: licenseTable.type,
-			fundingId: fundingTable.id,
-			fundingUrl: fundingTable.url,
-			repoId: repositoryTable.id,
-			repoUrl: repositoryTable.url,
-		})
-		.from(versionTable)
-		.where(
-			and(
-				eq(versionTable.packageId, packageId),
-				eq(versionTable.version, version),
-			),
-		)
-		.leftJoin(
-			versionLicenseTable,
-			eq(versionLicenseTable.versionId, versionTable.id),
-		)
-		.leftJoin(
-			licenseTable,
-			eq(licenseTable.id, versionLicenseTable.licenseId),
-		)
-		.leftJoin(
-			versionFundingTable,
-			eq(versionFundingTable.versionId, versionTable.id),
-		)
-		.leftJoin(
-			fundingTable,
-			eq(fundingTable.id, versionFundingTable.fundingId),
-		)
-		.leftJoin(
-			versionRepositoryTable,
-			eq(versionRepositoryTable.versionId, versionTable.id),
-		)
-		.leftJoin(
-			repositoryTable,
-			eq(repositoryTable.id, versionRepositoryTable.repositoryId),
-		);
-
-	if (exists.length === 0) {
-		return null;
-	}
-
-	const result: ExistingVersion = {
-		id: exists[0].id,
-		licenses: [],
-		funding: [],
-		repository: [],
-	};
-
-	for (const row of exists) {
-		if (row.licenseId && row.licenseType) {
-			result.licenses.push({
-				id: row.licenseId,
-				type: row.licenseType,
-			});
-		}
-
-		if (row.fundingId && row.fundingUrl) {
-			result.funding.push({
-				id: row.fundingId,
-				url: row.fundingUrl,
-			});
-		}
-
-		if (row.repoId && row.repoUrl) {
-			result.repository.push({
-				id: row.repoId,
-				url: row.repoUrl,
-			});
-		}
-	}
-
-	return result;
-}
 
 type ProcessVersionResult = Result<
 	ResourceId<'pkv'>,
