@@ -1,6 +1,14 @@
 type UUID = ReturnType<typeof crypto.randomUUID>;
 
-export const ID_PREFIXES = ['pkg', 'pkv', 'publ', 'repo', 'spc'] as const;
+export const ID_PREFIXES = [
+	'pkg',
+	'pkv',
+	'publ',
+	'repo',
+	'spc',
+	'fnd',
+	'lcs',
+] as const;
 
 /**
  * Fixed resource id prefixes

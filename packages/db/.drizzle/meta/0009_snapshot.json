@@ -1,0 +1,1115 @@
+{
+  "id": "4c80ac79-f8eb-420d-ab43-5fa049299c77",
+  "prevId": "686d66aa-bfe3-4859-97a8-0411adbf893b",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "core.change": {
+      "name": "change",
+      "schema": "core",
+      "columns": {
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rev_id": {
+          "name": "rev_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "change_state",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "change_state_idx": {
+          "name": "change_state_idx",
+          "columns": [
+            {
+              "expression": "state",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "change_name_rev_id_pk": {
+          "name": "change_name_rev_id_pk",
+          "columns": [
+            "name",
+            "rev_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.dependency": {
+      "name": "dependency",
+      "schema": "core",
+      "columns": {
+        "version_id": {
+          "name": "version_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "specifier_id": {
+          "name": "specifier_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "dependency_type",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "optional": {
+          "name": "optional",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alias": {
+          "name": "alias",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "dependency_specifier_idx": {
+          "name": "dependency_specifier_idx",
+          "columns": [
+            {
+              "expression": "specifier_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "dependency_version_id_version_id_fk": {
+          "name": "dependency_version_id_version_id_fk",
+          "tableFrom": "dependency",
+          "tableTo": "version",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "dependency_specifier_id_specifier_id_fk": {
+          "name": "dependency_specifier_id_specifier_id_fk",
+          "tableFrom": "dependency",
+          "tableTo": "specifier",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "specifier_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "dependency_version_id_specifier_id_type_pk": {
+          "name": "dependency_version_id_specifier_id_type_pk",
+          "columns": [
+            "version_id",
+            "specifier_id",
+            "type"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.funding": {
+      "name": "funding",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(40)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "funding_type",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "funding_type_url_unique_idx": {
+          "name": "funding_type_url_unique_idx",
+          "columns": [
+            {
+              "expression": "type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "url",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "funding_resource_id": {
+          "name": "funding_resource_id",
+          "value": "\"core\".\"funding\".\"id\" LIKE 'fnd_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "core.license": {
+      "name": "license",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(40)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "license_type_idx": {
+          "name": "license_type_idx",
+          "columns": [
+            {
+              "expression": "type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "license_resource_id": {
+          "name": "license_resource_id",
+          "value": "\"core\".\"license\".\"id\" LIKE 'lcs_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "core.package": {
+      "name": "package",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(40)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rev_id": {
+          "name": "rev_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dist_tags": {
+          "name": "dist_tags",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "npm_updated_at": {
+          "name": "npm_updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "package_name_unique_idx": {
+          "name": "package_name_unique_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "package_resource_id": {
+          "name": "package_resource_id",
+          "value": "\"core\".\"package\".\"id\" LIKE 'pkg_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "internal.packument": {
+      "name": "packument",
+      "schema": "internal",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "rev_id": {
+          "name": "rev_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data": {
+          "name": "data",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "packument_data_gin_idx": {
+          "name": "packument_data_gin_idx",
+          "columns": [
+            {
+              "expression": "data",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.publint": {
+      "name": "publint",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(41)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "version_id": {
+          "name": "version_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "publint_version": {
+          "name": "publint_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "messages": {
+          "name": "messages",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "publint_version_unique_idx": {
+          "name": "publint_version_unique_idx",
+          "columns": [
+            {
+              "expression": "version_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "publint_version_id_version_id_fk": {
+          "name": "publint_version_id_version_id_fk",
+          "tableFrom": "publint",
+          "tableTo": "version",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "publint_resource_id": {
+          "name": "publint_resource_id",
+          "value": "\"core\".\"publint\".\"id\" LIKE 'publ_%'"
+        },
+        "publint_version_resource_id": {
+          "name": "publint_version_resource_id",
+          "value": "\"core\".\"publint\".\"version_id\" LIKE 'pkv_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "core.repository": {
+      "name": "repository",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(41)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "repository_type",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stars": {
+          "name": "stars",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "forks": {
+          "name": "forks",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "archived": {
+          "name": "archived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "languages": {
+          "name": "languages",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_fetched": {
+          "name": "last_fetched",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "repository_url_unique_idx": {
+          "name": "repository_url_unique_idx",
+          "columns": [
+            {
+              "expression": "url",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "repository_resource_id": {
+          "name": "repository_resource_id",
+          "value": "\"core\".\"repository\".\"id\" LIKE 'repo_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "core.specifier": {
+      "name": "specifier",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(40)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "specifier": {
+          "name": "specifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "specifier_type",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "specifier_name_specifier_idx": {
+          "name": "specifier_name_specifier_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "specifier",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "specifier_name_idx": {
+          "name": "specifier_name_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "specifier_resource_id": {
+          "name": "specifier_resource_id",
+          "value": "\"core\".\"specifier\".\"id\" LIKE 'spc_%'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "internal.state": {
+      "name": "state",
+      "schema": "internal",
+      "columns": {
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.version_funding": {
+      "name": "version_funding",
+      "schema": "core",
+      "columns": {
+        "version_id": {
+          "name": "version_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "funding_id": {
+          "name": "funding_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "version_funding_version_id_version_id_fk": {
+          "name": "version_funding_version_id_version_id_fk",
+          "tableFrom": "version_funding",
+          "tableTo": "version",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "version_funding_funding_id_funding_id_fk": {
+          "name": "version_funding_funding_id_funding_id_fk",
+          "tableFrom": "version_funding",
+          "tableTo": "funding",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "funding_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "version_funding_version_id_funding_id_pk": {
+          "name": "version_funding_version_id_funding_id_pk",
+          "columns": [
+            "version_id",
+            "funding_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.version_license": {
+      "name": "version_license",
+      "schema": "core",
+      "columns": {
+        "version_id": {
+          "name": "version_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "license_id": {
+          "name": "license_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "version_license_version_id_version_id_fk": {
+          "name": "version_license_version_id_version_id_fk",
+          "tableFrom": "version_license",
+          "tableTo": "version",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "version_license_license_id_license_id_fk": {
+          "name": "version_license_license_id_license_id_fk",
+          "tableFrom": "version_license",
+          "tableTo": "license",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "license_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "version_license_version_id_license_id_pk": {
+          "name": "version_license_version_id_license_id_pk",
+          "columns": [
+            "version_id",
+            "license_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.version_repository": {
+      "name": "version_repository",
+      "schema": "core",
+      "columns": {
+        "version_id": {
+          "name": "version_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "repository_id": {
+          "name": "repository_id",
+          "type": "varchar(41)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "directory": {
+          "name": "directory",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch": {
+          "name": "branch",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "version_repository_version_id_version_id_fk": {
+          "name": "version_repository_version_id_version_id_fk",
+          "tableFrom": "version_repository",
+          "tableTo": "version",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "version_repository_repository_id_repository_id_fk": {
+          "name": "version_repository_repository_id_repository_id_fk",
+          "tableFrom": "version_repository",
+          "tableTo": "repository",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "repository_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "version_repository_version_id_repository_id_pk": {
+          "name": "version_repository_version_id_repository_id_pk",
+          "columns": [
+            "version_id",
+            "repository_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "core.version": {
+      "name": "version",
+      "schema": "core",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(40)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "package_id": {
+          "name": "package_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "homepage": {
+          "name": "homepage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deprecated": {
+          "name": "deprecated",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "unpacked_size": {
+          "name": "unpacked_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "packed_size": {
+          "name": "packed_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "types": {
+          "name": "types",
+          "type": "types_state",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "module_type": {
+          "name": "module_type",
+          "type": "module_type",
+          "typeSchema": "core",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keywords": {
+          "name": "keywords",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "version_package_id_version_unique_idx": {
+          "name": "version_package_id_version_unique_idx",
+          "columns": [
+            {
+              "expression": "package_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "version_package_id_package_id_fk": {
+          "name": "version_package_id_package_id_fk",
+          "tableFrom": "version",
+          "tableTo": "package",
+          "schemaTo": "core",
+          "columnsFrom": [
+            "package_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "version_resource_id": {
+          "name": "version_resource_id",
+          "value": "\"core\".\"version\".\"id\" LIKE 'pkv_%'"
+        },
+        "version_package_resource_id": {
+          "name": "version_package_resource_id",
+          "value": "\"core\".\"version\".\"package_id\" LIKE 'pkg_%'"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "core.change_state": {
+      "name": "change_state",
+      "schema": "core",
+      "values": [
+        "pending",
+        "processing",
+        "failed",
+        "completed"
+      ]
+    },
+    "core.dependency_type": {
+      "name": "dependency_type",
+      "schema": "core",
+      "values": [
+        "prod",
+        "dev",
+        "peer"
+      ]
+    },
+    "core.funding_type": {
+      "name": "funding_type",
+      "schema": "core",
+      "values": [
+        "patreon",
+        "github",
+        "open-collective",
+        "paypal",
+        "ko-fi",
+        "cashapp",
+        "buy-me-a-coffee",
+        "liberapay",
+        "thanks.dev",
+        "unknown"
+      ]
+    },
+    "core.module_type": {
+      "name": "module_type",
+      "schema": "core",
+      "values": [
+        "cjs",
+        "esm",
+        "dual",
+        "faux",
+        "dts",
+        "unknown"
+      ]
+    },
+    "core.repository_type": {
+      "name": "repository_type",
+      "schema": "core",
+      "values": [
+        "git",
+        "mercurial",
+        "unknown"
+      ]
+    },
+    "core.specifier_type": {
+      "name": "specifier_type",
+      "schema": "core",
+      "values": [
+        "git",
+        "tag",
+        "version",
+        "range",
+        "file",
+        "directory",
+        "remote"
+      ]
+    },
+    "core.types_state": {
+      "name": "types_state",
+      "schema": "core",
+      "values": [
+        "definitely-typed",
+        "built-in",
+        "none"
+      ]
+    }
+  },
+  "schemas": {
+    "core": "core",
+    "internal": "internal"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -1,5 +1,7 @@
+import '../setup';
 import '@npm.rest/test/mock-db';
 import { packageTable, packumentTable } from '@npm.rest/db/schema';
+import { createInputPackument } from '@npm.rest/test/packument';
 import { describe, expect, it, vi } from 'vitest';
 import type { UnpackResult } from '@publint/pack';
 import { hasTypes } from '../../src/pkv/types';
@@ -17,30 +19,6 @@ const TS_UNPACK: UnpackResult = {
 };
 
 const REV = '1-placeholder';
-
-const createPackument = (name: string) => ({
-	name: name,
-	time: {
-		created: new Date().toISOString(),
-		modified: new Date().toISOString(),
-	},
-});
-
-vi.mock('@npm.rest/db/server', async () => {
-	const { drizzle } = await import('drizzle-orm/postgres-js');
-
-	return {
-		db: drizzle.mock({}),
-	};
-});
-
-vi.mock(import('../../src/shared/logger'), async () => {
-	const { getLogger } = await import('@logtape/logtape');
-
-	return {
-		logger: getLogger('test'),
-	};
-});
 
 describe('hasTypes()', () => {
 	it('returns built-in if a types package is given', async () => {
@@ -73,11 +51,13 @@ describe('hasTypes()', () => {
 
 	it('returns definitely-typed when a types package exists as a packument', async () => {
 		const name = `:${crypto.randomUUID()}`;
+		const packument = createInputPackument();
+		packument.name = `@types/${name}`;
 
 		await db.insert(packumentTable).values({
 			id: `@types/${name}`,
 			revId: '1-placeholder',
-			data: createPackument(`@types/${name}`),
+			data: packument,
 		});
 
 		vi.stubGlobal(
@@ -128,11 +108,13 @@ describe('hasTypes()', () => {
 
 	it('returns definitely-typed when package is found via packument fetch', async () => {
 		const name = `:${crypto.randomUUID()}`;
+		const packument = createInputPackument();
+		packument.name = name;
 
 		vi.stubGlobal(
 			'fetch',
 			vi.fn().mockResolvedValue(
-				Response.json(createPackument(name), {
+				Response.json(packument, {
 					status: 200,
 					headers: {
 						'Content-Type': 'application/json',
@@ -148,11 +130,13 @@ describe('hasTypes()', () => {
 
 	it('hits typesPackageCache', async () => {
 		const name = `:${crypto.randomUUID()}`;
+		const packument = createInputPackument();
+		packument.name = `@types/${name}`;
 
 		await db.insert(packumentTable).values({
 			id: `@types/${name}`,
 			revId: '1-placeholder',
-			data: createPackument(`@types/${name}`),
+			data: packument,
 		});
 
 		const types = await hasTypes(name, EMPTY_UNPACK, '1-placeholder');

@@ -35,14 +35,14 @@ describe('process packument', () => {
 			name: 'foo',
 			version: '1.0.0',
 			dist: {
-				shasum: '1234567890abcdef',
 				tarball:
 					'https://registry.npmjs.org/my-package/-/my-package-1.0.0.tgz',
-				integrity: 'sha512-...',
+				integrity: 'sha512-foo',
 			},
 			repository: {
 				type: 'Git',
 				directory: random,
+				url: 'https://github.com/foo/bar',
 			},
 		};
 
@@ -54,10 +54,13 @@ describe('process packument', () => {
 		const result = await processPackument('foo', '1-placeholder');
 		const processed = result.unwrap();
 
-		expect(processed.versions?.['1.0.0'].repository).toMatchObject({
-			type: 'git',
-			directory: random,
-		});
+		expect(processed.versions?.['1.0.0'].repository).toMatchObject([
+			{
+				type: 'git',
+				directory: random,
+				url: 'git+https://github.com/foo/bar.git',
+			},
+		]);
 
 		const [record] = await db
 			.select({ data: packumentTable.data })

@@ -1,3 +1,4 @@
+import { FUNDING_TYPES, REPOSITORY_TYPES } from '@npm.rest/validate/packument';
 import { isIdPrefix, type IdPrefix, type ResourceId } from './id';
 import type { Message as PublintMessage } from 'publint';
 import { sql } from 'drizzle-orm';
@@ -7,13 +8,13 @@ import {
 	primaryKey,
 	customType,
 	timestamp,
+	pgSchema,
 	integer,
 	boolean,
 	index,
 	jsonb,
 	text,
 	check,
-	pgSchema,
 } from 'drizzle-orm/pg-core';
 
 /**
@@ -78,8 +79,8 @@ export const changeTable = coreSchema.table(
 		name: text().notNull(),
 		revId: text().notNull(),
 		state: changeState().notNull(),
-		createdAt: timestamp().defaultNow().notNull(),
-		updatedAt: timestamp().defaultNow().notNull(),
+		createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
+		updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 	},
 	(table) => [
 		index('change_state_idx').on(table.state),
@@ -94,9 +95,9 @@ export const packageTable = coreSchema.table(
 		name: text().notNull(),
 		revId: text().notNull(),
 		distTags: jsonb().$type<Record<string, string>>().default({}).notNull(),
-		createdAt: timestamp().notNull(),
-		npmUpdatedAt: timestamp().notNull(),
-		updatedAt: timestamp().defaultNow().notNull(),
+		createdAt: timestamp({ withTimezone: true }).notNull(),
+		npmUpdatedAt: timestamp({ withTimezone: true }).notNull(),
+		updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 	},
 	(table) => [
 		resourceIdCheck('package_resource_id', table.id),
@@ -130,18 +131,13 @@ export const versionTable = coreSchema.table(
 		description: text(),
 		homepage: text(),
 		deprecated: text(),
-		license: text(),
 		unpackedSize: integer().notNull(),
 		packedSize: integer().notNull(),
 		types: typesState().notNull(),
 		moduleType: moduleType().notNull(),
 		keywords: text().array(),
-		repo: resourceId('repo').references(() => repositoryTable.id),
-		repoDirectory: text(),
-		repoBranch: text(),
-		// funding:
-		publishedAt: timestamp().notNull(),
-		updatedAt: timestamp().defaultNow().notNull(),
+		publishedAt: timestamp({ withTimezone: true }).notNull(),
+		updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 	},
 	(table) => [
 		resourceIdCheck('version_resource_id', table.id),
@@ -170,23 +166,72 @@ export const publintTable = coreSchema.table(
 	],
 );
 
+export const repositoryType = coreSchema.enum(
+	'repository_type',
+	REPOSITORY_TYPES,
+);
+
 export const repositoryTable = coreSchema.table(
 	'repository',
 	{
 		id: resourceId('repo').primaryKey(),
+		type: repositoryType().notNull(),
 		url: text().notNull(),
 		stars: integer(),
 		forks: integer(),
 		archived: boolean(),
 		languages: jsonb().$type<Record<string, number>>(),
-		createdAt: timestamp(),
-		updatedAt: timestamp(),
-		lastFetched: timestamp().notNull().defaultNow(),
+		createdAt: timestamp({ withTimezone: true }),
+		updatedAt: timestamp({ withTimezone: true }),
+		lastFetched: timestamp({ withTimezone: true }).notNull().defaultNow(),
 	},
 	(table) => [
 		resourceIdCheck('repository_resource_id', table.id),
 		uniqueIndex('repository_url_unique_idx').on(table.url),
 	],
+);
+
+export const versionRepositoryTable = coreSchema.table(
+	'version_repository',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		repositoryId: resourceId('repo')
+			.notNull()
+			.references(() => repositoryTable.id, { onDelete: 'cascade' }),
+		directory: text(),
+		branch: text(),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.repositoryId] })],
+);
+
+export const fundingType = coreSchema.enum('funding_type', FUNDING_TYPES);
+
+export const fundingTable = coreSchema.table(
+	'funding',
+	{
+		id: resourceId('fnd').primaryKey(),
+		type: fundingType().notNull(),
+		url: text().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('funding_resource_id', table.id),
+		uniqueIndex('funding_type_url_unique_idx').on(table.type, table.url),
+	],
+);
+
+export const versionFundingTable = coreSchema.table(
+	'version_funding',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		fundingId: resourceId('fnd')
+			.notNull()
+			.references(() => fundingTable.id, { onDelete: 'cascade' }),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.fundingId] })],
 );
 
 export const dependencyType = coreSchema.enum('dependency_type', [
@@ -242,4 +287,29 @@ export const dependencyTable = coreSchema.table(
 		}),
 		index('dependency_specifier_idx').on(table.specifierId),
 	],
+);
+
+export const licenseTable = coreSchema.table(
+	'license',
+	{
+		id: resourceId('lcs').primaryKey(),
+		type: text().notNull(),
+	},
+	(table) => [
+		resourceIdCheck('license_resource_id', table.id),
+		uniqueIndex('license_type_idx').on(table.type),
+	],
+);
+
+export const versionLicenseTable = coreSchema.table(
+	'version_license',
+	{
+		versionId: resourceId('pkv')
+			.notNull()
+			.references(() => versionTable.id, { onDelete: 'cascade' }),
+		licenseId: resourceId('lcs')
+			.notNull()
+			.references(() => licenseTable.id),
+	},
+	(table) => [primaryKey({ columns: [table.versionId, table.licenseId] })],
 );

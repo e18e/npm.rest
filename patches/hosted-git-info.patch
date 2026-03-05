@@ -1,0 +1,89 @@
+diff --git a/lib/hosts.js b/lib/hosts.js
+index 6e7c123dbff8b45e46e58afb1d0e30690e2647cf..be6a46a0d51ef7813b94da4218024dc6d454f98b 100644
+--- a/lib/hosts.js
++++ b/lib/hosts.js
+@@ -222,6 +222,84 @@ hosts.sourcehut = {
+   },
+ }
+ 
++hosts.tangled = {
++	protocols: ['git:', 'http:', 'git+ssh:', 'git+https:', 'ssh:', 'https:'],
++	domain: 'tangled.org',
++	treepath: 'tree',
++	filetemplate: ({ domain, user, project, committish, path }) =>
++		`https://${domain}/${user}/${project}/${maybeEncode(committish) || 'HEAD'}/${path}`,
++	httpstemplate: ({ domain, user, project, committish }) =>
++		`git+https://${domain}/${user}/${project}${maybeJoin('#', committish)}`,
++	tarballtemplate: ({ domain, user, project, committish }) =>
++		`https://${domain}/${user}/${project}/archive/${maybeEncode(committish) || 'HEAD'}`,
++	bugstemplate: () => null,
++	extract: (url) => {
++		let [, user, project, aux] = url.pathname.split('/', 4);
++
++		if (project && project.endsWith('.git')) {
++			project = project.slice(0, -4);
++		}
++
++		if (!user || !project) {
++			return;
++		}
++
++		return { user, project, committish: url.hash.slice(1) };
++	},
++};
++
++hosts.codeberg = {
++	protocols: ['git:', 'http:', 'git+ssh:', 'git+https:', 'ssh:', 'https:'],
++	domain: 'codeberg.org',
++	treepath: 'tree',
++	filetemplate: ({ domain, user, project, committish, path }) =>
++		`https://${domain}/${user}/${project}/${maybeEncode(committish) || 'HEAD'}/${path}`,
++	httpstemplate: ({ domain, user, project, committish }) =>
++		`git+https://${domain}/${user}/${project}.git${maybeJoin('#', committish)}`,
++	tarballtemplate: ({ domain, user, project, committish }) =>
++		`https://${domain}/${user}/${project}/archive/${maybeEncode(committish) || 'HEAD'}.tar.gz`,
++	bugstemplate: () => null,
++	extract: (url) => {
++		let [, user, project, aux] = url.pathname.split('/', 4);
++
++		if (project && project.endsWith('.git')) {
++			project = project.slice(0, -4);
++		}
++
++		if (!user || !project) {
++			return;
++		}
++
++		return { user, project, committish: url.hash.slice(1) };
++	},
++};
++
++hosts.gitee = {
++	protocols: ['git:', 'http:', 'git+ssh:', 'git+https:', 'ssh:', 'https:'],
++	domain: 'gitee.com',
++	treepath: 'tree',
++	filetemplate: ({ domain, user, project, committish, path }) =>
++		`https://${domain}/${user}/${project}/${maybeEncode(committish) || 'HEAD'}/${path}`,
++	httpstemplate: ({ domain, user, project, committish }) =>
++		`https://${domain}/${user}/${project}.git${maybeJoin('#', committish)}`,
++	tarballtemplate: ({ domain, user, project, committish }) =>
++		`https://${domain}/${user}/${project}/archive/${maybeEncode(committish) || 'HEAD'}.tar.gz`,
++	bugstemplate: () => null,
++	extract: (url) => {
++		let [, user, project, aux] = url.pathname.split('/', 4);
++
++		if (project && project.endsWith('.git')) {
++			project = project.slice(0, -4);
++		}
++
++		if (!user || !project) {
++			return;
++		}
++
++		return { user, project, committish: url.hash.slice(1) };
++	},
++};
++
+ for (const [name, host] of Object.entries(hosts)) {
+   hosts[name] = Object.assign({}, defaults, host)
+ }

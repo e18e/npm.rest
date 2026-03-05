@@ -1,57 +1,193 @@
 import { version as PUBLINT_VERSION } from '../../node_modules/publint/package.json' with { type: 'json' };
 import type { PackumentVersion, Packument } from '@npm.rest/validate/packument';
+import { getLicenses, updateLicenses, type DatabaseLicenses } from './license';
 import { Result, type UnhandledException, type InferErr } from 'better-result';
+import { getFunding, updateFunding, type DatabaseFunding } from './funding';
 import { generateId, type ResourceId } from '@npm.rest/db/id';
 import { analyzePackageModuleType } from 'node-modules-tools';
 import type { PackumentResult } from '../shared/packument';
 import { getDependencies } from './dependencies';
+import { formatDeprecated } from './deprecated';
 import { downloadTarball } from './tarball';
-import hostedGitInfo from 'hosted-git-info';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from '@npm.rest/db/server';
+import {
+	getRepositories,
+	updateRepositories,
+	type DatabaseRepository,
+} from './repo';
 import { runPublint } from './publint';
-import { getRepository } from './repo';
 import { hasTypes } from './types';
 import {
-	specifierTable,
+	versionRepositoryTable,
+	versionLicenseTable,
+	versionFundingTable,
 	dependencyTable,
+	specifierTable,
 	publintTable,
 	versionTable,
+	licenseTable,
+	fundingTable,
+	repositoryTable,
 } from '@npm.rest/db/schema';
 
+export interface ExistingVersion {
+	id: ResourceId<'pkv'>;
+	licenses: DatabaseLicenses;
+	funding: DatabaseFunding;
+	repository: DatabaseRepository;
+}
+
+async function getExistingVersion(
+	packageId: ResourceId<'pkg'>,
+	version: string,
+) {
+	const exists = await db
+		.select({
+			id: versionTable.id,
+			licenseId: licenseTable.id,
+			licenseType: licenseTable.type,
+			fundingId: fundingTable.id,
+			fundingUrl: fundingTable.url,
+			repoId: repositoryTable.id,
+			repoUrl: repositoryTable.url,
+		})
+		.from(versionTable)
+		.where(
+			and(
+				eq(versionTable.packageId, packageId),
+				eq(versionTable.version, version),
+			),
+		)
+		.leftJoin(
+			versionLicenseTable,
+			eq(versionLicenseTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			licenseTable,
+			eq(licenseTable.id, versionLicenseTable.licenseId),
+		)
+		.leftJoin(
+			versionFundingTable,
+			eq(versionFundingTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			fundingTable,
+			eq(fundingTable.id, versionFundingTable.fundingId),
+		)
+		.leftJoin(
+			versionRepositoryTable,
+			eq(versionRepositoryTable.versionId, versionTable.id),
+		)
+		.leftJoin(
+			repositoryTable,
+			eq(repositoryTable.id, versionRepositoryTable.repositoryId),
+		);
+
+	if (exists.length === 0) {
+		return null;
+	}
+
+	const result: ExistingVersion = {
+		id: exists[0].id,
+		licenses: [],
+		funding: [],
+		repository: [],
+	};
+
+	for (const row of exists) {
+		if (row.licenseId && row.licenseType) {
+			result.licenses.push({
+				id: row.licenseId,
+				type: row.licenseType,
+			});
+		}
+
+		if (row.fundingId && row.fundingUrl) {
+			result.funding.push({
+				id: row.fundingId,
+				url: row.fundingUrl,
+			});
+		}
+
+		if (row.repoId && row.repoUrl) {
+			result.repository.push({
+				id: row.repoId,
+				url: row.repoUrl,
+			});
+		}
+	}
+
+	return result;
+}
+
 type ProcessVersionResult = Result<
-	void,
+	ResourceId<'pkv'>,
 	UnhandledException | InferErr<PackumentResult>
 >;
 
 export async function processVersion(
 	packageId: ResourceId<'pkg'>,
+	version: string,
 	pkg: Packument,
 	pkv: PackumentVersion,
 	rev: string,
 ): Promise<ProcessVersionResult> {
-	const [exists] = await db
-		.select({ id: versionTable.id })
-		.from(versionTable)
-		.where(
-			and(
-				eq(versionTable.packageId, packageId),
-				eq(versionTable.version, pkv.version),
-			),
-		);
+	// sanity check, shouldn't happen
+	if (pkv.version && pkv.version !== version) {
+		return Result.err(new Error('Version mismatch'));
+	}
+
+	const exists = await getExistingVersion(packageId, version);
+
+	const licenses = await getLicenses(pkv.license);
+	if (licenses.isErr()) return licenses;
+
+	const funding = await getFunding(pkv.funding);
+	if (funding.isErr()) return funding;
+
+	const repo = await getRepositories(pkv.repository);
+	if (repo.isErr()) return repo;
 
 	if (exists) {
-		// todo confirm what is actually immutable
-		// todo unpublish
-		await db
-			.update(versionTable)
-			.set({
-				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
-				updatedAt: new Date(),
-			})
-			.where(eq(versionTable.id, exists.id));
+		await db.transaction(async (tx) => {
+			await tx
+				.update(versionTable)
+				.set({
+					deprecated: formatDeprecated(pkv),
+					updatedAt: new Date(),
+				})
+				.where(eq(versionTable.id, exists.id));
 
-		return Result.ok();
+			if (licenses.value) {
+				await updateLicenses(
+					tx,
+					exists.id,
+					licenses.value,
+					exists.licenses,
+				);
+			}
+
+			if (funding.value) {
+				await updateFunding(
+					tx,
+					exists.id,
+					funding.value,
+					exists.funding,
+				);
+			}
+
+			if (repo.value) {
+				await updateRepositories(
+					tx,
+					exists.id,
+					repo.value,
+					exists.repository,
+				);
+			}
+		});
+
+		return Result.ok(exists.id);
 	}
 
 	const tarball = await downloadTarball(pkv.dist.tarball, pkv.dist.integrity);
@@ -63,39 +199,25 @@ export async function processVersion(
 	const types = await hasTypes(pkg.name, tarball.value, rev);
 	if (types.isErr()) return types;
 
-	const repoInfo = pkv.repository?.url
-		? hostedGitInfo.fromUrl(pkv.repository.url)
-		: null;
-
-	const repo = repoInfo ? await getRepository(repoInfo) : null;
-	if (repo?.isErr()) return repo;
-
 	const deps = getDependencies(pkv);
 	if (deps.isErr()) return deps;
 
-	await db.transaction(async (tx) => {
+	const pkvId = await db.transaction(async (tx) => {
 		const [record] = await tx
 			.insert(versionTable)
 			.values({
 				id: generateId('pkv'),
 				packageId,
-				version: pkv.version,
+				version: version,
 				description: pkv.description,
 				homepage: pkv.homepage,
-				deprecated: pkv.deprecated === false ? null : pkv.deprecated,
-				license:
-					typeof pkv.license === 'string'
-						? pkv.license
-						: pkv.license?.type,
+				deprecated: formatDeprecated(pkv),
 				packedSize: tarball.value.packedSize,
 				unpackedSize: tarball.value.unpackedSize,
-				publishedAt: pkg.time[pkv.version],
+				publishedAt: pkg.time[version],
 				types: types.value,
 				moduleType: analyzePackageModuleType(publintResult.value.pkg),
 				keywords: pkv.keywords,
-				repo: repo?.unwrapOr(null)?.id,
-				repoDirectory: pkv.repository?.directory,
-				repoBranch: repoInfo?.treepath,
 			})
 			.returning({ id: versionTable.id });
 
@@ -106,6 +228,18 @@ export async function processVersion(
 				messages: publintResult.value.messages,
 				publintVersion: PUBLINT_VERSION,
 			});
+		}
+
+		if (repo.value) {
+			await updateRepositories(tx, record.id, repo.value);
+		}
+
+		if (funding.value) {
+			await updateFunding(tx, record.id, funding.value);
+		}
+
+		if (licenses.value) {
+			await updateLicenses(tx, record.id, licenses.value);
 		}
 
 		if (deps.value.length > 0) {
@@ -175,7 +309,9 @@ export async function processVersion(
 				})),
 			);
 		}
+
+		return record.id;
 	});
 
-	return Result.ok();
+	return Result.ok(pkvId);
 }

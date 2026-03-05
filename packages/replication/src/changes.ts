@@ -1,8 +1,7 @@
-import { packumentTable, changeTable } from '@npm.rest/db/schema';
+import { changeTable } from '@npm.rest/db/schema';
 import { setTimeout } from 'node:timers/promises';
 import { db } from '@npm.rest/db/server';
 import { logger, seq } from './shared';
-import { eq } from 'drizzle-orm';
 import { ofetch } from 'ofetch';
 
 interface ChangeResult {
@@ -38,9 +37,10 @@ export async function watchChanges() {
 
 		for (const change of response.results) {
 			if (change.deleted) {
-				await db
-					.delete(packumentTable)
-					.where(eq(packumentTable.id, change.id));
+				throw new Error('todo deletion handling');
+				// await db
+				// 	.delete(packumentTable)
+				// 	.where(eq(packumentTable.id, change.id));
 			} else {
 				changes.push({
 					name: change.id,
