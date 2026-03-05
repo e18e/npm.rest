@@ -50,7 +50,9 @@ describe('get repository', () => {
 
 	describe('github metadata', () => {
 		it.todo('fetches on creation');
+
 		it.todo("doesn't fetch when metadata is too fresh");
+
 		it.todo('fetches when metadata is too old');
 	});
 });

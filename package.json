@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"format": "prettier --write .",
+		"fix": "prettier --write . && oxlint --type-aware --fix",
 		"lint": "prettier --check . && oxlint --type-aware",
 		"check": "pnpm -r run --if-present check",
 		"build": "pnpm -r run --if-present build",
