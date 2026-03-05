@@ -71,6 +71,13 @@
       "when": 1771362045787,
       "tag": "0009_marvelous_quasar",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1772686831531,
+      "tag": "0010_fancy_micromax",
+      "breakpoints": true
     }
   ]
 }
