@@ -32,6 +32,14 @@ You can track the progress of the significant parts of this here:
 
 If you'd like to get involved with this project, we'd love the help! Please reach out in the [e18e Discord](https://chat.e18e.dev/) or open an issue here on GitHub.
 
+## Sponsors
+
+<p align="center">
+  <a href="https://e18e.dev/sponsor">
+    <img src="https://e18e.dev/sponsors.svg" alt="e18e community sponsors" />
+  </a>
+</p>
+
 ## License
 
 MIT
