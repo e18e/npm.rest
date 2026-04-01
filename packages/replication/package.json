@@ -8,9 +8,9 @@
 	},
 	"dependencies": {
 		"@logtape/logtape": "catalog:",
-		"@logtape/sentry": "^2.0.2",
+		"@logtape/sentry": "^2.0.5",
 		"@npm.rest/db": "workspace:^",
-		"@sentry/node": "^10.38.0",
+		"@sentry/node": "^10.47.0",
 		"drizzle-orm": "catalog:",
 		"ofetch": "catalog:",
 		"tsx": "catalog:"
