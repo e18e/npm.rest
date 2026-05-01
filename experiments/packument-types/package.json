@@ -15,7 +15,7 @@
 		"@npm.rest/db": "workspace:^",
 		"@types/node": "catalog:",
 		"@valibot/to-json-schema": "^1.5.0",
-		"better-result": "^2.5.2",
+		"better-result": "^2.9.0",
 		"json-schema-to-typescript": "^15.0.4",
 		"tsx": "^4.21.0",
 		"valibot": "catalog:"
