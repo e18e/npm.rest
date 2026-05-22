@@ -8,15 +8,15 @@ allowBuilds:
     workerd: true
 
 catalog:
-    '@logtape/logtape': ^2.0.2
-    '@types/node': 24.12.4
-    drizzle-orm: ^0.45.1
-    postgres: ^3.4.8
-    publint: ^0.3.17
+    '@logtape/logtape': ^2.1.1
+    '@types/node': 25.9.1
+    drizzle-orm: ^0.45.2
+    postgres: ^3.4.9
+    publint: ^0.3.21
     typescript: 6.0.3
     valibot: ^1.2.0
     wrangler: ^4.62.0
-    better-result: 2.7.0
+    better-result: 2.9.2
     tsx: 4.22.3
     ofetch: ^1.5.1
 
@@ -26,7 +26,7 @@ catalogs:
         '@types/hosted-git-info': 3.0.5
         npm-package-arg: 14.0.0
         '@types/npm-package-arg': 6.1.4
-        semver: 7.7.3
+        semver: 7.8.1
         '@types/semver': 7.7.1
         validate-npm-package-name: 8.0.0
         '@types/validate-npm-package-name': 4.0.2

@@ -15,10 +15,10 @@
 		"./id": "./src/id.ts"
 	},
 	"dependencies": {
-		"@logtape/drizzle-orm": "^2.0.2",
+		"@logtape/drizzle-orm": "^2.1.1",
 		"@logtape/logtape": "catalog:",
 		"@npm.rest/validate": "workspace:^",
-		"dotenv": "^17.2.3",
+		"dotenv": "^17.4.2",
 		"drizzle-orm": "catalog:",
 		"postgres": "catalog:"
 	},
