@@ -14,7 +14,7 @@ catalog:
     postgres: ^3.4.8
     prettier: ^3.8.0
     publint: ^0.3.17
-    typescript: ^5.9.3
+    typescript: 6.0.3
     valibot: ^1.2.0
     wrangler: ^4.62.0
     better-result: ^2.7.0
