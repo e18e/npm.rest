@@ -152,6 +152,7 @@ describe('hasTypes()', () => {
 
 	it('correctly gets scoped package @types name', async () => {
 		const ftch = vi
+			// oxlint-disable-next-line vitest/require-mock-type-parameters
 			.fn()
 			.mockResolvedValue(new Response('Not Found', { status: 404 }));
 

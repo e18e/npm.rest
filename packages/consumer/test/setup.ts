@@ -15,12 +15,12 @@ vi.mock(import('lru-cache'), async (importOriginal) => {
 	// @ts-expect-error shhh tests
 	class Patched extends mod.LRUCache {
 		constructor(...args: unknown[]) {
-			// oxlint-disable-next-line typescript-eslint(no-unsafe-call)
+			// oxlint-disable-next-line typescript-eslint/no-unsafe-call
 			super(...args);
 
 			beforeEach(() => {
 				// @ts-expect-error shhh tests
-				// oxlint-disable-next-line typescript-eslint(no-unsafe-call)
+				// oxlint-disable-next-line typescript-eslint/no-unsafe-call
 				this.clear();
 			});
 		}
@@ -32,7 +32,7 @@ vi.mock(import('lru-cache'), async (importOriginal) => {
 });
 
 vi.mock(import('../src/pkv/tarball'), () => ({
-	// oxlint-disable-next-line eslint(require-await))
+	// oxlint-disable-next-line eslint/require-await
 	async downloadTarball() {
 		return Result.ok({
 			unpackedSize: 128,
@@ -44,7 +44,7 @@ vi.mock(import('../src/pkv/tarball'), () => ({
 }));
 
 vi.mock(import('../src/pkv/publint'), () => ({
-	// oxlint-disable-next-line eslint(require-await))
+	// oxlint-disable-next-line eslint/require-await
 	async runPublint() {
 		return Result.ok({ pkg: {}, messages: [] });
 	},

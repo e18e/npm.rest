@@ -19,7 +19,7 @@ const TEMPLATE = `<!doctype html>
   </body>
 </html>`;
 
-// oxlint-disable-next-line eslint-plugin-import(no-default-export))
+// oxlint-disable-next-line eslint-plugin-import/no-default-export
 export default {
 	async fetch(request: Request) {
 		if (request.method !== 'GET') {

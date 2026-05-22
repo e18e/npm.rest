@@ -126,9 +126,9 @@ function mergeSchemas(schemas: JsonSchema[]): JsonSchema {
 
 	// Get all unique types
 	const types = new Set<JsonSchemaType>();
-	// oxlint-disable-next-line eslint/no-unused-vars: ??
+	// oxlint-disable-next-line eslint/no-unused-vars ??
 	let hasObject = false;
-	// oxlint-disable-next-line eslint/no-unused-vars: ??
+	// oxlint-disable-next-line eslint/no-unused-vars ??
 	let hasArray = false;
 
 	for (const schema of schemas) {

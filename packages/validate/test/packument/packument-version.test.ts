@@ -114,7 +114,7 @@ describe('packument-version validation', () => {
 	describe('homepage', () => {
 		it('is optional', () => {
 			const version = createInputPackumentVersion('1.0.0');
-			// oxlint-disable-next-line eslint(no-undefined)
+			// oxlint-disable-next-line eslint/no-undefined
 			version.homepage = undefined;
 			expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 		});
@@ -148,7 +148,7 @@ describe('packument-version validation', () => {
 		it('is required', () => {
 			const version = createInputPackumentVersion('1.0.0');
 			// @ts-expect-error tests
-			// oxlint-disable-next-line eslint(no-undefined)
+			// oxlint-disable-next-line eslint/no-undefined
 			version.dist = undefined;
 			expect(v.is(PackumentVersionSchema, version)).toBeFalsy();
 		});
@@ -185,7 +185,7 @@ describe('packument-version validation', () => {
 		describe('integrity', () => {
 			it('is optional', () => {
 				const version = createInputPackumentVersion('1.0.0');
-				// oxlint-disable-next-line eslint(no-undefined)
+				// oxlint-disable-next-line eslint/no-undefined
 				version.dist.integrity = undefined;
 				expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 			});

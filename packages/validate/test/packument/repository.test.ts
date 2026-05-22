@@ -355,7 +355,7 @@ describe('repository', () => {
 				expect(parsed).toMatchObject([
 					{
 						type: 'git',
-						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 						url: expect.stringContaining(
 							`git+https://${domain}/owner/repo`,
 						),
@@ -371,7 +371,7 @@ describe('repository', () => {
 				expect(parsed).toMatchObject([
 					{
 						type: 'git',
-						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 						url: expect.stringContaining(
 							`git+https://${domain}/owner/repo`,
 						),
@@ -387,7 +387,7 @@ describe('repository', () => {
 				expect(parsed).toMatchObject([
 					{
 						type: 'git',
-						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 						url: expect.stringContaining(
 							`git+https://${domain}/owner/repo`,
 						),
@@ -403,7 +403,7 @@ describe('repository', () => {
 				expect(parsed).toMatchObject([
 					{
 						type: 'git',
-						// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+						// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 						url: expect.stringContaining(
 							`git+https://${domain}/owner/repo`,
 						),

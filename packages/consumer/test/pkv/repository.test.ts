@@ -15,7 +15,7 @@ describe('get repository', () => {
 			},
 		]);
 
-		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		// oxlint-disable-next-line eslint-plugin-jest/no-conditional-in-test
 		const repos = result.unwrap() ?? [];
 		expect(repos).toHaveLength(1);
 		expect(repos[0]).toMatchObject({ id: repos[0].id });
@@ -42,7 +42,7 @@ describe('get repository', () => {
 			},
 		]);
 
-		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		// oxlint-disable-next-line eslint-plugin-jest/no-conditional-in-test
 		const repos = result.unwrap() ?? [];
 		expect(repos).toHaveLength(1);
 		expect(repos[0]).toMatchObject({ id });

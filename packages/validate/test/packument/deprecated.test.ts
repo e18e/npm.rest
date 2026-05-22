@@ -6,7 +6,7 @@ import * as v from 'valibot';
 describe('deprecated', () => {
 	it('is optional', () => {
 		const version = createInputPackumentVersion('1.0.0');
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		version.deprecated = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 	});
@@ -101,7 +101,7 @@ describe('deprecated', () => {
 		const version = createInputPackumentVersion('1.0.0');
 		version.deprecated = { foo: { bar: 'baz' } };
 		const parsed = v.parse(PackumentVersionSchema, version);
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line eslint-plugin-vitest/prefer-to-be-truthy
 		expect(parsed.deprecated).toBe(true);
 	});
 
@@ -109,7 +109,7 @@ describe('deprecated', () => {
 		const version = createInputPackumentVersion('1.0.0');
 		version.deprecated = 0;
 		const parsed = v.parse(PackumentVersionSchema, version);
-		// oxlint-disable-next-line eslint-plugin-vitest(prefer-to-be-falsy)
+		// oxlint-disable-next-line eslint-plugin-vitest/prefer-to-be-falsy
 		expect(parsed.deprecated).toBe(false);
 	});
 });

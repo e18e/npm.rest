@@ -84,7 +84,7 @@ export const ghFetch = async <T>(
 			headers,
 		});
 	} catch (error) {
-		// oxlint-disable-next-line eslint(no-empty-function)
+		// oxlint-disable-next-line eslint/no-empty-function
 		await validateGHTokens().catch(() => {});
 		throw error;
 	}

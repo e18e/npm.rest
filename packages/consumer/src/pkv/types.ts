@@ -60,7 +60,7 @@ async function typesPackageExists(typesPkgName: string, rev: string) {
 	const packument = await processPackument(typesPkgName, rev);
 
 	if (packument.isErr()) {
-		// oxlint-disable-next-line notypescript-eslint(prefer-optional-chain): I can't
+		// oxlint-disable-next-line typescript-eslint/prefer-optional-chain: I can't
 		if ('status' in packument.error && packument.error.status === 404) {
 			typesPackageCache.set(typesPkgName, false);
 			return Result.ok(false);

@@ -22,7 +22,7 @@ describe('get funding', () => {
 		]);
 
 		const funding = result.unwrap();
-		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		// oxlint-disable-next-line eslint-plugin-jest/no-conditional-in-test
 		const ids = funding?.map((funding) => funding.id) ?? [];
 
 		const records = await db
@@ -140,7 +140,7 @@ describe('update licenses', () => {
 		]);
 
 		const allFunding = await db.select().from(fundingTable);
-		// oxlint-disable-next-line eslint-plugin-jest(max-expects)
+		// oxlint-disable-next-line eslint-plugin-jest/max-expects
 		expect(allFunding).toHaveLength(3);
 	});
 });

@@ -6,7 +6,7 @@ import type { ResourceId } from '@npm.rest/db/id';
 export const REV = '1-placeholder';
 
 export async function insert(pkg: Packument) {
-	// oxlint-disable-next-line eslint-plugin-unicorn(no-await-expression-member)
+	// oxlint-disable-next-line eslint-plugin-unicorn/no-await-expression-member
 	const pkgId = (await processPackage(pkg, REV)).unwrap();
 	const pkvIds: ResourceId<'pkv'>[] = [];
 

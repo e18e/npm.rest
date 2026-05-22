@@ -1,4 +1,4 @@
-// oxlint-disable eslint(no-duplicate-imports) bug?
+// oxlint-disable eslint/no-duplicate-imports bug?
 
 export {
 	type PackumentVersion,

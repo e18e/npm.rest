@@ -119,15 +119,15 @@ s.start(msg());
 
 // function tryExtractType(rawPkg: unknown, version: string, key: string) {
 // 	// @ts-expect-error necessary evil
-// 	// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment), typescript-eslint(no-unsafe-member-access)
+// 	// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment, typescript-eslint/no-unsafe-member-access
 // 	const f = rawPkg?.versions?.[version]?.[key];
 // 	const a = Array.isArray(f) ? f : [f];
 // 	const t = a
-// 		// oxlint-disable-next-line typescript-eslint(no-unsafe-return), typescript-eslint(no-unsafe-member-access)
+// 		// oxlint-disable-next-line typescript-eslint/no-unsafe-return, typescript-eslint/no-unsafe-member-access
 // 		.map((f) => (f && typeof f === 'object' && 'type' in f ? f : null))
 // 		.filter((t) => t !== null);
 
-// 	// oxlint-disable-next-line typescript-eslint(no-unsafe-return)
+// 	// oxlint-disable-next-line typescript-eslint/no-unsafe-return
 // 	return t;
 // }
 
@@ -146,7 +146,7 @@ while (true) {
 	offset += packuments.length;
 
 	await Promise.all(
-		// oxlint-disable-next-line eslint(no-loop-func): not sure what it means
+		// oxlint-disable-next-line eslint/no-loop-func not sure what it means
 		packuments.map(async (pkg) => {
 			const result = await v.safeParseAsync(PackumentSchema, pkg.data);
 
@@ -167,7 +167,7 @@ while (true) {
 						// 		unknownFundingType.unknown.push(`pkg:${name}`);
 						// 	} else {
 						// 		for (const item of types) {
-						// 			// oxlint-disable-next-linetypescript-eslint(no-unsafe-member-access)
+						// 			// oxlint-disable-next-linetypescript-eslint/no-unsafe-member-access
 						// 			(unknownFundingType[item.type] ??= []).push(
 						// 				item,
 						// 			);
@@ -187,7 +187,7 @@ while (true) {
 						// 		unknownRepoType.unknown.push(`pkg:${name}`);
 						// 	} else {
 						// 		for (const item of types) {
-						// 			// oxlint-disable-next-linetypescript-eslint(no-unsafe-member-access)
+						// 			// oxlint-disable-next-linetypescript-eslint/no-unsafe-member-access
 						// 			(unknownRepoType[item.type] ??= []).push(
 						// 				item,
 						// 			);

@@ -18,7 +18,7 @@ describe('funding', () => {
 
 	it('is optional', () => {
 		const version = createInputPackumentVersion('1.0.0');
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		version.funding = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 	});
@@ -216,7 +216,7 @@ describe('funding', () => {
 			it('transforms when conflicting type is given', () => {
 				const version = createInputPackumentVersion('1.0.0');
 				version.funding = {
-					// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test) required here
+					// oxlint-disable-next-line eslint-plugin-jest/no-conditional-in-test required here
 					type: type === 'github' ? 'patreon' : 'github',
 					url: `https://${domain}/example`,
 				};

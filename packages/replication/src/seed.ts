@@ -45,7 +45,7 @@ export async function seed() {
 				'User-Agent': `npm-alt (+https://github.com/e18e/npm.rest)`,
 			},
 			query: {
-				// oxlint-disable-next-line eslint(no-undefined)
+				// oxlint-disable-next-line eslint/no-undefined
 				start_key: startKey ? JSON.stringify(startKey) : undefined,
 				limit: 5000,
 			},

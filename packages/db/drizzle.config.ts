@@ -6,7 +6,7 @@ import { config } from 'dotenv';
 
 config({ path: resolve('../../.env'), quiet: true });
 
-// oxlint-disable-next-line eslint-plugin-import(no-default-export))
+// oxlint-disable-next-line eslint-plugin-import/no-default-export
 export default defineConfig({
 	out: './.drizzle',
 	schema: './src/schema.ts',

@@ -33,6 +33,9 @@ catalogs:
 
 ignoreDepScripts: true
 
+minimumReleaseAgeExclude:
+    - '@rlly/pedantic@0.4.1'
+
 patchedDependencies:
     hosted-git-info: patches/hosted-git-info.patch
     validate-npm-package-name: patches/validate-npm-package-name.patch

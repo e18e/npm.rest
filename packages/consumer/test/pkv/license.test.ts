@@ -17,7 +17,7 @@ describe('get licenses', () => {
 		const result = await getLicenses([{ type: 'MIT' }]);
 		const licenses = result.unwrap();
 
-		// oxlint-disable-next-line eslint-plugin-jest(no-conditional-in-test)
+		// oxlint-disable-next-line eslint-plugin-jest/no-conditional-in-test
 		const ids = licenses?.map((license) => license.id) ?? [];
 
 		const records = await db
@@ -97,7 +97,7 @@ describe('update licenses', () => {
 		]);
 
 		const allLicenses = await db.select().from(licenseTable);
-		// oxlint-disable-next-line eslint-plugin-jest(max-expects)
+		// oxlint-disable-next-line eslint-plugin-jest/max-expects
 		expect(allLicenses).toHaveLength(3);
 	});
 });

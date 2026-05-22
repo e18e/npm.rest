@@ -119,7 +119,7 @@ describe('packument', () => {
 		it('supports missing latest in dist-tags', () => {
 			const packument = createInputPackument();
 			packument['dist-tags'] ??= {};
-			// oxlint-disable-next-line eslint(no-undefined)
+			// oxlint-disable-next-line eslint/no-undefined
 			packument['dist-tags'].latest = undefined;
 
 			expect(v.is(PackumentSchema, packument)).toBeTruthy();
@@ -247,7 +247,7 @@ describe('packument', () => {
 		describe('unpublished', () => {
 			it('is optional', () => {
 				const packument = createInputPackument();
-				// oxlint-disable-next-line eslint(no-undefined)
+				// oxlint-disable-next-line eslint/no-undefined
 				packument.time.unpublished = undefined;
 				expect(v.is(PackumentSchema, packument)).toBeTruthy();
 			});
@@ -264,7 +264,7 @@ describe('packument', () => {
 
 				const parsed = v.parse(PackumentSchema, packument);
 				expect(parsed.time.unpublished).toStrictEqual({
-					// oxlint-disable-next-line typescript-eslint(no-unsafe-assignment)
+					// oxlint-disable-next-line typescript-eslint/no-unsafe-assignment
 					time: expect.any(Date),
 					versions: ['2.0.0'],
 				});

@@ -35,7 +35,7 @@ function isMockDB(db: unknown): asserts db is MockDB {
 	throw new Error('Expected a mock database');
 }
 
-// oxlint-disable-next-line vitest(require-top-level-describe)
+// oxlint-disable-next-line vitest/require-top-level-describe
 beforeAll(async () => {
 	isMockDB(db);
 
@@ -61,7 +61,7 @@ const TABLES = [
 	s.publintTable,
 ];
 
-// oxlint-disable-next-line vitest(require-top-level-describe)
+// oxlint-disable-next-line vitest/require-top-level-describe
 afterEach(async () => {
 	isMockDB(db);
 
@@ -70,7 +70,7 @@ afterEach(async () => {
 	}
 });
 
-// oxlint-disable-next-line vitest(require-top-level-describe)
+// oxlint-disable-next-line vitest/require-top-level-describe
 afterAll(async () => {
 	isMockDB(db);
 	await db.$client.close();

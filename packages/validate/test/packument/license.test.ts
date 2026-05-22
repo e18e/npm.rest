@@ -7,7 +7,7 @@ import * as v from 'valibot';
 describe('license', () => {
 	it('is optional', () => {
 		const version = createInputPackumentVersion('1.0.0');
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		version.license = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 	});
@@ -240,7 +240,7 @@ describe('license', () => {
 
 	it('url should be null when given improper url', () => {
 		const version = createInputPackumentVersion('1.0.0');
-		// oxlint-disable-next-line eslint(no-script-url)
+		// oxlint-disable-next-line eslint/no-script-url
 		version.license = { name: 'MIT', url: 'javascript:alert(1)' };
 		const parsed = v.parse(PackumentVersionSchema, version);
 		expect(parsed.license).toStrictEqual([{ type: 'MIT', url: null }]);

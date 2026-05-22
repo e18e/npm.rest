@@ -7,7 +7,7 @@ import * as v from 'valibot';
 describe('keywords', () => {
 	it('is optional', () => {
 		const version = createInputPackumentVersion('1.0.0');
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		version.keywords = undefined;
 		expect(v.is(PackumentVersionSchema, version)).toBeTruthy();
 	});

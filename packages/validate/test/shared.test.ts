@@ -223,16 +223,16 @@ describe('null on empty', () => {
 	});
 
 	it('strips when values are undefined', () => {
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		const result = v.parse(schema, { foo: undefined, bar: undefined });
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		expect(result).toBeNull();
 	});
 
 	it("doesn't strip when values are not all undefined", () => {
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		const result = v.parse(schema, { foo: undefined, bar: 'imagine' });
-		// oxlint-disable-next-line eslint(no-undefined)
+		// oxlint-disable-next-line eslint/no-undefined
 		expect(result).toMatchObject({ foo: undefined, bar: 'imagine' });
 	});
 });
@@ -240,25 +240,25 @@ describe('null on empty', () => {
 describe('pretend boolean', () => {
 	it('supports real true', () => {
 		const result = v.parse(PretendBoolean, true);
-		// oxlint-disable-next-line vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest/prefer-to-be-truthy
 		expect(result).toBe(true);
 	});
 
 	it('supports real false', () => {
 		const result = v.parse(PretendBoolean, false);
-		// oxlint-disable-next-line vitest(prefer-to-be-falsy)
+		// oxlint-disable-next-line vitest/prefer-to-be-falsy
 		expect(result).toBe(false);
 	});
 
 	it('supports pretend true', () => {
 		const result = v.parse(PretendBoolean, 'true');
-		// oxlint-disable-next-line vitest(prefer-to-be-truthy)
+		// oxlint-disable-next-line vitest/prefer-to-be-truthy
 		expect(result).toBe(true);
 	});
 
 	it('supports pretend false', () => {
 		const result = v.parse(PretendBoolean, 'false');
-		// oxlint-disable-next-line vitest(prefer-to-be-falsy)
+		// oxlint-disable-next-line vitest/prefer-to-be-falsy
 		expect(result).toBe(false);
 	});
 });
