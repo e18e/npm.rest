@@ -10,18 +10,18 @@
 		"./package": "./src/package.ts"
 	},
 	"dependencies": {
-		"hosted-git-info": "^9.0.2",
-		"npm-package-arg": "^13.0.2",
-		"semver": "^7.7.3",
+		"hosted-git-info": "catalog:npm",
+		"npm-package-arg": "catalog:npm",
+		"semver": "catalog:npm",
 		"valibot": "catalog:",
-		"validate-npm-package-name": "^7.0.2"
+		"validate-npm-package-name": "catalog:npm"
 	},
 	"devDependencies": {
 		"@npm.rest/test": "workspace:^",
-		"@types/hosted-git-info": "^3.0.5",
-		"@types/npm-package-arg": "^6.1.4",
-		"@types/semver": "^7.7.1",
-		"@types/validate-npm-package-name": "^4.0.2"
+		"@types/hosted-git-info": "catalog:npm",
+		"@types/npm-package-arg": "catalog:npm",
+		"@types/semver": "catalog:npm",
+		"@types/validate-npm-package-name": "catalog:npm"
 	},
 	"packageManager": "pnpm@11.2.2",
 	"volta": {

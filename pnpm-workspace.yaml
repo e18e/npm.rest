@@ -21,6 +21,17 @@ catalog:
     tsx: ^4.21.0
     ofetch: ^1.5.1
 
+catalogs:
+    npm:
+        hosted-git-info: 10.1.1
+        '@types/hosted-git-info': 3.0.5
+        npm-package-arg: 14.0.0
+        '@types/npm-package-arg': 6.1.4
+        semver: 7.7.3
+        '@types/semver': 7.7.1
+        validate-npm-package-name: 8.0.0
+        '@types/validate-npm-package-name': 4.0.2
+
 ignoreDepScripts: true
 
 patchedDependencies:
