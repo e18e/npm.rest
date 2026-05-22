@@ -7,10 +7,10 @@
 		"start": "tsx --env-file '../../.env' src/main.ts"
 	},
 	"dependencies": {
-		"@logtape/logtape": "catalog:",
-		"@logtape/sentry": "^2.0.2",
+		"@logtape/logtape": "catalog:log",
+		"@logtape/sentry": "catalog:log",
 		"@npm.rest/db": "workspace:^",
-		"@sentry/node": "^10.38.0",
+		"@sentry/node": "catalog:log",
 		"drizzle-orm": "catalog:",
 		"ofetch": "catalog:",
 		"tsx": "catalog:"

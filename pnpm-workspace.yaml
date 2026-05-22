@@ -8,7 +8,6 @@ allowBuilds:
     workerd: true
 
 catalog:
-    '@logtape/logtape': ^2.0.2
     '@types/node': 24.12.4
     drizzle-orm: ^0.45.1
     postgres: ^3.4.8
@@ -21,6 +20,11 @@ catalog:
     ofetch: ^1.5.1
 
 catalogs:
+    log:
+        '@logtape/logtape': 2.1.1
+        '@logtape/drizzle-orm': 2.1.1
+        '@logtape/sentry': 2.1.1
+        '@sentry/node': ^10.53.1
     npm:
         hosted-git-info: 10.1.1
         '@types/hosted-git-info': 3.0.5
