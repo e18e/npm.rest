@@ -25,9 +25,9 @@
 		"typescript": "catalog:",
 		"vitest": "^4.0.18"
 	},
-	"packageManager": "pnpm@10.28.1",
+	"packageManager": "pnpm@11.2.2",
 	"volta": {
 		"node": "24.13.0",
-		"pnpm": "10.28.1"
+		"pnpm": "11.2.2"
 	}
 }

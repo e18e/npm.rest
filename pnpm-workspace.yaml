@@ -2,6 +2,11 @@ packages:
     - packages/*
     - experiments/*
 
+allowBuilds:
+    esbuild: true
+    sharp: true
+    workerd: true
+
 catalog:
     '@logtape/logtape': ^2.0.2
     '@types/node': ^25.2.0
@@ -17,11 +22,6 @@ catalog:
     ofetch: ^1.5.1
 
 ignoreDepScripts: true
-
-onlyBuiltDependencies:
-    - esbuild
-    - workerd
-    - sharp
 
 patchedDependencies:
     hosted-git-info: patches/hosted-git-info.patch
