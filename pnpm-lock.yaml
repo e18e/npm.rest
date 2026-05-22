@@ -13,7 +13,7 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     better-result:
-      specifier: ^2.7.0
+      specifier: 2.7.0
       version: 2.7.0
     drizzle-orm:
       specifier: ^0.45.1
@@ -122,8 +122,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(valibot@1.2.0(typescript@6.0.3))
       better-result:
-        specifier: ^2.5.2
-        version: 2.5.2
+        specifier: 'catalog:'
+        version: 2.7.0
       json-schema-to-typescript:
         specifier: ^15.0.4
         version: 15.0.4
@@ -2502,10 +2502,6 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-
-  better-result@2.5.2:
-    resolution: {integrity: sha512-gHG++1y+GvCrGvSi1WVwyM3slsl1yeE68rNCuTXfwcCx041I3f1z2d99oaC6QSuP+XB70Vda3Dc+EitE5KfGqg==}
-    hasBin: true
 
   better-result@2.7.0:
     resolution: {integrity: sha512-7zrmXjAK8u8Z6SOe4R65XObOR5X+Y2I/VVku3t5cPOGQ8/WsBcfFmfnIPiEl5EBMDOzPHRwbiPbMtQBKYdw7RA==}
@@ -5234,10 +5230,6 @@ snapshots:
   axobject-query@4.1.0: {}
 
   balanced-match@1.0.2: {}
-
-  better-result@2.5.2:
-    dependencies:
-      '@clack/prompts': 0.11.0
 
   better-result@2.7.0:
     dependencies:

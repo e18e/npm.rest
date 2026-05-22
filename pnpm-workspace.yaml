@@ -16,7 +16,7 @@ catalog:
     typescript: 6.0.3
     valibot: ^1.2.0
     wrangler: ^4.62.0
-    better-result: ^2.7.0
+    better-result: 2.7.0
     tsx: 4.22.3
     ofetch: ^1.5.1
 
