@@ -12,7 +12,6 @@ catalog:
     '@types/node': 24.12.4
     drizzle-orm: ^0.45.1
     postgres: ^3.4.8
-    prettier: ^3.8.0
     publint: ^0.3.17
     typescript: 6.0.3
     valibot: ^1.2.0
