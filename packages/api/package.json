@@ -10,13 +10,13 @@
 		"prepare": "pnpm types"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.23.0",
+		"@cloudflare/vite-plugin": "1.37.2",
 		"@npm.rest/db": "workspace:^",
 		"drizzle-orm": "catalog:",
-		"esm-env": "^1.2.2",
-		"nitro": "^3.0.1-alpha.2",
+		"esm-env": "1.2.2",
+		"nitro": "3.0.260429-beta",
 		"postgres": "catalog:",
-		"vite": "^7.3.1",
+		"vite": "8.0.13",
 		"wrangler": "catalog:"
 	}
 }

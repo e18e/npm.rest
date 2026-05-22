@@ -18,13 +18,13 @@
 		"@logtape/drizzle-orm": "catalog:log",
 		"@logtape/logtape": "catalog:log",
 		"@npm.rest/validate": "workspace:^",
-		"dotenv": "^17.2.3",
+		"dotenv": "17.4.2",
 		"drizzle-orm": "catalog:",
 		"postgres": "catalog:"
 	},
 	"devDependencies": {
 		"@types/node": "catalog:",
-		"drizzle-kit": "^0.31.8",
+		"drizzle-kit": "0.31.10",
 		"publint": "catalog:"
 	},
 	"packageManager": "pnpm@11.2.2",
