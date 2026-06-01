@@ -13,10 +13,10 @@ catalog:
     postgres: 3.4.9
     publint: 0.3.21
     typescript: 6.0.3
-    valibot: 1.4.0
-    wrangler: 4.93.0
-    better-result: 2.7.0
-    tsx: 4.22.3
+    valibot: 1.4.1
+    wrangler: 4.96.0
+    better-result: 2.9.2
+    tsx: 4.22.4
     ofetch: 1.5.1
 
 catalogs:
@@ -24,13 +24,13 @@ catalogs:
         '@logtape/logtape': 2.1.1
         '@logtape/drizzle-orm': 2.1.1
         '@logtape/sentry': 2.1.1
-        '@sentry/node': ^10.53.1
+        '@sentry/node': ^10.55.0
     npm:
         hosted-git-info: 10.1.1
         '@types/hosted-git-info': 3.0.5
         npm-package-arg: 14.0.0
         '@types/npm-package-arg': 6.1.4
-        semver: 7.8.0
+        semver: 7.8.1
         '@types/semver': 7.7.1
         validate-npm-package-name: 8.0.0
         '@types/validate-npm-package-name': 4.0.2
