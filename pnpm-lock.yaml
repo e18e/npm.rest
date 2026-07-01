@@ -38,8 +38,8 @@ catalogs:
       version: 4.93.0
   log:
     '@logtape/drizzle-orm':
-      specifier: 2.1.1
-      version: 2.1.1
+      specifier: 2.2.2
+      version: 2.2.2
     '@logtape/logtape':
       specifier: 2.1.1
       version: 2.1.1
@@ -181,7 +181,7 @@ importers:
         version: 1.2.2
       nitro:
         specifier: 3.0.260429-beta
-        version: 3.0.260429-beta(@electric-sql/pglite@0.4.5)(dotenv@17.4.2)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9))(jiti@2.7.0)(lru-cache@11.5.0)(miniflare@4.20260518.0)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3)(yaml@2.9.0))
+        version: 3.0.260429-beta(@electric-sql/pglite@0.4.5)(dotenv@17.4.2)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9))(jiti@2.7.0)(lru-cache@11.5.1)(miniflare@4.20260518.0)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3)(yaml@2.9.0))
       postgres:
         specifier: 'catalog:'
         version: 3.4.9
@@ -207,8 +207,8 @@ importers:
         specifier: workspace:^
         version: link:../validate
       '@publint/pack':
-        specifier: 0.1.4
-        version: 0.1.4
+        specifier: 0.1.5
+        version: 0.1.5
       '@sentry/node':
         specifier: catalog:log
         version: 10.53.1
@@ -222,11 +222,11 @@ importers:
         specifier: catalog:npm
         version: 10.1.1(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e)
       lru-cache:
-        specifier: 11.5.0
-        version: 11.5.0
+        specifier: 11.5.1
+        version: 11.5.1
       node-modules-tools:
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.1.3
+        version: 2.1.3
       npm-package-arg:
         specifier: catalog:npm
         version: 14.0.0
@@ -263,7 +263,7 @@ importers:
     dependencies:
       '@logtape/drizzle-orm':
         specifier: catalog:log
-        version: 2.1.1(@logtape/logtape@2.1.1)
+        version: 2.2.2(@logtape/logtape@2.1.1)
       '@logtape/logtape':
         specifier: catalog:log
         version: 2.1.1
@@ -1280,10 +1280,10 @@ packages:
   '@jsdevtools/ono@7.1.3':
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
 
-  '@logtape/drizzle-orm@2.1.1':
-    resolution: {integrity: sha512-x+DEwnHSF2bPUN6MyZEDAutJDNKroW48O+WTNG+qEK/HToPBeDTW3kWEBtxyUm5HVrGsXOdZRH1k69f5nvtZKw==}
+  '@logtape/drizzle-orm@2.2.2':
+    resolution: {integrity: sha512-Z/TrI5BbOCSJPmoyogy9RERtAxs/hlyI+e/uay1PSY68/ZddPqfudbS6MGgFylAiACprJ0d0zEiGeysUQUcQ2A==}
     peerDependencies:
-      '@logtape/logtape': ^2.1.1
+      '@logtape/logtape': ^2.2.2
 
   '@logtape/logtape@2.1.1':
     resolution: {integrity: sha512-aULbCqUQGerfOsZ3CMvcKtueKzmdchluXYUd3bIHKmOIS93fx1ko0+hyRQ4flloGZ8EiyRPydZXiy8n1J/eAQA==}
@@ -1886,8 +1886,8 @@ packages:
     peerDependencies:
       '@opentelemetry/api': ^1.8
 
-  '@publint/pack@0.1.4':
-    resolution: {integrity: sha512-HDVTWq3H0uTXiU0eeSQntcVUTPP3GamzeXI41+x7uU9J65JgWQh3qWZHblR1i0npXfFtF+mxBiU2nJH8znxWnQ==}
+  '@publint/pack@0.1.5':
+    resolution: {integrity: sha512-edgyN2pP07uXiP4tJs0s8KVmU8M8i60YPbbI0/WDeok1mIJHRXz+CgD8I0nelwDkoCh3EWL/G5kGfbuHjsdbvw==}
     engines: {node: '>=18'}
 
   '@rlly/pedantic@0.4.1':
@@ -2258,6 +2258,11 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  acorn@8.17.0:
+    resolution: {integrity: sha512-xRQbDb9BnwDafYNn6Vwl839DYVjqXYb1XVGtWAZ1kcDc6iwAL4hg3B1dZlRiuENFeO2H53gFG3in621AdERVAg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
@@ -2514,8 +2519,8 @@ packages:
   esm-env@1.2.2:
     resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
-  esrap@2.2.9:
-    resolution: {integrity: sha512-4KijP+NxCWthMCUC3qHbE6n4vCjqgJS1uAYKhuT/GWfFTf1Qyive2TgOjep+gzbSzRfnNyaN/UU9YmdOt8Eg0A==}
+  esrap@2.2.13:
+    resolution: {integrity: sha512-m8jH5hZgJE2RRUK/jjkGPcJEDAV+dYnZYFkosQaPTcE+Yw4xynXHOo6FUdwaWBtdR3b1MMa7wEDTSHeR2VWsGA==}
     peerDependencies:
       '@typescript-eslint/types': ^8.2.0
     peerDependenciesMeta:
@@ -2531,6 +2536,9 @@ packages:
 
   exsolve@1.0.8:
     resolution: {integrity: sha512-LmDxfWXwcTArk8fUEnOfSZpHOJ6zOMUJKOtFLFqJLoKJetuQG874Uc7/Kki7zFLzYybmZhp1M7+98pfMqeX8yA==}
+
+  exsolve@1.1.0:
+    resolution: {integrity: sha512-D+42+T12DdIlJM3uepa55qGiL3sYdLBOxIl2ifQCzCHz4c7eiolaHsi3BIqEr7JxBzxv2pYZQX9kw16ziMcEmw==}
 
   fast-string-truncated-width@3.0.3:
     resolution: {integrity: sha512-0jjjIEL6+0jag3l2XWWizO64/aZVtpiGE3t0Zgqxv0DPuxiMjvB3M24fCyhZUO4KomJQPj3LTSUnDP3GpdwC0g==}
@@ -2643,6 +2651,10 @@ packages:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
+  js-yaml@4.3.0:
+    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+    hasBin: true
+
   json-schema-to-typescript@15.0.4:
     resolution: {integrity: sha512-Su9oK8DR4xCmDsLlyvadkXzX6+GGXJpbhwoLtOGArAG61dvbW4YQmSEno2y66ahpIdmLMg6YUf/QHLgiwvkrHQ==}
     engines: {node: '>=16.0.0'}
@@ -2737,8 +2749,8 @@ packages:
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
-  lru-cache@11.5.0:
-    resolution: {integrity: sha512-5YgH9UJd7wVb9hIouI2adWpgqrrICkt070Dnj8EUY1+B4B2P9eRLPAkAAo6NICA7CEhOIeBHl46u9zSNpNu7zA==}
+  lru-cache@11.5.1:
+    resolution: {integrity: sha512-RPimw/7aMdv2oqRrxKwvZXcPfwBrn/JZ2xYcY9Hus/6LaS3VOAKVWKWgNLCFSiOm1ESXinjsDlidVU7JlnCN2A==}
     engines: {node: 20 || >=22}
 
   magic-string@0.30.21:
@@ -2822,8 +2834,8 @@ packages:
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
 
-  node-modules-tools@2.1.2:
-    resolution: {integrity: sha512-Mj1NUY+c31/JxrksEQ8w2rr8e39uBtr8aRfVotkgBBTwn/XiAOME8CbQ8s3YP/wQE1ytvUvSzfH/CD5HU9GVzg==}
+  node-modules-tools@2.1.3:
+    resolution: {integrity: sha512-jBOHFteylcpfqlyof/fdWBFFPOOrPXfcRybQWZ8mL4bOr7yvqmy0iBqkBqSlHZvacQLdQ8KxlfFTmbdh6fR4cg==}
 
   npm-package-arg@14.0.0:
     resolution: {integrity: sha512-69XQh3k+dtGa1p+7RaR57IuG3rCko96xr/nUfN4yDYBXbTYICiWcOpsFKLN2GtGE9cyIljE+f1exnaYt9MvM+Q==}
@@ -2973,6 +2985,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   sharp@0.34.5:
     resolution: {integrity: sha512-Ou9I5Ft9WNcCbXrU9cMgPBcCK8LiwLqcbywW3t4oDV37n1pzpuNLsYiAV8eODnjbtQlSDwZ2cUEeQz4E54Hltg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -3034,6 +3051,10 @@ packages:
 
   tinyexec@1.1.2:
     resolution: {integrity: sha512-dAqSqE/RabpBKI8+h26GfLq6Vb3JVXs30XYQjdMjaj/c2tS8IYYMbIzP599KtRj7c57/wYApb3QjgRgXmrCukA==}
+    engines: {node: '>=18'}
+
+  tinyexec@1.2.4:
+    resolution: {integrity: sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg==}
     engines: {node: '>=18'}
 
   tinyglobby@0.2.16:
@@ -3865,7 +3886,7 @@ snapshots:
 
   '@jsdevtools/ono@7.1.3': {}
 
-  '@logtape/drizzle-orm@2.1.1(@logtape/logtape@2.1.1)':
+  '@logtape/drizzle-orm@2.2.2(@logtape/logtape@2.1.1)':
     dependencies:
       '@logtape/logtape': 2.1.1
 
@@ -4338,7 +4359,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@publint/pack@0.1.4': {}
+  '@publint/pack@0.1.5':
+    dependencies:
+      tinyexec: 1.2.4
 
   '@rlly/pedantic@0.4.1(@e18e/eslint-plugin@0.5.0(oxlint@1.66.0(oxlint-tsgolint@0.23.0)))(oxlint-tsgolint@0.23.0)(oxlint@1.66.0(oxlint-tsgolint@0.23.0))':
     dependencies:
@@ -4510,9 +4533,9 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@sveltejs/acorn-typescript@1.0.10(acorn@8.16.0)':
+  '@sveltejs/acorn-typescript@1.0.10(acorn@8.17.0)':
     dependencies:
-      acorn: 8.16.0
+      acorn: 8.17.0
 
   '@tybys/wasm-util@0.10.2':
     dependencies:
@@ -4641,6 +4664,8 @@ snapshots:
       acorn: 8.16.0
 
   acorn@8.16.0: {}
+
+  acorn@8.17.0: {}
 
   argparse@2.0.1: {}
 
@@ -4848,7 +4873,7 @@ snapshots:
 
   esm-env@1.2.2: {}
 
-  esrap@2.2.9:
+  esrap@2.2.13:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
@@ -4859,6 +4884,8 @@ snapshots:
   expect-type@1.3.0: {}
 
   exsolve@1.0.8: {}
+
+  exsolve@1.1.0: {}
 
   fast-string-truncated-width@3.0.3: {}
 
@@ -4908,7 +4935,7 @@ snapshots:
 
   hosted-git-info@10.1.1(patch_hash=369521f7f3815a9782d28e9b48076dd5019c93fe9653ca9b19c30819eca2e24e):
     dependencies:
-      lru-cache: 11.5.0
+      lru-cache: 11.5.1
 
   html-escaper@2.0.2: {}
 
@@ -4956,6 +4983,10 @@ snapshots:
   js-tokens@10.0.0: {}
 
   js-yaml@4.1.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.3.0:
     dependencies:
       argparse: 2.0.1
 
@@ -5046,7 +5077,7 @@ snapshots:
 
   lodash@4.18.1: {}
 
-  lru-cache@11.5.0: {}
+  lru-cache@11.5.1: {}
 
   magic-string@0.30.21:
     dependencies:
@@ -5060,7 +5091,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.8.0
+      semver: 7.8.5
 
   miniflare@4.20260518.0:
     dependencies:
@@ -5094,7 +5125,7 @@ snapshots:
 
   nf3@0.3.17: {}
 
-  nitro@3.0.260429-beta(@electric-sql/pglite@0.4.5)(dotenv@17.4.2)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9))(jiti@2.7.0)(lru-cache@11.5.0)(miniflare@4.20260518.0)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3)(yaml@2.9.0)):
+  nitro@3.0.260429-beta(@electric-sql/pglite@0.4.5)(dotenv@17.4.2)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9))(jiti@2.7.0)(lru-cache@11.5.1)(miniflare@4.20260518.0)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3)(yaml@2.9.0)):
     dependencies:
       consola: 3.4.2
       crossws: 0.4.5(srvx@0.11.15)
@@ -5109,7 +5140,7 @@ snapshots:
       rolldown: 1.0.2
       srvx: 0.11.15
       unenv: 2.0.0-rc.24
-      unstorage: 2.0.0-alpha.7(db0@0.3.4(@electric-sql/pglite@0.4.5)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9)))(lru-cache@11.5.0)(ofetch@2.0.0-alpha.3)
+      unstorage: 2.0.0-alpha.7(db0@0.3.4(@electric-sql/pglite@0.4.5)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9)))(lru-cache@11.5.1)(ofetch@2.0.0-alpha.3)
     optionalDependencies:
       dotenv: 17.4.2
       jiti: 2.7.0
@@ -5147,16 +5178,16 @@ snapshots:
 
   node-fetch-native@1.6.7: {}
 
-  node-modules-tools@2.1.2:
+  node-modules-tools@2.1.3:
     dependencies:
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       p-limit: 7.3.0
       package-manager-detector: 1.6.0
       pathe: 2.0.3
       pkg-types: 2.3.1
       publint: 0.3.21
-      semver: 7.8.0
-      tinyexec: 1.1.2
+      semver: 7.8.5
+      tinyexec: 1.2.4
 
   npm-package-arg@14.0.0:
     dependencies:
@@ -5293,7 +5324,7 @@ snapshots:
   pkg-types@2.3.1:
     dependencies:
       confbox: 0.2.4
-      exsolve: 1.0.8
+      exsolve: 1.1.0
       pathe: 2.0.3
 
   postcss@8.5.15:
@@ -5325,7 +5356,7 @@ snapshots:
 
   publint@0.3.21:
     dependencies:
-      '@publint/pack': 0.1.4
+      '@publint/pack': 0.1.5
       package-manager-detector: 1.6.0
       picocolors: 1.1.1
       sade: 1.8.1
@@ -5389,11 +5420,13 @@ snapshots:
 
   semver@7.8.0: {}
 
+  semver@7.8.5: {}
+
   sharp@0.34.5:
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
-      semver: 7.8.0
+      semver: 7.8.5
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.34.5
       '@img/sharp-darwin-x64': 0.34.5
@@ -5459,15 +5492,15 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@sveltejs/acorn-typescript': 1.0.10(acorn@8.16.0)
+      '@sveltejs/acorn-typescript': 1.0.10(acorn@8.17.0)
       '@types/estree': 1.0.9
-      acorn: 8.16.0
+      acorn: 8.17.0
       aria-query: 5.3.2
       axobject-query: 4.1.0
       clsx: 2.1.1
       devalue: 5.8.1
       esm-env: 1.2.2
-      esrap: 2.2.9
+      esrap: 2.2.13
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.21
@@ -5478,6 +5511,8 @@ snapshots:
   tinybench@2.9.0: {}
 
   tinyexec@1.1.2: {}
+
+  tinyexec@1.2.4: {}
 
   tinyglobby@0.2.16:
     dependencies:
@@ -5511,10 +5546,10 @@ snapshots:
     dependencies:
       pathe: 2.0.3
 
-  unstorage@2.0.0-alpha.7(db0@0.3.4(@electric-sql/pglite@0.4.5)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9)))(lru-cache@11.5.0)(ofetch@2.0.0-alpha.3):
+  unstorage@2.0.0-alpha.7(db0@0.3.4(@electric-sql/pglite@0.4.5)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9)))(lru-cache@11.5.1)(ofetch@2.0.0-alpha.3):
     optionalDependencies:
       db0: 0.3.4(@electric-sql/pglite@0.4.5)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.5)(@opentelemetry/api@1.9.1)(@types/pg@8.15.6)(postgres@3.4.9))
-      lru-cache: 11.5.0
+      lru-cache: 11.5.1
       ofetch: 2.0.0-alpha.3
 
   valibot@1.4.0(typescript@6.0.3):

@@ -22,7 +22,7 @@ catalog:
 catalogs:
     log:
         '@logtape/logtape': 2.1.1
-        '@logtape/drizzle-orm': 2.1.1
+        '@logtape/drizzle-orm': 2.2.2
         '@logtape/sentry': 2.1.1
         '@sentry/node': ^10.53.1
     npm:
