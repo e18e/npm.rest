@@ -10,7 +10,7 @@
 		"./packument": "./src/packument.ts"
 	},
 	"devDependencies": {
-		"@electric-sql/pglite": "0.4.5",
+		"@electric-sql/pglite": "0.5.3",
 		"@npm.rest/db": "workspace:^",
 		"@npm.rest/validate": "workspace:^",
 		"drizzle-orm": "catalog:",
