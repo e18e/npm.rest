@@ -14,9 +14,9 @@
 	"devDependencies": {
 		"@npm.rest/db": "workspace:^",
 		"@types/node": "catalog:",
-		"@valibot/to-json-schema": "1.7.0",
+		"@valibot/to-json-schema": "1.7.1",
 		"better-result": "catalog:",
-		"json-schema-to-typescript": "^15.0.4",
+		"json-schema-to-typescript": "^16.0.0",
 		"tsx": "catalog:",
 		"valibot": "catalog:"
 	}
