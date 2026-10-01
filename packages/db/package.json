@@ -24,7 +24,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "catalog:",
-		"drizzle-kit": "0.31.10",
+		"drizzle-kit": "0.31.11",
 		"publint": "catalog:"
 	},
 	"packageManager": "pnpm@11.2.2",
