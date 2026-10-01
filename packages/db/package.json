@@ -18,7 +18,7 @@
 		"@logtape/drizzle-orm": "catalog:log",
 		"@logtape/logtape": "catalog:log",
 		"@npm.rest/validate": "workspace:^",
-		"dotenv": "17.4.2",
+		"dotenv": "18.0.4",
 		"drizzle-orm": "catalog:",
 		"postgres": "catalog:"
 	},
